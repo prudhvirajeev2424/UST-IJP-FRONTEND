@@ -1,0 +1,108 @@
+import type { Task } from "../types/TP_Manager_Assigning_and_tracking_activity";
+
+export const mockTasks: Task[] = [
+  {
+    id: "1",
+    user: {
+      id: "user-1",
+      name: "Zamira Peterson",
+      uid: "123456",
+      location: "Bangalore",
+      avatarUrl: "https://i.pravatar.cc/150?img=5",
+    },
+    title: "SQL for testers",
+    progress: 0,
+    updatedDaysAgo: 2,
+  },
+  {
+    id: "2",
+    user: {
+      id: "user-2",
+      name: "Zamira Peterson",
+      uid: "123456",
+      location: "Bangalore",
+      avatarUrl: "https://i.pravatar.cc/150?img=5",
+    },
+    title: "SQL for testers",
+    progress: 60,
+    updatedDaysAgo: 2,
+  },
+  {
+    id: "3",
+    user: {
+      id: "user-3",
+      name: "Zamira Peterson",
+      uid: "123456",
+      location: "Bangalore",
+      avatarUrl: "https://i.pravatar.cc/150?img=5",
+    },
+    title: "SQL for testers",
+    progress: 50,
+    updatedDaysAgo: 2,
+  },
+  {
+    id: "4",
+    user: {
+      id: "user-4",
+      name: "Zamira Peterson",
+      uid: "123456",
+      location: "Bangalore",
+      avatarUrl: "https://i.pravatar.cc/150?img=5",
+    },
+    title: "SQL for testers",
+    progress: 60,
+    updatedDaysAgo: 2,
+  },
+  {
+    id: "5",
+    user: {
+      id: "user-5",
+      name: "Zamira Peterson",
+      uid: "123456",
+      location: "Bangalore",
+      avatarUrl: "https://i.pravatar.cc/150?img=5",
+    },
+    title: "SQL for testers",
+    progress: 60,
+    updatedDaysAgo: 2,
+  },
+  {
+    id: "6",
+    user: {
+      id: "user-6",
+      name: "Zamira Peterson",
+      uid: "123456",
+      location: "Bangalore",
+      avatarUrl: "https://i.pravatar.cc/150?img=5",
+    },
+    title: "SQL for testers",
+    progress: 60,
+    updatedDaysAgo: 2,
+  },
+  {
+    id: "7",
+    user: {
+      id: "user-7",
+      name: "Zamira Peterson",
+      uid: "123456",
+      location: "Bangalore",
+      avatarUrl: "https://i.pravatar.cc/150?img=5",
+    },
+    title: "SQL for testers",
+    progress: 60,
+    updatedDaysAgo: 2,
+  },
+  {
+    id: "8",
+    user: {
+      id: "user-8",
+      name: "Zamira Peterson",
+      uid: "123456",
+      location: "Bangalore",
+      avatarUrl: "https://i.pravatar.cc/150?img=5",
+    },
+    title: "SQL for testers",
+    progress: 60,
+    updatedDaysAgo: 2,
+  },
+];

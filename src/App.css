@@ -40,3 +40,47 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Right-side stats card positioned to match design */
+.cardtop {
+  position: fixed;
+  top: 180px; /* as requested */
+  left: 1140px; /* as requested */
+  width: 320px;
+  height: 294px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 1;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  z-index: 40;
+}
+
+.cardtop .stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: transparent;
+}
+
+.cardtop .stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f766e; /* teal green for 'completed' */
+}
+.cardtop .stat-number.warn {
+  color: #b45309;
+}
+.cardtop .stat-number.red {
+  color: #c0262e;
+}
+
+.cardtop .stat-label {
+  font-size: 14px;
+  color: #6b7280;
+}
