@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import NavigationBar from "./components/NavigationBar";
+import FilterTab from "./components/ui/FilterTab";
+import { ApplicationsTable } from "./components/ApplicationsTable";
+import TopControls from "./components/TopControls";
+import { mockApplications } from "./data/profiles";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("All");
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="min-h-screen bg-[#F2F7F8]">
+      {/* Top Navigation Bar */}
+      <NavigationBar />
 
-export default App
+      {/* Main Content Layout */}
+      {/* Top controls row (Profiles heading on the left, tabs centered, actions right) */}
+      <TopControls activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      <div className="flex px-8 items-stretch">
+        {/* Left Sidebar - Filters (add left padding via wrapper) */}
+        <div className="pr-8 pl-6 self-stretch">
+          <FilterTab />
+        </div>
+
+        {/* Main Content Area - keep top padding parallel to FilterTab */}
+        <div className="flex-1 pt-0 self-stretch">
+          {/* (Status tabs are rendered in the top controls so all header items sit on one line) */}
+
+          {/* Applications Table */}
+          <div className="bg-white rounded-lg shadow-sm">
+            <ApplicationsTable applications={mockApplications} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
