@@ -1,8 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -58,7 +58,7 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
   }
 }
 
@@ -92,7 +92,7 @@
   }
 
   .nav-link-active::after {
-    content: '';
+    content: "";
     @apply absolute bottom-0 left-0 right-0 h-0.5 bg-primary;
   }
 
@@ -106,7 +106,11 @@
 
   .percentage-badge {
     @apply w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold;
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(171 77% 35%) 100%);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(171 77% 35%) 100%
+    );
     color: white;
   }
 }
