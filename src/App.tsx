@@ -4,14 +4,14 @@
 import './App.css'
 import Application from './pages/Application';
 import './pages/landing_page'
-// import LoginPage from './pages/landing_page';
+import LoginPage from './pages/landing_page';
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-    {/* <LoginPage /> */}
-    <Application/>
+    <LoginPage />
+    {/* <Application/> */}
     </>
     // <>
     //   <div>
