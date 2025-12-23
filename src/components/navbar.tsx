@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
-import Home from "../pages/home";
+import Home from "../pages/Home";
 
 interface NavbarProps {
   role?: string | null;
