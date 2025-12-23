@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import type { Project } from "../../../types/project";
 import AdobeLogo from "../../../assets/Image46.png";
 import PdfIcon from "../../../assets/IconFilePdf.svg";
+import ShortlistImg from '../../../assets/Group 173611.svg';
+import { useShortlist } from './context/ShortlistContext';
 import JobDetailsUI from "./JobDetailsUI";
 
 interface ProjectInfoProps {
@@ -10,9 +12,34 @@ interface ProjectInfoProps {
 
 const ProjectInfo: React.FC<ProjectInfoProps> = ({ project }) => {
   const [showModal, setShowModal] = useState(false);
+  const { shortlisted } = useShortlist();
 
   return (
     <>
+    {/* Inline shortlist banner for this page */}
+    {shortlisted && (
+      <div
+        role="status"
+        aria-live="polite"
+        className="flex items-center gap-2 rounded "
+        style={{
+          background: '#FFFFFF',
+          color: '#06B27C',
+          padding: '12px 16px',
+          marginBottom: '16px'
+        }}
+      >
+        <img src={ShortlistImg} alt="shortlisted" className="w-12 h-12" />
+        <span
+          className="text-sm font-medium"
+          style={{
+            font: 'var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/19px var(--unnamed-font-family-rubik)'
+          }}
+        >
+          Candidate has been shortlisted for this opportunity
+        </span>
+      </div>
+    )}
       <div className="bg-white rounded-lg shadow-sm p-6 relative">
         {/* Adobe Logo fixed to top-right */}
         <img
@@ -85,34 +112,43 @@ const ProjectInfo: React.FC<ProjectInfoProps> = ({ project }) => {
           </div>
 
           {/* Job Description Card */}
-          <div
-            onClick={() => setShowModal(true)}
-            className="group p-4 bg-[#F2F7F8] rounded-lg cursor-pointer transition-transform"
-          >
-            <div className="flex items-center justify-between">
-              {/* Left side: PDF icon + label */}
-              <div className="flex items-center space-x-2">
-                <img src={PdfIcon} alt="PDF Icon" className="w-6 h-6" />
-                <span className="text-sm font-medium text-gray-800">
-                  Job Description
-                </span>
-              </div>
+          {/** Job Description Card: clickable only when not shortlisted **/}
+          {!shortlisted ? (
+            <div
+              onClick={() => setShowModal(true)}
+              className="group p-4 bg-[#F2F7F8] rounded-lg cursor-pointer transition-transform"
+            >
+              <div className="flex items-center justify-between">
+                {/* Left side: PDF icon + label */}
+                <div className="flex items-center space-x-2">
+                  <img src={PdfIcon} alt="PDF Icon" className="w-6 h-6" />
+                  <span className="text-sm font-medium text-gray-800">
+                    Job Description
+                  </span>
+                </div>
 
-              {/* Right side: enlarged teal arrow icon with hover animation */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#008080"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-10 h-10 transform transition-transform duration-300 ease-in-out group-hover:translate-x-2"
-              >
-                <path d="M10 12h8M14 9l4 3-4 3" />
-              </svg>
+                {/* Right side: enlarged teal arrow icon with hover animation */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#008080"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-10 h-10 transform transition-transform duration-300 ease-in-out group-hover:translate-x-2"
+                >
+                  <path d="M10 12h8M14 9l4 3-4 3" />
+                </svg>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="p-4 bg-[#F2F7F8] rounded-lg">
+              <div className="flex items-center">
+                {/* Intentionally empty when shortlisted - non-clickable */}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

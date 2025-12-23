@@ -98,28 +98,18 @@ export default function CoverLetterPopup({
         </div>
 
         {/* Body */}
-        <div
-          style={{
-            paddingLeft: "24px",
-            paddingRight: "24px",
-            paddingTop: "24px",
-            overflowY: "auto",
-            flex: 1,
-          }}
-        >
-          <p
-            style={{
-              font: "normal normal normal 14px/21px Rubik",
-              letterSpacing: "0px",
-              color: "#231F20",
-              textAlign: "left",
-              opacity: 1,
-              margin: 0,
-              whiteSpace: "pre-wrap",
-            }}
-          >
-            {coverLetter ??
-              `I am interested in joining the [Project Name] team at [Company Name]. With experience in [Key Skills], I have contributed to [mention relevant achievement]. I believe my expertise aligns well with the project's goals and would love the opportunity to contribute. Looking forward to discussing this further.`}
+        <div style={{ paddingLeft: '24px', paddingRight: '24px', paddingTop: '32px' }}>
+          <p style={{ 
+            width: '620px',
+            height: '80px',
+            font: 'normal normal normal 14px/21px Rubik',
+            letterSpacing: '0px',
+            color: '#231F20',
+            textAlign: 'left',
+            opacity: 1,
+            margin: 0
+          }}>
+            I am interested in joining the [Project Name] team at [Company_Name]. With experience in [Key Skills], I have contributed to [mention relevant achievement]. I believe my expertise aligns well with the project's goals and would love the opportunity to contribute. Looking forward to discussing this further.
           </p>
         </div>
       </div>
