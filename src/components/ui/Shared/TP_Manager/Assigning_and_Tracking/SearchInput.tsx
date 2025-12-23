@@ -12,13 +12,29 @@ const SearchInput: React.FC<SearchInputProps> = ({
   placeholder = "Search",
 }) => {
   return (
-    <div className="relative w-48">
+    <div className="relative w-[320px]">
       <input
         type="text"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full h-9 pl-9 pr-3 bg-white border border-gray-light rounded-md text-sm text-dark placeholder:text-gray-primary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+        className="
+          w-full
+          h-[49px]
+          pl-9
+          pr-3
+          bg-white
+          border
+          border-gray-light
+          rounded-md
+          text-sm
+          text-dark
+          placeholder:text-gray-primary
+          focus:outline-none
+          focus:ring-2
+          focus:ring-primary
+          focus:border-transparent
+        "
       />
     </div>
   );

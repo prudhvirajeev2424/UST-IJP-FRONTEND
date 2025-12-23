@@ -1,7 +1,7 @@
 import React from "react";
-import { ProgressBar } from "./FilterBar";
+import { ProgressBar } from "./ProgressBar";
 import type { Task } from "../../../../types/AssigningandTrackingTypes";
-import ProfilePhoto from "/src/assets/ProfilePhoto.png"; // make sure this path is correct
+import ProfilePhoto from "/src/assets/ProfilePhoto.png";
 
 /* ============================
    ICONS
@@ -56,10 +56,6 @@ interface UserInfoProps {
 export const UserInfo: React.FC<UserInfoProps> = ({ name, uid, location }) => {
   return (
     <div className="flex items-start gap-3">
-      {/* Profile photo: using provided design CSS as a background image.
-          Note: the original spec included absolute top/left values (top:214px; left:450px;) —
-          applying those would break card layout, so we apply size, background, and opacity only.
-      */}
       <div
         className="rounded-lg overflow-hidden flex-shrink-0"
         style={{
@@ -77,7 +73,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({ name, uid, location }) => {
       <div className="flex-1 min-w-0">
         <div className="text-[14px] text-[#231F20] mb-1 truncate">{name}</div>
 
-        <div className="flex items-center gap-2 text-[14px] text-[#7A7480]">
+        <div className="flex flex-wrap items-center gap-2 text-[14px] text-[#7A7480]">
           <div className="flex items-center gap-1">
             <IDIcon />
             <span>UID - {uid}</span>
@@ -94,7 +90,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({ name, uid, location }) => {
 };
 
 /* ============================
-   TASK CARD
+   TASK CARD (XD EXACT)
 ============================ */
 
 interface TaskCardProps {
@@ -105,41 +101,41 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const { user, title, progress, updatedDaysAgo } = task;
 
   return (
-    <div className="bg-white rounded-xl shadow-card p-6 hover:shadow-card-hover transition-shadow">
+    <div
+      className="
+    bg-white
+    rounded-[10px]
+    p-6
+    w-full
+    min-h-[294px]
+    transition-shadow
+    hover:shadow-card-hover
+    flex
+    flex-col
+  "
+    >
+      {/* USER INFO */}
       <div className="mb-5">
         <UserInfo {...user} />
       </div>
 
+      {/* TASK TITLE */}
       <div className="mb-4">
         <p className="text-sm text-[#7A7480] mb-1">Task Assigned :</p>
-        <p className="text-sm font-semibold text-[#231F20]">{title}</p>
+        <p className="text-sm font-semibold text-[#231F20] break-words">
+          {title}
+        </p>
       </div>
 
+      {/* PROGRESS */}
       <div className="mb-3">
         <ProgressBar percentage={progress} />
       </div>
 
+      {/* UPDATED INFO */}
       <p className="text-xs text-[#C2BCBE]">
         Updated {updatedDaysAgo} {updatedDaysAgo === 1 ? "day" : "days"} ago
       </p>
-    </div>
-  );
-};
-
-/* ============================
-   TASK GRID
-============================ */
-
-interface TaskGridProps {
-  tasks: Task[];
-}
-
-export const TaskGrid: React.FC<TaskGridProps> = ({ tasks }) => {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {tasks.map((task) => (
-        <TaskCard key={task.id} task={task} />
-      ))}
     </div>
   );
 };
