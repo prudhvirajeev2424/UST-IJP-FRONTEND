@@ -2,17 +2,20 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
-// import Application from './pages/Application';
+import { ShortlistProvider } from './components/tp_manager/application/context/ShortlistContext';
+import Application from './pages/Application';
 import './pages/landing_page'
 import LoginPage from './pages/landing_page';
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <>
-    <LoginPage />
-    {/* <Application/> */}
-    </>
+    <ShortlistProvider>
+
+      <Application/>
+    
+    {/* <LoginPage />
+    
     // <>
     //   <div>
     //     <a href="https://vite.dev" target="_blank">
@@ -34,7 +37,8 @@ function App() {
     //   <p className="read-the-docs">
     //     Click on the Vite and React logos to learn more
     //   </p>
-    // </>
+    // </> */}
+    </ShortlistProvider>
   )
 }
 
