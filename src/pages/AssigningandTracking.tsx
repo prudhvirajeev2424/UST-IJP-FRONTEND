@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import Header from "../components/TP_Manager/Assigning_and_Tracking/layout/Header";
 import xlIcon from "../assets/XlIcon.png";
+import AssignTaskModal from "../components/TP_Manager/Assigning_and_Tracking/AssignTaskModal";
+import SuccessBanner from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SuccessBanner";
 
 import FilterPill from "../components/TP_Manager/Assigning_and_Tracking/dashboard/FilterPill";
 import SearchInput from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SearchInput";
@@ -116,6 +118,7 @@ const Assigning_and_tracking: React.FC = () => {
             </button>
 
             <button
+              onClick={() => setIsAssignModalOpen(true)}
               className="
                 w-[138px]
                 h-[49px]
@@ -162,6 +165,13 @@ const Assigning_and_tracking: React.FC = () => {
           </div>
         </div>
       </div>
+      {showBanner && (
+        <SuccessBanner
+          message={bannerMessage}
+          onClose={() => setShowBanner(false)}
+        />
+      )}
+
       <AssignTaskModal
         isOpen={isAssignModalOpen}
         onClose={() => setIsAssignModalOpen(false)}
