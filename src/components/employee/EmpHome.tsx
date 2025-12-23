@@ -6,6 +6,11 @@ import { ResumeDetailModal } from './ResumeDetailModal';
 import { UpdateResumeDrawer } from './UpdateResumeDrawer';
 import { ResumeNotFoundCard } from './ResumeNotFoundCard';
 import { Button, Card, CardContent, CardHeader, CardTitle } from '../ui';
+import { EmpHomeRightSideBar } from './EmpHomeRightSideBar';
+import { stats,opportunities, } from '../../data/mockData';
+import { EmpHomeGrid } from './EmpHomeGrid';
+// import type {Stats,Activity} from '../../types/activity';
+
  
 interface Activity {
   id: string;
@@ -163,17 +168,7 @@ export default function Home() {
                 <ResumeNotFoundCard onUploadClick={() => setUploadResumeModalOpen(true)} />
               ) : (
                 // Resume uploaded - show placeholder for opportunities
-                <Card className="border-0 shadow-sm h-full flex flex-col items-center justify-center py-16">
-                  <CardContent className="flex flex-col items-center text-center space-y-4">
-                    <div className="rounded-full bg-primary/10 p-4">
-                      <FileText className="w-8 h-8 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-medium text-foreground">Resume uploaded</h3>
-                    <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                      Your resume has been successfully uploaded. Check the left panel to view your resume details.
-                    </p>
-                  </CardContent>
-                </Card>
+                <EmpHomeGrid opportunities={opportunities} />
               )}
             </div>
  
@@ -229,7 +224,9 @@ export default function Home() {
                   ))}
                 </CardContent>
               </Card>
+              {/* <EmpHomeRightSideBar stats={stats} activities={recentActivities} /> */}
             </div>
+            
           </div>
         </div>
       </main>
