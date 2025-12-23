@@ -100,7 +100,7 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
 	}, [isOpen]);
 
 	// runtime asset URLs — place the SVGs under public/assets/
-	const PUBLIC = process.env.PUBLIC_URL || '';
+	const PUBLIC = '';
 	const certIconPath = `${PUBLIC}${encodeURI('/assets/certificate_svg.svg')}`;
 	const eduIconPath = `${PUBLIC}${encodeURI('/assets/education_svg.svg')}`;
 	const accoladeIconPath = `${PUBLIC}${encodeURI('/assets/accolades_svg.svg')}`;
