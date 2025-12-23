@@ -3,10 +3,11 @@ import { X, Upload } from "lucide-react";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogTitle,
   Button,
 } from "../ui";
+import pdf_svg from "../../assets/Icon awesome-file-pdf.svg";
+import upload_svg from "../../assets/Icon feather-upload-cloud.svg";
 
 interface UploadResumeModalProps {
   open: boolean;
@@ -102,24 +103,24 @@ export function UploadResumeModal({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-[500px] p-0 gap-0 bg-card border border-border rounded-lg">
+      <DialogContent className="sm:max-w-[500px] p-0 gap-0 bg-white border border-gray-200 rounded-lg">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-          <DialogTitle className="text-base font-medium text-foreground">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+          <DialogTitle className="text-base font-medium text-gray-900">
             Upload resume
           </DialogTitle>
           <button
             onClick={() => handleOpenChange(false)}
             className="rounded-sm opacity-70 hover:opacity-100 transition-opacity focus:outline-none"
           >
-            <X className="h-5 w-5 text-foreground" />
+            <X className="h-5 w-5 text-gray-900" />
           </button>
         </div>
 
         {/* Content */}
         <div className="p-8 space-y-6 flex flex-col items-center">
           {/* Description */}
-          <p className="text-sm text-muted-foreground text-center">
+          <p className="text-sm text-gray-600 text-center">
             Upload your resume in a PDF format
           </p>
 
@@ -130,23 +131,21 @@ export function UploadResumeModal({
             onDrop={handleDrop}
             className={`w-full border-2 border-dashed rounded-lg p-8 flex flex-col items-center justify-center gap-4 transition-all ${
               isDragging
-                ? "border-primary bg-primary/5"
-                : "border-muted-foreground/30 hover:border-primary/50"
+                ? "border-teal-600 bg-teal-50"
+                : "border-gray-300 hover:border-teal-500"
             }`}
           >
-            <div className="rounded-full bg-muted/50 p-4">
-              <Upload className="w-8 h-8 text-muted-foreground" />
-            </div>
+              <img src={upload_svg} alt="Upload Icon" className="h-8 w-8 text-gray-400" />
             <div className="text-center">
-              <p className="text-sm text-muted-foreground">
-                Drag and drop to upload or
+              <p className="text-sm text-gray-600">
+                Drag and drop to upload or{" "}
+                <label
+                  htmlFor="file-input"
+                  className="text-teal-600 cursor-pointer hover:underline font-medium"
+                >
+                  Browse
+                </label>
               </p>
-              <label
-                htmlFor="file-input"
-                className="text-sm text-primary cursor-pointer hover:underline font-medium inline"
-              >
-                Browse
-              </label>
               <input
                 id="file-input"
                 type="file"
@@ -160,29 +159,23 @@ export function UploadResumeModal({
 
           {/* Uploaded File */}
           {uploadedFile && (
-            <div className="w-full flex items-center justify-between p-4 bg-muted/30 rounded-lg">
+            <div className="w-full flex items-center justify-between p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center gap-3 flex-1">
-                <div className="h-10 w-10 bg-red-100 rounded flex items-center justify-center flex-shrink-0">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="w-6 h-6 text-red-600"
-                    fill="currentColor"
-                  >
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
-                  </svg>
-                </div>
+                
+                  <img src={pdf_svg} alt="PDF Icon" className="h-6 w-6" />
+          
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-foreground truncate">
+                  <p className="text-sm font-medium text-gray-900 truncate">
                     {uploadedFile.name}
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-gray-600">
                     {uploadedFile.size}
                   </p>
                 </div>
               </div>
               <button
                 onClick={handleRemoveFile}
-                className="text-muted-foreground hover:text-foreground transition-colors p-1 flex-shrink-0 ml-2"
+                className="text-gray-600 hover:text-gray-900 transition-colors p-1 flex-shrink-0 ml-2"
                 disabled={isSubmitting}
               >
                 <X className="w-5 h-5" />
@@ -192,23 +185,23 @@ export function UploadResumeModal({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-center gap-3 px-6 py-4 border-t border-border bg-background">
+        <div className="flex items-center justify-center gap-3 px-6 py-4 border-t border-gray-200 bg-white">
           <Button
             variant="outline"
             onClick={() => handleOpenChange(false)}
-            className="px-8 border-border text-foreground hover:bg-muted"
+            className="px-8"
             disabled={isSubmitting}
           >
             Cancel
           </Button>
           <Button
             onClick={handleProceed}
-            className="px-8 bg-primary hover:bg-teal-dark text-primary-foreground"
+            className="px-8 bg-teal-600 hover:bg-teal-700 text-white"
             disabled={!uploadedFile || isSubmitting}
           >
             {isSubmitting ? (
               <span className="flex items-center gap-2">
-                <span className="w-3.5 h-3.5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
+                <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 Uploading...
               </span>
             ) : (
