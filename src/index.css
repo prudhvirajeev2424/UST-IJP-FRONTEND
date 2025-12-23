@@ -115,12 +115,12 @@
   .text-balance {
     text-wrap: balance;
   }
-}
 
-@layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
   .scrollbar-hide {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;     /* Firefox */
+  }
+}

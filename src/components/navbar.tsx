@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
+import Home from "../pages/home";
 
 interface NavbarProps {
   role?: string | null;
@@ -26,6 +27,7 @@ const Navbar = ({ role }: NavbarProps) => {
   }
 
   return (
+    <>
     <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
       <div className="max-w-7xl mx-auto w-full px-6 py-[14px]">
         <div className="flex items-center justify-between">
@@ -68,7 +70,9 @@ const Navbar = ({ role }: NavbarProps) => {
 
           {/* Right */}
           <div className="flex-shrink-0 flex items-center gap-4 relative">
-            <Mail size={24} className="text-gray-700" />
+            {role !== "WFM" ? (
+              <Mail size={24} className="text-gray-700" />
+            ) : null}
 
             {/* Bell */}
             <div className="relative">
@@ -172,6 +176,11 @@ const Navbar = ({ role }: NavbarProps) => {
         </div>
       </div>
     </header>
+    {/* Page Content */}
+      <main className="mt-20 p-6">
+        {active === "Home" && <Home />}
+      </main>
+      </>
   );
 };
 
