@@ -1,12 +1,11 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import Header from "../components/TP_Manager/Assigning_and_Tracking/layout/Header";
 import xlIcon from "../assets/XlIcon.png";
-
-import FilterPill from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/FilterPill";
-import SearchInput from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SearchInput";
-import Button from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/Button";
 import AssignTaskModal from "../components/TP_Manager/Assigning_and_Tracking/AssignTaskModal";
-import SuccessBanner from "../components/ui/Shared/SuccessBanner";
+import SuccessBanner from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SuccessBanner";
+
+import FilterPill from "../components/TP_Manager/Assigning_and_Tracking/dashboard/FilterPill";
+import SearchInput from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SearchInput";
 import StatsSummary from "../components/TP_Manager/Assigning_and_Tracking/dashboard/StatsSummary";
 import TaskCard from "../components/TP_Manager/Assigning_and_Tracking/dashboard/TaskCard";
 
@@ -79,18 +78,11 @@ const Assigning_and_tracking: React.FC = () => {
     <>
       <Header />
 
-      {showBanner && (
-        <SuccessBanner
-          message={bannerMessage}
-          onClose={() => setShowBanner(false)}
-        />
-      )}
-
-      <div className="max-w-[1600px] mx-auto px-6 py-6">
+      <div className="max-w-[1600px] mx-auto px-6 py-6 relative">
         {/* ================= TOP BAR ================= */}
-        <div className="flex items-center justify-between gap-6 mb-6">
+        <div className="flex items-start justify-between gap-6 mb-6">
           {/* LEFT */}
-          <h1 className="text-base font-medium text-dark whitespace-nowrap">
+          <h1 className="font-rubik font-medium text-[18px] leading-[20px] text-[#231F20] whitespace-nowrap mt-6">
             Task & Course Tracker
           </h1>
 
@@ -117,30 +109,54 @@ const Assigning_and_tracking: React.FC = () => {
           <div className="flex items-center gap-3">
             <SearchInput value={searchQuery} onChange={setSearchQuery} />
 
-            <button className="h-9 w-9 flex items-center justify-center bg-white border border-gray-light rounded-md hover:bg-gray-50">
-              <img src={xlIcon} alt="export" className="w-6 h-6" />
+            <button className="w-[48px] h-[48px] flex items-center justify-center">
+              <img
+                src={xlIcon}
+                alt="export"
+                className="w-[48px] h-[48px] object-contain"
+              />
             </button>
 
-            <Button
-              variant="primary"
+            <button
               onClick={() => setIsAssignModalOpen(true)}
+              className="
+                w-[138px]
+                h-[49px]
+                bg-[#006E74]
+                rounded-[4px]
+                font-rubik
+                font-medium
+                text-white
+                text-[14px]
+                flex
+                items-center
+                justify-center
+                whitespace-nowrap
+                hover:bg-[#00595F]
+              "
             >
               Assign a task
-            </Button>
+            </button>
           </div>
         </div>
 
-        {/* ================= CONTENT GRID ================= */}
-        <div className="grid grid-cols-1 xl:grid-cols-5 gap-6 items-start">
-          {/* TASK CARDS */}
-          <div className="xl:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="flex items-start gap-6">
+          {/* TASK CARDS (LEFT) */}
+          <div
+            className="
+    flex-1
+    grid
+    gap-5
+    grid-cols-[repeat(auto-fit,minmax(280px,1fr))]
+  "
+          >
             {filteredTasks.map((task) => (
               <TaskCard key={task.id} task={task} />
             ))}
           </div>
 
-          {/* STATS SUMMARY */}
-          <div className="xl:col-span-1 self-start">
+          {/* STATS SUMMARY (RIGHT) */}
+          <div className="sticky top-6 w-[360px] flex-shrink-0">
             <StatsSummary
               completedCount={stats.completed}
               inProgressCount={stats.inProgress}
@@ -149,6 +165,13 @@ const Assigning_and_tracking: React.FC = () => {
           </div>
         </div>
       </div>
+      {showBanner && (
+        <SuccessBanner
+          message={bannerMessage}
+          onClose={() => setShowBanner(false)}
+        />
+      )}
+
       <AssignTaskModal
         isOpen={isAssignModalOpen}
         onClose={() => setIsAssignModalOpen(false)}
