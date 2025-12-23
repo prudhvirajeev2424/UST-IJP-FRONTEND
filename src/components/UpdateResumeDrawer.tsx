@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Upload } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button } from '../components/ui';
 
 interface UpdateResumeDrawerProps {
   isOpen: boolean;

@@ -1,5 +1,5 @@
 import { MapPin, User } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui';
+import { Card, CardContent } from '../components/ui';
 
 interface JobSummaryCardProps {
   soNumber: string;

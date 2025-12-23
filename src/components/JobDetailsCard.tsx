@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui';
 import { SkillBadge } from './SkillBadge';
 
 interface JobDetailsCardProps {
