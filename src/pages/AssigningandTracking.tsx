@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import Header from "../components/TP_Manager/Assigning_and_Tracking/layout/Header";
 import xlIcon from "../assets/XlIcon.png";
 
@@ -6,6 +6,7 @@ import FilterPill from "../components/ui/Shared/TP_Manager/Assigning_and_Trackin
 import SearchInput from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SearchInput";
 import Button from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/Button";
 import AssignTaskModal from "../components/TP_Manager/Assigning_and_Tracking/AssignTaskModal";
+import SuccessBanner from "../components/ui/Shared/SuccessBanner";
 import StatsSummary from "../components/TP_Manager/Assigning_and_Tracking/dashboard/StatsSummary";
 import TaskCard from "../components/TP_Manager/Assigning_and_Tracking/dashboard/TaskCard";
 
@@ -16,6 +17,29 @@ const Assigning_and_tracking: React.FC = () => {
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showBanner, setShowBanner] = useState(false);
+  const [bannerMessage, setBannerMessage] = useState("");
+  const bannerTimerRef = useRef<number | null>(null);
+
+  const showSuccess = (message: string) => {
+    if (bannerTimerRef.current) {
+      clearTimeout(bannerTimerRef.current);
+      bannerTimerRef.current = null;
+    }
+    setBannerMessage(message);
+    setShowBanner(true);
+    const id = window.setTimeout(() => {
+      setShowBanner(false);
+      bannerTimerRef.current = null;
+    }, 4000);
+    bannerTimerRef.current = id;
+  };
+
+  useEffect(() => {
+    return () => {
+      if (bannerTimerRef.current) clearTimeout(bannerTimerRef.current);
+    };
+  }, []);
 
   /* ---------------- FILTER TASKS ---------------- */
   const filteredTasks = useMemo(() => {
@@ -54,6 +78,13 @@ const Assigning_and_tracking: React.FC = () => {
   return (
     <>
       <Header />
+
+      {showBanner && (
+        <SuccessBanner
+          message={bannerMessage}
+          onClose={() => setShowBanner(false)}
+        />
+      )}
 
       <div className="max-w-[1600px] mx-auto px-6 py-6">
         {/* ================= TOP BAR ================= */}
@@ -121,6 +152,7 @@ const Assigning_and_tracking: React.FC = () => {
       <AssignTaskModal
         isOpen={isAssignModalOpen}
         onClose={() => setIsAssignModalOpen(false)}
+        onSuccess={(msg: string) => showSuccess(msg)}
       />
     </>
   );

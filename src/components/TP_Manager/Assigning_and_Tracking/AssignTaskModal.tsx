@@ -4,11 +4,13 @@ import ProfilePic from "/src/assets/DP.png";
 interface AssignTaskModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSuccess?: (message: string) => void;
 }
 
 const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
   isOpen,
   onClose,
+  onSuccess,
 }) => {
   const [title, setTitle] = useState("SQL for testers");
   const [description, setDescription] = useState(
@@ -170,6 +172,12 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
           <button
             onClick={() => {
               // placeholder: implement save logic here
+              // trigger parent banner if provided
+              if (typeof onSuccess === "function") {
+                onSuccess(
+                  "A new task has been assigned to all Talent pool employees"
+                );
+              }
               onClose();
             }}
             className="h-9 px-4 rounded-md bg-[#0b7b77] text-white text-sm"
