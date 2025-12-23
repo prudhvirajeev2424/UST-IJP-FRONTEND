@@ -20,7 +20,7 @@ import {
   accolades, 
   testimonials, 
   projectData 
-} from '../data/mockData';
+} from '../data/mockdata';
 
 const Application: React.FC = () => {
   const [activeSection, setActiveSection] = useState('introduction');

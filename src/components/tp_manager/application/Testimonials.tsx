@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Testimonial } from '../../../types/candidate';
-import QuoteIcon from '../../assets/Icon metro-quote.svg'; 
+import QuoteIcon from '../../../assets/Testimonials.svg'; 
 
 interface TestimonialsProps {
   testimonials: Testimonial[];

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Accolade } from '../../../types/candidate';
-import AccoladeIcon from '../../assets/Group2.svg'; // adjust path if needed
+import AccoladeIcon from '../../../assets/alocades.svg'; // adjust path if needed
 
 interface AccoladeCardProps {
   accolade: Accolade;

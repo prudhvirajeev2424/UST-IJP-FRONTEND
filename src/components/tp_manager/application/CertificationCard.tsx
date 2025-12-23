@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Certification } from '../../../types/candidate';
-import GroupIcon from '../../assets/Group.svg'; // adjust path if needed
+import GroupIcon from '../../../assets/certificatecard.svg'; // adjust path if needed
 
 interface CertificationCardProps {
   certification: Certification;

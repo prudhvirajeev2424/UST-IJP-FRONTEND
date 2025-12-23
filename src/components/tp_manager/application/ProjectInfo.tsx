@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import type { Project } from '../../../types/project';
-import AdobeLogo from '../../assets/Image 46@2x.png';
-import PdfIcon from '../../assets/Icon awesome-file-pdf.svg';
-import JobDetailsUI from './JobDetailsUI';
+import React, { useState } from "react";
+import type { Project } from "../../../types/project";
+import AdobeLogo from "../../../assets/Image46.png";
+import PdfIcon from "../../../assets/IconFilePdf.svg";
+import JobDetailsUI from "./JobDetailsUI";
 
 interface ProjectInfoProps {
   project: Project;
@@ -42,6 +42,48 @@ const ProjectInfo: React.FC<ProjectInfoProps> = ({ project }) => {
           {/* Horizontal line after spacing */}
           <hr className="mt-3 mb-4 border-t border-gray-300" />
 
+          <div className="flex items-center space-x-2 mb-1">
+            <span
+              className="text-[18px] leading-[22px] font-normal transition-colors cursor-pointer"
+              style={{ color: "#006E74" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#000000")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#006E74")}
+            >
+              SO# 85938594
+            </span>
+          </div>
+          <div>
+            <span
+              className="text-[18px] leading-[22px] font-normal"
+              style={{ color: "#231F20" }}
+            >
+              Developer III - B3
+            </span>
+          </div>
+          <div className="mt-1 flex items-center space-x-1">
+            <svg
+              width="13"
+              height="16"
+              viewBox="0 0 13 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.5 0C3.46 0 1 2.46 1 5.5C1 9.5 6.5 15 6.5 15C6.5 15 12 9.5 12 5.5C12 2.46 9.54 0 6.5 0ZM6.5 7.5C5.4 7.5 4.5 6.6 4.5 5.5C4.5 4.4 5.4 3.5 6.5 3.5C7.6 3.5 8.5 4.4 8.5 5.5C8.5 6.6 7.6 7.5 6.5 7.5Z"
+                stroke="#7A7480"
+                strokeWidth="2"
+                fill="none"
+                opacity="1"
+              />
+            </svg>
+            <span
+              className="text-[14px] leading-[17px] font-normal"
+              style={{ color: "#7A7480" }}
+            >
+              Bangalore
+            </span>
+          </div>
+
           {/* Job Description Card */}
           <div
             onClick={() => setShowModal(true)}
@@ -50,12 +92,10 @@ const ProjectInfo: React.FC<ProjectInfoProps> = ({ project }) => {
             <div className="flex items-center justify-between">
               {/* Left side: PDF icon + label */}
               <div className="flex items-center space-x-2">
-                <img
-                  src={PdfIcon}
-                  alt="PDF Icon"
-                  className="w-6 h-6"
-                />
-                <span className="text-sm font-medium text-gray-800">Job Description</span>
+                <img src={PdfIcon} alt="PDF Icon" className="w-6 h-6" />
+                <span className="text-sm font-medium text-gray-800">
+                  Job Description
+                </span>
               </div>
 
               {/* Right side: enlarged teal arrow icon with hover animation */}
@@ -77,9 +117,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = ({ project }) => {
       </div>
 
       {/* Job Details Modal */}
-      {showModal && (
-        <JobDetailsUI onClose={() => setShowModal(false)} />
-      )}
+      {showModal && <JobDetailsUI onClose={() => setShowModal(false)} />}
     </>
   );
 };

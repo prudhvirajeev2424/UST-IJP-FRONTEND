@@ -1,5 +1,5 @@
 import React from 'react';
-import DownloadIcon from '../../assets/download.svg'; 
+import DownloadIcon from '../../../assets/download.svg'; 
 
 interface IntroductionProps {
   introduction: string;
