@@ -5,6 +5,7 @@ import xlIcon from "../assets/XlIcon.png";
 import FilterPill from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/FilterPill";
 import SearchInput from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SearchInput";
 import Button from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/Button";
+import AssignTaskModal from "../components/TP_Manager/Assigning_and_Tracking/AssignTaskModal";
 import StatsSummary from "../components/TP_Manager/Assigning_and_Tracking/dashboard/StatsSummary";
 import TaskCard from "../components/TP_Manager/Assigning_and_Tracking/dashboard/TaskCard";
 
@@ -12,6 +13,7 @@ import { mockTasks } from "../data/TPManagerAssigningandTrackingMockData";
 import { type FilterType } from "../types/AssigningandTrackingTypes";
 
 const Assigning_and_tracking: React.FC = () => {
+  const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -88,7 +90,12 @@ const Assigning_and_tracking: React.FC = () => {
               <img src={xlIcon} alt="export" className="w-6 h-6" />
             </button>
 
-            <Button variant="primary">Assign a task</Button>
+            <Button
+              variant="primary"
+              onClick={() => setIsAssignModalOpen(true)}
+            >
+              Assign a task
+            </Button>
           </div>
         </div>
 
@@ -111,6 +118,10 @@ const Assigning_and_tracking: React.FC = () => {
           </div>
         </div>
       </div>
+      <AssignTaskModal
+        isOpen={isAssignModalOpen}
+        onClose={() => setIsAssignModalOpen(false)}
+      />
     </>
   );
 };
