@@ -6,7 +6,7 @@ import FilterPill from "../components/ui/Shared/TP_Manager/Assigning_and_Trackin
 import SearchInput from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SearchInput";
 import Button from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/Button";
 import AssignTaskModal from "../components/TP_Manager/Assigning_and_Tracking/AssignTaskModal";
-import SuccessBanner from "../components/ui/Shared/SuccessBanner";
+import SuccessBanner from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SuccessBanner";
 import StatsSummary from "../components/TP_Manager/Assigning_and_Tracking/dashboard/StatsSummary";
 import TaskCard from "../components/TP_Manager/Assigning_and_Tracking/dashboard/TaskCard";
 
