@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
+import Navbar from "../components/Navbar";
 
 // Create context for active role
 export const ActiveRoleContext = createContext<{
@@ -61,31 +62,38 @@ const LoginPage: React.FC = () => {
     }
   };
 
-  // If user is logged in, show the active role
+  // If user is logged in, render the Navbar and a simple welcome area.
   if (activeRole) {
     return (
       <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
-        <div className="h-screen w-screen flex items-center justify-center bg-gray-100 overflow-hidden">
-          <div className="bg-white rounded-2xl shadow-2xl p-10 text-center">
-            <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome!</h1>
-            <p className="text-lg text-gray-600 mb-6">
-              You are logged in as:{" "}
-              <span className="font-semibold text-[#008080]">{activeRole}</span>
-            </p>
-            <button
-              onClick={() => {
-                setActiveRole(null);
-                setEmail("");
-                setPassword("");
-                setRole("Employee");
-                setZoomOut(false);
-                setFadeWhite(false);
-              }}
-              className="bg-[#008080] text-white px-6 py-2.5 rounded hover:bg-[#006666] transition"
-            >
-              Logout
-            </button>
-          </div>
+        <div className="min-h-screen bg-gray-50 pt-16">
+          <Navbar role={activeRole} />
+          {/* <main className="p-6">
+            <div className="max-w-4xl mx-auto">
+              <h1 className="text-2xl font-semibold text-gray-800 mb-2">
+                Welcome, {activeRole}
+              </h1>
+              <p className="text-gray-600">
+                You are now signed in. Use the navigation above to access your
+                workspace.
+              </p>
+              <div className="mt-6">
+                <button
+                  onClick={() => {
+                    setActiveRole(null);
+                    setEmail("");
+                    setPassword("");
+                    setRole("Employee");
+                    setZoomOut(false);
+                    setFadeWhite(false);
+                  }}
+                  className="bg-[#008080] text-white px-4 py-2 rounded hover:bg-[#006666] transition"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          </main> */}
         </div>
       </ActiveRoleContext.Provider>
     );
@@ -120,7 +128,9 @@ const LoginPage: React.FC = () => {
                   />
                 </div>
               </div>
-              <div className="text-gray-800 font-semibold text-xl">Taking you to your workspace...</div>
+              <div className="text-gray-800 font-semibold text-xl">
+                Taking you to your workspace...
+              </div>
             </div>
           </div>
         )}
@@ -162,7 +172,9 @@ const LoginPage: React.FC = () => {
             {/* Error Message */}
             {error && (
               <div
-                className={`mb-4 text-sm text-red-600 text-center ${errorShake ? "shake" : ""}`}
+                className={`mb-4 text-sm text-red-600 text-center ${
+                  errorShake ? "shake" : ""
+                }`}
               >
                 {error}
               </div>
@@ -247,8 +259,12 @@ const LoginPage: React.FC = () => {
             </div>
 
             <div className="mt-6 flex justify-center gap-6 text-sm text-gray-500">
-              <a href="#" className="hover:underline">Privacy</a>
-              <a href="#" className="hover:underline">Need Help</a>
+              <a href="#" className="hover:underline">
+                Privacy
+              </a>
+              <a href="#" className="hover:underline">
+                Need Help
+              </a>
             </div>
           </div>
         </div>
