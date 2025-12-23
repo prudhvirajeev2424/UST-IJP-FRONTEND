@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@/components/ui';
+import { Card, CardContent } from '../components/ui';
 
 interface MatchScoreCardProps {
   percentage: number;

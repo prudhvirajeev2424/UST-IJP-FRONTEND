@@ -7,7 +7,7 @@ import {
   DialogTitle,
   Button,
   Textarea,
-} from '@/components/ui';
+} from '../components/ui';
 
 interface AttachedFile {
   name: string;

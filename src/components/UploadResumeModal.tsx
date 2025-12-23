@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
   Button,
-} from '@/components/ui';
+} from '../components/ui';
 
 interface UploadResumeModalProps {
   open: boolean;
