@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
-
+import Navbar from "../components/navbar";
 // Create context for active role
 export const ActiveRoleContext = createContext<{
   activeRole: string | null;
@@ -64,30 +64,31 @@ const LoginPage: React.FC = () => {
   // If user is logged in, show the active role
   if (activeRole) {
     return (
-      <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
-        <div className="h-screen w-screen flex items-center justify-center bg-gray-100 overflow-hidden">
-          <div className="bg-white rounded-2xl shadow-2xl p-10 text-center">
-            <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome!</h1>
-            <p className="text-lg text-gray-600 mb-6">
-              You are logged in as:{" "}
-              <span className="font-semibold text-[#008080]">{activeRole}</span>
-            </p>
-            <button
-              onClick={() => {
-                setActiveRole(null);
-                setEmail("");
-                setPassword("");
-                setRole("Employee");
-                setZoomOut(false);
-                setFadeWhite(false);
-              }}
-              className="bg-[#008080] text-white px-6 py-2.5 rounded hover:bg-[#006666] transition"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      </ActiveRoleContext.Provider>
+      <Navbar role={activeRole} />
+      // <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
+      //   <div className="h-screen w-screen flex items-center justify-center bg-gray-100 overflow-hidden">
+      //     <div className="bg-white rounded-2xl shadow-2xl p-10 text-center">
+      //       <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome!</h1>
+      //       <p className="text-lg text-gray-600 mb-6">
+      //         You are logged in as:{" "}
+      //         <span className="font-semibold text-[#008080]">{activeRole}</span>
+      //       </p>
+      //       <button
+      //         onClick={() => {
+      //           setActiveRole(null);
+      //           setEmail("");
+      //           setPassword("");
+      //           setRole("Employee");
+      //           setZoomOut(false);
+      //           setFadeWhite(false);
+      //         }}
+      //         className="bg-[#008080] text-white px-6 py-2.5 rounded hover:bg-[#006666] transition"
+      //       >
+      //         Logout
+      //       </button>
+      //     </div>
+      //   </div>
+      // </ActiveRoleContext.Provider>
     );
   }
 
