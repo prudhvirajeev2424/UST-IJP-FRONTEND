@@ -87,7 +87,7 @@ export default function CoverLetterPopup() {
             opacity: 1,
             margin: 0
           }}>
-            I am interested in joining the [Project Name] team at [Company Name]. With experience in [Key Skills], I have contributed to [mention relevant achievement]. I believe my expertise aligns well with the project's goals and would love the opportunity to contribute. Looking forward to discussing this further.
+            I am interested in joining the [Project Name] team at [Company_Name]. With experience in [Key Skills], I have contributed to [mention relevant achievement]. I believe my expertise aligns well with the project's goals and would love the opportunity to contribute. Looking forward to discussing this further.
           </p>
         </div>
       </div>
