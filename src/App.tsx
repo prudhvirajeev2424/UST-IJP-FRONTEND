@@ -2,10 +2,9 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
-import Application from './pages/Application';
+// import Application from './pages/Application';
 import './pages/landing_page'
 import LoginPage from './pages/landing_page';
-// import LoginPage from './pages/landing_page';
 function App() {
   // const [count, setCount] = useState(0)
 
