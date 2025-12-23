@@ -84,8 +84,12 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {applications.map((application) => (
-            <TableRow key={application.id} application={application} />
+          {applications.map((application, idx) => (
+            <TableRow
+              key={application.id}
+              application={application}
+              isFirst={idx === 0}
+            />
           ))}
         </tbody>
       </table>
