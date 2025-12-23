@@ -1,5 +1,5 @@
-import { MapPin, User } from 'lucide-react';
-import { Card, CardContent } from '../components/ui';
+import { MapPin, User } from "lucide-react";
+import { Card, CardContent } from "../ui";
 
 interface JobSummaryCardProps {
   soNumber: string;
@@ -41,7 +41,9 @@ export function JobSummaryCard({
 
           <div>
             <p className="text-xs text-muted-foreground">Role & Band</p>
-            <p className="text-sm font-medium text-foreground">{role} / {band}</p>
+            <p className="text-sm font-medium text-foreground">
+              {role} / {band}
+            </p>
           </div>
 
           <div>
@@ -50,7 +52,9 @@ export function JobSummaryCard({
               {accountLogo ? (
                 <img src={accountLogo} alt={account} className="h-5" />
               ) : (
-                <span className="text-sm font-medium text-primary">{account}</span>
+                <span className="text-sm font-medium text-primary">
+                  {account}
+                </span>
               )}
             </div>
           </div>
@@ -65,12 +69,18 @@ export function JobSummaryCard({
             <div className="flex items-center gap-2">
               <div className="h-7 w-7 rounded-full bg-secondary flex items-center justify-center overflow-hidden">
                 {hiringManager.avatar ? (
-                  <img src={hiringManager.avatar} alt={hiringManager.name} className="h-full w-full object-cover" />
+                  <img
+                    src={hiringManager.avatar}
+                    alt={hiringManager.name}
+                    className="h-full w-full object-cover"
+                  />
                 ) : (
                   <User className="h-4 w-4 text-muted-foreground" />
                 )}
               </div>
-              <span className="text-sm text-foreground">{hiringManager.name}</span>
+              <span className="text-sm text-foreground">
+                {hiringManager.name}
+              </span>
             </div>
           </div>
         </div>

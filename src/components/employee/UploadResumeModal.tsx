@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { X, Upload } from 'lucide-react';
+import { useState } from "react";
+import { X, Upload } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   Button,
-} from '../components/ui';
+} from "../ui";
 
 interface UploadResumeModalProps {
   open: boolean;
@@ -14,10 +14,15 @@ interface UploadResumeModalProps {
   onConfirm: (file: File) => void;
 }
 
-export function UploadResumeModal({ open, onOpenChange, onConfirm }: UploadResumeModalProps) {
-  const [uploadedFile, setUploadedFile] = useState<{ name: string; size: string } | null>(
-    { name: 'Sarah Anderson - Resume.pdf', size: '2.4 MB' }
-  );
+export function UploadResumeModal({
+  open,
+  onOpenChange,
+  onConfirm,
+}: UploadResumeModalProps) {
+  const [uploadedFile, setUploadedFile] = useState<{
+    name: string;
+    size: string;
+  } | null>({ name: "Sarah Anderson - Resume.pdf", size: "2.4 MB" });
   const [isDragging, setIsDragging] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -33,7 +38,7 @@ export function UploadResumeModal({ open, onOpenChange, onConfirm }: UploadResum
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    
+
     const files = e.dataTransfer.files;
     if (files.length > 0) {
       handleFileSelect(files[0]);
@@ -42,10 +47,14 @@ export function UploadResumeModal({ open, onOpenChange, onConfirm }: UploadResum
 
   const handleFileSelect = (file: File) => {
     // Validate file type (PDF, DOC, DOCX)
-    const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-    
+    const validTypes = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ];
+
     if (!validTypes.includes(file.type)) {
-      alert('Please upload a PDF or Word document');
+      alert("Please upload a PDF or Word document");
       return;
     }
 
@@ -69,11 +78,11 @@ export function UploadResumeModal({ open, onOpenChange, onConfirm }: UploadResum
     setIsSubmitting(true);
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       onConfirm({} as File);
       onOpenChange(false);
       // Reset to dummy data
-      setUploadedFile({ name: 'Sarah Anderson - Resume.pdf', size: '2.4 MB' });
+      setUploadedFile({ name: "Sarah Anderson - Resume.pdf", size: "2.4 MB" });
     } finally {
       setIsSubmitting(false);
     }
@@ -86,7 +95,7 @@ export function UploadResumeModal({ open, onOpenChange, onConfirm }: UploadResum
   const handleOpenChange = (newOpen: boolean) => {
     if (newOpen === false) {
       // Reset to dummy data when closing
-      setUploadedFile({ name: 'Sarah Anderson - Resume.pdf', size: '2.4 MB' });
+      setUploadedFile({ name: "Sarah Anderson - Resume.pdf", size: "2.4 MB" });
     }
     onOpenChange(newOpen);
   };
@@ -121,8 +130,8 @@ export function UploadResumeModal({ open, onOpenChange, onConfirm }: UploadResum
             onDrop={handleDrop}
             className={`w-full border-2 border-dashed rounded-lg p-8 flex flex-col items-center justify-center gap-4 transition-all ${
               isDragging
-                ? 'border-primary bg-primary/5'
-                : 'border-muted-foreground/30 hover:border-primary/50'
+                ? "border-primary bg-primary/5"
+                : "border-muted-foreground/30 hover:border-primary/50"
             }`}
           >
             <div className="rounded-full bg-muted/50 p-4">
@@ -132,7 +141,10 @@ export function UploadResumeModal({ open, onOpenChange, onConfirm }: UploadResum
               <p className="text-sm text-muted-foreground">
                 Drag and drop to upload or
               </p>
-              <label htmlFor="file-input" className="text-sm text-primary cursor-pointer hover:underline font-medium inline">
+              <label
+                htmlFor="file-input"
+                className="text-sm text-primary cursor-pointer hover:underline font-medium inline"
+              >
                 Browse
               </label>
               <input
@@ -151,8 +163,12 @@ export function UploadResumeModal({ open, onOpenChange, onConfirm }: UploadResum
             <div className="w-full flex items-center justify-between p-4 bg-muted/30 rounded-lg">
               <div className="flex items-center gap-3 flex-1">
                 <div className="h-10 w-10 bg-red-100 rounded flex items-center justify-center flex-shrink-0">
-                  <svg viewBox="0 0 24 24" className="w-6 h-6 text-red-600" fill="currentColor">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="w-6 h-6 text-red-600"
+                    fill="currentColor"
+                  >
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -196,7 +212,7 @@ export function UploadResumeModal({ open, onOpenChange, onConfirm }: UploadResum
                 Uploading...
               </span>
             ) : (
-              'Proceed'
+              "Proceed"
             )}
           </Button>
         </div>
