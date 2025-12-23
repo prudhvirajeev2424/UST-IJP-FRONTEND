@@ -1,17 +1,7 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
-
-// Create context for active role
-export const ActiveRoleContext = createContext<{
-  activeRole: string | null;
-  setActiveRole: (role: string | null) => void;
-}>({
-  activeRole: null,
-  setActiveRole: () => {},
-});
-
-// Hook to use active role in other components
-export const useActiveRole = () => useContext(ActiveRoleContext);
+import { useActiveRole } from "../context/ActiveRoleContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +13,8 @@ const LoginPage: React.FC = () => {
   const [zoomOut, setZoomOut] = useState(false);
   const [errorShake, setErrorShake] = useState(false);
   const [fadeWhite, setFadeWhite] = useState(false);
-  const [activeRole, setActiveRole] = useState<string | null>(null);
+  const { activeRole, setActiveRole } = useActiveRole();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
@@ -51,6 +42,8 @@ const LoginPage: React.FC = () => {
       setTimeout(() => setFadeWhite(true), ZOOM_MS);
       setTimeout(() => {
         setActiveRole(role);
+        // navigate to home after sign-in animation
+        navigate("/home");
       }, ZOOM_MS + FADE_MS);
     } catch (err: any) {
       console.error(err);
@@ -65,10 +58,9 @@ const LoginPage: React.FC = () => {
   // If user is logged in, render the Navbar and a simple welcome area.
   if (activeRole) {
     return (
-      <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
-        <div className="min-h-screen bg-gray-50 pt-16">
-          <Navbar role={activeRole} />
-          {/* <main className="p-6">
+      <div className="min-h-screen bg-gray-50 pt-16">
+        <Navbar role={activeRole} />
+        {/* <main className="p-6">
             <div className="max-w-4xl mx-auto">
               <h1 className="text-2xl font-semibold text-gray-800 mb-2">
                 Welcome, {activeRole}
@@ -94,13 +86,11 @@ const LoginPage: React.FC = () => {
               </div>
             </div>
           </main> */}
-        </div>
-      </ActiveRoleContext.Provider>
+      </div>
     );
   }
 
   return (
-    <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
       <div className="h-screen w-screen flex items-center justify-center bg-[#008080] overflow-hidden">
         {/* Component-level styles */}
         <style>{`
@@ -269,7 +259,6 @@ const LoginPage: React.FC = () => {
           </div>
         </div>
       </div>
-    </ActiveRoleContext.Provider>
   );
 };
 

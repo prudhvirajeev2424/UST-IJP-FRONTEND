@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useActiveRole } from "../context/ActiveRoleContext";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
 
@@ -7,7 +9,6 @@ interface NavbarProps {
 }
 
 const Navbar = ({ role }: NavbarProps) => {
-  const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
 
   const allLinks = ["Home", "Applications", "Assigning & Tracking", "Reports"];
@@ -24,6 +25,35 @@ const Navbar = ({ role }: NavbarProps) => {
   } else {
     links = ["Home", "Applications"];
   }
+
+  // if role not passed as prop, fall back to context
+  const context = useActiveRole();
+  const effectiveRole = role ?? context.activeRole;
+
+  // recompute links based on effectiveRole
+  if (effectiveRole === "TP Manager") {
+    links = allLinks;
+  } else if (effectiveRole === "Employee") {
+    links = ["Home", "Opportunities", "Assigning & Tracking", "My Applications"];
+  } else if (effectiveRole === "WFM") {
+    links = allLinks.filter(
+      (l) => l !== "Assigning & Tracking" && l !== "Reports"
+    );
+  } else {
+    links = ["Home", "Applications"];
+  }
+
+  const linkToPath = (link: string) => {
+    const map: Record<string, string> = {
+      Home: "/home",
+      Applications: "/applications",
+      "Assigning & Tracking": "/assigning",
+      Reports: "/reports",
+      Opportunities: "/opportunities",
+      "My Applications": "/my-applications",
+    };
+    return map[link] ?? "/";
+  };
 
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
@@ -46,21 +76,18 @@ const Navbar = ({ role }: NavbarProps) => {
             <div className="flex gap-5">
               {links.map((link) => (
                 <div key={link} className="relative">
-                  <a
-                    href="#"
-                    onClick={() => setActive(link)}
-                    className={`text-sm font-semibold px-2 py-1 ${
-                      active === link
-                        ? "text-black"
-                        : "text-gray-500 hover:text-black"
-                    }`}
+                  <NavLink
+                    to={linkToPath(link)}
+                    className={({ isActive }) =>
+                      `text-sm font-semibold px-2 py-1 ${
+                        isActive ? "text-black" : "text-gray-500 hover:text-black"
+                      }`
+                    }
                   >
                     {link}
-                  </a>
+                  </NavLink>
 
-                  {active === link && (
-                    <span className="absolute -bottom-0.5 left-0 right-0 h-1 bg-teal-600 rounded-full" />
-                  )}
+                  {/* underline indicator for active link (NavLink already handles styling) */}
                 </div>
               ))}
             </div>
