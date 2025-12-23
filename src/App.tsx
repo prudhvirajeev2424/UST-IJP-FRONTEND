@@ -1,5 +1,4 @@
-import React from "react";
-import Assigning_and_tracking from "./pages/Assigning_and_tracking";
+import Assigning_and_tracking from "./pages/AssigningandTracking";
 
 const App = () => {
   return <Assigning_and_tracking />;

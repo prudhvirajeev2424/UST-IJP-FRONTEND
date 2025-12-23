@@ -1,16 +1,15 @@
 import React, { useState, useMemo } from "react";
-import MainLayout from "../components/TP_Manager_Assigning_and_tracking_layouts/TP_Manager_Assigning_and_tracking_MainLayout";
-import Header from "../components/TP_Manager_Assigning_and_tracking_layouts/TP_Manager_Assigning_and_tracking_Header";
-import xlIcon from "../assets/TP_Manager_Assigning_and_tracking_xl_icon.png";
+import Header from "../components/TP_Manager/Assigning_and_Tracking/layout/Header";
+import xlIcon from "../assets/XlIcon.png";
 
-import FilterPill from "../components/ui/TP_Manager_Assigning_and_tracking_FilterPill";
-import SearchInput from "../components/ui/TP_Manager_Assigning_and_tracking_SearchInput";
-import Button from "../components/ui/TP_Manager_Assigning_and_tracking_Button";
-import StatsSummary from "../components/TP_Manager_Assigning_and_tracking_dashboard/TP_Manager_Assigning_and_tracking_right_StatsSummary";
-import TaskCard from "../components/TP_Manager_Assigning_and_tracking_dashboard/TP_Manager_Assigning_and_tracking_middle_TaskCard";
+import FilterPill from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/FilterPill";
+import SearchInput from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SearchInput";
+import Button from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/Button";
+import StatsSummary from "../components/TP_Manager/Assigning_and_Tracking/dashboard/StatsSummary";
+import TaskCard from "../components/TP_Manager/Assigning_and_Tracking/dashboard/TaskCard";
 
-import { mockTasks } from "../data/TP_Manager_Assigning_and_tracking_mock_data";
-import { type FilterType } from "../types/TP_Manager_Assigning_and_tracking_activity";
+import { mockTasks } from "../data/TPManagerAssigningandTrackingMockData";
+import { type FilterType } from "../types/AssigningandTrackingTypes";
 
 const Assigning_and_tracking: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
@@ -51,7 +50,7 @@ const Assigning_and_tracking: React.FC = () => {
   );
 
   return (
-    <MainLayout>
+    <>
       <Header />
 
       <div className="max-w-[1600px] mx-auto px-6 py-6">
@@ -112,7 +111,7 @@ const Assigning_and_tracking: React.FC = () => {
           </div>
         </div>
       </div>
-    </MainLayout>
+    </>
   );
 };
 

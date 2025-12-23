@@ -1,4 +1,4 @@
-import type { Task } from "../types/TP_Manager_Assigning_and_tracking_activity";
+import type { Task } from "../types/AssigningandTrackingTypes";
 
 export const mockTasks: Task[] = [
   {
