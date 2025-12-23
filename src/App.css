@@ -84,3 +84,22 @@
   font-size: 14px;
   color: #6b7280;
 }
+
+/* Task card spacing and responsive overlap
+   - default: 20px vertical spacing between cards (matches request)
+   - when viewport is narrower (zoomed in / small width), make cards overlap
+     so they don't push the right-side stats out of alignment.
+*/
+.task-card {
+  position: relative;
+  margin-bottom: 20px; /* 20px spacing */
+  transition: margin 150ms ease;
+  z-index: 1;
+}
+
+/* When viewport gets narrower, overlap subsequent cards by 20px */
+@media (max-width: 1280px) {
+  .task-card {
+    margin-bottom: -20px; /* overlap by 20px */
+  }
+}
