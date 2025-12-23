@@ -1,4 +1,5 @@
-import type { Candidate, Job, Certification, Education, Skill, Accolade, Testimonial } from '../types/candidate';
+import type { Candidate, Job, Certification, Education, Skill, Accolade, Testimonial  } from '../types/candidate';
+import type { Activity,Stats } from '../types/activity';
 import type { Project } from '../types/project';
 
 export const candidateData: Candidate = {
@@ -127,3 +128,32 @@ export const projectData: Project = {
   company: 'Adobe',
   coverLetter: 'I am interested in joining the project team and contributing my expertise in Java and system design.'
 };
+export const stats: Stats = {
+  applied: 4,
+  shortlisted: 3,
+  rejected: 1,
+};
+
+export const recentActivities: Activity[] = [
+  {
+    id: '1',
+    title: 'Java Developer I - A1',
+    soId: 'SO#292567',
+    status: 'Shortlisted',
+    timestamp: '12 hrs ago',
+  },
+  {
+    id: '2',
+    title: 'Java Developer I - A1',
+    soId: 'SO#292567',
+    status: 'Actioned',
+    timestamp: 'Yesterday',
+  },
+  {
+    id: '3',
+    title: 'Java Developer I - A1',
+    soId: 'SO#292567',
+    status: 'Rejected',
+    timestamp: '3 days ago',
+  },
+];
