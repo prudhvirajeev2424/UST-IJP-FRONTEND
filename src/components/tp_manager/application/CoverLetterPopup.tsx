@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 
-export default function TP_manager_Application_popup_coverletter() {
+export default function CoverLetterPopup() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (

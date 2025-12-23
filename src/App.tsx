@@ -1,15 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import { useState } from 'react'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
 import './App.css'
-import TP_manager_Application_popup_coverletter from './components/TP_manager_Application_popup_coverletter'
-
+import ProjectInfo from './components/tp_manager/application/ProjectInfo'
+import { projectData } from './data/mockdata'
+// import CoverLetterPopup from './components/tp_manager/application/CoverLetterPopup' 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
 
   return (
     <>
-      <TP_manager_Application_popup_coverletter/>
+      {/* <CoverLetterPopup/> */}
+      <ProjectInfo project={projectData} />
     </>
   )
 }
