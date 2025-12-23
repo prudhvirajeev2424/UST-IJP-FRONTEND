@@ -3,26 +3,21 @@
 // import viteLogo from '/vite.svg'
 import './App.css'
 import { ShortlistProvider } from './components/tp_manager/application/context/ShortlistContext';
-import Application from './pages/Application';
-import './pages/landing_page'
+// Render the Home page (contains Navbar and ApplicationStatus) by default
+import Home from './pages/home';
+// import Application from './pages/Application';
+// import './pages/landing_page'
 // import LoginPage from './pages/landing_page';
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
-<<<<<<< HEAD
-    <>
-    {/* <LoginPage /> */}
-    <Application/>
-    </>
-=======
     <ShortlistProvider>
 
-      <Application/>
+  <Home />
     
     {/* <LoginPage />
     
->>>>>>> harsh
     // <>
     //   <div>
     //     <a href="https://vite.dev" target="_blank">
