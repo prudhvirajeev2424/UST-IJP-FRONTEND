@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle, Button } from '../components/ui';
-import { SimilarJobCard } from './SimilarJobCard';
+import { Card, CardContent, CardHeader, CardTitle, Button } from "../ui";
+import { SimilarJobCard } from "./SimilarJobCard";
 
 interface SimilarJob {
   soNumber: string;
@@ -17,7 +17,9 @@ export function SimilarJobsPanel({ jobs }: SimilarJobsPanelProps) {
     <Card className="bg-card border border-border animate-fade-in">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-sm font-semibold text-foreground">Similar Jobs</CardTitle>
+          <CardTitle className="text-sm font-semibold text-foreground">
+            Similar Jobs
+          </CardTitle>
           <Button variant="link" className="text-primary text-xs p-0 h-auto">
             View More
           </Button>
