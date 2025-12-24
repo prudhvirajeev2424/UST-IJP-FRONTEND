@@ -101,19 +101,67 @@ export default function Home() {
     setResumeModalOpen(false);
   };
  
-  return (
+   return (
     <div className="min-h-screen bg-background">
       {/* <Header activeTab={activeTab} onTabChange={setActiveTab} /> */}
  
       <main className="p-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-[repeat(3,1fr)] gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left Column - Profile Summary */}
-            
-            <EmpHomeLeftSideBar profile={profileData}/>
-            
+            <div className="lg:col-span-3">
+              <Card className="border-0 shadow-sm">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-normal text-muted-foreground">
+                    Profile Summary
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm text-foreground leading-relaxed">
+                    {profileData.summary}
+                  </p>
+ 
+                  <div className="space-y-2">
+                    <h4 className="text-sm text-muted-foreground">Primary Skills</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {profileData.primarySkills.map((skill) => (
+                        <SkillBadge key={skill} skill={skill} variant="primary" />
+                      ))}
+                    </div>
+                  </div>
+ 
+                  {/* Resume Status */}
+                  {hasResume ? (
+                    <button
+                      onClick={handleResumeClick}
+                      className="w-full flex items-center justify-between py-3 px-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                          <FileText className="w-5 h-5 text-primary" />
+                        </div>
+                        <div className="text-left">
+                          <p className="text-sm font-medium text-foreground">Resume</p>
+                          <p className="text-xs text-muted-foreground">Updated: 6 months ago</p>
+                        </div>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-primary" />
+                    </button>
+                  ) : (
+                    <div className="flex items-center justify-between py-2 px-3 bg-muted/30 rounded-lg">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <User className="w-4 h-4" />
+                        <span>Resume not found</span>
+                      </div>
+                      <AlertCircle className="w-4 h-4 text-coral" />
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
  
             {/* Center Column - Resume Upload or Uploaded State */}
+            <div className="lg:col-span-5">
               {!hasResume ? (
                 // Resume not found state - Use the new component
                 <ResumeNotFoundCard onUploadClick={() => setUploadResumeModalOpen(true)} />
@@ -121,10 +169,11 @@ export default function Home() {
                 // Resume uploaded - show placeholder for opportunities
                 <EmpHomeGrid opportunities={opportunities} />
               )}
-           
+            </div>
  
-            <div>
-              {/* Right Column - Stats & Activities */}
+            {/* Right Column - Stats & Activities */}
+            <div className="lg:col-span-4 space-y-4">
+              {/* Stats */}
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="grid grid-cols-3 gap-4 text-center">
@@ -174,8 +223,8 @@ export default function Home() {
                   ))}
                 </CardContent>
               </Card>
+              {/* <EmpHomeRightSideBar stats={stats} activities={recentActivities} /> */}
             </div>
-            
             
           </div>
         </div>
