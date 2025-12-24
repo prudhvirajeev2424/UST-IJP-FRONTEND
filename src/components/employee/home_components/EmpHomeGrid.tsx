@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { List } from "lucide-react";
-import type { Opportunity } from "../../types/opportunity";
-import excelIcon from "../../assets/Icon awesome-file-pdf.svg";
+import type { Opportunity } from "../../../types/opportunity";
+import excelIcon from "../../../assets/Icon awesome-file-pdf.svg";
 
 interface OpportunityGridProps {
   opportunities: Opportunity[];

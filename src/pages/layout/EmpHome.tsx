@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { User, AlertCircle, FileText, ArrowRight } from 'lucide-react';
-import { SkillBadge } from './SkillBadge';
-import { UploadResumeModal } from './UploadResumeModal';
-import { ResumeDetailModal } from './ResumeDetailModal';
-import { UpdateResumeDrawer } from './UpdateResumeDrawer';
-import { ResumeNotFoundCard } from './ResumeNotFoundCard';
-import { Button, Card, CardContent, CardHeader, CardTitle } from '../ui';
-import { EmpHomeRightSideBar } from './EmpHomeRightSideBar';
-import {EmpHomeLeftSideBar} from './EmpHomeLeftSideBar'
-import { stats,opportunities, } from '../../data/mockData';
-import {profileData} from '../../data/profiles'
-import { EmpHomeGrid } from './EmpHomeGrid';
+import { SkillBadge } from '../../components/employee/home_components/SkillBadge';
+import { UploadResumeModal } from '../../components/employee/home_components/UploadResumeModal';
+import { ResumeDetailModal } from '../../components/employee/home_components/ResumeDetailModal';
+import { UpdateResumeDrawer } from '../../components/employee/home_components/UpdateResumeDrawer';
+import { ResumeNotFoundCard } from '../../components/employee/home_components/ResumeNotFoundCard';
+import {  Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card';
+import { EmpHomeRightSideBar } from '../../components/employee/home_components//EmpHomeRightSideBar';
+import { EmpHomeLeftSideBar } from '../../components/employee/home_components//EmpHomeLeftSideBar';
+import { stats,opportunities } from '../../data/mockData';
+import { profileData } from '../../data/profiles';
+import { EmpHomeGrid } from '../../components/employee/home_components//EmpHomeGrid';
 // import type {Stats,Activity} from '../../types/activity';
 
  
@@ -101,19 +101,20 @@ export default function Home() {
     setResumeModalOpen(false);
   };
  
-  return (
+   return (
     <div className="min-h-screen bg-background">
       {/* <Header activeTab={activeTab} onTabChange={setActiveTab} /> */}
  
       <main className="p-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-[repeat(3,1fr)] gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left Column - Profile Summary */}
             
             
             <EmpHomeLeftSideBar profile={profileData} hasresume={hasResume} handleresume={handleResumeClick}/>
  
             {/* Center Column - Resume Upload or Uploaded State */}
+            <div className="lg:col-span-5">
               {!hasResume ? (
                 // Resume not found state - Use the new component
                 <ResumeNotFoundCard onUploadClick={() => setUploadResumeModalOpen(true)} />
@@ -121,10 +122,11 @@ export default function Home() {
                 // Resume uploaded - show placeholder for opportunities
                 <EmpHomeGrid opportunities={opportunities} />
               )}
-           
+            </div>
  
-            <div>
-              {/* Right Column - Stats & Activities */}
+            {/* Right Column - Stats & Activities */}
+            <div className="lg:col-span-4 space-y-4">
+              {/* Stats */}
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="grid grid-cols-3 gap-4 text-center">
@@ -174,8 +176,8 @@ export default function Home() {
                   ))}
                 </CardContent>
               </Card>
+              {/* <EmpHomeRightSideBar stats={stats} activities={recentActivities} /> */}
             </div>
-            
             
           </div>
         </div>

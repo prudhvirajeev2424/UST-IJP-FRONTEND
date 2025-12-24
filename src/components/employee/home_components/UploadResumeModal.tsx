@@ -4,10 +4,10 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  Button,
-} from "../ui";
-import pdf_svg from "../../assets/Icon awesome-file-pdf.svg";
-import upload_svg from "../../assets/Icon feather-upload-cloud.svg";
+} from "../../ui/Dialog";
+import { Button } from "../../ui/Button";
+import pdf_svg from "../../../assets/Icon awesome-file-pdf.svg";
+import upload_svg from "../../../assets/Icon feather-upload-cloud.svg";
 
 interface UploadResumeModalProps {
   open: boolean;
