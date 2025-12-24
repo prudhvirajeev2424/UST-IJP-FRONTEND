@@ -72,7 +72,7 @@ export function UploadResumeModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className="
-          w-[800px]
+          w-[600px]
           max-w-none
           p-0
           bg-white
@@ -84,7 +84,6 @@ export function UploadResumeModal({
         "
       >
 
-        {/* Header */}
         <div className="bg-[#F3FAF9]">
           <div className="flex items-center justify-between px-8 py-5">
             <DialogTitle className="text-lg font-semibold text-gray-900">
@@ -100,16 +99,12 @@ export function UploadResumeModal({
           </div>
         </div>
 
-
-        {/* Body */}
         <div className="px-8 py-8">
-          {/* Text above upload area */}
           <p className="text-base text-gray-700 mb-4 flex align">
             Upload your resume in a PDF format
           </p>
 
           <div className="space-y-4">
-            {/* Upload Area */}
             <div
                 onDragOver={(e) => {
                   e.preventDefault();
@@ -156,7 +151,6 @@ export function UploadResumeModal({
               />
             </div>
 
-            {/* Uploaded File */}
             {uploadedFile && (
               <div className="flex items-center gap-2">
                 <img src={pdf_svg} className="h-5 w-5" />
@@ -171,7 +165,6 @@ export function UploadResumeModal({
           </div>
         </div>
 
-        {/* Footer */}
         <div className="px-8 py-6 flex justify-center gap-3">
           <button
             className="px-6 py-4 border border-black rounded text-black hover:bg-black hover:text-white disabled:opacity-50"
@@ -186,7 +179,7 @@ export function UploadResumeModal({
             onClick={handleProceed}
             disabled={!uploadedFile || isSubmitting}
           >
-            {isSubmitting ? "Uploading..." : "Proceed"}
+            {isSubmitting && "Proceed"}
           </button>
         </div>
       </DialogContent>
