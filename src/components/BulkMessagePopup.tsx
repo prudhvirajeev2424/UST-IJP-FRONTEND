@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
+import uploadIcon from "../assets/Icon feather-upload-cloud (1).svg";
 
 const BulkMessagePopup: React.FC = () => {
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const adjustHeight = (e?: React.FormEvent<HTMLTextAreaElement>) => {
+    const el = e
+      ? (e.currentTarget as HTMLTextAreaElement)
+      : textareaRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+    el.style.overflow = "hidden";
+  };
+
+  useEffect(() => {
+    // set initial height based on defaultValue
+    if (textareaRef.current) {
+      adjustHeight();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 font-[Rubik]">
+    <div className="fixed inset-0 z-50 flex h-[1080px] w-[1920px] items-center justify-center  bg-[#231F20] bg-opacity-70">
       {/* Modal Container */}
-      <div 
-        className="relative w-[601px] rounded-[10px] bg-white shadow-[0_10px_25px_rgba(0,0,0,0.15)]"
-        style={{ transform: 'scale(1)', transformOrigin: 'center' }}
-      >
+      {/* <div
+        className="relative w-[601px] h-[634px] rounded-[10px] bg-white shadow-[0_10px_25px_rgba(0,0,0,0.15)]"
+        style={{ transform: "scale(1)", transformOrigin: "center" }}
+      > */}
+      <div className="relative h-[580px] w-[601px] rounded-[10px] bg-[#FFFFFF] shadow-xl">
         {/* Header */}
-        <div className="flex h-[70px] items-center justify-between border-b border-[#E5E5E5] px-[32px]">
-          <h2 className="m-0 text-[18px] font-normal leading-[24px] text-[#231F20]">
+        <div className="flex h-[70px] w-[601px] items-center justify-between rounded-t-[10px] bg-[#F2F7F8] px-[32px] py-[24px]">
+          <h2 className="m-0 h-[22px] w-[119px] whitespace-nowrap text-left text-[18px] font-medium leading-[22px] text-[#231F20]">
             New message
           </h2>
 
@@ -20,82 +42,67 @@ const BulkMessagePopup: React.FC = () => {
         </div>
 
         {/* Body */}
-        <div className="px-[32px] py-[24px]">
+        <div className="px-[32px] py-[24px] space-y-[16px]">
           {/* Message */}
-          <div className="mb-[24px]">
-            <label className="mb-[8px] block text-left text-[13px] font-normal leading-[17px] text-[#231F20]">
-              Message
-            </label>
+          
+          
+<div className="relative h-[174px] w-[521px] rounded-[5px] border border-[#D7E0E3] bg-[#FFFFFF] p-[16px]">
+  <p className="absolute -top-[10px] left-[16px] bg-white px-[8px] text-left text-[13px] font-normal leading-[20px] text-[#7A7480]">
+    Message
+  </p>
+  <textarea
+  ref={textareaRef}
+  className="h-[137px] w-full resize-none border-none bg-transparent text-left text-[14px] leading-[20px] text-[#231f20] outline-none"
+  placeholder="Hey team,
+welcome to talent pool. refurbish your skills and await your next opportunity! Meanwhile, please complete the tasks assigned to you and connect with fellow peers to expand your professional network.
 
-            <textarea
-              className="h-[120px] w-full resize-none rounded-[5px] border border-[#D7E0E3] bg-white p-[12px] text-[13px] leading-[20px] text-[#231F20] outline-none focus:border-[#006E74]"
-              defaultValue={`Hey team,
-
-Welcome to talent pool, refurbish your skills and await your next opportunity! Meanwhile, please complete the tasks assigned to you and connect with fellow peers to expand your professional network.`}
-            />
-          </div>
+Regards,
+Andrea Stephen"
+  rows={4}
+  defaultValue=""
+  onInput={adjustHeight}
+  
+  />
+</div>
 
           {/* Attach Documents */}
           <div>
-            <p className="mb-[6px] text-center text-[13px] font-normal leading-[20px] text-[#231F20]">
+            <p className="mb-[6px] text-left  text-[13px] font-normal leading-[20px] text-[#231F20]">
               Attach Documents
             </p>
 
-            <p className="mb-[16px] text-center text-[11px] leading-[16px] text-[#7A7480]">
+            <p className="mb-[16px] text-left text-[11px] leading-[16px] text-[#7A7480]">
               Attach any documents if necessary
             </p>
 
-            <div className="flex h-[180px] w-full cursor-pointer flex-col items-center justify-center rounded-[6px] border-2 border-dashed border-[#D7E0E3] bg-white text-[13px] text-[#7A7480] transition-colors hover:border-[#006E74] hover:bg-[#F9FBFB]">
+            <div className="flex h-[126px] w-[521px] cursor-pointer flex-col items-center justify-center rounded-[10px] border border-dashed border-[#D7E0E3] bg-[#F7F9FA] text-[13px] text-[#7A7480] transition-colors hover:border-[#006E74] hover:bg-[#F9FBFB]">
               {/* Cloud Upload Icon */}
               <div className="mb-[12px]">
-                <svg
-                  width="40"
-                  height="40"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M38 32C41.314 32 44 29.314 44 26C44 22.686 41.314 20 38 20C37.674 20 37.354 20.023 37.04 20.066C36.38 14.966 32 11 26.6 11C20.75 11 16 15.75 16 21.6C16 22.1 16.033 22.594 16.097 23.077C12.574 23.98 10 27.167 10 31C10 35.527 13.673 39.2 18.2 39.2H38"
-                    stroke="#006E74"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M29 29L24 24L19 29"
-                    stroke="#006E74"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M24 24V36"
-                    stroke="#006E74"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                {/* feather-upload-cloud icon as image */}
+                <img
+                  src={uploadIcon}
+                  alt="upload"
+                  className="w-[33px] h-[27px]"
+                />
               </div>
 
               <p className="m-0 text-center text-[13px]">
-                Drag and drop to upload or{" "}
-                <span className="font-normal text-[#006E74] underline">
-                  Browse
-                </span>
-              </p>
+  Drag and drop to upload or{" "}
+  <span className="font-normal text-[#006E74]">
+    Browse
+  </span>
+</p>
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="flex justify-center gap-[16px] border-t border-[#E5E5E5] px-[32px] py-[20px]">
-          <button className="h-[44px] w-[100px] cursor-pointer rounded-[4px] border border-[#231F20] bg-white text-[13px] font-normal text-[#231F20] transition-colors hover:bg-[#F5F5F5]">
+        <div className="flex justify-center gap-[16px] border-[#E5E5E5] px-[32px] py-[23px]">
+          <button className="h-[49px] w-[90px] cursor-pointer rounded-[4px] border border-[#231F20] bg-white text-[13px] font-normal text-[#231F20] transition-colors hover:bg-[#F5F5F5]">
             Cancel
           </button>
 
-          <button className="h-[44px] w-[100px] cursor-pointer rounded-[4px] border-none bg-[#006E74] text-[13px] font-normal text-white transition-colors hover:bg-[#005a5f]">
+          <button className="h-[49px] w-[78px] cursor-pointer rounded-[4px] border-none bg-[#006E74] text-[13px] font-normal text-white transition-colors hover:bg-[#005a5f]">
             Send
           </button>
         </div>
