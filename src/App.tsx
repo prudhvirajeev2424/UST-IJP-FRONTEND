@@ -3,7 +3,7 @@ import "./App.css";
 import { useState } from "react";
 
 import LoginPage from "./pages/landing_page";
-import { ShortlistProvider } from "./components/tp_manager/application/context/ShortlistContext";
+import { ShortlistProvider } from "./components/TP_Manager/application/context/ShortlistContext";
 import { ActiveRoleContext } from "./context/ActiveRoleContext";
 
 function App() {

@@ -1,7 +1,7 @@
 import React from "react";
-import ProfileCard from "../components/tp_manager/home/ProfileCard";
-import ApplicationStatus from "../components/tp_manager/home/ApplicationStatus";
-import RecentActivities from "../components/tp_manager/home/RecentActivities";
+import ProfileCard from "../components/TP_Manager/home/ProfileCard";
+import ApplicationStatus from "../components/TP_Manager/home/ApplicationStatus";
+import RecentActivities from "../components/TP_Manager/home/RecentActivities";
 import type { Profile } from "../types";
 import { profiles } from "../data/profiles";
 
