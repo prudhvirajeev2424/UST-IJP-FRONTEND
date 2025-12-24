@@ -11,34 +11,43 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   label = "Overall Progress",
   showPercentage = true,
 }) => {
-  const getProgressColor = (percent: number) => {
-    if (percent < 50) return "bg-danger";
-    if (percent === 50) return "bg-warning";
-    return "bg-primary";
-  };
+  const barColor =
+    percentage < 50
+      ? "bg-danger"
+      : percentage === 50
+      ? "bg-warning"
+      : "bg-primary";
 
-  const getTextColor = (percent: number) => {
-    if (percent < 50) return "text-danger";
-    if (percent === 50) return "text-warning";
-    return "text-primary";
-  };
+  const textColor =
+    percentage < 50
+      ? "text-danger"
+      : percentage === 50
+      ? "text-warning"
+      : "text-primary";
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-1">
-        <span className="text-sm text-[#7A7480]">{label}</span>
+    /* Use fixed heights and prevent wrapping so the component never grows vertically.
+       Ensure label row truncates and percentage uses whitespace-nowrap. */
+    <div className="w-full h-[40px] flex flex-col justify-center min-h-0">
+      {/* LABEL ROW (fixed height, prevents wrapping) */}
+      <div className="flex justify-between items-center h-[18px] min-h-0">
+        <span className="text-sm text-[#7A7480] truncate min-w-0 block">
+          {label}
+        </span>
+
         {showPercentage && (
-          <span className={`text-sm font-medium ${getTextColor(percentage)}`}>
+          <span
+            className={`text-sm font-medium whitespace-nowrap leading-none ${textColor}`}
+          >
             {percentage}%
           </span>
         )}
       </div>
 
-      <div className="w-full h-[3px] bg-[#D7E0E3] rounded-full">
+      {/* BAR (fixed height) */}
+      <div className="w-full h-[3px] bg-[#D7E0E3] rounded-full overflow-hidden mt-2">
         <div
-          className={`h-full ${getProgressColor(
-            percentage
-          )} rounded-full transition-all`}
+          className={`h-full ${barColor} rounded-full transition-all duration-300`}
           style={{ width: `${percentage}%` }}
         />
       </div>

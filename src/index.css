@@ -31,7 +31,7 @@
   --unnamed-line-spacing-24: 24px;
 }
 
-/* @layer base {
+@layer base {
   * {
     @apply box-border;
   }
@@ -45,7 +45,7 @@
   #root {
     @apply min-h-screen;
   }
-} */
+}
 
 .unnamed-character-style-1 {
   font-family: var(--unnamed-font-family-rubik);
@@ -75,5 +75,28 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+  /* thin scrollbar (~4px) that doesn't affect layout
+     - Works in WebKit browsers via ::-webkit-scrollbar
+     - Works in Firefox via scrollbar-width
+     Use by adding `scrollbar-thin-4` alongside `overflow-auto`/`overflow-y-auto`
+  */
+  .scrollbar-thin-4 {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+  }
+
+  .scrollbar-thin-4::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .scrollbar-thin-4::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 9999px;
+  }
+
+  .scrollbar-thin-4::-webkit-scrollbar-track {
+    background: transparent;
   }
 }

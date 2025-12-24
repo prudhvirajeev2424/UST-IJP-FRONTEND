@@ -57,7 +57,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({ name, uid, location }) => {
   return (
     <div className="flex items-start gap-3">
       <div
-        className="rounded-lg overflow-hidden flex-shrink-0"
+        className="rounded-lg overflow-auto flex-shrink-0"
         style={{
           width: "40px",
           height: "40px",
@@ -107,11 +107,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
     rounded-[10px]
     p-6
     w-full
-    min-h-[294px]
+    h-[294px]
     transition-shadow
     hover:shadow-card-hover
     flex
     flex-col
+    overflow-hidden
   "
     >
       {/* USER INFO */}
@@ -128,7 +129,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       </div>
 
       {/* PROGRESS */}
-      <div className="mb-3">
+      <div className="mb-3 h-[40px] flex flex-col justify-center">
         <ProgressBar percentage={progress} />
       </div>
 
