@@ -1,4 +1,6 @@
 import type { ProfileSummary } from "../../../types/profilesummary";
+import React ,{useState} from "react";
+import { User, AlertCircle, FileText, ArrowRight } from 'lucide-react';
  
 interface SidebarProps {
   profile: Omit<ProfileSummary, "resumeUpdated">;
@@ -8,7 +10,7 @@ interface SidebarProps {
  
 export function EmpHomeLeftSideBar({ profile ,hasresume,handleresume}: SidebarProps) {
   const { description,primarySkills} = profile
-  const {hasResume} = hasresume
+  const hasResume = hasresume
   const handleResumeClick = handleresume
   
   return (
@@ -33,7 +35,6 @@ export function EmpHomeLeftSideBar({ profile ,hasresume,handleresume}: SidebarPr
             ))}
           </div>
         </div>
-
         {hasResume ? (
                     <button
                       onClick={handleResumeClick}

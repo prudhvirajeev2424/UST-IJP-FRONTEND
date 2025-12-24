@@ -81,7 +81,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left Column - Profile Summary */}
-<<<<<<< HEAD:src/components/employee/EmpHome.tsx
+            
             
             <EmpHomeLeftSideBar profile={profileData} hasresume={hasResume} handleresume={handleResumeClick}/>
             
