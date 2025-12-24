@@ -35,7 +35,39 @@ export const tasksData: Task[] = [
     comments: "All modules completed.",
     lastUpdated: "January 2nd, 2025",
   },
-  // ... (all other tasks)
+  {
+    id: "3",
+    name: "Data visualisation workshop",
+    assignedBy: "Andrea Stephen",
+    startDate: "2nd January, 2025",
+    progress: 100,
+    description:
+      "Learning D3.js and charting libraries for complex data representation.",
+    comments: "Workshop completed.",
+    lastUpdated: "January 2nd, 2025",
+  },
+  {
+    id: "4",
+    name: "Product management essentials",
+    assignedBy: "Andrea Stephen",
+    startDate: "2nd January, 2025",
+    progress: 100,
+    description:
+      "Understanding product lifecycles and agile project management.",
+    comments: "Certification obtained.",
+    lastUpdated: "January 2nd, 2025",
+  },
+  {
+    id: "5",
+    name: "Python Course",
+    assignedBy: "Andrea Stephen",
+    startDate: "2nd January, 2025",
+    progress: 45,
+    description:
+      "Python logic, data structures, and back-end development basics.",
+    comments: "Currently on the intermediate section.",
+    lastUpdated: "January 2nd, 2025",
+  },
   {
     id: "6",
     name: "Agile project management",
