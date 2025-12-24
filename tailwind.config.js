@@ -1,41 +1,62 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        'ust-primary': '#003C51',
-        'ust-secondary': '#0097AC',
-        'ust-teal': '#006E74',
-        'ust-green': '#01B27C',
-        'ust-coral': '#FC6A59',
-        'ust-purple': '#881E87',
-        'ust-yellow': '#FFBF00',
-        'ust-gray': '#7A7480',
-        'ust-light-gray': '#C2BCBE',
-        'ust-bg': '#F2F7F8',
-        'ust-white': '#FFFFFF',
-        'ust-beige': '#DBD3BD',
-        'ust-off-white': '#ECECE1',
-        'ust-light-blue': '#D7E0E3',
-        'ust-text': '#231F20',
+        primary: {
+          darkest: "#003C51",
+          dark: "#006E74",
+          DEFAULT: "#0097AC",
+          bright: "#01B27C",
+        },
+        warning: "#FFBF00",
+        danger: "#FC6A59",
+        accent: "#881E87",
+        dark: "#231F20",
+        gray: {
+          primary: "#7A7480",
+          secondary: "#C2BCBE",
+          light: "#D7E0E3",
+          beige: "#DBD3BD",
+        },
+        background: {
+          DEFAULT: "#F2F7F8",
+          alt: "#ECECE1",
+        },
       },
       fontFamily: {
-        'rubik': ['Rubik', 'sans-serif'],
+        sans: ["Rubik", "sans-serif"],
       },
       fontSize: {
-        '14': '14px',
+        xs: "12px",
+        sm: "14px",
+        base: "16px",
+        lg: "18px",
+        xl: "20px",
+        "2xl": "24px",
+        "3xl": "28px",
+        "4xl": "32px",
       },
       lineHeight: {
-        '17': '17px',
+        tight: "1.2",
+        snug: "1.375",
+        normal: "1.5",
+        relaxed: "1.57",
       },
-      letterSpacing: {
-        '0': '0px',
+      borderRadius: {
+        card: "12px",
+        button: "8px",
+      },
+      boxShadow: {
+        card: "0 2px 8px rgba(0, 0, 0, 0.08)",
+        "card-hover": "0 4px 16px rgba(0, 0, 0, 0.12)",
+      },
+      transitionDuration: {
+        200: "200ms",
+        300: "300ms",
       },
     },
   },
   plugins: [],
-}
+};
