@@ -1,6 +1,4 @@
-import type { ProfileSummary } from "../../types/profilesummary";
-import React ,{useState} from "react";
-import { User, AlertCircle, FileText, ArrowRight } from 'lucide-react';
+import type { ProfileSummary } from "../../../types/profilesummary";
  
 interface SidebarProps {
   profile: Omit<ProfileSummary, "resumeUpdated">;

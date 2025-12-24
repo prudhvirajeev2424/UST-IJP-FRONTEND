@@ -1,5 +1,5 @@
-import type { Stats,Activity } from "../../types/activity";
-import { getStatusColor } from "../../utils/Helper";
+import type { Stats,Activity } from "../../../types/activity";
+import { getStatusColorActivity } from "../../../utils/Helper";
 
 interface RightSidebarProps {
   stats: Stats;

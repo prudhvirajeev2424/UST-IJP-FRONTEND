@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import Navbar from "../components/navbar";
+import Home from "./Home";
 
 // Create context for active role
 export const ActiveRoleContext = createContext<{
@@ -62,39 +63,18 @@ const LoginPage: React.FC = () => {
     }
   };
 
-  // If user is logged in, render the Navbar and a simple welcome area.
+  // If user is logged in, show the active role
   if (activeRole) {
     return (
       <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
-        <div className="min-h-screen bg-gray-50 pt-16">
-          <Navbar role={activeRole} />
-          {/* <main className="p-6">
-            <div className="max-w-4xl mx-auto">
-              <h1 className="text-2xl font-semibold text-gray-800 mb-2">
-                Welcome, {activeRole}
-              </h1>
-              <p className="text-gray-600">
-                You are now signed in. Use the navigation above to access your
-                workspace.
-              </p>
-              <div className="mt-6">
-                <button
-                  onClick={() => {
-                    setActiveRole(null);
-                    setEmail("");
-                    setPassword("");
-                    setRole("Employee");
-                    setZoomOut(false);
-                    setFadeWhite(false);
-                  }}
-                  className="bg-[#008080] text-white px-4 py-2 rounded hover:bg-[#006666] transition"
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
-          </main> */}
-        </div>
+        <>
+          <Navbar role={activeRole ?? "Employee"} />
+
+          {/* Home page under the fixed navbar */}
+          <div className="pt-10 w-full">
+            <Home />
+          </div>
+        </>
       </ActiveRoleContext.Provider>
     );
   }
