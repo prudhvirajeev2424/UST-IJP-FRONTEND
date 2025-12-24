@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import Navbar from "../components/navbar";
+import Home from "./home";
 
 // Create context for active role
 export const ActiveRoleContext = createContext<{
@@ -24,6 +25,7 @@ const LoginPage: React.FC = () => {
   const [errorShake, setErrorShake] = useState(false);
   const [fadeWhite, setFadeWhite] = useState(false);
   const [activeRole, setActiveRole] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState<string>("Home");
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
@@ -67,7 +69,18 @@ const LoginPage: React.FC = () => {
     return (
       <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
         <div className="min-h-screen bg-gray-50 pt-16">
-          <Navbar role={activeRole} />
+          <Navbar role={activeRole} onNavigate={(p) => setCurrentPage(p)} />
+          <main>
+            {currentPage === "Home" && <Home />}
+            {currentPage !== "Home" && (
+              <div className="p-6">
+                <h2 className="text-lg font-semibold">{currentPage}</h2>
+                <p className="text-sm text-gray-600">
+                  Content for {currentPage} goes here.
+                </p>
+              </div>
+            )}
+          </main>
           {/* <main className="p-6">
             <div className="max-w-4xl mx-auto">
               <h1 className="text-2xl font-semibold text-gray-800 mb-2">
