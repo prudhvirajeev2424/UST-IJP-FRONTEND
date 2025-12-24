@@ -58,7 +58,7 @@ export function EmpHomeRightSideBar({ stats, activities }: RightSidebarProps) {
               {/* Timeline column */}
               <div className="w-4 flex justify-center">
                 {/* Dot */}
-                <span className="w-2.5 h-2.5 mt-2 rounded-full bg-secondary z-10 bg-[#0097AC]" />
+                <span className="w-2.5 h-2.5 mt-2  rounded-full z-10 bg-[#0097AC]" />
               </div>
 
               {/* Vertical line (absolute, full height) */}
