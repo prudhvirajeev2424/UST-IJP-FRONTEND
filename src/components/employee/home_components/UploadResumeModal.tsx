@@ -4,8 +4,8 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  Button,
-} from "../../ui";
+} from "../../ui/Dialog";
+import { Button } from "../../ui/Button";
 import pdf_svg from "../../../assets/Icon awesome-file-pdf.svg";
 import upload_svg from "../../../assets/Icon feather-upload-cloud.svg";
 

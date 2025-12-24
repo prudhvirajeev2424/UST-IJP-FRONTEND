@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Upload } from 'lucide-react';
-import { Button } from '../../ui';
+import { Button } from '../../ui/Button';
 import pdf_svg from "../../../assets/Icon awesome-file-pdf.svg";
 import upload_svg from "../../../assets/Icon feather-upload-cloud.svg";
 
