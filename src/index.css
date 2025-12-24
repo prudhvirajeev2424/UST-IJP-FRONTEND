@@ -1,52 +1,102 @@
-/* src/index.css */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+:root {
+  --unnamed-color-ffbf00: #ffbf00;
+  ---ffffff: #ffffff;
+  ---d7e0e3: #d7e0e3;
+  ---fc6a59: #fc6a59;
+  ---ecece1: #ecece1;
+  ---881e87: #881e87;
+  ---01b27c: #01b27c;
+  ---7a7480: #7a7480;
+  ---c2bcbe: #c2bcbe;
+  ---dbd3bd: #dbd3bd;
+  ---003c51: #003c51;
+  ---006e74: #006e74;
+  ---0097ac: #0097ac;
+  --unnamed-color-000000: #000000;
+  --unnamed-color-231f20: #231f20;
+  ---f2f7f8: #f2f7f8;
+  --unnamed-font-family-rubik: Rubik;
+  --unnamed-font-style-normal: normal;
+  --unnamed-font-weight-normal: normal;
+  --unnamed-font-size-14: 14px;
+  --unnamed-font-size-16: 16px;
+  --unnamed-character-spacing-0: 0px;
+  --unnamed-line-spacing-22: 22px;
+  --unnamed-line-spacing-24: 24px;
 }
 
-::-webkit-scrollbar-track {
-  background: #f2f7f8;
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  body {
+    @apply font-sans bg-background text-dark antialiased;
+    margin: 0;
+    padding: 0;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: #d7e0e3;
-  border-radius: 4px;
+.unnamed-character-style-1 {
+  font-family: var(--unnamed-font-family-rubik);
+  font-style: var(--unnamed-font-style-normal);
+  font-weight: var(--unnamed-font-weight-normal);
+  font-size: var(--unnamed-font-size-16);
+  line-height: var(--unnamed-line-spacing-24);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-231f20);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #7a7480;
+.unnamed-character-style-2 {
+  font-family: var(--unnamed-font-family-rubik);
+  font-style: var(--unnamed-font-style-normal);
+  font-weight: var(--unnamed-font-weight-normal);
+  font-size: var(--unnamed-font-size-14);
+  line-height: var(--unnamed-line-spacing-22);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-231f20);
 }
 
-/* Range slider styling */
-input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #0097ac;
-  cursor: pointer;
-  border: 2px solid white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
-input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #0097ac;
-  cursor: pointer;
-  border: 2px solid white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  /* thin scrollbar (~4px) that doesn't affect layout
+     - Works in WebKit browsers via ::-webkit-scrollbar
+     - Works in Firefox via scrollbar-width
+     Use by adding `scrollbar-thin-4` alongside `overflow-auto`/`overflow-y-auto`
+  */
+  .scrollbar-thin-4 {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+  }
 
-/* Use Rubik as default app font for clarity */
-body {
-  font-family: "Rubik", sans-serif;
+  .scrollbar-thin-4::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .scrollbar-thin-4::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 9999px;
+  }
+
+  .scrollbar-thin-4::-webkit-scrollbar-track {
+    background: transparent;
+  }
 }
