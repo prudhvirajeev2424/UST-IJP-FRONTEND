@@ -1,5 +1,5 @@
 import type { Stats,Activity } from "../../types/activity";
-import { getStatusColorActivity } from "../../utils/Helper";
+import { getStatusColor } from "../../utils/Helper";
 
 interface RightSidebarProps {
   stats: Stats;
@@ -77,8 +77,8 @@ export function EmpHomeRightSideBar({ stats, activities }: RightSidebarProps) {
 
                 <div className="flex items-center justify-between mt-1">
                   <span
-                    className={`text-xs font-medium px-2 py-1 rounded-md ${getStatusColorActivity(
-                      activity
+                    className={`text-xs font-medium px-2 py-1 rounded-md ${getStatusColor(
+                      activity.status
                     )}`}
                   >
                     {getStatusLabel(activity.status)}

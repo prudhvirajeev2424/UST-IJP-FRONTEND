@@ -9,16 +9,11 @@ import { Button, Card, CardContent, CardHeader, CardTitle } from '../ui';
 import { EmpHomeRightSideBar } from './EmpHomeRightSideBar';
 import { stats,opportunities, } from '../../data/mockData';
 import { EmpHomeGrid } from './EmpHomeGrid';
-// import type {Stats,Activity} from '../../types/activity';
+import { recentActivities } from '../../data/mockData';
+import StatusBadge from './StatusBadge';
 
  
-interface Activity {
-  id: string;
-  jobTitle: string;
-  soNumber: string;
-  status: 'shortlisted' | 'actioned' | 'rejected';
-  time: string;
-}
+
  
 const profileData = {
   summary: 'Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.',
@@ -31,49 +26,27 @@ const statsData = {
   rejected: 1,
 };
  
-const recentActivities: Activity[] = [
-  {
-    id: '1',
-    jobTitle: 'Java Developer I - A1',
-    soNumber: 'SO#29256?',
-    status: 'shortlisted',
-    time: '12 hrs ago',
-  },
-  {
-    id: '2',
-    jobTitle: 'Java Developer I - A1',
-    soNumber: 'SO#29256?',
-    status: 'actioned',
-    time: 'Yesterday',
-  },
-  {
-    id: '3',
-    jobTitle: 'Java Developer I - A1',
-    soNumber: 'SO#29256?',
-    status: 'rejected',
-    time: '3 days ago',
-  },
-];
+
  
-const StatusBadge = ({ status }: { status: Activity['status'] }) => {
-  const styles = {
-    shortlisted: 'bg-emerald-100 text-emerald-600',
-    actioned: 'bg-amber-100 text-amber-600',
-    rejected: 'bg-red-100 text-red-600',
-  };
+// const StatusBadge = ({ status }) => {
+//   const styles = {
+//     shortlisted: 'bg-emerald-100 text-emerald-600',
+//     actioned: 'bg-amber-100 text-amber-600',
+//     rejected: 'bg-red-100 text-red-600',
+//   };
  
-  const labels = {
-    shortlisted: 'Shortlisted',
-    actioned: 'Actioned',
-    rejected: 'Rejected',
-  };
+//   const labels = {
+//     shortlisted: 'Shortlisted',
+//     actioned: 'Actioned',
+//     rejected: 'Rejected',
+//   };
  
-  return (
-    <span className={`text-xs px-2 py-0.5 rounded ${styles[status]}`}>
-      {labels[status]}
-    </span>
-  );
-};
+//   return (
+//     <span className={`text-xs px-2 py-0.5 rounded ${styles[status]}`}>
+//       {labels[status]}
+//     </span>
+//   );
+// };
  
 export default function Home() {
   const [activeTab, setActiveTab] = useState('home');
@@ -212,12 +185,12 @@ export default function Home() {
                       <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-foreground">
-                          Applied job "{activity.jobTitle}"
+                          Applied job "{activity.title}"
                         </p>
-                        <p className="text-xs text-primary">({activity.soNumber})</p>
+                        <p className="text-xs text-primary">({activity.soId})</p>
                         <div className="flex items-center gap-2 mt-1">
                           <StatusBadge status={activity.status} />
-                          <span className="text-xs text-muted-foreground">{activity.time}</span>
+                          <span className="text-xs text-muted-foreground">{activity.timestamp}</span>
                         </div>
                       </div>
                     </div>
