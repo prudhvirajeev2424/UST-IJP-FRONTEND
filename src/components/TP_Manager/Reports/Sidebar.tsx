@@ -1,17 +1,14 @@
-import React from "react";
+import type React from "react"
 
 const Sidebar: React.FC = () => {
   const menuItems = [
     { label: "TP employee list", active: true },
     { label: "Certifications", active: false },
     { label: "Education", active: false },
-  ];
+  ]
 
   return (
-    <aside
-      className="w-52 bg-white border-r"
-      style={{ borderColor: "var(--d7e0e3)" }}
-    >
+    <aside className="w-52 bg-white" style={{ borderColor: "var(--d7e0e3)" }}>
       <style>{`
         .sidebar-item {
           padding: 12px 24px;
@@ -49,16 +46,13 @@ const Sidebar: React.FC = () => {
       `}</style>
       <div className="pt-6">
         {menuItems.map((item) => (
-          <div
-            key={item.label}
-            className={`sidebar-item ${item.active ? "active" : "inactive"}`}
-          >
+          <div key={item.label} className={`sidebar-item ${item.active ? "active" : "inactive"}`}>
             {item.label}
           </div>
         ))}
       </div>
     </aside>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

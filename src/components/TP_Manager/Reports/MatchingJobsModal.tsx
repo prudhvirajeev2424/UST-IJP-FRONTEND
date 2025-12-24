@@ -1,6 +1,6 @@
 import React from "react";
-import type { Employee } from "../types/employee";
-import { mockMatchingJobs } from "../data/mockMatchingJobs";
+import type { Employee } from "../../../types/employee";
+import { mockMatchingJobs } from "../../../data/mockMatchingJobs";
 
 // Rest of the file stays the same
 interface MatchingJobsModalProps {
@@ -75,32 +75,31 @@ const MatchingJobsModal: React.FC<MatchingJobsModalProps> = ({
 
         {/* Bigger Close Button */}
         <button
-    onClick={onClose}
-    aria-label="Close modal"
-    style={{
-      width: "40px",          // ⬅️ bigger container
-      height: "40px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      cursor: "pointer",
-    }}
-  >
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="#7A7480"
-      strokeWidth="3.2"       // ⬅️ thicker X
-      style={{
-        width: "22px",        // ⬅️ visually bigger X
-        height: "22px",
-      }}
-    >
-      <line x1="19" y1="5" x2="5" y2="19" />
-      <line x1="5" y1="5" x2="19" y2="19" />
-    </svg>
-  </button>
-
+          onClick={onClose}
+          aria-label="Close modal"
+          style={{
+            width: "40px", // ⬅️ bigger container
+            height: "40px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+          }}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#7A7480"
+            strokeWidth="3.2" // ⬅️ thicker X
+            style={{
+              width: "22px", // ⬅️ visually bigger X
+              height: "22px",
+            }}
+          >
+            <line x1="19" y1="5" x2="5" y2="19" />
+            <line x1="5" y1="5" x2="19" y2="19" />
+          </svg>
+        </button>
       </div>
 
       {/* White Table Card with more spacing */}
