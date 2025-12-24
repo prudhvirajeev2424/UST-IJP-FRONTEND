@@ -78,29 +78,29 @@ export const education: Education[] = [
 
 export const skills: Skill[] = [
   { id: '1', name: 'Java' },
-  { id: '2', name: 'Spring Boot' },
-  { id: '3', name: 'Hibernate' },
-  { id: '4', name: 'REST APIs' },
-  { id: '5', name: 'Microservices' },
-  { id: '6', name: 'AWS' },
-  { id: '7', name: 'Docker' },
-  { id: '8', name: 'Kubernetes' },
-  { id: '9', name: 'MySQL' },
-  { id: '10', name: 'MongoDB' },
-  { id: '11', name: 'Git' },
-  { id: '12', name: 'Jenkins' }
+  { id: '2', name: 'JavaScript' },
+  { id: '3', name: 'SQL' },
+  { id: '4', name: 'Spring Boot' },
+  { id: '5', name: 'MySQL' },
+  { id: '6', name: 'MongoDB' },
+  { id: '7', name: 'GitHub' },
+  { id: '8', name: 'Java EE' }
 ];
 
 export const accolades: Accolade[] = [
   {
     id: '1',
-    title: 'Employee of the Year 2023',
-    description: 'Recognized for outstanding performance and contributions'
+    title: 'Received "Best Developer of the Year" at XYZ Technologies',
+    
   },
   {
     id: '2',
-    title: 'Best Innovation Award 2022',
-    description: 'For developing a scalable microservices architecture'
+    title: 'Achieved 98% on-time project delivery rate for mission-critical applications.',
+  },
+  {
+    id: '3',
+    title: 'Received "Best Developer of the Year" at XYZ Technologies',
+    
   }
 ];
 
