@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import { useActiveRole } from "../context/ActiveRoleContext";
-import { useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +13,6 @@ const LoginPage: React.FC = () => {
   const [errorShake, setErrorShake] = useState(false);
   const [fadeWhite, setFadeWhite] = useState(false);
   const { activeRole, setActiveRole } = useActiveRole();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
@@ -41,9 +39,8 @@ const LoginPage: React.FC = () => {
       setZoomOut(true);
       setTimeout(() => setFadeWhite(true), ZOOM_MS);
       setTimeout(() => {
+        // set active role in context so landing page will render Navbar
         setActiveRole(role);
-        // navigate to home after sign-in animation
-        navigate("/home");
       }, ZOOM_MS + FADE_MS);
     } catch (err: any) {
       console.error(err);
@@ -91,7 +88,7 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center bg-[#008080] overflow-auto">
+    <div className="h-screen w-screen flex items-center justify-center bg-[#008080] overflow-hidden">
       {/* Component-level styles */}
       <style>{`
           html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; }
@@ -110,7 +107,7 @@ const LoginPage: React.FC = () => {
         <div className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none">
           <div className="bg-white rounded-2xl p-6 shadow-xl flex items-center gap-6">
             <div className="relative">
-              <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center ust-ring overflow-auto p-2 shadow-lg border-2 border-gray-100">
+              <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center ust-ring overflow-hidden p-2 shadow-lg border-2 border-gray-100">
                 <img
                   src="https://th.bing.com/th/id/OIP.dJyDYtvxRwYypCbYf4Xh_gAAAA?w=158&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1"
                   alt="UST Logo"
