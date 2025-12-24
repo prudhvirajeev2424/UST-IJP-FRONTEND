@@ -3,6 +3,7 @@ import { List } from "lucide-react";
 import type { Opportunity } from "../../../types/opportunity";
 import excelIcon from "../../../assets/Icon awesome-file-pdf.svg";
 import { OpportunityCard } from "./OpportunityCard";
+import EmpHomeList from "./EmpHomeList";
 
 interface OpportunityGridProps {
   opportunities: Opportunity[];
@@ -103,12 +104,12 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
       </div>
       ):
       (
+        // render only the table component when list view is active
         <div>
-          <h2>LIST</h2>
+          <EmpHomeList opportunities={opportunities} />
         </div>
       )}
       </div>
     </div>
   );
 }
- 

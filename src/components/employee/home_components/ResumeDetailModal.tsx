@@ -180,8 +180,8 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
           </div>
         </div>
 
-        {/* Scrollable Content - with hidden scrollbar */}
-        <div id="resume-modal-scroll" className="flex-1 overflow-y-auto hide-scrollbar p-6 space-y-8">
+        {/* Scrollable Content - ensure texts are left-aligned (not justified) */}
+        <div id="resume-modal-scroll" className="flex-1 overflow-y-auto hide-scrollbar p-6 space-y-8 text-left" style={{ paddingBottom: 150 }}>
           {/* Introduction */}
           <p className="text-sm text-muted-foreground leading-relaxed">
             {resumeData.introduction}
