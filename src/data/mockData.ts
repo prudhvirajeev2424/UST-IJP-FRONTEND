@@ -1,7 +1,7 @@
 import type { Candidate, Job, Certification, Education, Skill, Accolade, Testimonial  } from '../types/candidate';
 import type { Activity,Stats } from '../types/activity';
 import type { Opportunity } from '../types/opportunity';
-import type { Project } from '../types/project';
+import  {Project} from '../types/index.ts';
 
 export const candidateData: Candidate = {
   id: '1',

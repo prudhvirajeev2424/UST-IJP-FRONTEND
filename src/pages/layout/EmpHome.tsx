@@ -5,7 +5,7 @@ import { UploadResumeModal } from '../../components/employee/home_components/Upl
 import { ResumeDetailModal } from '../../components/employee/home_components/ResumeDetailModal';
 import { UpdateResumeDrawer } from '../../components/employee/home_components/UpdateResumeDrawer';
 import { ResumeNotFoundCard } from '../../components/employee/home_components/ResumeNotFoundCard';
-import { Button, Card, CardContent, CardHeader, CardTitle } from '../../components/ui';
+import {  Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card';
 import { EmpHomeRightSideBar } from '../../components/employee/home_components//EmpHomeRightSideBar';
 import { stats,opportunities, } from '../../data/mockData';
 import { EmpHomeGrid } from '../../components/employee/home_components//EmpHomeGrid';
