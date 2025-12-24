@@ -59,7 +59,7 @@ const LoginPage: React.FC = () => {
   if (activeRole) {
     return (
       <div className="min-h-screen bg-gray-50 pt-16">
-        <Navbar role={activeRole} />
+        {/* <Navbar role={activeRole} /> */}
         {/* <main className="p-6">
             <div className="max-w-4xl mx-auto">
               <h1 className="text-2xl font-semibold text-gray-800 mb-2">
@@ -91,7 +91,7 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center bg-[#008080] overflow-hidden">
+    <div className="h-screen w-screen flex items-center justify-center bg-[#008080] overflow-auto">
       {/* Component-level styles */}
       <style>{`
           html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; }
@@ -110,7 +110,7 @@ const LoginPage: React.FC = () => {
         <div className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none">
           <div className="bg-white rounded-2xl p-6 shadow-xl flex items-center gap-6">
             <div className="relative">
-              <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center ust-ring overflow-hidden p-2 shadow-lg border-2 border-gray-100">
+              <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center ust-ring overflow-auto p-2 shadow-lg border-2 border-gray-100">
                 <img
                   src="https://th.bing.com/th/id/OIP.dJyDYtvxRwYypCbYf4Xh_gAAAA?w=158&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1"
                   alt="UST Logo"

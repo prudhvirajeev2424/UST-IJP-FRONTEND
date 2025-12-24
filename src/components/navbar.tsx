@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "/src/assets/DP@2x.png";
 
@@ -15,35 +16,65 @@ const Navbar = () => {
         <div className="flex items-center gap-8">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="text-2xl font-bold" style={{ color: "var(--003c51)" }}>
+            <span
+              className="text-2xl font-bold"
+              style={{ color: "var(--003c51)" }}
+            >
               UST
             </span>
-            <span className="text-2xl font-light ml-1" style={{ color: "var(--7a7480)" }}>
+            <span
+              className="text-2xl font-light ml-1"
+              style={{ color: "var(--7a7480)" }}
+            >
               IJP
             </span>
           </div>
 
           {/* Navbar Links */}
           <nav className="ml-80 flex gap-5">
-            {links.map((link) => (
-              <div key={link} className="relative">
-                <a
-                  href="#"
-                  onClick={() => setActive(link)}
-                  className={`text-sm font-semibold px-2 py-1 ${
-                    active === link
-                      ? "text-black"
-                      : "text-gray-500 hover:text-black"
-                  }`}
-                >
-                  {link}
-                </a>
+            {links.map((link) => {
+              // determine route only for the Assigning link; others remain non-routing or can be extended
+              const path =
+                link === "Home"
+                  ? "/home"
+                  : link === "Assigning & Tracking"
+                  ? "/assigning"
+                  : "#";
 
-                {active === link && (
-                  <span className="absolute -bottom-0.5 left-0 right-0 h-1 bg-teal-600 rounded-full" />
-                )}
-              </div>
-            ))}
+              return (
+                <div key={link} className="relative">
+                  {path === "#" ? (
+                    <a
+                      href="#"
+                      onClick={() => setActive(link)}
+                      className={`text-sm font-semibold px-2 py-1 ${
+                        active === link
+                          ? "text-black"
+                          : "text-gray-500 hover:text-black"
+                      }`}
+                    >
+                      {link}
+                    </a>
+                  ) : (
+                    <Link
+                      to={path}
+                      onClick={() => setActive(link)}
+                      className={`text-sm font-semibold px-2 py-1 ${
+                        active === link
+                          ? "text-black"
+                          : "text-gray-500 hover:text-black"
+                      }`}
+                    >
+                      {link}
+                    </Link>
+                  )}
+
+                  {active === link && (
+                    <span className="absolute -bottom-0.5 left-0 right-0 h-1 bg-teal-600 rounded-full" />
+                  )}
+                </div>
+              );
+            })}
           </nav>
         </div>
 
@@ -118,8 +149,8 @@ const Navbar = () => {
                     />
                     <div className="text-sm">
                       <p>
-                        <span className="font-semibold">Angie Johnson</span>{" "}
-                        has been approved for the SO 32987221
+                        <span className="font-semibold">Angie Johnson</span> has
+                        been approved for the SO 32987221
                       </p>
                       <span className="text-xs opacity-80">2 days</span>
                     </div>

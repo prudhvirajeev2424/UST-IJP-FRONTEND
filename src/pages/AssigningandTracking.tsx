@@ -1,17 +1,15 @@
-import type React from "react"
-import { useState, useMemo, useRef, useEffect } from "react"
-import Header from "../components/TP_Manager/Assigning_and_Tracking/layout/Header"
-import xlIcon from "../assets/XlIcon.png"
-import AssignTaskModal from "../components/TP_Manager/Assigning_and_Tracking/AssignTaskModal"
-import SuccessBanner from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SuccessBanner"
+import React, { useState, useMemo, useRef, useEffect } from "react";
+import xlIcon from "../assets/XlIcon.png";
+import AssignTaskModal from "../components/TP_Manager/Assigning_and_Tracking/AssignTaskModal";
+import SuccessBanner from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SuccessBanner";
 
-import FilterPill from "../components/TP_Manager/Assigning_and_Tracking/dashboard/FilterPill"
-import SearchInput from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SearchInput"
-import StatsSummary from "../components/TP_Manager/Assigning_and_Tracking/dashboard/StatsSummary"
-import TaskCard from "../components/TP_Manager/Assigning_and_Tracking/dashboard/TaskCard"
-
-import { mockTasks } from "../data/TPManagerAssigningandTrackingMockData"
-import type { FilterType } from "../types/AssigningandTrackingTypes"
+import FilterPill from "../components/TP_Manager/Assigning_and_Tracking/dashboard/FilterPill";
+import SearchInput from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SearchInput";
+import StatsSummary from "../components/TP_Manager/Assigning_and_Tracking/dashboard/StatsSummary";
+import TaskCard from "../components/TP_Manager/Assigning_and_Tracking/dashboard/TaskCard";
+import Navbar from "../components/navbar";
+import { mockTasks } from "../data/TPManagerAssigningandTrackingMockData";
+import { type FilterType } from "../types/AssigningandTrackingTypes";
 
 const Assigning_and_tracking: React.FC = () => {
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false)
@@ -72,9 +70,15 @@ const Assigning_and_tracking: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <div className="w-full min-h-screen bg-[#f2f7f8]">
-        <div className="max-w-[1600px] mx-auto px-6 py-6 relative">
+      <Navbar />
+
+      {/*
+        Scroll wrapper: set height to remaining viewport below navbar and
+        enable overflow with a thin 4px scrollbar. Assumption: navbar height
+        is about 64px; adjust the calc() value if your navbar height differs.
+      */}
+      <div className="h-[calc(100vh-64px)] overflow-auto scrollbar-thin-4 bg-[#F2F7F8]">
+        <div className="max-w-[1600px] mx-auto px-6 py-6 relative ">
           {/* ================= TOP BAR ================= */}
           <div className="flex items-start justify-between gap-6 mb-6">
             {/* LEFT */}
@@ -84,7 +88,11 @@ const Assigning_and_tracking: React.FC = () => {
 
             {/* CENTER */}
             <div className="flex items-center gap-2">
-              <FilterPill label="All" active={activeFilter === "all"} onClick={() => setActiveFilter("all")} />
+              <FilterPill
+                label="All"
+                active={activeFilter === "all"}
+                onClick={() => setActiveFilter("all")}
+              />
               <FilterPill
                 label="< 50% completed"
                 active={activeFilter === "below50"}
@@ -102,7 +110,11 @@ const Assigning_and_tracking: React.FC = () => {
               <SearchInput value={searchQuery} onChange={setSearchQuery} />
 
               <button className="w-[48px] h-[48px] flex items-center justify-center">
-                <img src={xlIcon || "/placeholder.svg"} alt="export" className="w-[48px] h-[48px] object-contain" />
+                <img
+                  src={xlIcon}
+                  alt="export"
+                  className="w-[48px] h-[48px] object-contain"
+                />
               </button>
 
               <button
@@ -120,7 +132,7 @@ const Assigning_and_tracking: React.FC = () => {
                 items-center
                 justify-center
                 whitespace-nowrap
-                hover:bg-[#00595F]
+                hover:bg-[#006E74]
               "
               >
                 Assign a task
@@ -132,11 +144,12 @@ const Assigning_and_tracking: React.FC = () => {
             {/* TASK CARDS (LEFT) */}
             <div
               className="
-    flex-1
-    grid
-    gap-5
-    grid-cols-[repeat(auto-fit,minmax(280px,1fr))]
-  "
+      flex-1
+      grid
+      gap-5
+      grid-cols-[repeat(auto-fill,minmax(280px,1fr))]
+      justify-center
+    "
             >
               {filteredTasks.map((task) => (
                 <TaskCard key={task.id} task={task} />
@@ -144,18 +157,22 @@ const Assigning_and_tracking: React.FC = () => {
             </div>
 
             {/* STATS SUMMARY (RIGHT) */}
-            <div className="sticky top-6 w-[360px] flex-shrink-0">
-              <StatsSummary
-                completedCount={stats.completed}
-                inProgressCount={stats.inProgress}
-                notStartedCount={stats.notStarted}
-              />
-            </div>
+            {/* <div className="sticky top-6 w-[360px] flex-shrink-0"> */}
+            <StatsSummary
+              completedCount={stats.completed}
+              inProgressCount={stats.inProgress}
+              notStartedCount={stats.notStarted}
+            />
+            {/* </div> */}
           </div>
         </div>
       </div>
-      {/* </CHANGE> */}
-      {showBanner && <SuccessBanner message={bannerMessage} onClose={() => setShowBanner(false)} />}
+      {showBanner && (
+        <SuccessBanner
+          message={bannerMessage}
+          onClose={() => setShowBanner(false)}
+        />
+      )}
 
       <AssignTaskModal
         isOpen={isAssignModalOpen}
