@@ -12,66 +12,61 @@ import { mockTasks } from "../data/TPManagerAssigningandTrackingMockData";
 import { type FilterType } from "../types/AssigningandTrackingTypes";
 
 const Assigning_and_tracking: React.FC = () => {
-  const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<FilterType>("all");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [showBanner, setShowBanner] = useState(false);
-  const [bannerMessage, setBannerMessage] = useState("");
-  const bannerTimerRef = useRef<number | null>(null);
+  const [isAssignModalOpen, setIsAssignModalOpen] = useState(false)
+  const [activeFilter, setActiveFilter] = useState<FilterType>("all")
+  const [searchQuery, setSearchQuery] = useState("")
+  const [showBanner, setShowBanner] = useState(false)
+  const [bannerMessage, setBannerMessage] = useState("")
+  const bannerTimerRef = useRef<number | null>(null)
 
   const showSuccess = (message: string) => {
     if (bannerTimerRef.current) {
-      clearTimeout(bannerTimerRef.current);
-      bannerTimerRef.current = null;
+      clearTimeout(bannerTimerRef.current)
+      bannerTimerRef.current = null
     }
-    setBannerMessage(message);
-    setShowBanner(true);
+    setBannerMessage(message)
+    setShowBanner(true)
     const id = window.setTimeout(() => {
-      setShowBanner(false);
-      bannerTimerRef.current = null;
-    }, 4000);
-    bannerTimerRef.current = id;
-  };
+      setShowBanner(false)
+      bannerTimerRef.current = null
+    }, 4000)
+    bannerTimerRef.current = id
+  }
 
   useEffect(() => {
     return () => {
-      if (bannerTimerRef.current) clearTimeout(bannerTimerRef.current);
-    };
-  }, []);
+      if (bannerTimerRef.current) clearTimeout(bannerTimerRef.current)
+    }
+  }, [])
 
   /* ---------------- FILTER TASKS ---------------- */
   const filteredTasks = useMemo(() => {
-    let tasks = [...mockTasks];
+    let tasks = [...mockTasks]
 
     if (activeFilter === "below50") {
-      tasks = tasks.filter((t) => t.progress < 50);
+      tasks = tasks.filter((t) => t.progress < 50)
     }
     if (activeFilter === "above50") {
-      tasks = tasks.filter((t) => t.progress >= 50);
+      tasks = tasks.filter((t) => t.progress >= 50)
     }
 
     if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      tasks = tasks.filter(
-        (t) =>
-          t.user.name.toLowerCase().includes(q) ||
-          t.title.toLowerCase().includes(q)
-      );
+      const q = searchQuery.toLowerCase()
+      tasks = tasks.filter((t) => t.user.name.toLowerCase().includes(q) || t.title.toLowerCase().includes(q))
     }
 
-    return tasks;
-  }, [activeFilter, searchQuery]);
+    return tasks
+  }, [activeFilter, searchQuery])
 
   /* ---------------- STATS ---------------- */
   const stats = useMemo(
     () => ({
       completed: mockTasks.filter((t) => t.progress === 100).length,
-      inProgress: mockTasks.filter((t) => t.progress > 0 && t.progress < 100)
-        .length,
+      inProgress: mockTasks.filter((t) => t.progress > 0 && t.progress < 100).length,
       notStarted: mockTasks.filter((t) => t.progress === 0).length,
     }),
-    []
-  );
+    [],
+  )
 
   return (
     <>
@@ -185,7 +180,7 @@ const Assigning_and_tracking: React.FC = () => {
         onSuccess={(msg: string) => showSuccess(msg)}
       />
     </>
-  );
-};
+  )
+}
 
-export default Assigning_and_tracking;
+export default Assigning_and_tracking
