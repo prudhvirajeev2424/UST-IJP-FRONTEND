@@ -1,161 +1,290 @@
-import React, { useState } from 'react';
- 
-const ConfirmationDialog: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(true);
+import React, { useState, useContext } from 'react';
+import { X } from 'lucide-react';
+
+// Singleton toast service (inline for demonstration)
+let toastRoot: any = null;
+let toastContainer: HTMLDivElement | null = null;
+let toasts: any[] = [];
+
+function showToast(message: string, opts?: { type?: 'success' | 'error' | 'info'; duration?: number }) {
+  if (typeof document === 'undefined') return;
+  
+  if (!toastContainer) {
+    toastContainer = document.createElement('div');
+    toastContainer.id = 'toast-root';
+    document.body.appendChild(toastContainer);
+  }
+  
+  const id = String(Date.now()) + Math.random().toString(36).slice(2, 9);
+  const toast = { id, message, type: opts?.type ?? 'info', duration: opts?.duration ?? 3000 };
+  
+  // Simple toast implementation
+  const toastEl = document.createElement('div');
+  toastEl.className = 'toast-notification';
+  toastEl.style.cssText = `
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 624px;
+    height: 70px;
+    background: ${toast.type === 'success' ? '#01B27C' : toast.type === 'error' ? '#E53E3E' : '#334155'};
+    border-radius: 8px;
+    padding: 0 20px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    color: #FFFFFF;
+    font-family: Rubik, system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    animation: slideDown 0.35s ease-out;
+  `;
+  toastEl.innerHTML = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="22 4 12 14.01 9 11.01" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>${message}</span>
+  `;
+  
+  if (!toastContainer.querySelector('.toast-container')) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'toast-container';
+    wrapper.style.cssText = 'position: fixed; left: 50%; top: 20px; transform: translateX(-50%); z-index: 9999;';
+    toastContainer.appendChild(wrapper);
+    
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideDown {
+        from { transform: translateY(-100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  
+  toastContainer.querySelector('.toast-container')?.appendChild(toastEl);
+  
+  setTimeout(() => {
+    toastEl.style.animation = 'slideUp 0.3s ease-out';
+    setTimeout(() => toastEl.remove(), 300);
+  }, toast.duration);
+}
+
+// ApprovalContext placeholder
+const ApprovalContext = React.createContext<any>(undefined);
+
+interface ApprovalModalProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+  onConfirm?: (comments: string) => void;
+}
+
+const ApprovalModal: React.FC<ApprovalModalProps> = ({ 
+  isOpen: controlledIsOpen, 
+  onClose, 
+  onConfirm 
+}) => {
+  const [internalIsOpen, setInternalIsOpen] = useState(true);
   const [comments, setComments] = useState('');
 
-  // Styles derived from the provided layout/properties
-  const overlayStyle: React.CSSProperties = {
-    position: 'fixed',
-    inset: 0,
-    background: 'rgba(0, 0, 0, 0.45)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // keep stacking order above page
-    zIndex: 50,
+  const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+  const approvalCtx = useContext(ApprovalContext as React.Context<any>);
+
+  const handleClose = () => {
+    setInternalIsOpen(false);
+    onClose?.();
   };
 
-  const dialogStyle: React.CSSProperties = {
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 601,
-    height: 416,
-    background: '#FFFFFF', // fallback to white
-    borderRadius: 10,
-    opacity: 1,
-    border: '1px solid #D7E0E3',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.12)',
-    overflow: 'hidden',
-    display: 'flex',
-    flexDirection: 'column',
-    zIndex: 60,
-  };
- 
   const handleConfirm = () => {
-    console.log('Confirmed with comments:', comments);
-    setIsOpen(false);
+    onConfirm?.(comments);
+    showToast('Candidate has been approved for this opportunity', { type: 'success', duration: 3000 });
+    
+    if (approvalCtx && typeof approvalCtx.setApproved === 'function') {
+      try {
+        approvalCtx.setApproved(true);
+      } catch (e) {
+        console.warn('Failed to set approved in context', e);
+      }
+    }
+    
+    setInternalIsOpen(false);
   };
- 
-  const handleCancel = () => {
-    console.log('Cancelled');
-    setIsOpen(false);
-  };
- 
-  const handleReopen = () => {
-    setIsOpen(true);
-    setComments('');
-  };
- 
-  if (!isOpen) {
-    return (
-      <div className="flex items-center justify-center min-h-[416px] bg-transparent">
-        <button
-          onClick={handleReopen}
-          className="px-6 py-3 text-white rounded transition-colors"
-          style={{ backgroundColor: 'var(--0097ac)' }}
-        >
-          Reopen Dialog
-        </button>
-      </div>
-    );
-  }
 
   return (
-    <div aria-modal="true" role="dialog" aria-labelledby="dialog-title" style={overlayStyle}>
-      {/* Outer dialog with fixed size from screenshots */}
-      <div
-        style={dialogStyle}
-        className="relative bg-[var(--ffffff)] rounded-dialog shadow-dialog flex flex-col"
-      >
-        {/* Header row — exact height from guides */}
-        <div className="h-[69px] px-[24px] flex items-center justify-between">
-          <h2
-            id="dialog-title"
-            className="unnamed-character-style-1 font-[500]"
-            style={{ color: 'var(--unnamed-color-231f20)' }}
-          >
-            Approve candidate for this opportunity?
-          </h2>
- 
-          <button
-            onClick={handleCancel}
-            className="text-[var(--7a7480)] hover:text-[var(--231f20)] transition-colors"
-            aria-label="Close"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
- 
-        {/* Content block — 40px side padding equals 521px usable width */}
-        <div className="px-[40px] pt-[12px]">
-          <label
-            htmlFor="comments"
-            className="unnamed-character-style-2 mb-[8px] block"
-            style={{ color: 'var(--unnamed-color-231f20)' }}
-          >
-            Enter Comments
-          </label>
- 
-          <textarea
-            id="comments"
-            value={comments}
-            onChange={(e) => setComments(e.target.value)}
-            placeholder="Candidate profile is verified and is ready to proceed to the next stage."
-            className="
-              w-[521px] h-[80px] resize-none rounded
-              border px-[12px] py-[12px]
-              focus:outline-none unnamed-character-style-2
-            "
+    <>
+      {isOpen && (
+        <>
+          {/* Overlay */}
+          <div 
+            className="fixed inset-0 bg-black z-[999]"
             style={{
-              borderColor: 'var(--d7e0e3)',
-              color: 'var(--unnamed-color-231f20)',
+              opacity: 0.6
             }}
+            onClick={handleClose}
           />
-        </div>
- 
-        {/* Spacer so actions sit visually below textarea (matches guides) */}
-        <div className="flex-1" />
- 
-        {/* Actions row — pixel perfect center about dialog’s vertical axis */}
-        <div className="pb-[24px]">
-          <div className="mx-auto grid grid-cols-[72px_98px] gap-[24px]">
-            <button
-              onClick={handleCancel}
-              className="
-                w-[72px] h-[36px] rounded
-                border border-[color:var(--d7e0e3)]
-                text-[var(--unnamed-color-231f20)]
-                bg-[var(--ffffff)]
-                transition-all hover:opacity-90
-                unnamed-character-style-2
-              "
+
+          {/* Modal Container - Centered on page */}
+          <div
+            className="fixed z-[1000] opacity-100 flex flex-col"
+            style={{
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '601px',
+              height: '448px',
+              background: '#FFFFFF',
+              borderRadius: '10px',
+              boxShadow: '0px 10px 40px rgba(0, 0, 0, 0.3), 0px 2px 10px rgba(0, 0, 0, 0.2)'
+            }}
+          >
+            {/* Header */}
+            <div 
+              className="flex justify-between items-center opacity-100"
+              style={{
+                width: '601px',
+                height: '70px',
+                background: '#F2F7F8',
+                borderRadius: '10px 10px 0px 0px',
+                padding: '0 24px'
+              }}
             >
-              Cancel
-            </button>
- 
-            <button
-              onClick={handleConfirm}
-              className="
-                w-[98px] h-[36px] rounded
-                bg-[var(--0097ac)] text-[var(--ffffff)]
-                transition-all hover:opacity-90
-                unnamed-character-style-2
-              "
-            >
-              Confirm
-            </button>
+              <h2 
+                className="m-0 opacity-100"
+                style={{
+                  fontFamily: 'Rubik',
+                  fontStyle: 'normal',
+                  fontWeight: '500',
+                  fontSize: '18px',
+                  lineHeight: '22px',
+                  letterSpacing: '0px',
+                  color: '#231F20',
+                  textAlign: 'left'
+                }}
+              >
+                Approve candidate for this opportunity?
+              </h2>
+              <button
+                onClick={handleClose}
+                className="bg-transparent border-none cursor-pointer flex items-center justify-center"
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  transition: 'background 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = '#D7E0E3'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                aria-label="Close modal"
+              >
+                <X size={24} color="#666666" />
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="flex-1 flex items-center justify-center px-6">
+              <div 
+                className="relative opacity-100"
+                style={{
+                  width: '521px',
+                  height: '120px',
+                  background: '#FFFFFF',
+                  border: '1px solid #D7E0E3',
+                  borderRadius: '5px',
+                  padding: '20px 16px 16px 16px'
+                }}
+              >
+                <span 
+                  className="absolute bg-white px-2"
+                  style={{
+                    top: '-10px',
+                    left: '12px',
+                    fontFamily: 'Rubik',
+                    fontSize: '12px',
+                    fontWeight: '400',
+                    lineHeight: '14px',
+                    color: '#808080',
+                    letterSpacing: '0px'
+                  }}
+                >
+                  Enter Comments
+                </span>
+                <p 
+                  className="m-0"
+                  style={{
+                    fontFamily: 'Rubik',
+                    fontSize: '14px',
+                    fontWeight: '400',
+                    lineHeight: '20px',
+                    color: '#000000',
+                    letterSpacing: '0px'
+                  }}
+                >
+                  Candidate profile is verified and is ready to proceed to the next stage
+                </p>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-4 flex justify-center gap-3 border-t border-gray-100">
+              <button
+                onClick={handleClose}
+                className="px-6 py-2.5 bg-white border border-gray-300 rounded text-sm font-medium text-gray-700 cursor-pointer"
+                style={{
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#000000';
+                  e.currentTarget.style.color = '#FFFFFF';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#FFFFFF';
+                  e.currentTarget.style.color = '#4B5563';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="px-6 py-2.5 bg-teal-600 border-none rounded text-sm font-medium text-white cursor-pointer"
+                style={{
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#000000';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#0D9488';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                Confirm
+              </button>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </>
+      )}
+
+      <style>{`
+        @keyframes slideDown {
+          from {
+            transform: translateX(-50%) translateY(-100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+          }
+        }
+        
+        .animate-slideDown {
+          animation: slideDown 0.4s ease-out;
+        }
+      `}</style>
+    </>
   );
 };
- 
-export default ConfirmationDialog;
+
+export default ApprovalModal;
