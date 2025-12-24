@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import StatusBadge from './StatusBadge';
+import StatusBadge from './home_components/StatusBadge';
 
 interface EmpHomeListProps {
   opportunities: any[]; // changed from Opportunity[] to any[] to avoid missing export runtime error
