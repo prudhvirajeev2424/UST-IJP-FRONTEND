@@ -10,22 +10,22 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
   applications,
 }) => {
   return (
-    <div className="w-full bg-white rounded-lg h-full">
+    <div className="w-full bg-white rounded-lg overflow-visible">
       <table className="w-full border-collapse">
         <thead>
           <tr style={{ backgroundColor: "#D7E0E3" }}>
-            <th className="px-6 py-4 text-left overflow-visible">
-              <div className="flex items-center gap-3">
+            <th className="px-3 py-2 text-left overflow-visible">
+              <div className="flex items-center gap-2">
                 <div className="w-[20px] flex-shrink-0"></div>
                 <span
                   className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
-                  style={{ color: "#7A7480", minWidth: "80px" }}
+                  style={{ color: "#7A7480", minWidth: "60px" }}
                 >
                   SO#
                 </span>
               </div>
             </th>
-            <th className="px-6 py-4 text-left">
+            <th className="px-3 py-2 text-left">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -33,7 +33,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 UID
               </span>
             </th>
-            <th className="px-6 py-4 text-left">
+            <th className="px-3 py-2 text-left">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -41,7 +41,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 Name
               </span>
             </th>
-            <th className="px-6 py-4 text-left">
+            <th className="px-3 py-2 text-left">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -49,7 +49,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 Role
               </span>
             </th>
-            <th className="px-6 py-4 text-left">
+            <th className="px-3 py-2 text-left">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -57,7 +57,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 Location
               </span>
             </th>
-            <th className="px-6 py-4 text-left">
+            <th className="px-3 py-2 text-left">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -65,7 +65,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 Applied date
               </span>
             </th>
-            <th className="px-6 py-4 text-left">
+            <th className="px-3 py-2 text-left">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -73,7 +73,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 Match Score
               </span>
             </th>
-            <th className="px-6 py-4 text-left">
+            <th className="px-3 py-2 text-left">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}

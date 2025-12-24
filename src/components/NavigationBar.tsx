@@ -1,5 +1,5 @@
 import React from "react";
-import { MailIcon, BellIcon } from "./Icons";
+import { Mail, Bell } from "lucide-react";
 
 export const Navbar: React.FC = () => {
   return (
@@ -52,10 +52,10 @@ export const Navbar: React.FC = () => {
       </div>
       <div className="flex items-center gap-6 flex-shrink-0">
         <button className="text-[#7A7480] hover:text-[#231F20] transition-colors flex-shrink-0">
-          <MailIcon />
+          <Mail className="w-5 h-5" />
         </button>
         <button className="relative text-[#7A7480] hover:text-[#231F20] transition-colors flex-shrink-0">
-          <BellIcon />
+          <Bell className="w-5 h-5" />
           <span
             className="absolute -top-1 -right-1 w-5 h-5 bg-[#FC6A59] rounded-full text-white text-[11px] font-medium flex items-center justify-center"
             style={{ fontFamily: "Rubik, sans-serif", fontWeight: 500 }}

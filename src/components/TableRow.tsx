@@ -1,6 +1,6 @@
 import React from "react";
 import type { Application } from "../types/application";
-import { UserCircleIcon } from "./Icons";
+import { User } from "lucide-react";
 
 interface TableRowProps {
   application: Application;
@@ -59,43 +59,49 @@ export const TableRow: React.FC<TableRowProps> = ({
     // only the first row receives interactive handlers and the hover group
     <tr {...trProps}>
       <td
-        className="px-4 py-3 overflow-visible relative"
+        className="px-2 py-2 overflow-visible relative"
         style={{ borderBottom: "2px solid #FFFFFF" }}
       >
-        <div className="flex items-center gap-2">
-          <div className="w-[20px] flex-shrink-0">
-            {application.hasIcon &&
-              (isFirst ? (
+        <div className="flex items-center gap-1">
+          <div className="w-6 flex-shrink-0 -ml-1">
+            {application.hasIcon && (
+              <div
+                className="relative z-50"
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+              >
+                {/* Circular user badge with #006E74 ring and matching icon color (tight fit) */}
                 <div
-                  className="relative text-[#0097AC] cursor-pointer z-50"
-                  onMouseEnter={() => setShowTooltip(true)}
-                  onMouseLeave={() => setShowTooltip(false)}
+                  className="w-6 h-6 rounded-full flex items-center justify-center cursor-pointer"
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    border: "2px solid #006E74",
+                    boxSizing: "border-box",
+                  }}
                 >
-                  <UserCircleIcon />
-                  {showTooltip && (
-                    <div
-                      className="absolute left-1/2 -translate-x-1/2 bottom-8 z-[100] px-4 py-2 rounded-lg shadow-lg whitespace-nowrap"
-                      style={{ backgroundColor: "#006E74", color: "#FFFFFF" }}
-                    >
-                      <div className="text-[13px] font-normal">
-                        External request
-                      </div>
-                      <div
-                        className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0"
-                        style={{
-                          borderLeft: "6px solid transparent",
-                          borderRight: "6px solid transparent",
-                          borderTop: "8px solid #006E74",
-                        }}
-                      />
+                  <User className="w-3 h-3 text-[#006E74]" />
+                </div>
+
+                {showTooltip && (
+                  <div
+                    className="absolute left-1/2 -translate-x-1/2 bottom-8 z-[100] px-4 py-2 rounded-lg shadow-lg whitespace-nowrap"
+                    style={{ backgroundColor: "#006E74", color: "#FFFFFF" }}
+                  >
+                    <div className="text-[13px] font-normal">
+                      External request
                     </div>
-                  )}
-                </div>
-              ) : (
-                <div className="relative text-[#0097AC] z-50">
-                  <UserCircleIcon />
-                </div>
-              ))}
+                    <div
+                      className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0"
+                      style={{
+                        borderLeft: "6px solid transparent",
+                        borderRight: "6px solid transparent",
+                        borderTop: "8px solid #006E74",
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           <a
             href="#"
@@ -104,13 +110,13 @@ export const TableRow: React.FC<TableRowProps> = ({
               console.log("open sid", application.sid);
             }}
             className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px] flex-shrink-0 text-[#006E74] hover:underline"
-            style={{ minWidth: "80px" }}
+            style={{ minWidth: "60px" }}
           >
             {application.sid}
           </a>
         </div>
       </td>
-      <td className="px-4 py-3" style={{ borderBottom: "2px solid #FFFFFF" }}>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
         <span
           className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px]"
           style={{ color: "#7A7480" }}
@@ -118,7 +124,7 @@ export const TableRow: React.FC<TableRowProps> = ({
           {application.uid}
         </span>
       </td>
-      <td className="px-4 py-3" style={{ borderBottom: "2px solid #FFFFFF" }}>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
         <span
           className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px]"
           style={{ color: "#7A7480" }}
@@ -126,7 +132,7 @@ export const TableRow: React.FC<TableRowProps> = ({
           {application.name}
         </span>
       </td>
-      <td className="px-4 py-3" style={{ borderBottom: "2px solid #FFFFFF" }}>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
         <a
           href="#"
           onClick={(e) => {
@@ -138,7 +144,7 @@ export const TableRow: React.FC<TableRowProps> = ({
           {application.role}
         </a>
       </td>
-      <td className="px-4 py-3" style={{ borderBottom: "2px solid #FFFFFF" }}>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
         <span
           className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px]"
           style={{ color: "#7A7480" }}
@@ -146,7 +152,7 @@ export const TableRow: React.FC<TableRowProps> = ({
           {application.location}
         </span>
       </td>
-      <td className="px-4 py-3" style={{ borderBottom: "2px solid #FFFFFF" }}>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
         <span
           className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px]"
           style={{ color: "#7A7480" }}
@@ -166,7 +172,7 @@ export const TableRow: React.FC<TableRowProps> = ({
           {application.score}
         </span>
       </td>
-      <td className="px-6 py-5" style={{ borderBottom: "2px solid #FFFFFF" }}>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
         <span
           className="inline-flex items-center justify-center min-w-[95px] h-[30px] px-4 rounded-md text-[13px] font-normal"
           style={{

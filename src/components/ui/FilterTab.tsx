@@ -6,8 +6,8 @@ const FilterTab: React.FC = () => {
   const [fitment, setFitment] = useState<number>(76);
 
   return (
-    <aside className="w-full md:w-[360px] bg-white border border-[#D7E0E3] flex-shrink-0 rounded-xl shadow-sm px-6 md:px-8 py-6 h-full">
-      <div className="py-4">
+    <aside className="w-full md:w-[420px] bg-white border border-[#D7E0E3] flex-shrink-0 rounded-xl shadow-sm px-6 md:px-10 py-6 h-full">
+      <div className="py-4 px-2 md:px-4">
         {/* Filter Header */}
         <div className="flex items-center justify-between mb-8">
           <h3 className="text-[16px] font-medium text-[#231F20]">Filter</h3>
