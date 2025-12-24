@@ -79,13 +79,6 @@ const resumeData = {
   ],
 };
 
-// added direct SVG imports from src/assets
-import certIconPath from '../../../assets/certificate_svg.svg';
-import eduIconPath from '../../../assets/education_svg.svg';
-import accoladeIconPath from '../../../assets/accolades_svg.svg';
-import quoteIconPath from '../../../assets/Icon metro-quote.svg';
-import profileIconPath from '../../../assets/profile_svg.svg';
-
 export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDetailModalProps) {
   // local state to show the update resume drawer on top of the modal
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -106,51 +99,82 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
 		return () => { document.body.style.overflow = prev; };
 	}, [isOpen]);
 
-  // split skills into two rows (first 4, next 4)
-  const topSkills = resumeData.skills.slice(0, 4);
-  const bottomSkills = resumeData.skills.slice(4, 8);
+	// runtime asset URLs — place the SVGs under public/assets/
+	const PUBLIC = '';
+	const certIconPath = `${PUBLIC}${encodeURI('/assets/certificate_svg.svg')}`;
+	const eduIconPath = `${PUBLIC}${encodeURI('/assets/education_svg.svg')}`;
+	const accoladeIconPath = `${PUBLIC}${encodeURI('/assets/accolades_svg.svg')}`;
+	const quoteIconPath = `${PUBLIC}${encodeURI('/assets/Icon metro-quote.svg')}`;
+	const profileIconPath = `${PUBLIC}${encodeURI('/assets/profile_svg.svg')}`;
 
-  if (!isOpen) return null;
+	// split skills into two rows (first 4, next 4)
+	const topSkills = resumeData.skills.slice(0, 4);
+	const bottomSkills = resumeData.skills.slice(4, 8);
 
-  return (
+	if (!isOpen) return null;
+
+	return (
     <div className="fixed inset-0 z-50">
       <style>{`
         @keyframes slideUp {
           from { transform: translateX(-50%) translateY(100%); }
           to { transform: translateX(-50%) translateY(0); }
         }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .hide-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
       `}</style>
-
+      
       {/* Overlay */}
-      <div className="fixed inset-0 bg-black/30" onClick={onClose} />
-
-      {/* Modal */}
+      <div 
+        className="fixed inset-0 bg-black/30"
+        onClick={onClose}
+      />
+      
+      {/* Modal: top gap 80px, flush to bottom; width 1000px; height = calc(100vh - 80px) */}
       <div
         id="resume-detail-modal"
-        className="fixed left-1/2 top-[50px] bottom-0 -translate-x-1/2 w-[1000px] bg-white shadow-xl z-50 flex flex-col"
+        className="fixed left-1/2 top-[80px] bottom-0 -translate-x-1/2 w-[1000px] bg-white shadow-xl z-50 flex flex-col"
         style={{
           width: 1000,
-          height:1000,
-          maxHeight: 1000,
+          height: 'calc(100vh - 80px)',
+          maxHeight: 'calc(100vh - 80px)',
           backgroundColor: '#FFFFFF',
           borderRadius: '10px',
           boxSizing: 'border-box',
         }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-2 border-b border-border shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
           <h2 className="text-lg font-semibold text-foreground">Introduction</h2>
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">Applied on {resumeData.appliedDate}</span>
-            <button onClick={openDrawer} className="p-2 hover:bg-muted rounded-md transition-colors" aria-label="Upload resume">
+            <button 
+              onClick={openDrawer}
+              className="p-2 hover:bg-muted rounded-md transition-colors"
+              aria-label="Upload resume"
+            >
               <Upload className="w-5 h-5 text-muted-foreground" />
             </button>
-            <button className="p-2 hover:bg-muted rounded-md transition-colors" aria-label="Download resume">
+            <button 
+              className="p-2 hover:bg-muted rounded-md transition-colors"
+              aria-label="Download resume"
+            >
               <Download className="w-5 h-5 text-muted-foreground" />
             </button>
-            <button onClick={onClose} className="p-2 hover:bg-muted rounded-md transition-colors" aria-label="Close modal">
+            <button 
+              onClick={onClose}
+              className="p-2 hover:bg-muted rounded-md transition-colors"
+              aria-label="Close modal"
+            >
               <X className="w-5 h-5 text-muted-foreground" />
             </button>
           </div>
@@ -167,11 +191,12 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
           <section>
             <h3 className="text-base font-semibold text-foreground mb-1">Professional Experience</h3>
             <p className="text-sm text-muted-foreground mb-4">Total {resumeData.totalExperience} as Java Developer</p>
-
+            
             <div className="space-y-6">
               {resumeData.experiences.map((exp, index) => {
                 return (
                   <div key={exp.id} className="flex gap-4">
+                    {/* timeline column with vertical line (line drawn by CSS ::before) */}
                     <div className="timeline-column relative flex flex-col items-center pt-1">
                       <div className="timeline-dot z-10" />
                     </div>
@@ -207,6 +232,7 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
             <div className="space-y-4">
               {resumeData.education.map((edu) => (
                 <div key={edu.id} className="flex gap-4">
+                  {/* timeline column (vertical line) for education - matches experience timeline */}
                   <div className="timeline-column relative flex flex-col items-center pt-1">
                     <div className="timeline-dot z-10" />
                   </div>
@@ -313,8 +339,12 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
         </div>
       </div>
 
-      {/* UpdateResumeDrawer appears on top of the modal */}
-      <UpdateResumeDrawer isOpen={isDrawerOpen} onClose={closeDrawer} onConfirm={handleDrawerConfirm} />
+      {/* UpdateResumeDrawer appears on top of the modal (its overlay uses a higher z-index) */}
+      <UpdateResumeDrawer
+        isOpen={isDrawerOpen}
+        onClose={closeDrawer}
+        onConfirm={handleDrawerConfirm}
+      />
     </div>
   );
 }
