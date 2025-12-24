@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { User, AlertCircle, FileText, ArrowRight } from 'lucide-react';
-import { SkillBadge } from './SkillBadge';
-import { UploadResumeModal } from './UploadResumeModal';
-import { ResumeDetailModal } from './ResumeDetailModal';
-import { UpdateResumeDrawer } from './UpdateResumeDrawer';
-import { ResumeNotFoundCard } from './ResumeNotFoundCard';
-import { Button, Card, CardContent, CardHeader, CardTitle } from '../ui';
-import { EmpHomeRightSideBar } from './EmpHomeRightSideBar';
+import { SkillBadge } from '../../components/employee/home_components/SkillBadge';
+import { UploadResumeModal } from '../../components/employee/home_components/UploadResumeModal';
+import { ResumeDetailModal } from '../../components/employee/home_components/ResumeDetailModal';
+import { UpdateResumeDrawer } from '../../components/employee/home_components/UpdateResumeDrawer';
+import { ResumeNotFoundCard } from '../../components/employee/home_components/ResumeNotFoundCard';
+import { Button, Card, CardContent, CardHeader, CardTitle } from '../../components/ui';
+import { EmpHomeRightSideBar } from '../../components/employee/home_components//EmpHomeRightSideBar';
 import { stats,opportunities, } from '../../data/mockData';
-import { EmpHomeGrid } from './EmpHomeGrid';
+import { EmpHomeGrid } from '../../components/employee/home_components//EmpHomeGrid';
 // import type {Stats,Activity} from '../../types/activity';
 
  

@@ -1,4 +1,4 @@
-import type { ProfileSummary } from "../../types/profilesummary";
+import type { ProfileSummary } from "../../../types/profilesummary";
  
 interface SidebarProps {
   profile: ProfileSummary;

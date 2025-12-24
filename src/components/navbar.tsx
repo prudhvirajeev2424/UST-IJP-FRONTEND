@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Mail, Bell, X, User } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png"
-import EmpHome from "./employee/EmpHome";
+import EmpHome from "../pages/layout/EmpHome";
  
 interface NavbarProps {
   role?: string | null;
