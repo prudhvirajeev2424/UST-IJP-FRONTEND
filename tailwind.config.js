@@ -16,6 +16,18 @@ module.exports = {
         primary: "hsl(var(--primary))",
         "primary-foreground": "hsl(var(--primary-foreground))",
         secondary: "hsl(var(--secondary))",
+        success: {
+          DEFAULT: "#01B27C",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "#FFBF00",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        danger: {
+          DEFAULT: "#FC6A59",
+          foreground: "hsl(var(--danger-foreground))",
+        },
         "secondary-foreground": "hsl(var(--secondary-foreground))",
         muted: "hsl(var(--muted))",
         "muted-foreground": "hsl(var(--muted-foreground))",

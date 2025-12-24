@@ -1,12 +1,11 @@
-// import React from 'react';
-import type { Status } from '../../types/status';
-import { getStatusColor } from '../../utils/Helper';
+
+import { getStatusColor } from '../../../utils/Helper';
  
 interface StatusBadgeProps {
- status: Status;
+ status: String;
 }
  
-const StatusBadge = ({ status }:StatusBadgeProps['status']) => {
+const StatusBadge = ({ status }:StatusBadgeProps) => {
  return (
    <span
      className={`px-3 py-1 rounded-md font-rubik ${getStatusColor(status)}`}

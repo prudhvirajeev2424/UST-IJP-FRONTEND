@@ -1,5 +1,4 @@
 import type { ProfileSummary } from "../../../types/profilesummary";
-import React ,{useState} from "react";
 import { User, AlertCircle, FileText, ArrowRight } from 'lucide-react';
  
 interface SidebarProps {

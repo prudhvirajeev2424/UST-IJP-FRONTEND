@@ -5,7 +5,7 @@ interface ResumeNotFoundCardProps {
 
 export function ResumeNotFoundCard({ onUploadClick }: ResumeNotFoundCardProps) {
   return (
-    <div className="flex items-center justify-center min-h-[500px] bg-white rounded-lg p-8">
+    <div className="flex items-center justify-center h-[920px] bg-white rounded-lg p-8 w-[1000px]">
       <div className="text-center max-w-md">
         {/* Illustration */}
         <div className="mb-8">

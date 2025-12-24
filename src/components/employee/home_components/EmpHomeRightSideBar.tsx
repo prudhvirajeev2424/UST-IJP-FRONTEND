@@ -1,5 +1,5 @@
 import type { Stats,Activity } from "../../../types/activity";
-import { getStatusColorActivity } from "../../../utils/Helper";
+import { getStatusColor } from "../../../utils/Helper";
 
 interface RightSidebarProps {
   stats: Stats;
@@ -12,7 +12,7 @@ function getStatusLabel(status: Activity["status"]): string {
 
 export function EmpHomeRightSideBar({ stats, activities }: RightSidebarProps) {
   return (
-    <aside className="w-[360px] flex-shrink-0 pt-6">
+    <aside className="w-[360px] h-[110px] flex-shrink-0 pt-6 ">
       {/* Stats */}
       <div className="w-full h-[110px] bg-white relative rounded-lg p-5 cursor-pointer shadow-lg overflow-hidden flex justify-around mb-10">
         <div className="text-center">
@@ -58,7 +58,7 @@ export function EmpHomeRightSideBar({ stats, activities }: RightSidebarProps) {
               {/* Timeline column */}
               <div className="w-4 flex justify-center">
                 {/* Dot */}
-                <span className="w-2.5 h-2.5 mt-2 rounded-full bg-secondary z-10" />
+                <span className="w-2.5 h-2.5 mt-2 rounded-full bg-secondary z-10 bg-[#0097AC]" />
               </div>
 
               {/* Vertical line (absolute, full height) */}
@@ -68,7 +68,7 @@ export function EmpHomeRightSideBar({ stats, activities }: RightSidebarProps) {
 
               {/* Content */}
               <div className="flex-1">
-                <p className="text-base text-text-primary leading-6">
+                <p className="text-left text-text-primary leading-6">
                   Applied job{" "}
                   <span className="font-semibold">
                     "{activity.title} ({activity.soId})"
@@ -84,7 +84,7 @@ export function EmpHomeRightSideBar({ stats, activities }: RightSidebarProps) {
                     {getStatusLabel(activity.status)}
                   </span>
 
-                  <span className="text-xs text-text-muted">
+                  <span className="text-xs text-text-muted text-[#7A7480] opacity-50">
                     {activity.timestamp}
                   </span>
                 </div>

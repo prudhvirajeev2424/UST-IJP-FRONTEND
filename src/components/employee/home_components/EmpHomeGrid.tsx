@@ -2,6 +2,7 @@ import { useState } from "react";
 import { List } from "lucide-react";
 import type { Opportunity } from "../../../types/opportunity";
 import excelIcon from "../../../assets/Icon awesome-file-pdf.svg";
+import { OpportunityCard } from "./OpportunityCard";
 
 interface OpportunityGridProps {
   opportunities: Opportunity[];
@@ -94,6 +95,18 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
             </div>
           </div>
         </div>
+        {viewMode === 'grid' ?(
+        <div className="grid grid-cols-[repeat(3,1fr)]  gap-5">
+        {opportunities.slice(0,6).map((opportunity) => (
+          <OpportunityCard key={opportunity.id} opportunity={opportunity} />
+        ))}
+      </div>
+      ):
+      (
+        <div>
+          <h2>LIST</h2>
+        </div>
+      )}
       </div>
     </div>
   );
