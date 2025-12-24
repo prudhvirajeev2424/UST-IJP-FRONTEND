@@ -2,7 +2,7 @@ import React from "react";
 
 const ApplicationStatus: React.FC = () => {
   return (
-    <div className="bg-white rounded-[10px] p-5 w-[290px] shadow-sm mt-5 ml-10 h-fit">
+  <div className="bg-white rounded-[10px] p-5 w-full shadow-sm mt-5 h-fit">
       {/* Title */}
       <h2 className="text-[16px] font-normal text-[#231F20] text-center mb-3 leading-[24px]">
         Application Status
