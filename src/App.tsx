@@ -10,19 +10,12 @@ function App() {
   // const [count, setCount] = useState(0)
 
   return (
-<<<<<<< HEAD
-    <>
-    {/* <LoginPage /> */}
-    <Application/>
-    </>
-=======
     <ShortlistProvider>
 
       <Application/>
     
     {/* <LoginPage />
     
->>>>>>> harsh
     // <>
     //   <div>
     //     <a href="https://vite.dev" target="_blank">
