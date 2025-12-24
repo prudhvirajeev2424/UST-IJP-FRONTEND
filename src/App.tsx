@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// react-router removed: login/role state controls which UI is shown
 import { useState } from "react";
 
 import LoginPage from "./pages/landing_page";
@@ -12,12 +12,7 @@ function App() {
   return (
     <ShortlistProvider>
       <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
-        <Router>
-          <Routes>
-            {/* Login + App Shell */}
-            <Route path="/" element={<LoginPage />} />
-          </Routes>
-        </Router>
+        <LoginPage />
       </ActiveRoleContext.Provider>
     </ShortlistProvider>
   );
