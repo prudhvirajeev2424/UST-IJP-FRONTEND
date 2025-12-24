@@ -16,3 +16,22 @@ export interface Application {
   requiredSkills: string[];
   status: ApplicationStatus;
 }
+
+// THIS INTERFACE IS FOR MOCK DATA PURPOSES FOR OPPORTUNITIES (TEAM 6)
+export interface Job {
+  id: string;
+  role: string;
+  band: string;
+  location: string;
+  skills: string[];
+  status?: 'Shortlisted' | 'Actioned' | 'Rejected';
+  description: string;
+}
+
+export interface Notification {
+  user: string;
+  action: string;
+  target: string;
+  time: string;
+  avatar: string;
+}
