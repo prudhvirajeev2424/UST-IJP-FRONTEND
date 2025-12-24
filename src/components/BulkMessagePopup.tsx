@@ -47,7 +47,7 @@ const BulkMessagePopup: React.FC = () => {
           
           
 <div className="relative h-[174px] w-[521px] rounded-[5px] border border-[#D7E0E3] bg-[#FFFFFF] p-[16px]">
-  <p className="absolute -top-[10px] left-[16px] bg-white px-[8px] text-left text-[13px] font-normal leading-[20px] text-[#7A7480]">
+  <p className="absolute -top-[10px] left-[16px] bg-white px-[8px] text-left text-[14px] font-normal leading-[20px] text-[#7A7480]">
     Message
   </p>
   <textarea
@@ -67,11 +67,11 @@ Andrea Stephen"
 
           {/* Attach Documents */}
           <div>
-            <p className="mb-[6px] text-left  text-[13px] font-normal leading-[20px] text-[#231F20]">
+            <p className="mb-[6px] text-left  text-[16px] font-medium leading-[20px] text-[#231F20]">
               Attach Documents
             </p>
 
-            <p className="mb-[16px] text-left text-[11px] leading-[16px] text-[#7A7480]">
+            <p className="mb-[16px] text-left text-[14px] leading-[16px] text-[#7A7480]">
               Attach any documents if necessary
             </p>
 
@@ -86,9 +86,10 @@ Andrea Stephen"
                 />
               </div>
 
-              <p className="m-0 text-center text-[13px]">
+              <p className="m-0 text-center text-[14px]">
   Drag and drop to upload or{" "}
-  <span className="font-normal text-[#006E74]">
+  <br />
+  <span className="font-normal text-[14px] text-[#006E74]">
     Browse
   </span>
 </p>
@@ -98,11 +99,11 @@ Andrea Stephen"
 
         {/* Footer */}
         <div className="flex justify-center gap-[16px] border-[#E5E5E5] px-[32px] py-[23px]">
-          <button className="h-[49px] w-[90px] cursor-pointer rounded-[4px] border border-[#231F20] bg-white text-[13px] font-normal text-[#231F20] transition-colors hover:bg-[#F5F5F5]">
+          <button className="h-[49px] w-[90px] cursor-pointer rounded-[4px] border border-[#231F20] bg-white text-[16px] font-normal text-[#231F20] transition-colors hover:bg-[#F5F5F5]">
             Cancel
           </button>
 
-          <button className="h-[49px] w-[78px] cursor-pointer rounded-[4px] border-none bg-[#006E74] text-[13px] font-normal text-white transition-colors hover:bg-[#005a5f]">
+          <button className="h-[49px] w-[78px] cursor-pointer rounded-[4px] border-none bg-[#006E74] text-[16px] font-normal text-white transition-colors hover:bg-[#005a5f]">
             Send
           </button>
         </div>
