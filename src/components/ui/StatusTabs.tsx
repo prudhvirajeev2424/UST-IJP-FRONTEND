@@ -4,9 +4,16 @@ import { ArrowLeft, Grid, List } from "lucide-react";
 interface StatusTabsProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  onViewChange?: (view: "table" | "kanban") => void;
+  view?: "table" | "kanban";
 }
 
-const StatusTabs: React.FC<StatusTabsProps> = ({ activeTab, setActiveTab }) => {
+const StatusTabs: React.FC<StatusTabsProps> = ({
+  activeTab,
+  setActiveTab,
+  onViewChange,
+  view = "table",
+}) => {
   const tabs = ["All", "Pending Action", "Accepted", "Rejected"];
 
   return (
@@ -115,11 +122,23 @@ const StatusTabs: React.FC<StatusTabsProps> = ({ activeTab, setActiveTab }) => {
           {/* Attached View Toggle: Kanban (Grid) + List */}
           <div className="inline-flex items-center ml-3">
             {/* Kanban/List icons: reduce visual weight with lighter color and smaller size */}
-            <button aria-label="Kanban View" className="p-0">
-              <Grid className="w-5 h-5 text-[#7A7480] opacity-70" />
+            <button
+              aria-label="Kanban View"
+              className={`p-0 ${
+                view === "kanban" ? "opacity-100" : "opacity-50"
+              } transition-opacity duration-150`}
+              onClick={() => onViewChange?.("kanban")}
+            >
+              <Grid className="w-5 h-5 text-[#7A7480]" />
             </button>
-            <button aria-label="List View" className="p-0 ml-2">
-              <List className="w-5 h-5 text-[#7A7480] opacity-70" />
+            <button
+              aria-label="List View"
+              className={`p-0 ml-2 ${
+                view === "table" ? "opacity-100" : "opacity-50"
+              } transition-opacity duration-150`}
+              onClick={() => onViewChange?.("table")}
+            >
+              <List className="w-5 h-5 text-[#7A7480]" />
             </button>
           </div>
         </div>
