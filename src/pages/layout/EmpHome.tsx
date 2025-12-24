@@ -7,7 +7,9 @@ import { UpdateResumeDrawer } from '../../components/employee/home_components/Up
 import { ResumeNotFoundCard } from '../../components/employee/home_components/ResumeNotFoundCard';
 import {  Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card';
 import { EmpHomeRightSideBar } from '../../components/employee/home_components//EmpHomeRightSideBar';
-import { stats,opportunities, } from '../../data/mockData';
+import { EmpHomeLeftSideBar } from '../../components/employee/home_components//EmpHomeLeftSideBar';
+import { stats,opportunities } from '../../data/mockData';
+import { profileData } from '../../data/profiles';
 import { EmpHomeGrid } from '../../components/employee/home_components//EmpHomeGrid';
 // import type {Stats,Activity} from '../../types/activity';
 
