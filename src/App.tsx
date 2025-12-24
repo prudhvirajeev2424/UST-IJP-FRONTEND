@@ -1,11 +1,13 @@
-// src/App.tsx
 import React from "react";
-import AssigningTracking from "./pages/Assigning_and_Tracking";
+// import Layout from './components/layout/Layout';
+// import MyApplications from "./pages/MyApplications";
+import Opportunities from "./pages/Opportunies";
 
 const App: React.FC = () => {
   return (
     <>
-      <AssigningTracking />
+      {/* <MyApplications /> */}
+      <Opportunities />
     </>
   );
 };
