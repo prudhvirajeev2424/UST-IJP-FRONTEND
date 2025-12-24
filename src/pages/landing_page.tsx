@@ -71,7 +71,7 @@ const LoginPage: React.FC = () => {
           <Navbar role={activeRole ?? "Employee"} />
  
           {/* Home page under the fixed navbar */}
-          <div className="pt-20 w-full bg-white">
+          <div className="pt-10">
             <Home />
           </div>
         </>
