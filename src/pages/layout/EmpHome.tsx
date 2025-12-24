@@ -81,7 +81,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left Column - Profile Summary */}
-            
+<<<<<<< HEAD
+<<<<<<< HEAD:src/components/employee/EmpHome.tsx
             
             <EmpHomeLeftSideBar profile={profileData} hasresume={hasResume} handleresume={handleResumeClick}/>
             
@@ -137,6 +138,11 @@ export default function Home() {
               </Card>
             </div>
 >>>>>>> 21ef11eb7e7ec03a479ea6c3c772e89146e7f29e:src/pages/layout/EmpHome.tsx
+=======
+            
+            
+            <EmpHomeLeftSideBar profile={profileData} hasresume={hasResume} handleresume={handleResumeClick}/>
+>>>>>>> 3fb9e2e3260916ef71aad06b1eb601884f51b778
  
             {/* Center Column - Resume Upload or Uploaded State */}
             <div className="lg:col-span-5">
