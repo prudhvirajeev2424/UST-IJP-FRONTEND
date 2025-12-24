@@ -39,6 +39,8 @@ const Navbar = () => {
                   ? "/home"
                   : link === "Assigning & Tracking"
                   ? "/assigning"
+                  : link === "Applications"
+                  ? "/applications"
                   : "#";
 
               return (

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/landing_page";
 import Home from "./pages/home";
 import AssigningAndTracking from "./pages/AssigningandTracking";
+import Applications from "./pages/Applications_page";
 import { ActiveRoleContext } from "./context/ActiveRoleContext";
 import { useState } from "react";
 
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<LoginPage />} />
             <Route path="/home" element={<Home />} />
             <Route path="/assigning" element={<AssigningAndTracking />} />
+            <Route path="/applications" element={<Applications />} />
           </Routes>
         </Router>
       </ActiveRoleContext.Provider>

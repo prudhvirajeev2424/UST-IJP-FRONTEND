@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavigationBar from "../components/ui/NavigationBar";
+import NavigationBar from "../components/navbar";
 import FilterTab from "../components/ui/FilterTab";
 import StatusTabs from "../components/ui/StatusTabs";
 import { ApplicationsTable } from "../components/ApplicationsTable";
