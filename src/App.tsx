@@ -1,10 +1,10 @@
-import './App.css'
-import { ShortlistProvider } from './components/tp_manager/application/context/ShortlistContext';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/landing_page';
-import Home from './pages/home';
-import { ActiveRoleContext } from './context/ActiveRoleContext';
-import { useState } from 'react';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+
+import LoginPage from "./pages/landing_page";
+import { ShortlistProvider } from "./components/tp_manager/application/context/ShortlistContext";
+import { ActiveRoleContext } from "./context/ActiveRoleContext";
 
 function App() {
   const [activeRole, setActiveRole] = useState<string | null>(null);
@@ -14,13 +14,13 @@ function App() {
       <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
         <Router>
           <Routes>
+            {/* Login + App Shell */}
             <Route path="/" element={<LoginPage />} />
-            <Route path="/home" element={<Home />} />
           </Routes>
         </Router>
       </ActiveRoleContext.Provider>
     </ShortlistProvider>
-  )
+  );
 }
 
 export default App;
