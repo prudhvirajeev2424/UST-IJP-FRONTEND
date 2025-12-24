@@ -97,7 +97,7 @@ const ApplicationStatus = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 gap-4 px-1 mb-4 ">
+      <div className="grid grid-cols-2 gap-4  mb-4 ">
         {stats.map((stat) => (
           <div key={stat.label} className="flex items-center gap-2 justify-start px-4 ">
             <p
