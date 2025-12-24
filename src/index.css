@@ -31,7 +31,7 @@
   --unnamed-line-spacing-24: 24px;
 }
 
-@layer base {
+/* @layer base {
   * {
     @apply box-border;
   }
@@ -45,7 +45,7 @@
   #root {
     @apply min-h-screen;
   }
-}
+} */
 
 .unnamed-character-style-1 {
   font-family: var(--unnamed-font-family-rubik);
