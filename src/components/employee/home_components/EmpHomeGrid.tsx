@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { List } from "lucide-react";
-import type { Opportunity } from "../../../types/opportunity";
+// removed: import type { Opportunity } from "../../../types/opportunity";
 import excelIcon from "../../../assets/Icon awesome-file-pdf.svg";
 import { OpportunityCard } from "./OpportunityCard";
+import EmpHomeList from "./EmpHomeList";
 
 interface OpportunityGridProps {
-  opportunities: Opportunity[];
+  opportunities: any[]; // changed from Opportunity[] to any[] to avoid missing export runtime error
 }
 
 export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
@@ -57,7 +58,11 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
             {/* View Mode Toggle */}
             <div className="flex items-center gap-1 border border-border-light rounded">
               <button
-                onClick={() => setViewMode("grid")}
+                type="button"
+                onClick={() => {
+                  setViewMode("grid");
+                  console.log("viewMode -> grid");
+                }}
                 className={`p-2 transition-colors ${
                   viewMode === "grid" ? "bg-muted" : "hover:bg-muted"
                 }`}
@@ -79,7 +84,11 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
               </button>
               <div className="w-px h-[35px] bg-gray-300" />
               <button
-                onClick={() => setViewMode("list")}
+                type="button"
+                onClick={() => {
+                  setViewMode("list");
+                  console.log("viewMode -> list (button clicked)");
+                }}
                 className={`p-2 transition-colors ${
                   viewMode === "list" ? "bg-muted" : "hover:bg-muted"
                 }`}
@@ -103,12 +112,12 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
       </div>
       ):
       (
+        // render only the table component when list view is active
         <div>
-          <h2>LIST</h2>
+          <EmpHomeList opportunities={opportunities} />
         </div>
       )}
       </div>
     </div>
   );
 }
- 
