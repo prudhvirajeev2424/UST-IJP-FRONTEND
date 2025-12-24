@@ -10,7 +10,7 @@ interface SidebarProps {
  
 export function EmpHomeLeftSideBar({ profile ,hasresume,handleresume}: SidebarProps) {
   const { description,primarySkills} = profile
-  const {hasResume} = hasresume
+  const hasResume = hasresume
   const handleResumeClick = handleresume
   
   return (
@@ -35,7 +35,6 @@ export function EmpHomeLeftSideBar({ profile ,hasresume,handleresume}: SidebarPr
             ))}
           </div>
         </div>
-
         {hasResume ? (
                     <button
                       onClick={handleResumeClick}

@@ -110,8 +110,8 @@ export default function Home() {
           <div className="grid grid-cols-[repeat(3,1fr)] gap-6">
             {/* Left Column - Profile Summary */}
             
-            <EmpHomeLeftSideBar profile={profileData} hasresume={hasResume} handleresume={handleResumeClick}/>
             
+            <EmpHomeLeftSideBar profile={profileData} hasresume={hasResume} handleresume={handleResumeClick}/>
  
             {/* Center Column - Resume Upload or Uploaded State */}
               {!hasResume ? (
