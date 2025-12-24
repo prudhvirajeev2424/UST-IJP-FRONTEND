@@ -92,6 +92,7 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
     }
   };
 
+  
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
