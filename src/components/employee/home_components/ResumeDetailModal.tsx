@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { X, Upload, Download } from 'lucide-react';
-import { UpdateResumeDrawer } from './UpdateResumeDrawer';
+// use default import (UpdateResumeDrawer exports default)
+import UpdateResumeDrawer from './UpdateResumeDrawer';
 
 interface ResumeDetailModalProps {
   isOpen: boolean;
@@ -79,6 +80,13 @@ const resumeData = {
   ],
 };
 
+// import SVGs directly so Vite resolves URLs
+import certIconPath from '../../../assets/certificate_svg.svg';
+import eduIconPath from '../../../assets/education_svg.svg';
+import accoladeIconPath from '../../../assets/accolades_svg.svg';
+import quoteIconPath from '../../../assets/Icon metro-quote.svg';
+import profileIconPath from '../../../assets/profile_svg.svg';
+
 export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDetailModalProps) {
   // local state to show the update resume drawer on top of the modal
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -98,14 +106,6 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
 		document.body.style.overflow = 'hidden';
 		return () => { document.body.style.overflow = prev; };
 	}, [isOpen]);
-
-	// runtime asset URLs — place the SVGs under public/assets/
-	const PUBLIC = '';
-	const certIconPath = `${PUBLIC}${encodeURI('/assets/certificate_svg.svg')}`;
-	const eduIconPath = `${PUBLIC}${encodeURI('/assets/education_svg.svg')}`;
-	const accoladeIconPath = `${PUBLIC}${encodeURI('/assets/accolades_svg.svg')}`;
-	const quoteIconPath = `${PUBLIC}${encodeURI('/assets/Icon metro-quote.svg')}`;
-	const profileIconPath = `${PUBLIC}${encodeURI('/assets/profile_svg.svg')}`;
 
 	// split skills into two rows (first 4, next 4)
 	const topSkills = resumeData.skills.slice(0, 4);
