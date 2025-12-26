@@ -107,15 +107,15 @@ export const accolades: Accolade[] = [
 export const testimonials: Testimonial[] = [
   {
     id: '1',
-    content: 'Zamira is an exceptional developer with deep technical expertise. Her ability to solve complex problems and mentor junior developers is outstanding.',
-    author: 'John Smith',
-    position: 'Senior Engineering Manager, UST'
+    content: 'An exceptional Java developer who consistently delivers high-quality code. His ability to troubleshoot complex issues is outstanding',
+    author: 'James Albert',
+    position: 'CTO,XYZ Techologies'
   },
   {
     id: '2',
-    content: 'A reliable team player who consistently delivers high-quality code. Zamira\'s attention to detail and commitment to best practices makes her a valuable asset.',
-    author: 'Sarah Johnson',
-    position: 'Tech Lead, ABC Solutions'
+    content: 'A fantastic mentor and leader. His technical expertise and problem-solving skills have greatly contrbutted to our teams success. ',
+    author: 'Peter Hayne',
+    position: 'Team Lead, ABC Solutions'
   }
 ];
 
