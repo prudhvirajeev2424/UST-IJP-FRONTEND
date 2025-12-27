@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle, Button } from "../../ui";
+import { Card, CardContent, CardHeader, CardTitle, Button } from "../ui";
 import { SimilarJobCard } from "./SimilarJobCard";
 
 interface SimilarJob {

@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
@@ -14,18 +17,6 @@ module.exports = {
         "primary-foreground": "hsl(var(--primary-foreground))",
         secondary: "hsl(var(--secondary))",
         "secondary-foreground": "hsl(var(--secondary-foreground))",
-        success: {
-          DEFAULT: "#01B27C",
-          foreground: "hsl(var(--success-foreground))",
-        },
-        warning: {
-          DEFAULT: "#FFBF00",
-          foreground: "hsl(var(--warning-foreground))",
-        },
-        danger: {
-          DEFAULT: "#FC6A59",
-          foreground: "hsl(var(--danger-foreground))",
-        },
         muted: "hsl(var(--muted))",
         "muted-foreground": "hsl(var(--muted-foreground))",
         accent: "hsl(var(--accent))",

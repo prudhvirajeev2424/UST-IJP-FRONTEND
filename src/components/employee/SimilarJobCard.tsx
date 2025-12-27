@@ -1,5 +1,5 @@
 import { Card, CardContent } from "../ui";
-import { SkillBadge } from "./home_components/SkillBadge";
+import { SkillBadge } from "./SkillBadge";
 
 interface SimilarJobCardProps {
   soNumber: string;
