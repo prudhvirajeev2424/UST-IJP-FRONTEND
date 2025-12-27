@@ -1,4 +1,3 @@
-import React from 'react'
 import ApplicationStatus from '../../components/Wfm/Home/ApplicationStatus'
 import RecentActivities from '../../components/Wfm/Home/RecentActivities'
 
