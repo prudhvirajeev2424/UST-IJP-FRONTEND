@@ -80,7 +80,9 @@ const Navbar = ({ role = "Employee" }: NavbarProps) => {
 
           {/* Right */}
           <div className="flex-shrink-0 flex items-center gap-4 relative">
-            <Mail size={24} className="text-gray-700" />
+            {role !== "WFM" && (
+              <Mail size={24} className="text-gray-700" />
+            )}
 
             {/* Bell */}
             <div className="relative">
