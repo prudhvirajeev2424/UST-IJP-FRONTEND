@@ -84,7 +84,7 @@ const LoginPage: React.FC = () => {
       <div className="h-screen w-screen flex items-center justify-center bg-[#008080] overflow-hidden">
         {/* Component-level styles */}
         <style>{`
-          html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; }
+          html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #008080; }
           @keyframes shakeX { 0%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}100%{transform:translateX(0)} }
           .shake { animation: shakeX 0.6s cubic-bezier(.36,.07,.19,.97); }
           @keyframes fadeUp { from { transform: translateY(6px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
