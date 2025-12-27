@@ -33,12 +33,14 @@ const Navbar = () => {
           {/* Navbar Links */}
           <nav className="ml-80 flex gap-5">
             {links.map((link) => {
-              // determine route only for the Assigning link; others remain non-routing or can be extended
+              // determine route for known pages; fallback to '#' for non-routed items
               const path =
                 link === "Home"
                   ? "/home"
                   : link === "Assigning & Tracking"
                   ? "/assigning"
+                  : link === "Reports"
+                  ? "/reports"
                   : "#";
 
               return (
