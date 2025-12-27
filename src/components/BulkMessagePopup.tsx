@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import SuccessBanner from "./ui/toastbar";
 import uploadIcon from "../assets/Icon feather-upload-cloud (1).svg";
 
 const BulkMessagePopup: React.FC = () => {
@@ -22,8 +23,34 @@ const BulkMessagePopup: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = React.useRef<number | null>(null);
+
+  const handleSend = () => {
+    setShowToast(true);
+    if (toastTimeoutRef.current) {
+      window.clearTimeout(toastTimeoutRef.current);
+    }
+    toastTimeoutRef.current = window.setTimeout(() => {
+      setShowToast(false);
+      toastTimeoutRef.current = null;
+    }, 4000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) window.clearTimeout(toastTimeoutRef.current);
+    };
+  }, []);
+
   return (
     <div className="fixed inset-0 z-50 flex h-[1080px] w-[1920px] items-center justify-center  bg-[#231F20] bg-opacity-70">
+      {showToast && (
+        <SuccessBanner
+          message={"Message sent to all the employees in talent pool"}
+          onClose={() => setShowToast(false)}
+        />
+      )}
       {/* Modal Container */}
       {/* <div
         className="relative w-[601px] h-[634px] rounded-[10px] bg-white shadow-[0_10px_25px_rgba(0,0,0,0.15)]"
@@ -44,15 +71,28 @@ const BulkMessagePopup: React.FC = () => {
         {/* Body */}
         <div className="px-[32px] py-[24px] space-y-[16px]">
           {/* Message */}
-          
-          
-<div className="relative h-[174px] w-[521px] rounded-[5px] border border-[#D7E0E3] bg-[#FFFFFF] p-[16px]">
-  <p className="absolute -top-[10px] left-[16px] bg-white px-[8px] text-left text-[14px] font-normal leading-[20px] text-[#7A7480]">
+          {/* <div className="mb-[24px] relative">
+            <label className="absolute left-[12px] top-0 -translate-y-1/2 bg-white px-[6px] text-[13px] font-normal leading-[17px] text-[#231F20]">
+              Message
+            </label>
+
+            <textarea
+            ref={textareaRef}
+            className="w-full resize-none rounded-[4px] border border-[#D7E0E3] bg-white px-[12px] py-[10px] text-[13px] leading-[20px] text-[#231F20] outline-none transition-colors focus:border-[#006E74]"
+            placeholder="Hey team,
+            welcome to talent pool. vRuhrish your skills and await your next opportunity! Meanwhile, please complete the tasks assigned to you and keep your professional details updated."
+            rows={4}
+            defaultValue=""
+            onInput={adjustHeight}
+/>
+          </div> */}
+          {/* <div className="h-[174px] w-[521px] rounded-[5px] border border-[#D7E0E3] bg-[#FFFFFF] p-[12px]">
+  <p className="mb-[6px] text-left text-[13px] font-normal leading-[20px] text-[#231F20]">
     Message
   </p>
   <textarea
   ref={textareaRef}
-  className="h-[137px] w-full resize-none border-none bg-transparent text-left text-[14px] leading-[20px] text-[#231f20] outline-none"
+  className="h-[137px] w-full resize-none border-none bg-transparent text-left text-[14px] leading-[20px] text-[#231F20] outline-none"
   placeholder="Hey team,
 welcome to talent pool. refurbish your skills and await your next opportunity! Meanwhile, please complete the tasks assigned to you and connect with fellow peers to expand your professional network.
 
@@ -61,17 +101,33 @@ Andrea Stephen"
   rows={4}
   defaultValue=""
   onInput={adjustHeight}
-  
-  />
-</div>
+/>
+</div> */}
+          <div className="relative h-[174px] w-[521px] rounded-[5px] border border-[#D7E0E3] bg-[#FFFFFF] p-[16px]">
+            <p className="absolute -top-[10px] left-[16px] bg-white px-[8px] text-left text-[13px] font-normal leading-[20px] text-[#7A7480]">
+              Message
+            </p>
+            <textarea
+              ref={textareaRef}
+              className="h-[137px] w-full resize-none border-none bg-transparent text-left text-[14px] leading-[20px] text-[#231f20] outline-none"
+              placeholder="Hey team,
+welcome to talent pool. refurbish your skills and await your next opportunity! Meanwhile, please complete the tasks assigned to you and connect with fellow peers to expand your professional network.
+
+Regards,
+Andrea Stephen"
+              rows={4}
+              defaultValue=""
+              onInput={adjustHeight}
+            />
+          </div>
 
           {/* Attach Documents */}
           <div>
-            <p className="mb-[6px] text-left  text-[16px] font-medium leading-[20px] text-[#231F20]">
+            <p className="mb-[6px] text-left  text-[13px] font-normal leading-[20px] text-[#231F20]">
               Attach Documents
             </p>
 
-            <p className="mb-[16px] text-left text-[14px] leading-[16px] text-[#7A7480]">
+            <p className="mb-[16px] text-left text-[11px] leading-[16px] text-[#7A7480]">
               Attach any documents if necessary
             </p>
 
@@ -86,24 +142,24 @@ Andrea Stephen"
                 />
               </div>
 
-              <p className="m-0 text-center text-[14px]">
-  Drag and drop to upload or{" "}
-  <br />
-  <span className="font-normal text-[14px] text-[#006E74]">
-    Browse
-  </span>
-</p>
+              <p className="m-0 text-center text-[13px]">
+                Drag and drop to upload or{" "}
+                <span className="font-normal text-[#006E74]">Browse</span>
+              </p>
             </div>
           </div>
         </div>
 
         {/* Footer */}
         <div className="flex justify-center gap-[16px] border-[#E5E5E5] px-[32px] py-[23px]">
-          <button className="h-[49px] w-[90px] cursor-pointer rounded-[4px] border border-[#231F20] bg-white text-[16px] font-normal text-[#231F20] transition-colors hover:bg-[#F5F5F5]">
+          <button className="h-[49px] w-[90px] cursor-pointer rounded-[4px] border border-[#231F20] bg-white text-[13px] font-normal text-[#231F20] transition-colors hover:bg-[#F5F5F5]">
             Cancel
           </button>
 
-          <button className="h-[49px] w-[78px] cursor-pointer rounded-[4px] border-none bg-[#006E74] text-[16px] font-normal text-white transition-colors hover:bg-[#005a5f]">
+          <button
+            onClick={handleSend}
+            className="h-[49px] w-[78px] cursor-pointer rounded-[4px] border-none bg-[#006E74] text-[13px] font-normal text-white transition-colors hover:bg-[#005a5f]"
+          >
             Send
           </button>
         </div>
