@@ -152,7 +152,7 @@ const ApprovalModal: React.FC<ApprovalModalProps> = ({
                 className="m-0 opacity-100"
                 style={{
                   fontFamily: 'Rubik',
-                  fontStyle: 'normal',
+                  fontStyle: 'Medium',
                   fontWeight: '500',
                   fontSize: '18px',
                   lineHeight: '22px',
@@ -199,7 +199,8 @@ const ApprovalModal: React.FC<ApprovalModalProps> = ({
                     top: '-10px',
                     left: '12px',
                     fontFamily: 'Rubik',
-                    fontSize: '12px',
+                    fontStyle: 'Regular',
+                    fontSize: '14px',
                     fontWeight: '400',
                     lineHeight: '14px',
                     color: '#808080',
