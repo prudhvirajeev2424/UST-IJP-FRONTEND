@@ -39,7 +39,7 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
         <div className="px-6 py-6 border-b">
           <div className="flex items-center justify-between">
             {/* <h2 className="text-lg font-semibold">Assign a new task</h2> */}
-            <h2 className="text-base font-semibold text-gray-800">
+            <h2 className="text-base font-semibold text-black-800">
               Assign a new task
             </h2>
 
