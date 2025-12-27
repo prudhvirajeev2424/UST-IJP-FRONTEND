@@ -1,0 +1,11 @@
+<svg id="external_request_icon" data-name="external request icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <g id="Ellipse_3705" data-name="Ellipse 3705" fill="#fff" stroke="#006e74" stroke-width="1">
+    <circle cx="11" cy="11" r="11" stroke="none"/>
+    <circle cx="11" cy="11" r="10.5" fill="none"/>
+  </g>
+  <g id="users" transform="translate(4.351 4.902)">
+    <path id="Path_41444" data-name="Path 41444" d="M10.672,19.065V17.71A2.577,2.577,0,0,0,8.254,15H3.418A2.577,2.577,0,0,0,1,17.71v1.355" transform="translate(-1 -6.87)" fill="none" stroke="#006e74" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <ellipse id="Ellipse_3704" data-name="Ellipse 3704" cx="2.426" cy="2.72" rx="2.426" ry="2.72" transform="translate(2.912)" fill="none" stroke="#006e74" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Path_41445" data-name="Path 41445" d="M20.231,15.238V13.883a2.674,2.674,0,0,0-1.813-2.622M16,3.13a2.674,2.674,0,0,1,1.818,2.625A2.674,2.674,0,0,1,16,8.381" transform="translate(-6.933 -3.042)" fill="none" stroke="#006e74" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>
