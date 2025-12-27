@@ -18,7 +18,7 @@ const UploadedDocuments = () => {
     <div className="bg-white rounded-lg shadow-sm border border-gray-100 w-[320px]">
       {/* Header */}
       <div className="px-4 py-3">
-        <h3 className="text-[15px] font-medium text-[#374151]">
+        <h3 className="text-[15px] font-medium text-[#010102]">
           Uploaded Documents
         </h3>
       </div>
@@ -46,7 +46,7 @@ const UploadedDocuments = () => {
                   className="w-5 h-5 flex-shrink-0 object-contain"
                 />
               )}
-              <span className="text-[14px] text-[#374151]">{doc.name}</span>
+              <span className="text-[14px] text-[#111317]">{doc.name}</span>
             </div>
           );
         })}
