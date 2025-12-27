@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Mail, Bell, X, Menu } from "lucide-react";
 import { useActiveRole } from "../context/ActiveRoleContext";
+
 import ProfilePic from "../assets/DP@2x.png";
+
 import Home from "../pages/home";
+import Assigning_and_tracking from "../pages/AssigningandTracking";
+import ApplicationsPage from "../pages/Applications_page";
+import ReportsPage from "../pages/ReportsPage";
 
 interface NavbarProps {
   role?: string | null;
@@ -37,15 +42,23 @@ const Navbar = ({ role }: NavbarProps) => {
     links = ["Home", "Applications"];
   }
 
-  // (we render pages in-place; paths are unused)
-
   const handleNavClick = (link: string) => {
     setActive(link);
     setMobileOpen(false);
   };
 
+  const pageMap: Record<string, ReactNode> = {
+    Home: <Home />,
+    Applications: <ApplicationsPage />,
+    "My Applications": <ApplicationsPage />,
+    Opportunities: <ApplicationsPage />,
+    "Assigning & Tracking": <Assigning_and_tracking />,
+    Reports: <ReportsPage />,
+  };
+
   return (
     <>
+      {/* NAVBAR */}
       <header className="fixed top-0 left-0 w-full z-50 bg-white h-16 shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
         <div className="relative max-w-7xl mx-auto h-full px-4 md:px-6">
           <div className="flex items-center h-full w-full">
@@ -79,8 +92,7 @@ const Navbar = ({ role }: NavbarProps) => {
 
             {/* RIGHT SIDE */}
             <div className="ml-auto flex items-center gap-3 md:gap-4 relative">
-              {/* Mail button (no effects) */}
-              <button className="hidden sm:block bg-transparent p-0 border-0 outline-none">
+              <button className="hidden sm:block">
                 <Mail size={22} className="text-gray-700" />
               </button>
 
@@ -154,7 +166,7 @@ const Navbar = ({ role }: NavbarProps) => {
                 />
               </div>
 
-              {/* Mobile menu */}
+              {/* Mobile Menu */}
               <button
                 className="md:hidden"
                 onClick={() => setMobileOpen(!mobileOpen)}
@@ -166,10 +178,9 @@ const Navbar = ({ role }: NavbarProps) => {
         </div>
       </header>
 
-      {/* Page content rendered by Navbar (so landing page only needs to render Navbar) */}
+      {/* PAGE CONTENT */}
       <div className="mt-16">
-        {active === "Home" && <Home />}
-        {active !== "Home" && (
+        {pageMap[active] ?? (
           <div className="p-6">
             <h2 className="text-lg font-semibold">{active}</h2>
             <p className="text-sm text-gray-600">

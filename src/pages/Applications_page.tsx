@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import NavigationBar from "../components/navbar";
+// NavigationBar is provided by the top-level Navbar wrapper when pages are rendered via the navbar
 import FilterTab from "../components/ui/FilterTab";
 import StatusTabs from "../components/ui/StatusTabs";
 import { ApplicationsTable } from "../components/ApplicationsTable";
 import RightSideProfileCards from "../components/RightSideProfileCards";
-import { mockApplications } from "../data/profiles";
+import { mockApplications } from "../data/ApplicationsMockdata";
 
 const ApplicationsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("All");
@@ -12,7 +12,7 @@ const ApplicationsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#F2F7F8]">
-      <NavigationBar />
+      {/* Page content assumes the top-level Navbar is rendered separately */}
 
       <StatusTabs
         activeTab={activeTab}

@@ -56,7 +56,7 @@ const LoginPage: React.FC = () => {
   if (activeRole) {
     return (
       <div className="min-h-screen bg-gray-50 pt-16">
-        {/* <Navbar role={activeRole} /> */}
+        <Navbar role={activeRole} />
         {/* <main className="p-6">
             <div className="max-w-4xl mx-auto">
               <h1 className="text-2xl font-semibold text-gray-800 mb-2">

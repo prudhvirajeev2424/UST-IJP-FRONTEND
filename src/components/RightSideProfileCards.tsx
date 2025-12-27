@@ -1,7 +1,7 @@
 // components/RightSideProfileCards.tsx
 import React from "react";
 import ProfileCard from "./ProfileCard";
-import { mockProfiles } from "../data/profiles";
+import { mockProfiles } from "../data/ApplicationsMockdata";
 
 const RightSideProfileCards: React.FC = () => {
   return (

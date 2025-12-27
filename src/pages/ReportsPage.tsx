@@ -1,34 +1,38 @@
-import type React from "react"
-import { useState } from "react"
-import type { Employee } from "../types/employee"
-import { mockEmployees } from "../data/mockEmployees"
-import Navbar from "../components/navbar"
-import Sidebar from "../components/TP_Manager/Reports/Sidebar"
-import EmployeeTable from "../components/TP_Manager/Reports/EmployeeTable"
-import Modal from "../components/ui/Modal"
-import MatchingJobsModal from "../components/TP_Manager/Reports/MatchingJobsModal"
+import type React from "react";
+import { useState } from "react";
+import type { Employee } from "../types/employee";
+import { mockEmployees } from "../data/mockEmployees";
+import Sidebar from "../components/TP_Manager/Reports/Sidebar";
+import EmployeeTable from "../components/TP_Manager/Reports/EmployeeTable";
+import Modal from "../components/ui/Modal";
+import MatchingJobsModal from "../components/TP_Manager/Reports/MatchingJobsModal";
 
 const ReportsPage: React.FC = () => {
-  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
+    null
+  );
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleViewMatchingJobs = (employee: Employee) => {
-    setSelectedEmployee(employee)
-    setIsModalOpen(true)
-  }
+    setSelectedEmployee(employee);
+    setIsModalOpen(true);
+  };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setSelectedEmployee(null)
-  }
+    setIsModalOpen(false);
+    setSelectedEmployee(null);
+  };
 
   return (
     <div className="w-full min-h-screen bg-[#f2f7f8]">
       <div className="flex flex-col h-screen">
-        <Navbar />
+        {/* Top-level Navbar is rendered by the main Navbar component; this page renders its body only */}
         <div className="flex flex-1 overflow-hidden">
           <Sidebar />
-          <main className="flex-1 overflow-auto" style={{ padding: "20px 24px" }}>
+          <main
+            className="flex-1 overflow-auto"
+            style={{ padding: "20px 24px" }}
+          >
             <div className="bg-white shadow-sm" style={{ borderRadius: "8px" }}>
               {/* Header section */}
               <div style={{ padding: "16px 20px 14px 20px" }}>
@@ -44,7 +48,13 @@ const ReportsPage: React.FC = () => {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <circle cx="16" cy="16" r="16" fill="#D7E0E3" opacity="0.5" />
+                        <circle
+                          cx="16"
+                          cy="16"
+                          r="16"
+                          fill="#D7E0E3"
+                          opacity="0.5"
+                        />
                         <g transform="translate(8, 9)">
                           <circle cx="3.2" cy="3.2" r="2" fill="#006E74" />
                           <circle cx="12.8" cy="3.2" r="2" fill="#006E74" />
@@ -76,27 +86,28 @@ const ReportsPage: React.FC = () => {
 
                     {/* Title and Subtitle */}
                     <div>
-                      <h1 
-                        style={{ 
+                      <h1
+                        style={{
                           fontSize: "16px",
                           fontWeight: "600",
                           color: "#231F20",
                           marginBottom: "2px",
                           lineHeight: "1.25",
-                          fontFamily: "Rubik, sans-serif"
+                          fontFamily: "Rubik, sans-serif",
                         }}
                       >
                         Talent Pool employee list
                       </h1>
-                      <p 
-                        style={{ 
+                      <p
+                        style={{
                           fontSize: "12px",
                           color: "#231F20",
                           lineHeight: "1.3",
-                          fontFamily: "Rubik, sans-serif"
+                          fontFamily: "Rubik, sans-serif",
                         }}
                       >
-                        View the list of employees present in fresher and global talent pool.
+                        View the list of employees present in fresher and global
+                        talent pool.
                       </p>
                     </div>
                   </div>
@@ -118,7 +129,7 @@ const ReportsPage: React.FC = () => {
                         paddingRight: "12px",
                         fontSize: "12px",
                         color: "#231F20",
-                        fontFamily: "Rubik, sans-serif"
+                        fontFamily: "Rubik, sans-serif",
                       }}
                     />
                   </div>
@@ -127,18 +138,26 @@ const ReportsPage: React.FC = () => {
 
               {/* Employee Table */}
               <div style={{ padding: "0 20px 20px 20px" }}>
-                <EmployeeTable employees={mockEmployees} onViewMatchingJobs={handleViewMatchingJobs} />
+                <EmployeeTable
+                  employees={mockEmployees}
+                  onViewMatchingJobs={handleViewMatchingJobs}
+                />
               </div>
             </div>
           </main>
         </div>
       </div>
-      
+
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        {selectedEmployee && <MatchingJobsModal employee={selectedEmployee} onClose={handleCloseModal} />}
+        {selectedEmployee && (
+          <MatchingJobsModal
+            employee={selectedEmployee}
+            onClose={handleCloseModal}
+          />
+        )}
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default ReportsPage
+export default ReportsPage;
