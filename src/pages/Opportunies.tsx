@@ -133,13 +133,97 @@
 // export default Opportunities;
 
 
+// import { useState } from "react";
+// import { Search } from "lucide-react";
+// import { Header } from "../components/employee/opportunities/Header";
+// import { Sidebar } from "../components/employee/opportunities/Sidebar";
+// import { JobCard } from "../components/employee/opportunities/JobCard";
+// import { JobListView } from "../components/employee/opportunities/JobListView";
+// import { NotificationPanel } from "../components/employee/opportunities/NotificationPanel";
+// import { mockJobs } from "../data/mockOpportunitiesData";
+
+// import sortImg from "../assets/sort.jpg";
+// import excelImg from "../assets/excel.jpg";
+// import gridDark from "../assets/gridd.jpg";
+// import gridLight from "../assets/grid_lite.jpg";
+// import listDark from "../assets/list.jpg";
+// import listLight from "../assets/list.jpg";
+
+// function Opportunities() {
+//   const [showNoti, setShowNoti] = useState(false);
+//   const [activeTab, setActiveTab] = useState("All");
+//   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+
+//   const filteredJobs = mockJobs.filter((job) => {
+//     if (activeTab === "Applied") return !!job.status;
+//     if (activeTab === "Shortlisted") return job.status === "Shortlisted";
+//     return true;
+//   });
+
+//   return (
+//     <div className="min-h-screen w-full bg-[#F2F7F8] font-rubik flex flex-col overflow-x-hidden">
+//       <Header onBellClick={() => setShowNoti(!showNoti)} />
+//       {showNoti && <NotificationPanel onClose={() => setShowNoti(false)} />}
+
+//       <div className="w-full max-w-[1700px] mx-auto px-[20px] pt-[30px] pb-[50px]">
+//         {/* 2x2 PRECISION GRID: Row 1 = Toolbar, Row 2 = Cards */}
+//         <div className="grid grid-cols-[300px_1fr] gap-x-[20px] gap-y-[25px] items-center">
+          
+//           {/* Row 1, Col 1 */}
+//           <h2 className="text-[18px] font-bold text-[#231F20] leading-none">Opportunities</h2>
+
+//           {/* Row 1, Col 2: Toolbar perfectly aligned */}
+//           <div className="flex items-center justify-between h-[45px]">
+//             <div className="flex gap-1.5">
+//               {["All", "My Opportunities", "Shortlisted", "Applied"].map((tab) => (
+//                 <button key={tab} onClick={() => setActiveTab(tab)}
+//                   className={`px-4 h-[32px] rounded-full text-[11px] font-medium transition-all flex items-center justify-center ${
+//                     activeTab === tab ? "bg-[#003C51] text-white" : "bg-[#E1E9EB] text-[#555]"
+//                   }`}
+//                 > {tab} </button>
+//               ))}
+//             </div>
+
+//             <div className="flex items-center gap-3">
+//               <div className="relative">
+//                 <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#C2BCBE]" />
+//                 <input type="text" placeholder="Search" className="pl-9 pr-4 h-[38px] w-[180px] border border-[#D7E0E3] rounded-md outline-none text-[12px] bg-white" />
+//               </div>
+//               <div className="w-9 h-9 bg-white border border-[#D7E0E3] rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-50"><img src={sortImg} alt="S" className="w-4" /></div>
+//               <div className="w-9 h-9 bg-white border border-[#D7E0E3] rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-50"><img src={excelImg} alt="E" className="w-4" /></div>
+//               <div className="flex bg-white border border-[#D7E0E3] rounded-md h-9 overflow-hidden">
+//                 <button className={`w-9 flex items-center justify-center border-r border-[#D7E0E3] ${viewMode === "grid" ? "bg-[#F8FDFE]" : ""}`} onClick={() => setViewMode("grid")}><img src={viewMode === "grid" ? gridDark : gridLight} alt="G" className="w-[14px]" /></button>
+//                 <button className={`w-9 flex items-center justify-center ${viewMode === "list" ? "bg-[#F8FDFE]" : ""}`} onClick={() => setViewMode("list")}><img src={viewMode === "list" ? listDark : listLight} alt="L" className="w-[14px]" /></button>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Row 2, Col 1 */}
+//           <div className="self-start"><Sidebar activeTab={activeTab} /></div>
+
+//           {/* Row 2, Col 2 */}
+//           <div className="self-start">
+//             {viewMode === "grid" ? (
+//               <div className="grid grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-4">
+//                 {filteredJobs.map((job, index) => <JobCard key={index} job={job} />)}
+//               </div>
+//             ) : (
+//               <JobListView jobs={filteredJobs} />
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Opportunities;
+
 import { useState } from "react";
 import { Search } from "lucide-react";
-import { Header } from "../components/employee/opportunities/Header";
 import { Sidebar } from "../components/employee/opportunities/Sidebar";
 import { JobCard } from "../components/employee/opportunities/JobCard";
 import { JobListView } from "../components/employee/opportunities/JobListView";
-import { NotificationPanel } from "../components/employee/opportunities/NotificationPanel";
 import { mockJobs } from "../data/mockOpportunitiesData";
 
 import sortImg from "../assets/sort.jpg";
@@ -150,7 +234,6 @@ import listDark from "../assets/list.jpg";
 import listLight from "../assets/list.jpg";
 
 function Opportunities() {
-  const [showNoti, setShowNoti] = useState(false);
   const [activeTab, setActiveTab] = useState("All");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
@@ -161,33 +244,33 @@ function Opportunities() {
   });
 
   return (
-    <div className="min-h-screen w-full bg-[#F2F7F8] font-rubik flex flex-col overflow-x-hidden">
-      <Header onBellClick={() => setShowNoti(!showNoti)} />
-      {showNoti && <NotificationPanel onClose={() => setShowNoti(false)} />}
-
-      <div className="w-full max-w-[1700px] mx-auto px-[20px] pt-[30px] pb-[50px]">
-        {/* 2x2 PRECISION GRID: Row 1 = Toolbar, Row 2 = Cards */}
-        <div className="grid grid-cols-[300px_1fr] gap-x-[20px] gap-y-[25px] items-center">
+    <div className="w-full bg-[#F2F7F8] font-rubik">
+      <div className="max-w-[1600px] mx-auto px-[25px] pt-[25px] pb-[50px]">
+        
+        {/* Precision 2x2 Grid: Col 1 is exactly 280px */}
+        <div className="grid grid-cols-[280px_1fr] gap-x-[30px] gap-y-[20px] items-center">
           
-          {/* Row 1, Col 1 */}
-          <h2 className="text-[18px] font-bold text-[#231F20] leading-none">Opportunities</h2>
+          {/* Row 1, Col 1: Title */}
+          <h2 className="text-[18px] font-bold text-[#231F20] leading-none whitespace-nowrap">
+            Opportunities
+          </h2>
 
-          {/* Row 1, Col 2: Toolbar perfectly aligned */}
-          <div className="flex items-center justify-between h-[45px]">
-            <div className="flex gap-1.5">
+          {/* Row 1, Col 2: Toolbar */}
+          <div className="flex items-center justify-between h-[45px] min-w-0">
+            <div className="flex gap-1.5 shrink-0">
               {["All", "My Opportunities", "Shortlisted", "Applied"].map((tab) => (
                 <button key={tab} onClick={() => setActiveTab(tab)}
-                  className={`px-4 h-[32px] rounded-full text-[11px] font-medium transition-all flex items-center justify-center ${
+                  className={`px-4 h-[32px] rounded-full text-[11px] font-medium transition-all flex items-center justify-center whitespace-nowrap ${
                     activeTab === tab ? "bg-[#003C51] text-white" : "bg-[#E1E9EB] text-[#555]"
                   }`}
                 > {tab} </button>
               ))}
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 shrink-0">
               <div className="relative">
-                <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#C2BCBE]" />
-                <input type="text" placeholder="Search" className="pl-9 pr-4 h-[38px] w-[180px] border border-[#D7E0E3] rounded-md outline-none text-[12px] bg-white" />
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#C2BCBE]" />
+                <input type="text" placeholder="Search" className="pl-9 pr-4 h-[36px] w-[180px] border border-[#D7E0E3] rounded-md outline-none text-[12px] bg-white focus:border-[#006E74]" />
               </div>
               <div className="w-9 h-9 bg-white border border-[#D7E0E3] rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-50"><img src={sortImg} alt="S" className="w-4" /></div>
               <div className="w-9 h-9 bg-white border border-[#D7E0E3] rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-50"><img src={excelImg} alt="E" className="w-4" /></div>
@@ -198,19 +281,22 @@ function Opportunities() {
             </div>
           </div>
 
-          {/* Row 2, Col 1 */}
-          <div className="self-start"><Sidebar activeTab={activeTab} /></div>
-
-          {/* Row 2, Col 2 */}
+          {/* Row 2, Col 1: Sidebar (Matched to 280px) */}
           <div className="self-start">
+            <Sidebar activeTab={activeTab} />
+          </div>
+
+          {/* Row 2, Col 2: Job Cards (min-w-0 prevents overlap) */}
+          <div className="self-start min-w-0">
             {viewMode === "grid" ? (
-              <div className="grid grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-4">
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
                 {filteredJobs.map((job, index) => <JobCard key={index} job={job} />)}
               </div>
             ) : (
               <JobListView jobs={filteredJobs} />
             )}
           </div>
+
         </div>
       </div>
     </div>

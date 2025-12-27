@@ -97,7 +97,6 @@
 //   );
 // };
 
-
 import { useState } from "react";
 import { MapPin } from "lucide-react";
 import type { Job } from "../../../types/application";
@@ -113,46 +112,39 @@ export const JobCard = ({ job }: { job: Job }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* 1. HEADER (SO#) */}
-      <div className={`px-[15px] pt-[20px] pb-[12px] transition-colors duration-500 ease-in-out ${isHovered ? "bg-[#555555]" : "bg-white"}`}>
-        <span className={`text-[13px] leading-tight font-normal uppercase transition-colors duration-500 ease-in-out block ${isHovered ? "text-white" : "text-[#006E74]"}`}>
+      <div className={`px-[15px] pt-[15px] pb-[10px] transition-colors duration-500 ${isHovered ? "bg-[#555555]" : "bg-white"}`}>
+        <span className={`text-[13.5px] font-normal uppercase transition-colors duration-500 block ${isHovered ? "text-white" : "text-[#006E74]"}`}>
           {job.id}
         </span>
       </div>
 
       <div className="flex-1 relative bg-white">
-        {/* --- DEFAULT VIEW --- */}
-        <div className={`absolute inset-0 px-[15px] pb-[20px] transition-opacity duration-500 ease-in-out ${isHovered ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-          <h3 className="text-[13px] leading-tight font-medium text-[#231F20] mb-[4px]">{job.role}</h3>
-          <p className="text-[12px] text-[#7A7480] mb-[6px]">{job.band}</p>
-          <div className="flex items-center gap-1 text-[12px] text-[#7A7480] mb-[10px]">
+        <div className={`absolute inset-0 px-[15px] pb-[15px] transition-opacity duration-500 ease-in-out ${isHovered ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+          <h3 className="text-[13px] font-medium text-[#231F20] mb-[3px] truncate">{job.role}</h3>
+          <p className="text-[11.5px] text-[#7A7480] mb-[5px]">{job.band}</p>
+          <div className="flex items-center gap-1 text-[11.5px] text-[#7A7480] mb-[8px]">
             <MapPin size={11} strokeWidth={2.5} />
             <span>{job.location}</span>
           </div>
 
           {job.status && (
-            <span className={`px-2 py-0.5 rounded-[3px] text-[10px] font-bold capitalize inline-block ${
+            <span className={`px-2 py-0.5 rounded-[3px] text-[9.5px] font-bold capitalize inline-block ${
               job.status === "Shortlisted" ? "bg-[#E6F9F3] text-[#01B27C]" : 
               job.status === "Actioned" ? "bg-[#FFF9E6] text-[#FFBF00]" : "bg-[#FFEBEB] text-[#FC6A59]"
-            }`}>
-              {job.status}
-            </span>
+            }`}> {job.status} </span>
           )}
 
-          <div className="absolute bottom-[12px] left-[20px] right-[20px] flex items-center gap-2">
-            <span className="bg-[#F2F7F8] px-2.5 py-1 rounded-full text-[11px] text-[#231F20]">JavaScript</span>
-            <span className="bg-[#F2F7F8] px-2.5 py-1 rounded-full text-[11px] text-[#231F20]">Python</span>
-            <span className="border border-[#7A7480] px-1.5 py-0.5 rounded-full text-[11px] text-[#7A7480] font-medium">+2</span>
+          <div className="absolute bottom-[15px] left-[15px] right-[15px] flex items-center gap-1.5">
+            <span className="bg-[#F2F7F8] px-2 py-0.5 rounded-full text-[10.5px] text-[#231F20]">JS</span>
+            <span className="bg-[#F2F7F8] px-2 py-0.5 rounded-full text-[10.5px] text-[#231F20]">Python</span>
+            <span className="border border-[#7A7480] px-1.5 rounded-full text-[10.5px] text-[#7A7480] font-medium">+2</span>
           </div>
         </div>
 
-        {/* --- HOVER VIEW --- */}
-        <div className={`absolute inset-0 px-[15px] pb-[20px] pt-[8px] bg-white transition-opacity duration-500 ease-in-out ${isHovered ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-          <p className="text-[12px] leading-[18px] text-[#231F20] font-normal line-clamp-6">
-            {job.description}
-          </p>
-          <button className="absolute bottom-[20px] left-[20px] text-[#0097AC] font-bold text-[12px] flex items-center gap-1 hover:text-black">
-            View in Detail <span>→</span>
+        <div className={`absolute inset-0 px-[15px] pb-[15px] pt-[5px] bg-white transition-opacity duration-500 ease-in-out ${isHovered ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+          <p className="text-[11px] leading-[16px] text-[#231F20] font-normal line-clamp-6">{job.description}</p>
+          <button className="absolute bottom-[15px] left-[15px] text-[#0097AC] font-bold text-[11.5px] flex items-center gap-1 hover:text-black">
+            View Detail <span>→</span>
           </button>
         </div>
       </div>
