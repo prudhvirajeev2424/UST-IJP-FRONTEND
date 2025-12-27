@@ -8,7 +8,8 @@ import { mockApplications } from "../data/profiles";
 
 const ApplicationsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("All");
-  const [view, setView] = useState<"table" | "kanban">("table");
+  // default to kanban so clicking Applications shows Kanban view first
+  const [view, setView] = useState<"table" | "kanban">("kanban");
   const [isCompact, setIsCompact] = useState<boolean>(false);
   const initialHeightRef = useRef<number | null>(null);
 
