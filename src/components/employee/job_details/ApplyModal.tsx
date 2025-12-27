@@ -7,7 +7,7 @@ import {
   DialogTitle,
   Button,
   Textarea,
-} from "../ui";
+} from "../../ui";
 
 interface AttachedFile {
   name: string;
@@ -25,7 +25,6 @@ const ApplyModal = ({
   open,
   onOpenChange,
   onConfirm,
-  jobTitle,
 }: ApplyModalProps) => {
   const [coverLetter, setCoverLetter] = useState(
     `I am interested in joining the [Project Name] team at [Company Name]. With experience in [Key Skills], I have contributed to [mention relevant achievement]. I believe my expertise aligns well with the project's goals and would love the opportunity to contribute.
@@ -73,7 +72,7 @@ Looking forward to discussing this further.`
             <div className="relative">
               <Textarea
                 value={coverLetter}
-                onChange={(e) => setCoverLetter(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setCoverLetter(e.target.value)}
                 className="min-h-[100px] resize-none text-sm border-border focus:border-primary"
                 placeholder="Write your cover letter..."
               />

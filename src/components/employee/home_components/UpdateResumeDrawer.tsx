@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { X, Upload } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { X } from 'lucide-react';
 import { Button } from '../../ui/Button';
 import uploadSvg from '../../../assets/upload_svg.svg';
 
@@ -12,40 +12,7 @@ interface UpdateResumeDrawerProps {
 export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeDrawerProps) {
   const [attachedFile, setAttachedFile] = useState<string | null>('Sarah Anderson - Resume.docx');
   const [isDragging, setIsDragging] = useState(false);
-  const [rect, setRect] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
   const touchStartRef = useRef<number | null>(null);
-
-  // compute position of the ResumeDetailModal and update rect when drawer opens
-  useEffect(() => {
-    if (!isOpen) {
-      setRect(null);
-      return;
-    }
-    const updateRect = () => {
-      const el = document.getElementById('resume-detail-modal');
-      if (el) {
-        const r = el.getBoundingClientRect();
-        setRect({
-          top: Math.round(r.top + window.scrollY),
-          left: Math.round(r.left + window.scrollX),
-          width: Math.round(r.width),
-          height: Math.round(r.height),
-        });
-      } else {
-        // fallback to previous fixed values if modal not present
-        setRect({ top: 540, left: 432, width: 1057, height: 540 });
-      }
-    };
-
-    updateRect();
-    // update on resize/scroll to keep alignment
-    window.addEventListener('resize', updateRect);
-    window.addEventListener('scroll', updateRect, true);
-    return () => {
-      window.removeEventListener('resize', updateRect);
-      window.removeEventListener('scroll', updateRect, true);
-    };
-  }, [isOpen]);
 
   // forward wheel delta to the modal's scroll container
   const forwardWheelToModal = (deltaY: number) => {
@@ -92,7 +59,7 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
     }
   };
 
-  
+
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -109,7 +76,7 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
   return (
     <div className="fixed inset-0 z-[60]">
       {/* Overlay (below drawer) */}
-      <div 
+      <div
         className="fixed inset-0 bg-black/50"
         onClick={onClose}
         style={{ zIndex: 60 }}
@@ -117,7 +84,7 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
         onTouchStart={handleOverlayTouchStart}
         onTouchMove={handleOverlayTouchMove}
       />
-      
+
       {/* Drawer aligned to ResumeDetailModal when open (solid white panel) */}
       <div
         className="fixed left-1/2 top-[480px] bottom-0 -translate-x-1/2 w-[1000px] bg-white shadow-xl z-50 flex flex-col"
@@ -140,11 +107,11 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
             to { transform: translateX(-50%) translateY(0); }
           }
         `}</style>
-        
+
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-3 border-b border-border">
           <h2 className="text-lg font-semibold text-foreground">Update resume?</h2>
-          <button 
+          <button
             onClick={onClose}
             className="p-2 hover:bg-muted rounded-lg transition-colors"
             aria-label="Close drawer"
@@ -156,15 +123,14 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
         {/* Content - ensure left-aligned text */}
         <div className="p-6 space-y-1 text-left">
           <p className="text-sm text-muted-foreground">Upload your resume in a PDF format</p>
-          
+
           {/* Drop Zone */}
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`rounded-lg p-6 transition-colors flex flex-col items-center justify-center text-center ${
-              isDragging ? 'border-primary' : ''
-            }`}
+            className={`rounded-lg p-6 transition-colors flex flex-col items-center justify-center text-center ${isDragging ? 'border-primary' : ''
+              }`}
             style={{
               minHeight: 80,
               border: '1px dashed var(---d7e0e3)',
@@ -199,12 +165,12 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
             <div className="flex items-center gap-1">
               <div className="w-8 h-5 bg-red-100 rounded flex items-center justify-center">
                 <svg viewBox="0 0 24 24" className="w-5 h-5 text-red-600" fill="currentColor">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-                  <path d="M14 2v6h6" fill="none" stroke="currentColor" strokeWidth="2"/>
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
+                  <path d="M14 2v6h6" fill="none" stroke="currentColor" strokeWidth="2" />
                 </svg>
               </div>
               <span className="text-sm text-foreground flex-1">{attachedFile}</span>
-              <button 
+              <button
                 onClick={handleRemoveFile}
                 className="p-1 hover:bg-muted rounded transition-colors"
                 aria-label="Remove file"

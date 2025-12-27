@@ -1,20 +1,28 @@
 import ApplicationStatus from '../../components/Wfm/Home/ApplicationStatus'
 import RecentActivities from '../../components/Wfm/Home/RecentActivities'
+import ProfilesReceivedSection from '../../components/Wfm/Home/ProfilesReceivedSection'
 
 const WfmHome = () => {
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl p-6 flex justify-between">
-        {/* Left side */}
-        <div className="max-w-xs">
-          <ApplicationStatus />
-        </div>
+      <main className="max-w-[1800px] mx-auto p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr_360px] gap-8">
+          {/* Left Column - Application Status */}
+          <div className="flex flex-col gap-6">
+            <ApplicationStatus />
+          </div>
 
-        {/* Right side */}
-        <div className="ml-4 w-1/3">
-          <RecentActivities />
+          {/* Middle Column - Profiles Received */}
+          <div className="flex-grow">
+            <ProfilesReceivedSection />
+          </div>
+
+          {/* Right Column - Recent Activities */}
+          <div className="flex flex-col gap-6">
+            <RecentActivities />
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   )
 }

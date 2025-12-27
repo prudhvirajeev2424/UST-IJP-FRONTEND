@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { X, Upload, Download } from 'lucide-react';
 import { UpdateResumeDrawer } from './UpdateResumeDrawer';
 
@@ -91,29 +91,29 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
     onUpdateClick?.();
   };
 
-	// move hook here so it's always called (avoids conditional hook rule)
-	useEffect(() => {
-		if (!isOpen) return;
-		const prev = document.body.style.overflow;
-		document.body.style.overflow = 'hidden';
-		return () => { document.body.style.overflow = prev; };
-	}, [isOpen]);
+  // move hook here so it's always called (avoids conditional hook rule)
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, [isOpen]);
 
-	// runtime asset URLs — place the SVGs under public/assets/
-	const PUBLIC = '';
-	const certIconPath = `${PUBLIC}${encodeURI('/assets/certificate_svg.svg')}`;
-	const eduIconPath = `${PUBLIC}${encodeURI('/assets/education_svg.svg')}`;
-	const accoladeIconPath = `${PUBLIC}${encodeURI('/assets/accolades_svg.svg')}`;
-	const quoteIconPath = `${PUBLIC}${encodeURI('/assets/Icon metro-quote.svg')}`;
-	const profileIconPath = `${PUBLIC}${encodeURI('/assets/profile_svg.svg')}`;
+  // runtime asset URLs — place the SVGs under public/assets/
+  const PUBLIC = '';
+  const certIconPath = `${PUBLIC}${encodeURI('/assets/certificate_svg.svg')}`;
+  const eduIconPath = `${PUBLIC}${encodeURI('/assets/education_svg.svg')}`;
+  const accoladeIconPath = `${PUBLIC}${encodeURI('/assets/accolades_svg.svg')}`;
+  const quoteIconPath = `${PUBLIC}${encodeURI('/assets/Icon metro-quote.svg')}`;
+  const profileIconPath = `${PUBLIC}${encodeURI('/assets/profile_svg.svg')}`;
 
-	// split skills into two rows (first 4, next 4)
-	const topSkills = resumeData.skills.slice(0, 4);
-	const bottomSkills = resumeData.skills.slice(4, 8);
+  // split skills into two rows (first 4, next 4)
+  const topSkills = resumeData.skills.slice(0, 4);
+  const bottomSkills = resumeData.skills.slice(4, 8);
 
-	if (!isOpen) return null;
+  if (!isOpen) return null;
 
-	return (
+  return (
     <div className="fixed inset-0 z-50">
       <style>{`
         @keyframes slideUp {
@@ -132,13 +132,13 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
           scrollbar-width: none;  /* Firefox */
         }
       `}</style>
-      
+
       {/* Overlay */}
-      <div 
+      <div
         className="fixed inset-0 bg-black/30"
         onClick={onClose}
       />
-      
+
       {/* Modal: top gap 80px, flush to bottom; width 1000px; height = calc(100vh - 80px) */}
       <div
         id="resume-detail-modal"
@@ -157,20 +157,20 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
           <h2 className="text-lg font-semibold text-foreground">Introduction</h2>
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">Applied on {resumeData.appliedDate}</span>
-            <button 
+            <button
               onClick={openDrawer}
               className="p-2 hover:bg-muted rounded-md transition-colors"
               aria-label="Upload resume"
             >
               <Upload className="w-5 h-5 text-muted-foreground" />
             </button>
-            <button 
+            <button
               className="p-2 hover:bg-muted rounded-md transition-colors"
               aria-label="Download resume"
             >
               <Download className="w-5 h-5 text-muted-foreground" />
             </button>
-            <button 
+            <button
               onClick={onClose}
               className="p-2 hover:bg-muted rounded-md transition-colors"
               aria-label="Close modal"
@@ -191,9 +191,9 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
           <section>
             <h3 className="text-base font-semibold text-foreground mb-1">Professional Experience</h3>
             <p className="text-sm text-muted-foreground mb-4">Total {resumeData.totalExperience} as Java Developer</p>
-            
+
             <div className="space-y-6">
-              {resumeData.experiences.map((exp, index) => {
+              {resumeData.experiences.map((exp) => {
                 return (
                   <div key={exp.id} className="flex gap-4">
                     {/* timeline column with vertical line (line drawn by CSS ::before) */}
@@ -265,7 +265,7 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
               ))}
             </div>
           </section>
-          
+
           {/* Accolades */}
           <section>
             <h3 className="text-base font-semibold text-foreground mb-4">Accolades</h3>
@@ -293,7 +293,7 @@ export function ResumeDetailModal({ isOpen, onClose, onUpdateClick }: ResumeDeta
                   </div>
                 ))}
               </div>
-              
+
               <div className="skill-grid">
                 {bottomSkills.map((skill) => (
                   <div key={skill} className="skill-chip" role="listitem">
