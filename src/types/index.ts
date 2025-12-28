@@ -11,4 +11,11 @@ export type Profile = {
   avatar?: string;
 };
 
+export type CandidateStatus =
+  | "PENDING_WFM"
+  | "WFM_APPROVED"
+  | "SELECTED"
+  | "ALLOCATED"
+  | "REJECTED";
+
 export default {} as unknown as {};

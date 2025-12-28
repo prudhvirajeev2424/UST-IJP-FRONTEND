@@ -1,10 +1,17 @@
 import React from "react";
-// ProfileCard is used inside ProfilesReceived; no direct import needed here
+import { useActiveRole } from "../context/ActiveRoleContext";
+import EmpHome from "./layout/EmpHome";
+import WfmHome from "./layout/WfmHome";
+import ProfileCard from "../components/tp_manager/home/ProfileCard";
 import ApplicationStatus from "../components/tp_manager/home/ApplicationStatus";
 import RecentActivities from "../components/tp_manager/home/RecentActivities";
+import type { Profile } from "../types";
+import { profiles } from "../data/profiles";
 import ProfilesReceived from "../components/tp_manager/home/ProfilesReceived";
-// profiles data and Profile type are used inside ProfilesReceived
-const Home: React.FC = () => {
+
+const sampleProfiles: Profile[] = profiles;
+
+const TpManagerHome: React.FC = () => {
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-gray-50 pt-6 pb-8 scrollbar-hide overflow-auto">
       <div className="max-w-7xl mx-auto w-full px-4">
@@ -29,4 +36,13 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+const home: React.FC = () => {
+  const { activeRole } = useActiveRole();
+
+  if (activeRole === "Employee") return <EmpHome />;
+  if (activeRole === "WFM") return <WfmHome />;
+  // default to TP Manager view
+  return <TpManagerHome />;
+};
+
+export default home;
