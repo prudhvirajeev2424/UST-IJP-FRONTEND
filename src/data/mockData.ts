@@ -6,7 +6,7 @@ import  type {Project} from '../types/project';
 export const candidateData: Candidate = {
   id: '1',
   name: 'Zamira Peterson',
-  position: 'Developer III - B3',
+  position: 'Developer  - B3',
   phone: '+91 9876543210',
   email: 'zamira.peterson@ust.com',
   avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop',
@@ -96,13 +96,11 @@ export const skills: Skill[] = [
 export const accolades: Accolade[] = [
   {
     id: '1',
-    title: 'Employee of the Year 2023',
-    description: 'Recognized for outstanding performance and contributions'
+    title: 'Employee of the Year 2023'
   },
   {
     id: '2',
-    title: 'Best Innovation Award 2022',
-    description: 'For developing a scalable microservices architecture'
+    title: 'Best Innovation Award 2022'
   }
 ];
 

@@ -1,18 +1,7 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
-import Home from "./Home";
- 
-// Create context for active role
-export const ActiveRoleContext = createContext<{
-  activeRole: string | null;
-  setActiveRole: (role: string | null) => void;
-}>({
-  activeRole: null,
-  setActiveRole: () => {},
-});
- 
-// Hook to use active role in other components
-export const useActiveRole = () => useContext(ActiveRoleContext);
+import { ActiveRoleContext } from "../context/ActiveRoleContext";
+import { ShortlistProvider } from "../components/tp_manager/application/context/ShortlistContext";
  
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -67,18 +56,14 @@ const LoginPage: React.FC = () => {
   if (activeRole) {
     return (
       <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
-        <>
-          <Navbar role={activeRole ?? "Employee"} />
- 
-          {/* Home page under the fixed navbar */}
-          <div className="pt-10">
-            <Home />
-          </div>
-        </>
+        <ShortlistProvider>
+          {/* Navbar handles rendering the active page (Home / Applications / etc.) */}
+          <Navbar />
+        </ShortlistProvider>
       </ActiveRoleContext.Provider>
     );
   }
- 
+
   return (
     <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
       <div className="h-screen w-screen flex items-center justify-center bg-[#008080] overflow-hidden">
