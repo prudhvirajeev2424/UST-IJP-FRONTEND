@@ -1,5 +1,5 @@
 import React from "react";
-import type { Application } from "../types/application";
+import type { Application } from "../types";
 import { User } from "lucide-react";
 
 /**

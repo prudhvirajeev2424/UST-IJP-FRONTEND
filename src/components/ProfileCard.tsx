@@ -1,7 +1,7 @@
 // components/ProfileCard.tsx
 import React, { useState } from "react";
 import DP from "../assets/DP.png";
-import type { Profile } from "../types/Profile";
+import type { Profile } from "../types";
 
 /**
  * ProfileCard
