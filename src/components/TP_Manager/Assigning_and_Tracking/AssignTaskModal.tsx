@@ -33,9 +33,19 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
         aria-hidden
       />
 
-      {/* panel */}
-      {/* <div className="relative z-10 w-full max-w-[480px] h-screen overflow-auto bg-white rounded-l-lg shadow-lg"> */}
-      <div className="relative z-10 w-[420px] h-[90vh] overflow-auto bg-white rounded-xl shadow-xl mr-6">
+      {/* panel - fixed to viewport (anchored to right) so it doesn't jump while zooming */}
+      <div
+        className="fixed z-10 overflow-auto shadow-xl"
+        style={{
+          right: "60px", // positions roughly equivalent to left:1342px on a 1920px-wide viewport
+          top: "80px",
+          width: "518px",
+          height: "850px",
+          backgroundColor: "#FFFFFF",
+          borderRadius: "10px",
+          opacity: 1,
+        }}
+      >
         <div className="px-6 py-6 border-b">
           <div className="flex items-center justify-between">
             {/* <h2 className="text-lg font-semibold">Assign a new task</h2> */}
