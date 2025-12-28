@@ -76,7 +76,7 @@ const Assigning_and_tracking: React.FC = () => {
     <>
       {/* Scroll wrapper: remaining viewport below the main Navbar */}
       <div className="h-[calc(100vh-64px)] overflow-auto scrollbar-thin-4 bg-[#F2F7F8]">
-        <div className="max-w-[1600px] mx-auto px-6 py-6 relative ">
+        <div className="max-w-[1920px] mx-auto px-6 py-6 relative ">
           {/* ================= TOP BAR ================= */}
           <div className="flex items-start justify-between gap-6 mb-6">
             {/* LEFT */}
@@ -138,16 +138,22 @@ const Assigning_and_tracking: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-start gap-6">
+          <div
+            className="
+    grid
+    grid-cols-[1fr_auto]
+    gap-x-[40.5px]
+  "
+          >
             {/* TASK CARDS (LEFT) */}
             <div
               className="
-      flex-1
-      grid
-      gap-5
-      grid-cols-[repeat(auto-fill,minmax(280px,1fr))]
-      justify-center
-    "
+    grid
+    grid-cols-[repeat(auto-fit,320px)]
+    gap-x-[40.5px]
+    gap-y-[16px]
+    justify-start
+  "
             >
               {filteredTasks.map((task) => (
                 <TaskCard key={task.id} task={task} />
@@ -155,13 +161,12 @@ const Assigning_and_tracking: React.FC = () => {
             </div>
 
             {/* STATS SUMMARY (RIGHT) */}
-            {/* <div className="sticky top-6 w-[360px] flex-shrink-0"> */}
-            <StatsSummary
-              completedCount={stats.completed}
-              inProgressCount={stats.inProgress}
-              notStartedCount={stats.notStarted}
-            />
-            {/* </div> */}
+              <StatsSummary
+                completedCount={stats.completed}
+                inProgressCount={stats.inProgress}
+                notStartedCount={stats.notStarted}
+              />
+
           </div>
         </div>
       </div>
