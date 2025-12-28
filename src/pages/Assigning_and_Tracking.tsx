@@ -50,7 +50,7 @@ const Assigning_and_Tracking: React.FC = () => {
       className="min-h-screen bg-[#F2F7F8] text-[#231F20] font-rubik overflow-y-scroll"
       style={{ scrollbarGutter: "stable" }}
     >
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="p-10 flex gap-10 max-w-[1800px] mx-auto">
         <Left_Side_Task_Tracker 

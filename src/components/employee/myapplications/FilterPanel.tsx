@@ -3,7 +3,7 @@ import { Calendar, ChevronDown } from 'lucide-react';
 
 const FilterPanel: React.FC = () => {
   return (
-    <div className="w-[420px] h-[562px] flex-shrink-0">
+    <div className="w-[320px] h-[562px] flex-shrink-0">
       <div className="rounded-lg bg-white px-6 py-5 shadow-sm border border-gray-100">
         {/* Header */}
         <div className="mb-5 flex items-center justify-between">

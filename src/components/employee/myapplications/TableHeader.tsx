@@ -2,24 +2,24 @@ import React from 'react';
 
 const TableHeader: React.FC = () => {
   const columns = [
-    'SO ID',
-    'Role',
-    'Account',
-    'Applied Date',
-    'Hiring Manager',
-    'Required Skills',
-    'Status',
+    { label: 'SO ID', width: 'w-[100px]' },
+    { label: 'Role', width: 'w-[180px]' },
+    { label: 'Account', width: 'w-[100px]' },
+    { label: 'Applied Date', width: 'w-[110px]' },
+    { label: 'Hiring Manager', width: 'w-[140px]' },
+    { label: 'Required Skills', width: 'w-[140px]' },
+    { label: 'Status', width: 'w-[120px]' },
   ];
 
   return (
-    <thead className="border-b border-[#E5E7EB] bg-[#E8ECED]">
+    <thead className="bg-[#E8ECED]">
       <tr>
         {columns.map((column) => (
           <th
-            key={column}
-            className="px-4 py-3 text-left text-[13px] font-medium text-[#7A7480] leading-tight tracking-normal"
+            key={column.label}
+            className={`${column.width} px-3 py-3 text-left text-[12px] font-medium text-[#7A7480] leading-tight border-b border-[#E8EBED]`}
           >
-            {column}
+            {column.label}
           </th>
         ))}
       </tr>

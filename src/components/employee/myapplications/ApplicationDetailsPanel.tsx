@@ -20,7 +20,7 @@ const ApplicationDetailsPanel: React.FC<ApplicationDetailsPanelProps> = ({
       />
 
       {/* Side Panel */}
-      <div className="fixed right-0 top-0 bottom-0 w-[800px] bg-white shadow-2xl z-50 overflow-y-auto rounded-l-2xl">
+      <div className="fixed right-0 top-0 bottom-0 w-[750px] bg-white shadow-2xl z-50 overflow-y-auto rounded-l-2xl">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-tl-2xl">
           <h2 className="text-[18px] font-medium text-[#231F20] leading-tight">
@@ -108,7 +108,7 @@ const ApplicationDetailsPanel: React.FC<ApplicationDetailsPanelProps> = ({
                 {['Java', 'Selenium', 'C++', 'Python'].map((skill) => (
                   <span
                     key={skill}
-                    className="inline-flex items-center rounded-md bg-[#ECEEE8] px-3 py-1.5 text-[13px] font-normal text-ijp-near-black leading-tight"
+                    className="inline-flex items-center rounded bg-[#ECEEE8] px-3 py-1.5 text-[13px] font-normal text-ijp-near-black leading-tight"
                   >
                     {skill}
                   </span>
