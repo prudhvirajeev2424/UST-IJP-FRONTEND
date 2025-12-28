@@ -3,7 +3,7 @@ import { mockNotifications } from "../../../data/mockOpportunitiesData";
 
 export const NotificationPanel = ({ onClose }: { onClose: () => void }) => {
   return (
-    <div className="absolute top-[75px] right-[40px] z-[1000] animate-in fade-in slide-in-from-top-2">
+    <div className="absolute top-[48px] right-[189px] z-[1000] animate-in fade-in slide-in-from-top-2">
       {/* Triangle Indicator */}
       <div className="absolute -top-2 right-4 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[8px] border-b-[#006E74]"></div>
 

@@ -36,7 +36,7 @@
 
 
 import React, { useState } from "react";
-import Navbar from "../components/navbar";
+// import Navbar from "../components/navbar";
 import Left_Side_Task_Tracker from "../components/employee/Task_and_Tracking/Left_Side_Task_Tracker";
 import Right_Side_Task_History from "../components/employee/Task_and_Tracking/Right_Side_Task_History";
 import { tasksData } from "../data/taskTrackingData";
