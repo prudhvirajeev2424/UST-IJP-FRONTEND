@@ -107,14 +107,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         </p>
       </div>
 
-      {/* compact progress area */}
-      <div className="mb-1">
+      <div className="mb-2">
         <ProgressBar percentage={progress} />
-      </div>
 
-      {/* place updated days directly below the progress bar with small spacing */}
-      <p
-        className="
+        {/* Updated days should sit immediately below the progress bar with small spacing */}
+        <p
+  className="
     text-[12px]
     leading-[14px]
     font-normal
@@ -125,11 +123,13 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
     w-[111px]
     h-[14px]
     font-[Rubik]
-    mt-auto
+    mt-1
   "
-      >
-        Updated {updatedDaysAgo} {updatedDaysAgo === 1 ? "day" : "days"} ago
-      </p>
+>
+  Updated {updatedDaysAgo} {updatedDaysAgo === 1 ? "day" : "days"} ago
+</p>
+
+      </div>
     </div>
   );
 };

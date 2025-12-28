@@ -26,26 +26,11 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       : "text-primary";
 
   return (
-    /* Compact variant: reduce vertical footprint so progress bar + label take less space */
-    <div className="w-full h-[28px] flex flex-col justify-center min-h-0">
+    /* Reduce vertical footprint: slightly smaller label row and tighter gap to the bar. */
+    <div className="w-full h-[32px] flex flex-col justify-center min-h-0">
       {/* LABEL ROW (slightly smaller) */}
       <div className="flex justify-between items-center h-[16px] min-h-0">
-        <span
-          className="
-    text-[14px]
-    leading-[17px]
-    font-normal
-    text-[#7A7480]
-    tracking-[0px]
-    text-left
-    opacity-100
-    w-[106px]
-    h-[17px]
-    font-[Rubik]
-    truncate
-    block
-  "
-        >
+        <span className="text-sm text-[#7A7480] truncate min-w-0 block">
           {label}
         </span>
 
@@ -58,7 +43,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         )}
       </div>
 
-      {/* BAR (compact spacing) */}
+      {/* BAR (keep slim and closer to label) */}
       <div className="w-full h-[3px] bg-[#D7E0E3] rounded-full overflow-hidden mt-1">
         <div
           className={`h-full ${barColor} rounded-full transition-all duration-300`}
