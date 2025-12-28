@@ -6,21 +6,28 @@ const WfmHome = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <main className="max-w-[1800px] mx-auto p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr_360px] gap-8">
-          {/* Left Column - Application Status */}
-          <div className="flex flex-col gap-6">
-            <ApplicationStatus />
-          </div>
+        <div className="grid grid-cols-12"> 
 
-          {/* Middle Column - Profiles Received */}
-          <div className="flex-grow">
-            <ProfilesReceivedSection />
-          </div>
+          {/* Left */} 
+          <div className="col-span-1">
+            <div className="flex flex-col "> 
+              <ApplicationStatus /> 
+            </div> 
+          </div> 
 
-          {/* Right Column - Recent Activities */}
-          <div className="flex flex-col gap-6">
-            <RecentActivities />
-          </div>
+          {/* Middle */} 
+          <div className="col-span-10 min-w-0"> 
+            <div className="flex justify-center"> 
+              <ProfilesReceivedSection /> 
+            </div> 
+          </div> 
+
+          {/* Right */} 
+          <div className="col-span-1"> 
+            <div className="flex flex-col "> 
+              <RecentActivities /> 
+            </div> 
+          </div> 
         </div>
       </main>
     </div>

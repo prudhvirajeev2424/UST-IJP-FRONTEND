@@ -35,7 +35,7 @@ const activities: Activity[] = [
 
 const RecentActivities = () => {
     return (
-    <div className="bg-card w-[360px]  rounded-xl p-5 card-shadow absolute top-[116px] right-[60px] shadow-lg border border-gray-200">
+    <div className="bg-card w-[360px]  rounded-xl p-5  absolute top-[116px] right-[60px] ">
         <div className="flex items-center justify-between mb-4">
         <h3 className="text-base font-medium leading-5 tracking-normal text-[#231F20] text-left opacity-100">
           Recent Activities
