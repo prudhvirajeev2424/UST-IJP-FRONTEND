@@ -13,7 +13,7 @@ function App() {
   return (
     <ShortlistProvider>
       <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
-        {/* <LoginPage /> */}
+        {/* <LoginPage />  */}
       </ActiveRoleContext.Provider>
 
       <Application/>
