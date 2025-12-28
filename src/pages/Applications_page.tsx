@@ -6,9 +6,17 @@ import { ApplicationsTable } from "../components/ApplicationsTable";
 import RightSideProfileCards from "../components/RightSideProfileCards";
 import { mockApplications } from "../data/ApplicationsMockdata";
 
+/**
+ * ApplicationsPage
+ * Parent page that composes NavigationBar, StatusTabs, the left FilterTab,
+ * and the right content area which can be either a List (table) or Kanban
+ * (profile cards). The view toggle is lifted here and passed into
+ * StatusTabs via onViewChange.
+ */
 const ApplicationsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("All");
-  const [view, setView] = useState<"table" | "kanban">("table");
+  // default to kanban so clicking Applications shows Kanban view first
+  const [view, setView] = useState<"table" | "kanban">("kanban");
   const [isCompact, setIsCompact] = useState<boolean>(false);
   const initialHeightRef = useRef<number | null>(null);
 

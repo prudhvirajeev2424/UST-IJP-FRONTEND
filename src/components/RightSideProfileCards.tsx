@@ -3,6 +3,15 @@ import React, { useEffect, useRef, useState } from "react";
 import ProfileCard from "./ProfileCard";
 import { mockProfiles } from "../data/ApplicationsMockdata";
 
+/**
+ * RightSideProfileCards
+ * The kanban-style grid of profile cards. This component watches the window
+ * width to decide between a responsive multi-column layout and a compact
+ * 2×4 footprint used when the viewport is reduced/zoomed.
+ *
+ * It intentionally avoids inner horizontal padding so the cards align with
+ * the FilterTab on the left.
+ */
 const RightSideProfileCards: React.FC = () => {
   const [isNarrow, setIsNarrow] = useState(false);
   const initialWidthRef = useRef<number | null>(null);
@@ -32,7 +41,7 @@ const RightSideProfileCards: React.FC = () => {
       <div className="pb-8 px-0">
         {/* Profile Cards Grid - responsive
             - Normal: responsive columns up to 4
-            - Compact (narrow/zoomed): show 2 columns × 4 rows visible with inner vertical scroll
+            - Compact (narrow/zoomed): show 2 columns × 4 rows visible
         */}
         {isNarrow ? (
           <div className="grid grid-cols-2 grid-rows-4 gap-4 justify-items-center">

@@ -1,7 +1,16 @@
 import React from "react";
-import type { Application } from "../types/application";
+import type { Application } from "../types";
 import { User } from "lucide-react";
 
+/**
+ * TableRow
+ * Renders a single application row inside the ApplicationsTable.
+ *
+ * Notes:
+ * - Only the first row is interactive (receives click/keyboard handlers). This
+ *   was an explicit UX requirement so other rows remain non-focusable.
+ * - The profile badge shows a tooltip on hover.
+ */
 interface TableRowProps {
   application: Application;
   isFirst?: boolean;
@@ -13,6 +22,10 @@ export const TableRow: React.FC<TableRowProps> = ({
 }) => {
   const [showTooltip, setShowTooltip] = React.useState(false);
 
+  /**
+   * Return color tokens for the action pill. Kept inline for readability; if
+   * design grows consider extracting to a shared constants file.
+   */
   const getActionColor = (action: string) => {
     switch (action) {
       case "Shortlisted":
@@ -33,7 +46,10 @@ export const TableRow: React.FC<TableRowProps> = ({
   const actionStyle = getActionColor(application.action);
 
   const handleActivate = () => {
-    // TODO: replace with navigation or detail open
+    // Navigation/detail opening should be wired by the page. Keep a console
+    // fallback for now as a no-op placeholder.
+    // TODO: replace with router navigation or detail panel open
+    // e.g. navigate(`/applications/${application.id}`)
     console.log("open row", application.id);
   };
 
@@ -43,16 +59,20 @@ export const TableRow: React.FC<TableRowProps> = ({
     }
   };
 
-  const trProps: any = {
+  // Use a typed props object for the <tr> element. We intentionally keep the
+  // inline style here so the table design stays identical.
+  const trProps: React.HTMLAttributes<HTMLTableRowElement> = {
     style: { backgroundColor: "#FFFFFF" },
     className: isFirst ? "hover:bg-[#F8FBFB] cursor-pointer group" : "",
   };
 
   if (isFirst) {
-    trProps.role = "button";
-    trProps.tabIndex = 0;
-    trProps.onClick = handleActivate;
-    trProps.onKeyDown = handleKeyDown;
+    // Only the first row should be focusable / interactive per the UX spec.
+    // These attributes are safe to add to a <tr> in modern browsers.
+    (trProps as any).role = "button";
+    (trProps as any).tabIndex = 0;
+    (trProps as any).onClick = handleActivate;
+    (trProps as any).onKeyDown = handleKeyDown;
   }
 
   return (

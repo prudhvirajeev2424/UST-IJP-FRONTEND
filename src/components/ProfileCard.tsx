@@ -1,8 +1,15 @@
 // components/ProfileCard.tsx
 import React, { useState } from "react";
 import DP from "../assets/DP.png";
-import type { Profile } from "../types/Profile";
+import type { Profile } from "../types";
 
+/**
+ * ProfileCard
+ * Small, focused card used in the Kanban/grid view. It implements a hover
+ * reveal layer which shows additional details and a "View in Detail" CTA.
+ *
+ * Keep this component self-contained to ease reuse in other list/grid views.
+ */
 interface ProfileCardProps {
   profile: Profile;
 }
@@ -10,7 +17,8 @@ interface ProfileCardProps {
 const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  // No per-profile avatar: we always show project DP.png
+  // No per-profile avatar: we always show project DP.png — if avatars are
+  // introduced later, replace DP import with profile.avatar.
 
   return (
     <div
