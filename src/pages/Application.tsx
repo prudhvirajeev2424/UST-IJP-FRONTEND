@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import Header from '../components/layout/Header';
 import CandidateHeader from '../components/tp_manager/application/CandidateHeader';
 import Sidebar from '../components/tp_manager/application/Sidebar';
 import Introduction from '../components/tp_manager/application/Introduction';
@@ -66,7 +65,7 @@ const Application: React.FC = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F2F7F8' }}>
-      {/* <Header /> */}
+      {/* CandidateHeader - directly below navbar */}
       <CandidateHeader candidate={candidateData} />
 
       <div className="flex px-8 py-6 space-x-6">
@@ -79,7 +78,7 @@ const Application: React.FC = () => {
         {/* Main Content Panel */}
         <div
           ref={contentRef}
-          className="flex-1 bg-white rounded-lg shadow-sm p-8 overflow-y-auto max-h-[calc(100vh-180px)] scrollbar-hide scroll-smooth"
+          className="flex-1 bg-white rounded-lg shadow-sm p-8 overflow-y-auto max-h-[calc(100vh-240px)] scrollbar-hide scroll-smooth"
         >
           <section id="introduction" className="scroll-mt-20">
             <Introduction introduction={candidateData.introduction} />
