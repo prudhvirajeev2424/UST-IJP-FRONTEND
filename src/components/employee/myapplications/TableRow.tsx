@@ -1,9 +1,8 @@
-
-import React from 'react';
-import type { Application } from '../../../types/application';
-import StatusBadge from './StatusBadge';
-import SkillsBadge from './SkillsBadge';
-import externalrequesticon from '../../../assets/externalrequesticon.svg';
+import React from "react";
+import type { Application } from "../../../types/application";
+import StatusBadge from "./StatusBadge";
+import SkillsBadge from "./SkillsBadge";
+import externalrequesticon from "../../../assets/externalrequesticon.svg";
 
 interface TableRowProps {
   application: Application;
@@ -11,38 +10,42 @@ interface TableRowProps {
   onClick?: () => void;
 }
 
-const TableRow: React.FC<TableRowProps> = ({ application, isClickable = false, onClick }) => {
+const TableRow: React.FC<TableRowProps> = ({
+  application,
+  isClickable = false,
+  onClick,
+}) => {
   return (
     <tr
       className={`border-b border-[#E5E7EB] transition-colors hover:bg-[#F9FAFB] ${
-        isClickable ? 'cursor-pointer' : ''
+        isClickable ? "cursor-pointer" : ""
       }`}
       onClick={isClickable ? onClick : undefined}
     >
       {/* SO ID */}
       <td className="w-[100px] px-3 py-3.5">
-        <span className="text-[13px] font-normal text-ijp-teal hover:underline leading-tight cursor-pointer">
+        <span className="text-[13px] font-normal text-[#006E74] hover:underline leading-tight cursor-pointer">
           {application.soId}
         </span>
       </td>
 
       {/* Role */}
       <td className="w-[180px] px-3 py-3.5">
-        <span className="text-[13px] font-normal text-ijp-near-black leading-tight">
+        <span className="text-[13px] font-normal text-[#231F20] leading-tight">
           {application.role}
         </span>
       </td>
 
       {/* Account */}
       <td className="w-[100px] px-3 py-3.5">
-        <span className="text-[13px] font-normal text-ijp-near-black leading-tight">
+        <span className="text-[13px] font-normal text-[#231F20] leading-tight">
           {application.account}
         </span>
       </td>
 
       {/* Applied Date */}
       <td className="w-[110px] px-3 py-3.5">
-        <span className="text-[13px] font-normal text-ijp-near-black leading-tight">
+        <span className="text-[13px] font-normal text-[#231F20] leading-tight">
           {application.appliedDate}
         </span>
       </td>
@@ -50,12 +53,17 @@ const TableRow: React.FC<TableRowProps> = ({ application, isClickable = false, o
       {/* Hiring Manager */}
       <td className="w-[140px] px-3 py-3.5">
         <div className="flex items-center gap-1.5">
-          <span className="text-[13px] font-normal text-ijp-near-black leading-tight">
+          <span className="text-[13px] font-normal text-[#231F20] leading-tight">
             {application.hiringManager}
           </span>
           {application.hasManagerInfo && (
             <div>
-            <img src={externalrequesticon} title='External Request' alt="externalrequest" className="h-[22px] w-[22px]" />
+              <img
+                src={externalrequesticon}
+                title="External Request"
+                alt="externalrequest"
+                className="h-[22px] w-[22px]"
+              />
             </div>
           )}
         </div>

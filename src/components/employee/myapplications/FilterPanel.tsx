@@ -1,5 +1,5 @@
-import React from 'react';
-import { Calendar, ChevronDown } from 'lucide-react';
+import React from "react";
+import { Calendar, ChevronDown } from "lucide-react";
 
 const FilterPanel: React.FC = () => {
   return (
@@ -7,8 +7,10 @@ const FilterPanel: React.FC = () => {
       <div className="rounded-lg bg-white px-6 py-5 shadow-sm border border-gray-100">
         {/* Header */}
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="text-[15px] font-medium text-[#231F20] leading-tight">Filter</h2>
-          <button className="text-[14px] font-normal text-ijp-teal hover:text-ijp-teal-dark transition-colors leading-tight">
+          <h2 className="text-[15px] font-medium text-[#231F20] leading-tight">
+            Filter
+          </h2>
+          <button className="text-[14px] font-normal text-[#0097AC] hover:text-[#0097AC]-dark transition-colors leading-tight">
             Clear All
           </button>
         </div>
@@ -22,11 +24,11 @@ const FilterPanel: React.FC = () => {
                 type="text"
                 value="06 - January - 2025"
                 readOnly
-                className="w-full rounded-md border border-[#D7E0E3] bg-white px-3.5 py-[9px] pr-10 text-[14px] text-ijp-near-black leading-tight focus:border-ijp-teal focus:outline-none focus:ring-1 focus:ring-ijp-teal"
+                className="w-full rounded-md border border-[#D7E0E3] bg-white px-3.5 py-[9px] pr-10 text-[14px] text-[#231F20] leading-tight focus:border-[#0097AC] focus:outline-none focus:ring-1 focus:ring-[#0097AC]"
               />
               <Calendar
                 size={16}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-ijp-gray pointer-events-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A7480] pointer-events-none"
                 strokeWidth={2}
               />
             </div>
@@ -36,7 +38,7 @@ const FilterPanel: React.FC = () => {
           <div>
             <div className="relative">
               <select
-                className="w-full appearance-none rounded-md border border-[#D7E0E3] bg-white px-3.5 py-[9px] pr-10 text-[14px] text-ijp-gray leading-tight focus:border-ijp-teal focus:outline-none focus:ring-1 focus:ring-ijp-teal cursor-pointer"
+                className="w-full appearance-none rounded-md border border-[#D7E0E3] bg-white px-3.5 py-[9px] pr-10 text-[14px] text-[#7A7480] leading-tight focus:border-[#0097AC] focus:outline-none focus:ring-1 focus:ring-[#0097AC] cursor-pointer"
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -48,7 +50,7 @@ const FilterPanel: React.FC = () => {
               </select>
               <ChevronDown
                 size={16}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-ijp-gray pointer-events-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A7480] pointer-events-none"
                 strokeWidth={2}
               />
             </div>
@@ -58,7 +60,7 @@ const FilterPanel: React.FC = () => {
           <div>
             <div className="relative">
               <select
-                className="w-full appearance-none rounded-md border border-[#D7E0E3] bg-white px-3.5 py-[9px] pr-10 text-[14px] text-ijp-gray leading-tight focus:border-ijp-teal focus:outline-none focus:ring-1 focus:ring-ijp-teal cursor-pointer"
+                className="w-full appearance-none rounded-md border border-[#D7E0E3] bg-white px-3.5 py-[9px] pr-10 text-[14px] text-[#7A7480] leading-tight focus:border-[#0097AC] focus:outline-none focus:ring-1 focus:ring-[#0097AC] cursor-pointer"
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -70,7 +72,7 @@ const FilterPanel: React.FC = () => {
               </select>
               <ChevronDown
                 size={16}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-ijp-gray pointer-events-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A7480] pointer-events-none"
                 strokeWidth={2}
               />
             </div>
@@ -80,7 +82,7 @@ const FilterPanel: React.FC = () => {
           <div>
             <div className="relative">
               <select
-                className="w-full appearance-none rounded-md border border-[#D7E0E3] bg-white px-3.5 py-[9px] pr-10 text-[14px] text-ijp-gray leading-tight focus:border-ijp-teal focus:outline-none focus:ring-1 focus:ring-ijp-teal cursor-pointer"
+                className="w-full appearance-none rounded-md border border-[#D7E0E3] bg-white px-3.5 py-[9px] pr-10 text-[14px] text-[#7A7480] leading-tight focus:border-[#0097AC] focus:outline-none focus:ring-1 focus:ring-[#0097AC] cursor-pointer"
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -94,7 +96,7 @@ const FilterPanel: React.FC = () => {
               </select>
               <ChevronDown
                 size={16}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-ijp-gray pointer-events-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A7480] pointer-events-none"
                 strokeWidth={2}
               />
             </div>
