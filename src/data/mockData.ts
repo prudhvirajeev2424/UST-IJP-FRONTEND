@@ -80,42 +80,44 @@ export const education: Education[] = [
 
 export const skills: Skill[] = [
   { id: '1', name: 'Java' },
-  { id: '2', name: 'Spring Boot' },
-  { id: '3', name: 'Hibernate' },
-  { id: '4', name: 'REST APIs' },
-  { id: '5', name: 'Microservices' },
-  { id: '6', name: 'AWS' },
-  { id: '7', name: 'Docker' },
-  { id: '8', name: 'Kubernetes' },
-  { id: '9', name: 'MySQL' },
-  { id: '10', name: 'MongoDB' },
-  { id: '11', name: 'Git' },
-  { id: '12', name: 'Jenkins' }
+  { id: '2', name: 'JavaScript' },
+  { id: '3', name: 'SQL' },
+  { id: '4', name: 'Spring Boot' },
+  { id: '5', name: 'MySQL' },
+  { id: '6', name: 'MongoDB' },
+  { id: '7', name: 'GitHub' },
+  { id: '8', name: 'Java EE' }
 ];
 
 export const accolades: Accolade[] = [
   {
     id: '1',
-    title: 'Employee of the Year 2023'
+    title: 'Received "Best Developer of the Year" at XYZ Technologies',
+    
   },
   {
     id: '2',
-    title: 'Best Innovation Award 2022'
+    title: 'Achieved 98% on-time project delivery rate for mission-critical applications.',
+  },
+  {
+    id: '3',
+    title: 'Received "Best Developer of the Year" at XYZ Technologies',
+    
   }
 ];
 
 export const testimonials: Testimonial[] = [
   {
     id: '1',
-    content: 'Zamira is an exceptional developer with deep technical expertise. Her ability to solve complex problems and mentor junior developers is outstanding.',
-    author: 'John Smith',
-    position: 'Senior Engineering Manager, UST'
+    content: 'An exceptional Java developer who consistently delivers high-quality code. His ability to troubleshoot complex issues is outstanding',
+    author: 'James Albert',
+    position: 'CTO,XYZ Techologies'
   },
   {
     id: '2',
-    content: 'A reliable team player who consistently delivers high-quality code. Zamira\'s attention to detail and commitment to best practices makes her a valuable asset.',
-    author: 'Sarah Johnson',
-    position: 'Tech Lead, ABC Solutions'
+    content: 'A fantastic mentor and leader. His technical expertise and problem-solving skills have greatly contrbutted to our teams success. ',
+    author: 'Peter Hayne',
+    position: 'Team Lead, ABC Solutions'
   }
 ];
 
