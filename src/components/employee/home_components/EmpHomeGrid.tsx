@@ -3,7 +3,11 @@ import { List } from "lucide-react";
 import type { Opportunity } from "../../../types/opportunity";
 import excelIcon from "../../../assets/ExcelIcon.svg";
 import { OpportunityCard } from "./OpportunityCard";
+<<<<<<< HEAD
 import EmpHomeList from "./EmpHomeList";
+=======
+import EmpHomeList from "../EmpHomeList";
+>>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
 
 interface OpportunityGridProps {
   opportunities: Opportunity[];
@@ -96,6 +100,7 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
         {viewMode === 'grid' ?(
         <div className="grid grid-cols-[repeat(3,1fr)]  gap-5">
         {opportunities.slice(0,6).map((opportunity) => (
@@ -109,6 +114,20 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
           <EmpHomeList opportunities={opportunities} />
         </div>
       )}
+=======
+        {viewMode === "grid" ? (
+          <div className="grid grid-cols-[repeat(3,1fr)]  gap-5">
+            {opportunities.slice(0, 6).map((opportunity) => (
+              <OpportunityCard key={opportunity.id} opportunity={opportunity} />
+            ))}
+          </div>
+        ) : (
+          // render only the table component when list view is active
+          <div>
+            <EmpHomeList opportunities={opportunities} />
+          </div>
+        )}
+>>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
       </div>
     </div>
   );

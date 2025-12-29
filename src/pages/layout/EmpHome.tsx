@@ -1,15 +1,13 @@
-import { useState } from 'react';
-import { UploadResumeModal } from '../../components/employee/UploadResumeModal';
-import { ResumeDetailModal } from '../../components/employee/ResumeDetailModal';
-import { UpdateResumeDrawer } from '../../components/employee/UpdateResumeDrawer';
-import { ResumeNotFoundCard } from '../../components/employee/ResumeNotFoundCard';
-import { EmpHomeRightSideBar } from '../../components/employee/EmpHomeRightSideBar';
-import { EmpHomeLeftSideBar } from '../../components/employee/EmpHomeLeftSideBar';
-import { stats, opportunities, recentActivities } from '../../data/mockData';
-import { profileData } from '../../data/profiles';
-import { EmpHomeGrid } from '../../components/employee/home_components/EmpHomeGrid';
-
-
+import { useState } from "react";
+import { UploadResumeModal } from "../../components/employee/UploadResumeModal";
+import { ResumeDetailModal } from "../../components/employee/ResumeDetailModal";
+import { UpdateResumeDrawer } from "../../components/employee/UpdateResumeDrawer";
+import { ResumeNotFoundCard } from "../../components/employee/ResumeNotFoundCard";
+import { EmpHomeRightSideBar } from "../../components/employee/EmpHomeRightSideBar";
+import { EmpHomeLeftSideBar } from "../../components/employee/EmpHomeLeftSideBar";
+import { stats, opportunities, recentActivities } from "../../data/mockData";
+import { profileData } from "../../data/profiles";
+import { EmpHomeGrid } from "../../components/employee/home_components/EmpHomeGrid";
 
 export default function Home() {
   const [hasResume, setHasResume] = useState(false);
@@ -39,7 +37,7 @@ export default function Home() {
 
   // Build a minimal ProfileSummary from the named profileData export for the left sidebar
   const profileSummary = {
-    description: profileData?.description ?? 'Profile summary',
+    description: profileData?.description ?? "Profile summary",
     primarySkills: profileData?.primarySkills ?? [],
   };
 
@@ -52,24 +50,26 @@ export default function Home() {
           <div className="w-full grid grid-cols-[repeat(3,1fr)] gap-6">
             {/* Left Column - Profile Summary */}
 
-
-            <EmpHomeLeftSideBar profile={profileSummary} hasresume={hasResume} handleresume={handleResumeClick} />
+            <EmpHomeLeftSideBar
+              profile={profileSummary}
+              hasresume={hasResume}
+              handleresume={handleResumeClick}
+            />
 
             {/* Center Column - Resume Upload or Uploaded State */}
 
             {!hasResume ? (
               // Resume not found state - Use the new component
-              <ResumeNotFoundCard onUploadClick={() => setUploadResumeModalOpen(true)} />
+              <ResumeNotFoundCard
+                onUploadClick={() => setUploadResumeModalOpen(true)}
+              />
             ) : (
               // Resume uploaded - show placeholder for opportunities
               <EmpHomeGrid opportunities={opportunities} />
             )}
 
-
             {/* Right Column - Stats & Activities */}
-            <EmpHomeRightSideBar stats={stats} activities={recentActivities}/>
-
-
+            <EmpHomeRightSideBar stats={stats} activities={recentActivities} />
           </div>
         </div>
       </main>
@@ -97,4 +97,3 @@ export default function Home() {
     </div>
   );
 }
-
