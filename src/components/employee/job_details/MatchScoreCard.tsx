@@ -21,8 +21,14 @@ export function MatchScoreCard({ percentage }: MatchScoreCardProps) {
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <Card className="bg-card border border-border animate-fade-in">
-      <CardContent className="p-5 flex items-center gap-4">
+    <Card
+      className="bg-card border border-border animate-fade-in"
+      style={{ width: "100%", height: "100%" }}
+    >
+      <CardContent
+        className="p-5 flex items-center gap-4"
+        style={{ height: "100%", boxSizing: "border-box" }}
+      >
         <div className="relative h-20 w-20">
           <svg className="h-20 w-20 -rotate-90" viewBox="0 0 100 100">
             <circle
