@@ -119,7 +119,7 @@ export function EmpHomeGrid({
           <div>
             <EmpHomeList
               opportunities={opportunities}
-              onViewDetails={onViewDetails}
+              // onViewDetails={onViewDetails}
             />
           </div>
         )}

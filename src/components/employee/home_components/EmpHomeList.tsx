@@ -2,15 +2,19 @@ import React, { useEffect } from "react";
 import StatusBadge from "./StatusBadge";
 
 interface EmpHomeListProps {
-  opportunities: any[]; // changed from Opportunity[] to any[] to avoid missing export runtime error
-  onViewDetails?: (jobId: string) => void;
+  opportunities: any[];
 }
 
-const EmpHomeList: React.FC<EmpHomeListProps> = ({
-  opportunities,
-  onViewDetails,
-}) => {
-  // log on mount to confirm rendering
+interface TableColumn {
+  header: string;
+  headerClass?: string;
+  cellClass?: string;
+  accessor: string;
+  render?: (value: any, row: any) => React.ReactNode;
+}
+
+const EmpHomeList: React.FC<EmpHomeListProps> = ({ opportunities }) => {
+  // Log on mount to confirm rendering
   useEffect(() => {
     console.log(
       "EmpHomeList mounted with",
@@ -21,9 +25,6 @@ const EmpHomeList: React.FC<EmpHomeListProps> = ({
 
   const handleRowClick = (opportunityId: string) => {
     console.log("Opportunity clicked:", opportunityId);
-    if (onViewDetails) {
-      onViewDetails(opportunityId);
-    }
   };
 
   // Accept string[] or string and normalize to array
@@ -38,7 +39,7 @@ const EmpHomeList: React.FC<EmpHomeListProps> = ({
       : [];
 
     if (skillsArray.length <= 2) {
-      return skillsArray.join(",");
+      return skillsArray.join(", ");
     }
 
     const firstTwoSkills = skillsArray.slice(0, 2).join(", ");
@@ -47,91 +48,66 @@ const EmpHomeList: React.FC<EmpHomeListProps> = ({
     return `${firstTwoSkills}, +${remainingCount}`;
   };
 
+  // Table column configuration - Easy to modify or reuse
+  const columns: TableColumn[] = [
+    {
+      header: "SOE",
+      headerClass: "uppercase",
+      cellClass: "table-cell-text-sm table-cell-primary",
+      accessor: "id",
+    },
+    {
+      header: "Role",
+      cellClass: "table-cell-text-lg table-cell-primary",
+      accessor: "role",
+    },
+    {
+      header: "Band",
+      cellClass: "table-cell-text-lg table-cell-secondary",
+      accessor: "band",
+    },
+    {
+      header: "Location",
+      cellClass: "table-cell-text-md table-cell-secondary",
+      accessor: "location",
+    },
+    {
+      header: "Skills",
+      cellClass: "table-cell-text-md table-cell-secondary",
+      accessor: "skills",
+      render: (skills, row) => (
+        <span
+          title={Array.isArray(skills) ? skills.join("; ") : String(skills)}
+        >
+          {formatSkills(skills)}
+        </span>
+      ),
+    },
+    {
+      header: "Action Taken",
+      accessor: "status",
+      render: (status) => status && <StatusBadge status={status} />,
+    },
+  ];
+
+  // Helper function to get cell value
+  const getCellValue = (row: any, accessor: string) => {
+    return row[accessor];
+  };
+
   return (
-    <div
-      className="bg-white rounded-lg shadow-sm overflow-hidden"
-      style={{ width: "1000px" }}
-    >
-      <table className="w-full">
+    <div className="table-container">
+      <table>
         <thead>
-          <tr style={{ backgroundColor: "rgba(215, 224, 227, 0.15)" }}>
-            <th
-              className="text-left py-4 px-6 font-rubik font-normal uppercase"
-              style={{
-                fontSize: "14px",
-                lineHeight: "17px",
-                letterSpacing: "0px",
-                height: "60px",
-                color: "#7A7480",
-              }}
-            >
-              SOE
-            </th>
-            <th
-              className="text-left py-4 px-6 font-rubik font-normal"
-              style={{
-                fontSize: "14px",
-                lineHeight: "17px",
-                letterSpacing: "0px",
-                height: "60px",
-                color: "#7A7480",
-                textTransform: "capitalize",
-              }}
-            >
-              Role
-            </th>
-            <th
-              className="text-left py-4 px-6 font-rubik font-normal"
-              style={{
-                fontSize: "14px",
-                lineHeight: "17px",
-                letterSpacing: "0px",
-                height: "60px",
-                color: "#7A7480",
-                textTransform: "capitalize",
-              }}
-            >
-              Band
-            </th>
-            <th
-              className="text-left py-4 px-6 font-rubik font-normal"
-              style={{
-                fontSize: "14px",
-                lineHeight: "17px",
-                letterSpacing: "0px",
-                height: "60px",
-                color: "#7A7480",
-                textTransform: "capitalize",
-              }}
-            >
-              Location
-            </th>
-            <th
-              className="text-left py-4 px-6 font-rubik font-normal"
-              style={{
-                fontSize: "14px",
-                lineHeight: "17px",
-                letterSpacing: "0px",
-                height: "60px",
-                color: "#7A7480",
-                textTransform: "capitalize",
-              }}
-            >
-              Skills
-            </th>
-            <th
-              className="text-left py-4 px-6 font-rubik font-normal"
-              style={{
-                fontSize: "14px",
-                lineHeight: "17px",
-                letterSpacing: "0px",
-                height: "60px",
-                color: "#7A7480",
-                textTransform: "capitalize",
-              }}
-            >
-              Action Taken
-            </th>
+          <tr className="table-header-row">
+            {columns.map((column, index) => (
+              <th
+                key={index}
+                className={`table-header-cell ${column.headerClass || ""}`}
+              >
+                {column.header}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -139,72 +115,20 @@ const EmpHomeList: React.FC<EmpHomeListProps> = ({
             <tr
               key={opp.id ?? index}
               onClick={() => handleRowClick(opp.id)}
-              className="border-b border-[#D7E0E3] hover:bg-[#F2F7F8] cursor-pointer last:border-b-0"
-              style={{ backgroundColor: "#FFFFFF", height: "65px" }}
+              className="table-body-row clickable"
             >
-              <td
-                className="py-4 px-6 font-rubik"
-                style={{
-                  fontSize: "14px",
-                  lineHeight: "17px",
-                  letterSpacing: "0px",
-                  color: "#006E74",
-                }}
-              >
-                {opp.id}
-              </td>
-              <td
-                className="py-4 px-6 font-rubik"
-                style={{
-                  fontSize: "18px",
-                  lineHeight: "22px",
-                  letterSpacing: "0px",
-                  color: "#006E74",
-                }}
-              >
-                {opp.role}
-              </td>
-              <td
-                className="py-4 px-6 font-rubik"
-                style={{
-                  fontSize: "18px",
-                  lineHeight: "22px",
-                  letterSpacing: "0px",
-                  color: "#231F20",
-                }}
-              >
-                {opp.band}
-              </td>
-              <td
-                className="py-4 px-6 font-rubik"
-                style={{
-                  fontSize: "16px",
-                  lineHeight: "19px",
-                  letterSpacing: "0px",
-                  color: "#231F20",
-                }}
-              >
-                {opp.location}
-              </td>
-              <td
-                className="py-4 px-6 font-rubik"
-                style={{
-                  fontSize: "16px",
-                  lineHeight: "19px",
-                  letterSpacing: "0px",
-                  color: "#231F20",
-                }}
-                title={
-                  Array.isArray(opp.skills)
-                    ? opp.skills.join("; ")
-                    : String(opp.skills)
-                }
-              >
-                {formatSkills(opp.skills)}
-              </td>
-              <td className="py-4 px-6">
-                {opp.status && <StatusBadge status={opp.status} />}
-              </td>
+              {columns.map((column, colIndex) => {
+                const cellValue = getCellValue(opp, column.accessor);
+
+                return (
+                  <td
+                    key={colIndex}
+                    className={`table-body-cell ${column.cellClass || ""}`}
+                  >
+                    {column.render ? column.render(cellValue, opp) : cellValue}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>
