@@ -12,7 +12,7 @@ const ApplicationStatus = () => {
           width="175"
           height="175"
           viewBox="0 0 175 175"
-          className="-rotate-[120deg]"
+          className="-rotate-[90deg]"
         >
           <circle
             cx="87.5"

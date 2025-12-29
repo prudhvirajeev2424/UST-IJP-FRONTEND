@@ -3,8 +3,9 @@ import { activities } from "../../../data/activities";
 
 const RecentActivities: React.FC = () => {
   return (
-    // use w-full and a flexible min-height so the sidebar fits its grid column without forcing extra width
-    <div className="flex w-full flex-col rounded-lg bg-white p-[20px_20px_30px_20px] shadow-sm min-h-[420px]">
+  // use w-full and a flexible min-height so the sidebar fits its grid column without forcing extra width
+  // make overflow visible so the timeline line/dots aren't clipped
+  <div className="flex w-full flex-col rounded-lg bg-white p-[20px_20px_30px_20px] shadow-sm min-h-[420px] overflow-visible">
       {/* ---------- LOCAL SCROLLBAR HIDE ---------- */}
       <style>
         {`
@@ -31,18 +32,14 @@ const RecentActivities: React.FC = () => {
       </div>
 
       {/* ---------- LIST ---------- */}
-      <div className="hide-scrollbar flex flex-1 flex-col overflow-y-auto">
-        {activities.map((a, i) => (
-          <div
-            key={a.id}
-            className={`relative pb-6 pl-6 ${
-              i === activities.length - 1
-                ? "border-l-0"
-                : "border-l-2 border-gray-200"
-            }`}
-          >
+      <div className="relative hide-scrollbar flex flex-1 flex-col overflow-y-auto">
+        {/* vertical timeline line: starts near the first dot and runs to the bottom */}
+        <div className="absolute left-[12px] top-[8px] bottom-0 w-[2px] bg-gray-200" />
+
+        {activities.map((a) => (
+          <div key={a.id} className={`relative pb-6 pl-12`}>
             {/* DOT */}
-            <div className="absolute left-[-5.5px] top-1 h-[10px] w-[10px] rounded-full border-2 border-white bg-[#0097AC] shadow-[0_0_0_1px_#e5e7eb]" />
+            <div className="absolute left-[7px] top-1 h-[10px] w-[10px] rounded-full border-2 border-white bg-[#0097AC] shadow-[0_0_0_1px_#e5e7eb]" />
 
             {/* TEXT */}
             <p className="mb-1 text-[14px] leading-[22px] text-[#231F20]">
