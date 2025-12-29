@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { List } from 'lucide-react';
 import ProfileCard from './ProfileCard';
 import Toggle from '../../common/Toggle/Toggle';
-import { profiles } from '../../../data/profiles';
-import { opportunities as mockOpportunities } from '../../../data/mockData';
-import type { Opportunity } from '../../../types/opportunity';
-import EmpHomeList from '../../employee/home_components/EmpHomeList';
+import { profilesReceived as listProfiles } from '../../../data/profile_list';
+import { profiles as gridProfiles } from '../../../data/profiles';
+// list view uses TP Manager profiles (listProfiles), grid uses the original gridProfiles
+import ProfileHomeList from './ProfileHomeList';
 
 /* ---------- Feather Grid Icon ---------- */
 const FeatherGridIcon = ({ active }: { active: boolean }) => (
@@ -30,10 +30,7 @@ const ProfilesReceived: React.FC = () => {
   const [showActionNeeded, setShowActionNeeded] = useState(true);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
-  // Use the mock opportunities data (already typed) for the list view
-  const opportunities: Opportunity[] = mockOpportunities.map((o) => ({
-    ...o,
-  }));
+  // (mockOpportunities is imported above but not required for the TP Manager list view)
 
   return (
     <div className="flex-1 rounded-lg bg-[#f9fafb86] p-6">
@@ -75,13 +72,13 @@ const ProfilesReceived: React.FC = () => {
       {/* ---------- CONTENT ---------- */}
       {viewMode === 'grid' ? (
         <div className="grid grid-cols-3 gap-4">
-          {profiles.map((profile) => (
+          {gridProfiles.map((profile) => (
             <ProfileCard key={profile.id} profile={profile} />
           ))}
         </div>
       ) : (
-        // Use the shared EmpHomeList component to render the list view
-        <EmpHomeList opportunities={opportunities} />
+        // Use the TP Manager ProfileHomeList component to render the list view using profilesReceived
+        <ProfileHomeList profiles={listProfiles} />
       )}
     </div>
   );
