@@ -1,0 +1,196 @@
+import { useState } from "react";
+import { Mail, Bell, X } from "lucide-react";
+import ProfilePic from "../assets/DP@2x.png";
+import LogoImg from "../assets/Group 172287@2x.jpg";
+
+import Home from "../pages/home";
+import LandingPage from "../pages/landing_page";
+import Application from "../pages/Application";
+
+import { useActiveRole } from "../context/ActiveRoleContext";
+
+interface NavbarProps {
+  role?: string | null;
+}
+
+type View = "landing" | "app";
+
+const Navbar = ({ role }: NavbarProps) => {
+  const { activeRole } = useActiveRole();
+  const effectiveRole = role ?? activeRole ?? "Employee";
+
+  /* ---------------- STATE ---------------- */
+  const [view, setView] = useState<View>("app"); // 👈 controls landing vs app
+  const [active, setActive] = useState("Home");
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  /* ---------------- LANDING PAGE ---------------- */
+  if (view === "landing") {
+    return <LandingPage />;
+  }
+
+  /* ---------------- NAV LINKS ---------------- */
+  const allLinks = ["Home", "Applications", "Assigning & Tracking", "Reports"];
+
+  let links: string[];
+  if (effectiveRole === "TP Manager") {
+    links = allLinks;
+  } else if (effectiveRole === "Employee") {
+    links = [
+      "Home",
+      "Opportunities",
+      "Assigning & Tracking",
+      "My Applications",
+    ];
+  } else if (effectiveRole === "WFM") {
+    links = ["Home", "Applications"];
+  } else {
+    links = ["Home", "Applications"];
+  }
+
+  return (
+    <>
+      {/* ================= NAVBAR ================= */}
+      <header className="fixed top-0 left-0 z-50 w-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
+        <div className="mx-auto max-w-8xl px-6 py-3">
+          <div className="flex items-center justify-between">
+            {/* ---------- LOGO (CLICK → LANDING) ---------- */}
+            <button
+              type="button"
+              onClick={() => {
+                setView("landing"); // 👈 go to landing page
+                setActive("Home"); // reset app state
+              }}
+              className="flex items-center cursor-pointer bg-transparent p-0"
+            >
+              <img
+                src={LogoImg}
+                alt="UST IJP"
+                className="h-4 object-contain mr-3"
+                style={{ display: "block" }}
+              />
+            </button>
+
+            {/* ---------- CENTER NAV ---------- */}
+            <nav className="flex flex-1 justify-center">
+              <div className="flex gap-5">
+                {links.map((link) => (
+                  <div key={link} className="relative">
+                    <button
+                      onClick={() => setActive(link)}
+                      className={`px-2 py-1 text-sm font-semibold ${
+                        active === link
+                          ? "text-black"
+                          : "text-gray-500 hover:text-black"
+                      }`}
+                    >
+                      {link}
+                    </button>
+
+                    {active === link && (
+                      <span className="absolute -bottom-0.5 left-0 right-0 h-1 rounded-full bg-teal-600" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </nav>
+
+            {/* ---------- RIGHT ---------- */}
+            <div className="relative flex items-center gap-4">
+              <Mail
+                size={24}
+                className="cursor-pointer text-gray-700"
+                onClick={() => {
+                  // alert("Mail icon clicked");
+                }}
+              />
+
+              {/* Notifications */}
+              <div className="relative">
+                <Bell
+                  size={24}
+                  className="cursor-pointer text-gray-700"
+                  onClick={() => setShowNotifications(!showNotifications)}
+                />
+                <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
+                  3
+                </span>
+
+                {showNotifications && (
+                  <div className="absolute right-0 mt-3 w-96 rounded-xl bg-teal-700 text-white shadow-xl">
+                    <div className="absolute -top-2 right-6 h-4 w-4 rotate-45 bg-teal-700" />
+
+                    <div className="flex items-center justify-between border-b border-teal-600 px-4 py-3">
+                      <h3 className="text-sm font-semibold">
+                        Notifications (3)
+                      </h3>
+                      <X
+                        size={18}
+                        className="cursor-pointer"
+                        onClick={() => setShowNotifications(false)}
+                      />
+                    </div>
+
+                    <div className="divide-y divide-teal-600">
+                      {[1, 2, 3].map((_, i) => (
+                        <div
+                          key={i}
+                          className="flex cursor-pointer gap-3 px-4 py-3 hover:bg-teal-600"
+                        >
+                          <img
+                            src={ProfilePic}
+                            className="h-9 w-9 rounded-full object-cover"
+                          />
+                          <div className="text-sm">
+                            <p>
+                              <span className="font-semibold">
+                                Zamira Peterson
+                              </span>{" "}
+                              notification text
+                            </p>
+                            <span className="text-xs opacity-80">Now</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Profile */}
+              <div className="flex items-center gap-3">
+                <div className="text-right">
+                  <div className="text-sm font-semibold">Andrea Stephen</div>
+                  <div className="text-xs text-gray-500">{effectiveRole}</div>
+                </div>
+                <img
+                  src={ProfilePic}
+                  className="h-9 w-9 rounded-lg object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* ================= PAGE CONTENT ================= */}
+      <div className="mt-16">
+        {active === "Home" && <Home />}
+        {active === "Applications" && effectiveRole === "TP Manager" && (
+          <Application />
+        )}
+
+        {active !== "Home" && active !== "Applications" && (
+          <div className="p-6">
+            <h2 className="text-lg font-semibold">{active}</h2>
+            <p className="text-sm text-gray-600">
+              Content for {active} goes here.
+            </p>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default Navbar;
