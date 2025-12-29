@@ -24,10 +24,10 @@ export function ProfileCard({ profile }: ProfileCardProps) {
     };
 
     return (
-        <div className="group relative bg-white rounded-[10px] shadow-sm border border-gray-100 overflow-hidden w-full max-w-[320px] h-[323px] transition-all duration-300 hover:shadow-md mx-auto">
+    <div className="group relative bg-white rounded-[10px] shadow-sm border border-gray-100 overflow-hidden w-full h-[323px] transition-all duration-300 hover:shadow-md">
             {/* Default Content */}
             <div className="flex flex-col h-full">
-                <div className="p-5 flex-grow">
+                <div className="p-5 flex-fixed ">
                     <div className="flex items-start gap-3 mb-6">
                         <Avatar className="h-11 w-11 border border-gray-100 shrink-0">
                             <AvatarImage src={profile.avatar} alt={profile.name} />
