@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
 import LogoImg from "../assets/Group 172287@2x.jpg";
@@ -24,6 +24,7 @@ const Navbar = ({ role }: NavbarProps) => {
   const [view, setView] = useState<View>("app"); // 👈 controls landing vs app
   const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
+  const [appOpenedByCard, setAppOpenedByCard] = useState(false);
 
   /* ---------------- LANDING PAGE ---------------- */
   if (view === "landing") {
@@ -49,6 +50,27 @@ const Navbar = ({ role }: NavbarProps) => {
     links = ["Home", "Applications"];
   }
 
+  // Listen for app-level navigation events (e.g., from profile cards)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (typeof detail === "string") {
+        // string payload — treat as simple navigation (not from card)
+        setActive(detail);
+        setAppOpenedByCard(false);
+      } else if (detail && typeof detail === "object") {
+        const { view: viewName, source } = detail as any;
+        if (viewName) setActive(viewName);
+        // Only mark appOpenedByCard when navigation originates from a card
+        setAppOpenedByCard(source === "card");
+      }
+    };
+
+    window.addEventListener("navigate", handler as EventListener);
+    return () =>
+      window.removeEventListener("navigate", handler as EventListener);
+  }, []);
+
   return (
     <>
       {/* ================= NAVBAR ================= */}
@@ -70,6 +92,7 @@ const Navbar = ({ role }: NavbarProps) => {
                 className="h-4 object-contain mr-3"
                 style={{ display: "block" }}
               />
+              
             </button>
 
             {/* ---------- CENTER NAV ---------- */}
@@ -78,7 +101,11 @@ const Navbar = ({ role }: NavbarProps) => {
                 {links.map((link) => (
                   <div key={link} className="relative">
                     <button
-                      onClick={() => setActive(link)}
+                      onClick={() => {
+                        // clicking the nav link should NOT open the Applications view
+                        setActive(link);
+                        if (link === "Applications") setAppOpenedByCard(false);
+                      }}
                       className={`px-2 py-1 text-sm font-semibold ${
                         active === link
                           ? "text-black"
@@ -177,10 +204,9 @@ const Navbar = ({ role }: NavbarProps) => {
       {/* ================= PAGE CONTENT ================= */}
       <div className="mt-20">
         {active === "Home" && <Home />}
-        {active === "Applications" && effectiveRole === "TP Manager" && (
-          // <Application />
-          <TP_Applications/>
-        )}
+        {active === "Applications" &&
+          effectiveRole === "TP Manager" &&
+          appOpenedByCard && <TP_Applications />}
 
         {active !== "Home" && active !== "Applications" && (
           <div className="p-6">
