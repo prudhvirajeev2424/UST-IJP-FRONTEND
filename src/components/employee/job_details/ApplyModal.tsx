@@ -5,9 +5,9 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  Button,
-  Textarea,
-} from "../ui";
+} from "../../ui/Dialog";
+import { Textarea } from "../../ui";
+import { Button } from "../../ui";
 
 interface AttachedFile {
   name: string;

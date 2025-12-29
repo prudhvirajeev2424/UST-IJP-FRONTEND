@@ -7,9 +7,13 @@ import EmpHomeList from "./EmpHomeList";
 
 interface OpportunityGridProps {
   opportunities: Opportunity[];
+  onViewDetails?: (jobId: string) => void;
 }
 
-export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
+export function EmpHomeGrid({
+  opportunities,
+  onViewDetails,
+}: OpportunityGridProps) {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [hideApplied, setHideApplied] = useState(false);
 
@@ -52,7 +56,11 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
 
             {/* Export Excel */}
             <button className="p-2 hover:bg-muted rounded transition-colors">
-              <img src={excelIcon} alt="Export to Excel" className="w-[48px] h-[48px]" />
+              <img
+                src={excelIcon}
+                alt="Export to Excel"
+                className="w-[48px] h-[48px]"
+              />
             </button>
 
             {/* View Mode Toggle */}
@@ -96,19 +104,25 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
             </div>
           </div>
         </div>
-        {viewMode === 'grid' ?(
-        <div className="grid grid-cols-[repeat(3,1fr)]  gap-5">
-        {opportunities.slice(0,6).map((opportunity) => (
-          <OpportunityCard key={opportunity.id} opportunity={opportunity} />
-        ))}
-      </div>
-      ):
-      (
-        // render only the table component when list view is active
-        <div>
-          <EmpHomeList opportunities={opportunities} />
-        </div>
-      )}
+        {viewMode === "grid" ? (
+          <div className="grid grid-cols-[repeat(3,1fr)] gap-5">
+            {opportunities.slice(0, 6).map((opportunity) => (
+              <OpportunityCard
+                key={opportunity.id}
+                opportunity={opportunity}
+                onViewDetails={onViewDetails}
+              />
+            ))}
+          </div>
+        ) : (
+          // render only the table component when list view is active
+          <div>
+            <EmpHomeList
+              opportunities={opportunities}
+              // onViewDetails={onViewDetails}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
