@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
@@ -25,8 +26,8 @@ const ApplicationTable: React.FC = () => {
 
   return (
     <>
-      <div className="overflow-x-auto rounded-lg bg-white shadow-sm border border-gray-100">
-        <table className="w-full">
+      <div className="overflow-x-auto rounded-lg bg-white shadow-sm">
+        <table className="w-full table-fixed">
           <TableHeader />
           <tbody>
             {mockApplications.map((application, index) => (

@@ -47,7 +47,7 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-5">
           {/* Notification Bell with Badge */}
           <div className="relative cursor-pointer">
-            <Bell size={19} className="text-ijp-gray" strokeWidth={2} />
+            <Bell size={19} className="text-[#7A7480]" strokeWidth={2} />
             <span className="absolute -top-1 -right-1 flex h-[17px] w-[17px] items-center justify-center rounded-full bg-ijp-coral text-[10px] font-semibold text-white leading-none">
               1
             </span>
@@ -56,18 +56,18 @@ const Header: React.FC = () => {
           {/* User Profile Section */}
           <div className="flex items-center gap-3">
             <div className="text-right">
-              <div className="text-[14px] font-medium leading-tight text-ijp-near-black">
+              <div className="text-[14px] font-medium leading-tight text-[#231F20]">
                 Sarah Anderson
               </div>
-              <div className="text-[12px] leading-tight text-ijp-gray mt-0.5">
+              <div className="text-[12px] leading-tight text-[#7A7480] mt-0.5">
                 Lead Developer
               </div>
             </div>
             <div>
-              <img 
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces" 
-              alt="Sarah Anderson"
-              className="h-9 w-9 rounded-full object-cover"
+              <img
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces"
+                alt="Sarah Anderson"
+                className="h-9 w-9 rounded-full object-cover"
               />
             </div>
           </div>

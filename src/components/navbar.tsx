@@ -1,69 +1,207 @@
-import React from "react";
-import DP from "../assets/DP.png";
-import IJP from "../assets/ijp.jpg";
+import { useState } from "react";
+import { Mail, Bell, X } from "lucide-react";
+import ProfilePic from "../assets/DP@2x.png";
+import Home from "../pages/home";
+import { useActiveRole } from "../context/ActiveRoleContext";
+import Application from "../pages/Application";
+import Opportunities from "../pages/Opportunies";
+import AssigningAndTracking from "../pages/Assigning_and_Tracking";
+import MyApplications from "../pages/MyApplications";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  role?: string | null;
+}
+
+const Navbar = ({ role }: NavbarProps) => {
+  const { activeRole } = useActiveRole();
+  const effectiveRole = role ?? activeRole ?? "Employee";
+  const [active, setActive] = useState("Home");
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  const allLinks = ["Home", "Applications", "Assigning & Tracking", "Reports"];
+
+  let links: string[];
+  if (effectiveRole === "TP Manager") {
+    links = allLinks;
+  } else if (effectiveRole === "Employee") {
+    links = [
+      "Home",
+      "Opportunities",
+      "Assigning & Tracking",
+      "My Applications",
+    ];
+  } else if (effectiveRole === "WFM") {
+    // WFM should see only Home and Applications
+    links = ["Home", "Applications"];
+  } else {
+    links = ["Home", "Applications"];
+  }
+
   return (
-    <nav className="h-20 bg-white flex items-center shadow-sm sticky top-0 z-50">
-      <div className="absolute left-[60px] top-[29px] w-[108px] h-[22px] bg-transparent opacity-100">
-        <img
-          src={IJP}
-          alt="UST IJP Logo"
-          className="w-full h-full object-contain"
-        />
-      </div>
+    <>
+      <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
+        <div className="max-w-[1920px] mx-auto w-full px-6 py-[14px]">
+          <div className="flex items-center justify-between">
+            {/* Left */}
+            <div className="flex-shrink-0">
+              <div className="flex items-center">
+                <span
+                  className="text-2xl font-bold"
+                  style={{ color: "var(--003c51)" }}
+                >
+                  UST
+                </span>
+                <span
+                  className="text-2xl font-light ml-1"
+                  style={{ color: "var(--7a7480)" }}
+                >
+                  IJP
+                </span>
+              </div>
+            </div>
 
-      <div className="flex ml-auto mr-[150px] gap-10 text-[18px]">
-        <span className="cursor-pointer hover:text-[#007C85] transition-colors">
-          Home
-        </span>
-        <span className="cursor-pointer hover:text-[#007C85] transition-colors">
-          Opportunities
-        </span>
-        <div className="relative h-full flex items-center">
-          <span className="font-medium text-[#007C85]">
-            Assigning & Tracking
-          </span>
-          <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#007C85]" />
-        </div>
-        <span className="text-[#7A7480] cursor-pointer hover:text-[#231F20]">
-          My Applications
-        </span>
-      </div>
+            {/* Center Nav */}
+            <nav className="flex-1 flex justify-center">
+              <div className="flex gap-5">
+                {links.map((link) => (
+                  <div key={link} className="relative">
+                    <button
+                      type="button"
+                      onClick={() => setActive(link)}
+                      className={`text-sm font-semibold px-2 py-1 ${
+                        active === link
+                          ? "text-black"
+                          : "text-gray-500 hover:text-black"
+                      }`}
+                      aria-current={active === link ? "page" : undefined}
+                    >
+                      {link}
+                    </button>
 
-      <div className="flex items-center gap-4 mr-[60px]">
-        <div className="relative cursor-pointer">
-          <div className="w-6 h-6 border-2 border-[#231F20] rounded-full flex items-center justify-center">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
+                    {active === link && (
+                      <span className="absolute -bottom-0.5 left-0 right-0 h-1 bg-teal-600 rounded-full" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </nav>
+
+            {/* Right */}
+            <div className="flex-shrink-0 flex items-center gap-4 relative">
+              <Mail size={24} className="text-gray-700" />
+
+              <div className="relative">
+                <Bell
+                  size={24}
+                  className="text-gray-700 cursor-pointer"
+                  onClick={() => setShowNotifications(!showNotifications)}
+                />
+                <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
+                  3
+                </span>
+
+                {showNotifications && (
+                  <div className="absolute right-0 mt-3 w-96 rounded-xl bg-teal-700 text-white shadow-xl">
+                    <div className="absolute -top-2 right-6 h-4 w-4 rotate-45 bg-teal-700" />
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-teal-600">
+                      <h3 className="text-sm font-semibold">
+                        Notifications (3)
+                      </h3>
+                      <X
+                        size={18}
+                        className="cursor-pointer opacity-80 hover:opacity-100"
+                        onClick={() => setShowNotifications(false)}
+                      />
+                    </div>
+                    <div className="divide-y divide-teal-600">
+                      <div className="flex gap-3 px-4 py-3 hover:bg-teal-600 cursor-pointer">
+                        <img
+                          src={ProfilePic}
+                          className="h-9 w-9 rounded-full object-cover"
+                        />
+                        <div className="text-sm">
+                          <p>
+                            <span className="font-semibold">
+                              Zamira Peterson
+                            </span>{" "}
+                            has applied for the SO 32443388
+                          </p>
+                          <span className="text-xs opacity-80">Now</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-3 px-4 py-3 hover:bg-teal-600 cursor-pointer">
+                        <img
+                          src={ProfilePic}
+                          className="h-9 w-9 rounded-full object-cover"
+                        />
+                        <div className="text-sm">
+                          <p>
+                            <span className="font-semibold">
+                              Zamira Peterson
+                            </span>{" "}
+                            has uploaded the resume and manager’s approval mail
+                          </p>
+                          <span className="text-xs opacity-80">1m</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-3 px-4 py-3 hover:bg-teal-600 cursor-pointer">
+                        <img
+                          src={ProfilePic}
+                          className="h-9 w-9 rounded-full object-cover"
+                        />
+                        <div className="text-sm">
+                          <p>
+                            <span className="font-semibold">Angie Johnson</span>{" "}
+                            has been approved for the SO 32987221
+                          </p>
+                          <span className="text-xs opacity-80">2 days</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="text-right">
+                  <div className="text-sm font-semibold">Andrea Stephen</div>
+                  <div className="text-xs text-gray-500">{effectiveRole}</div>
+                </div>
+                <img
+                  src={ProfilePic}
+                  alt="Profile"
+                  className="h-9 w-9 rounded-lg object-cover"
+                />
+              </div>
+            </div>
           </div>
-          <span className="absolute -top-1 -right-1 bg-[#FC6A59] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center border-2 border-white font-bold">
-            1
-          </span>
         </div>
+      </header>
 
-        <div className="text-right">
-          <p className="text-sm font-bold leading-tight">Sarah Anderson</p>
-          <p className="text-[11px] text-[#7A7480]">Lead Developer</p>
-        </div>
+      <div className="mt-16">
+        {active === "Home" && <Home />}
+        {active === "Applications" && effectiveRole === "TP Manager" && (<Application />)}
 
-        <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-100">
-          <img src={DP} alt="DP" className="w-full h-full object-cover" />
-        </div>
+        {/* Employee-specific pages */}
+        {active === "Opportunities" && effectiveRole === "Employee" && (<Opportunities />)}
+        {active === "Assigning & Tracking" && effectiveRole === "Employee" && (<AssigningAndTracking />)}
+        {active === "My Applications" && effectiveRole === "Employee" && (<MyApplications />)}
+
+        {/* Fallback for any other nav labels */}
+        {active !== "Home" &&
+          active !== "Applications" &&
+          active !== "Opportunities" &&
+          active !== "Assigning & Tracking" &&
+          active !== "My Applications" && (
+            <div className="p-6">
+              <h2 className="text-lg font-semibold">{active}</h2>
+              <p className="text-sm text-gray-600">
+                Content for {active} goes here.
+              </p>
+            </div>
+          )}
       </div>
-    </nav>
+    </>
   );
 };
-
 export default Navbar;
