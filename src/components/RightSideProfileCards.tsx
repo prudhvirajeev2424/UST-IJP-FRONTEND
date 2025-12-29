@@ -20,15 +20,27 @@ const RightSideProfileCards: React.FC = () => {
           - Works at all zoom levels
           - No JavaScript needed
         */}
-        <div 
+        <div
           className="grid gap-4 sm:gap-5 w-full"
           style={{
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
-            justifyItems: 'center',
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
+            justifyItems: "center",
           }}
         >
           {mockProfiles.map((profile) => (
-            <ProfileCard key={profile.id} profile={profile} />
+            <ProfileCard
+              key={profile.id}
+              profile={profile}
+              // when View in Detail is clicked, navigate to the Application detail view
+              onViewDetail={() => {
+                window.dispatchEvent(
+                  new CustomEvent("navigate", {
+                    detail: { page: "Application", fromProfileId: profile.id },
+                  })
+                );
+              }}
+            />
           ))}
         </div>
       </div>

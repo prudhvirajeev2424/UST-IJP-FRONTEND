@@ -11,9 +11,11 @@ import type { Profile } from "../types";
  */
 interface ProfileCardProps {
   profile: Profile;
+  // optional handler invoked when "View in Detail" is clicked
+  onViewDetail?: () => void;
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ profile, onViewDetail }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
@@ -153,7 +155,15 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           </p>
 
           {/* View Detail Button */}
-          <button className="absolute bottom-[8%] left-[7%] text-[#0097AC] font-medium text-[16px] flex items-center gap-2 transition-all duration-300 ease-out focus:outline-none hover:gap-3">
+          <button
+            className="absolute bottom-[8%] left-[7%] text-[#0097AC] font-medium text-[16px] flex items-center gap-2 transition-all duration-300 ease-out focus:outline-none hover:gap-3"
+            onClick={(e) => {
+              // prevent click from bubbling to the card's container
+              e.stopPropagation();
+              onViewDetail?.();
+            }}
+            type="button"
+          >
             <span className="whitespace-nowrap">View in Detail</span>
             <span className="text-[18px] leading-none">→</span>
           </button>

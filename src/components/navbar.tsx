@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
 
 import Home from "../pages/home";
+import ApplicationsPage from "../pages/Applications_page";
 import { useActiveRole } from "../context/ActiveRoleContext";
 import Application from "../pages/Application";
 import Assigning_and_tracking from "../pages/AssigningandTracking";
@@ -17,6 +18,25 @@ const Navbar = ({ role }: NavbarProps) => {
   const effectiveRole = role ?? activeRole ?? "Employee";
   const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
+
+  // listen for cross-component navigation events (used by ProfileCard)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      try {
+        const ev = e as CustomEvent;
+        const detail = ev.detail || {};
+        if (detail.page) {
+          setActive(detail.page);
+        }
+      } catch (err) {
+        // ignore malformed events
+      }
+    };
+
+    window.addEventListener("navigate", handler as EventListener);
+    return () =>
+      window.removeEventListener("navigate", handler as EventListener);
+  }, []);
 
   const allLinks = ["Home", "Applications", "Assigning & Tracking", "Reports"];
 
@@ -181,8 +201,11 @@ const Navbar = ({ role }: NavbarProps) => {
       <div className="mt-16">
         {active === "Home" && <Home />}
 
-        {/* Applications link - render Application component when clicked */}
-        {active === "Applications" && <Application />}
+        {/* Applications link - render Applications page when clicked */}
+        {active === "Applications" && <ApplicationsPage />}
+
+        {/* When a single application's "View in Detail" is requested, render Application detail */}
+        {active === "Application" && <Application />}
 
         {/* Assigning & Tracking link - render the Assigning_and_tracking page */}
         {active === "Assigning & Tracking" && <Assigning_and_tracking />}
