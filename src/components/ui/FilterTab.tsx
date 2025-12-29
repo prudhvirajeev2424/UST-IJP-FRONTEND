@@ -2,13 +2,7 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-/**
- * FilterTab
- * Left-side filter panel used on the Applications page. It contains a date
- * selector, location dropdown placeholder, a fitment slider, and other
- * collapsible filter buttons. Currently these are visual controls; hook them
- * into state/queries as needed for filtering behavior.
- */
+// FilterTab: left-side filter panel with date, location and fitment controls
 const FilterTab: React.FC = () => {
   const [fitment, setFitment] = useState<number>(76);
 

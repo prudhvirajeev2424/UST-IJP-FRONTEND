@@ -25,3 +25,37 @@ export interface FilterOption {
   id: FilterType;
   label: string;
 }
+
+
+export interface SearchInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+}
+
+export interface ProgressBarProps {
+  percentage: number;
+  label?: string;
+  showPercentage?: boolean;
+}
+
+
+export interface StatsSummaryProps {
+  completedCount: number;
+  inProgressCount: number;
+  notStartedCount: number;
+  compact?: boolean;
+}
+
+export interface UserInfoProps {
+  name: string;
+  uid: string;
+  location: string;
+}
+
+
+export interface FilterPillProps {
+  label: string;
+  active?: boolean;
+  onClick?: () => void;
+}

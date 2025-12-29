@@ -1,15 +1,9 @@
 // components/ProfileCard.tsx
 import React, { useState } from "react";
 import DP from "../assets/DP.png";
-import type { Profile } from "../types";
+import type { Profile } from "../types/ApplicationProfile";
 
-/**
- * ProfileCard
- * Small, focused card used in the Kanban/grid view. It implements a hover
- * reveal layer which shows additional details and a "View in Detail" CTA.
- *
- * Keep this component self-contained to ease reuse in other list/grid views.
- */
+// ProfileCard: compact Kanban card with hover reveal and "View in Detail" CTA
 interface ProfileCardProps {
   profile: Profile;
 }
@@ -22,7 +16,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
 
   return (
     <div
-      className={`relative w-[320px] h-[294px] rounded-[10px] overflow-hidden font-rubik flex flex-col cursor-pointer transition-all duration-300 ease-out ${
+      className={`relative w-full max-w-[320px] min-h-[260px] rounded-[10px] overflow-hidden font-rubik flex flex-col cursor-pointer transition-all duration-300 ease-out ${
         isHovered ? "bg-[#6B6B6B]" : "bg-white"
       } focus:outline-none`}
       onMouseEnter={() => setIsHovered(true)}
@@ -30,7 +24,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
     >
       {/* HEADER SECTION - Always visible with smooth transition */}
       <div
-        className={`px-[25px] pt-[25px] pb-[15px] transition-colors duration-300 ease-out ${
+        className={`px-6 pt-6 pb-4 transition-colors duration-300 ease-out ${
           isHovered ? "bg-[#6B6B6B]" : "bg-white"
         }`}
       >
@@ -97,9 +91,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
       <div className="flex-1 relative">
         {/* DEFAULT VIEW CONTENT (LAYER 1) - Fades out on hover */}
         <div
-          className={`absolute inset-0 px-[25px] pb-[25px] transition-opacity duration-300 ease-out ${
+          className={`absolute inset-0 transition-opacity duration-300 ease-out ${
             isHovered ? "opacity-20 pointer-events-none" : "opacity-100"
           }`}
+          style={{ paddingLeft: 24, paddingRight: 24, paddingBottom: 24 }}
         >
           {/* SO ID */}
           <p className="text-[14px] font-normal text-[#006E74] mb-1">
@@ -142,22 +137,39 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
 
         {/* HOVER VIEW CONTENT (LAYER 2) - Fades in on hover */}
         <div
-          className={`absolute inset-x-0 px-[25px] pb-[25px] pt-[15px] rounded-t-md transition-opacity duration-300 ease-out ${
+          className={`absolute inset-x-0 rounded-t-md transition-opacity duration-300 ease-out ${
             isHovered ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
           style={{
             top: "-45px",
             bottom: "0",
             backgroundColor: "rgba(255,255,255,0.98)",
+            paddingLeft: 24,
+            paddingRight: 24,
+            paddingBottom: 24,
+            paddingTop: 12,
           }}
         >
           {/* Description */}
-          <p className="text-[14px] leading-[22px] text-[#231F20] font-normal line-clamp-6 w-[260px]">
+          <p className="text-[14px] leading-[22px] text-[#231F20] font-normal line-clamp-6">
             {profile.description}
           </p>
 
           {/* View Detail Button */}
-          <button className="absolute bottom-[25px] left-[25px] text-[#0097AC] font-medium text-[16px] flex items-center gap-2 transition-all duration-300 ease-out focus:outline-none">
+          <button
+            onClick={() => {
+              try {
+                window.dispatchEvent(
+                  new CustomEvent("navigate", {
+                    detail: { page: "Application", fromProfileId: profile.id },
+                  })
+                );
+              } catch (err) {
+                console.log("navigate to application", profile.id);
+              }
+            }}
+            className="absolute bottom-6 left-6 text-[#0097AC] font-medium text-[16px] flex items-center gap-2 transition-all duration-300 ease-out focus:outline-none"
+          >
             View in Detail
             <span className="text-[18px] leading-none">→</span>
           </button>

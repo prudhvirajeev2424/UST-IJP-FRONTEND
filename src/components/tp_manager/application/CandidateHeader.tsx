@@ -4,6 +4,7 @@ import type { Candidate } from "../../../types/candidate";
 import Avatar from "./common/Avatar";
 import Button from "./common/Button";
 import ShortlistModal from "./shortListModal/ShortlistModal"; // Import the ShortlistModal
+import RejectModal from "./rejectModal/RejectModal";
 import { useShortlist } from "./context/ShortlistContext";
 
 interface CandidateHeaderProps {
@@ -13,6 +14,7 @@ interface CandidateHeaderProps {
 const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setShortlisted, shortlisted } = useShortlist();
+  const [isRejectModalOpen, setIsRejectModalOpen] = React.useState(false);
 
   const handleShortlistClick = () => {
     if (shortlisted) return; // prevent opening again if already shortlisted
@@ -31,8 +33,18 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
       setShortlisted(true);
     } catch (e) {
       // if context isn't available, silently ignore
-      console.warn('Shortlist context not available', e);
+      console.warn("Shortlist context not available", e);
     }
+  };
+
+  const handleRejectClick = () => {
+    setIsRejectModalOpen(true);
+  };
+
+  const handleConfirmReject = (reason: string) => {
+    console.log("Candidate Rejected for Reason:", reason);
+    setIsRejectModalOpen(false);
+    // additional reject logic (API etc) could go here
   };
 
   return (
@@ -63,12 +75,20 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
           </div>
         </div>
         <div className="flex space-x-3">
-          <Button variant="secondary" disabled={shortlisted}>Reject</Button>
+          <Button
+            variant="secondary"
+            disabled={shortlisted}
+            onClick={handleRejectClick}
+          >
+            Reject
+          </Button>
           <button
             onClick={handleShortlistClick}
             disabled={shortlisted}
             aria-pressed={shortlisted}
-            className={`px-4 py-2 rounded text-white bg-[#0097AC] transition-colors duration-200 ease-in-out ${shortlisted ? 'opacity-50 cursor-not-allowed' : 'hover:bg-black'}`}
+            className={`px-4 py-2 rounded text-white bg-[#0097AC] transition-colors duration-200 ease-in-out ${
+              shortlisted ? "opacity-50 cursor-not-allowed" : "hover:bg-black"
+            }`}
           >
             Shortlist
           </button>
@@ -81,6 +101,13 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
         isOpen={isModalOpen}
         onClose={handleModalClose}
         onConfirm={handleConfirmShortlist}
+      />
+
+      {/* Reject Modal */}
+      <RejectModal
+        isOpen={isRejectModalOpen}
+        onClose={() => setIsRejectModalOpen(false)}
+        onConfirm={handleConfirmReject}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Certification } from '../../../types/candidate';
-import GroupIcon from '../../../assets/certificatecard.svg'; // adjust path if needed
+import GroupIcon from '../../../assets/certificatecard.svg';
 
 interface CertificationCardProps {
   certification: Certification;
@@ -8,16 +8,17 @@ interface CertificationCardProps {
 
 const CertificationCard: React.FC<CertificationCardProps> = ({ certification }) => {
   return (
-    <div className="p-6 bg-gray-50 rounded-lg text-center">
-      {/* Show the image aligned left */}
-      <div className="mx-auto mb-4 flex items-center justify-start">
+    <div className="p-6 bg-[#ECECE1] rounded-lg">
+      {/* Icon aligned left */}
+      <div className="mb-4">
         <img 
           src={GroupIcon} 
           alt="Certification badge" 
-          className="w-16 h-16 object-contain"
+          className="w-12 h-12 object-contain"
         />
       </div>
-      <h3 className="text-sm font-semibold text-gray-900 mb-1 text-left">
+      {/* Title aligned left */}
+      <h3 className="text-sm font-semibold text-gray-900 text-left leading-snug">
         {certification.title}
       </h3>
     </div>

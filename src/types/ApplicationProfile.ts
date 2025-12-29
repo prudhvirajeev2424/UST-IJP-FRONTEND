@@ -17,7 +17,7 @@ export interface Profile {
   /** Optional URL to the profile image/avatar */
   imageUrl?: string;
 }
-
+ 
 export interface Application {
   id: number;
   sid: string;
@@ -30,5 +30,6 @@ export interface Application {
   action: string;
   hasIcon: boolean;
 }
-
+ 
 export type { Profile as ProfileType, Application as ApplicationType };
+ 

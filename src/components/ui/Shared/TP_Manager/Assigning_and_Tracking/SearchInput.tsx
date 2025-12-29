@@ -1,10 +1,5 @@
 import React from "react";
-
-interface SearchInputProps {
-  value: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
-}
+import type { SearchInputProps } from "../../../../../types/AssigningandTrackingTypes";
 
 const SearchInput: React.FC<SearchInputProps> = ({
   value,
@@ -18,23 +13,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="
-          w-full
-          h-[49px]
-          pl-9
-          pr-3
-          bg-white
-          border
-          border-gray-light
-          rounded-md
-          text-sm
-          text-dark
-          placeholder:text-gray-primary
-          focus:outline-none
-          focus:ring-2
-          focus:ring-primary
-          focus:border-transparent
-        "
+        className={
+          "w-full h-[49px] pl-9 pr-3 bg-[#FFFFFF] border border-[#D7E0E3] rounded-[5px] text-sm text-dark placeholder:text-gray-primary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all opacity-100"
+        }
       />
     </div>
   );

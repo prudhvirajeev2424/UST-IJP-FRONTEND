@@ -1,11 +1,6 @@
 import React from "react";
+import type { StatsSummaryProps } from "../../../../types/AssigningandTrackingTypes";
 
-interface StatsSummaryProps {
-  completedCount: number;
-  inProgressCount: number;
-  notStartedCount: number;
-  compact?: boolean;
-}
 
 const colorMap = {
   completed: "text-green-600",

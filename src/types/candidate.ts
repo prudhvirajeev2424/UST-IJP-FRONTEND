@@ -42,7 +42,7 @@ export interface Skill {
 export interface Accolade {
   id: string;
   title: string;
-  description: string;
+  
 }
 
 export interface Testimonial {

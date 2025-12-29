@@ -1,16 +1,8 @@
 import React from "react";
-import type { Application } from "../types";
+import type { Application } from "../types/ApplicationProfile";
 import { User } from "lucide-react";
 
-/**
- * TableRow
- * Renders a single application row inside the ApplicationsTable.
- *
- * Notes:
- * - Only the first row is interactive (receives click/keyboard handlers). This
- *   was an explicit UX requirement so other rows remain non-focusable.
- * - The profile badge shows a tooltip on hover.
- */
+// TableRow: renders one application row; only the first row is interactive
 interface TableRowProps {
   application: Application;
   isFirst?: boolean;
@@ -46,11 +38,18 @@ export const TableRow: React.FC<TableRowProps> = ({
   const actionStyle = getActionColor(application.action);
 
   const handleActivate = () => {
-    // Navigation/detail opening should be wired by the page. Keep a console
-    // fallback for now as a no-op placeholder.
-    // TODO: replace with router navigation or detail panel open
-    // e.g. navigate(`/applications/${application.id}`)
-    console.log("open row", application.id);
+    // Dispatch a navigation event so the Navbar can render the Application
+    // detail view. We keep the console log as a fallback for debugging.
+    try {
+      window.dispatchEvent(
+        new CustomEvent("navigate", {
+          detail: { page: "Application", fromApplicationId: application.id },
+        })
+      );
+    } catch (err) {
+      // if CustomEvent isn't available for some reason, fallback to console
+      console.log("open row", application.id);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

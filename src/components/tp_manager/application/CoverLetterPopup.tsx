@@ -8,7 +8,6 @@ interface CoverLetterPopupProps {
 
 export default function CoverLetterPopup({
   onClose,
-  coverLetter,
 }: CoverLetterPopupProps) {
   const [isHovered, setIsHovered] = useState(false);
 

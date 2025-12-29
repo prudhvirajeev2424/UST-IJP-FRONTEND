@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Education } from '../../../types/candidate';
+import EducationIcon from '../../../assets/Education.svg';
 
 interface EducationItemProps {
   education: Education;
@@ -7,12 +8,34 @@ interface EducationItemProps {
 
 const EducationItem: React.FC<EducationItemProps> = ({ education }) => {
   return (
-    <div className="p-4 border rounded-md shadow-sm">
-      <h3 className="text-lg font-bold">{education.degree}</h3>
-      <p className="text-gray-700">{education.institution}</p>
-      <p className="text-sm text-gray-500">
-        {education.startYear} - {education.endYear}
-      </p>
+    <div className="ml-8">
+      {/* Timeline dot + date row */}
+      <div className="flex items-center space-x-2 text-sm text-gray-500 mb-4 -ml-6">
+        <div className="w-2 h-2 bg-teal-500 rounded-full" />
+        <span>
+          {education.startYear} - {education.endYear}
+        </span>
+      </div>
+
+      {/* Education card */}
+      <div className="p-6 rounded-lg relative bg-[#F2F7F8] shadow-sm flex items-start space-x-4">
+        {/* Icon directly (no container) */}
+        <img 
+          src={EducationIcon} 
+          alt="Education" 
+          className="w-25 h-25"
+        />
+
+        {/* Content */}
+        <div className="flex-1">
+          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+            {education.degree}
+          </h3>
+          <p className="text-sm text-gray-600">
+            {education.institution}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
