@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { X, Upload, FileText, Mail } from "lucide-react";
+import { X} from "lucide-react";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogTitle,
 } from "../../ui/Dialog";
 import { Textarea } from "../../ui";
-import { Button } from "../../ui";
+import copy from "../../../assets/copy.svg"
+import mail from "../../../assets/email.svg"
+import pdf from "../../../assets/Icon awesome-file-pdf.svg"
+import upload from "../../../assets/Icon feather-upload-cloud.svg"
 
 interface AttachedFile {
   name: string;
@@ -21,16 +23,12 @@ interface ApplyModalProps {
   jobTitle?: string;
 }
 
-const ApplyModal = ({
-  open,
-  onOpenChange,
-  onConfirm,
-  jobTitle,
-}: ApplyModalProps) => {
+const ApplyModal = ({ open, onOpenChange, onConfirm }: ApplyModalProps) => {
   const [coverLetter, setCoverLetter] = useState(
     `I am interested in joining the [Project Name] team at [Company Name]. With experience in [Key Skills], I have contributed to [mention relevant achievement]. I believe my expertise aligns well with the project's goals and would love the opportunity to contribute.
 Looking forward to discussing this further.`
   );
+
   const [attachedFiles, setAttachedFiles] = useState<AttachedFile[]>([
     { name: "Sarah Anderson - Resume.docx", type: "doc" },
     { name: "Approval Mail.eml", type: "email" },
@@ -41,128 +39,133 @@ Looking forward to discussing this further.`
   };
 
   const handleConfirm = () => {
-    // Handle application submission
-    console.log("Application submitted:", { coverLetter, attachedFiles });
     onConfirm();
     onOpenChange(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] p-0 gap-0 bg-background">
-        <DialogHeader className="p-6 pb-4 border-b border-border">
-          <div className="flex items-center justify-between">
-            <DialogTitle className="text-lg font-medium text-foreground">
+      <DialogContent
+        className="
+          w-[900px]
+          max-w-[900px]
+          h-[700px]
+          max-h-[700px]
+          p-0
+          bg-white
+          rounded-xl
+          shadow-2xl
+          overflow-hidden
+        "
+      >
+
+        {/* Header */}
+        <div className="bg-[#F3FAF9]">
+          <div className="flex items-center justify-between px-8 py-4 mt-6">
+            <DialogTitle className="text-lg font-semibold text-gray-900">
               Apply for opportunity
             </DialogTitle>
-            <button
-              onClick={() => onOpenChange(false)}
-              className="rounded-sm opacity-70 hover:opacity-100 transition-opacity"
-            >
-              <X className="h-4 w-4" />
+            <button onClick={() => onOpenChange(false)}>
+              <X className="h-5 w-5 text-gray-600" />
             </button>
           </div>
-        </DialogHeader>
+        </div>
 
-        <div className="p-6 space-y-6">
-          {/* Cover Letter Section */}
-          <div className="space-y-2">
-            <label className="text-sm text-muted-foreground">
+        {/* Body */}
+        <div className="px-8 py-8 space-y-8">
+
+          {/* Cover Letter */}
+          <div className="space-y-1">
+            <label className="text-xs text-gray-500">
               Cover Letter (How much you are a good fit for this role)
             </label>
+
             <div className="relative">
               <Textarea
                 value={coverLetter}
                 onChange={(e) => setCoverLetter(e.target.value)}
-                className="min-h-[100px] resize-none text-sm border-border focus:border-primary"
-                placeholder="Write your cover letter..."
+                placeholder={`I am interested in joining the [Project Name] team at [Company Name]. With experience in [Key Skills], I have contributed to [mention relevant achievement]. I believe my expertise aligns well with the project's goals and would love the opportunity to contribute.
+          Looking forward to discussing this further.`}
+                className="w-full min-h-[130px] text-sm leading-relaxed resize-none border border-gray-200 rounded-md p-3 text-gray-700 bg-white focus:outline-none focus:ring-0 focus:border-gray-300"
               />
-              <button className="absolute bottom-2 right-2 p-1.5 text-primary hover:bg-primary/10 rounded">
-                <FileText className="w-4 h-4" />
+
+              <button className="absolute bottom-2 right-2 p-1 text-[#006E74] hover:bg-gray-100 rounded">
+                <img src={copy} className="w-5 h-5" />
               </button>
             </div>
           </div>
 
-          {/* Attach Documents Section */}
-          <div className="space-y-3">
-            <div>
-              <h4 className="text-sm font-medium text-foreground">
-                Attach Documents
-              </h4>
-              <p className="text-xs text-muted-foreground">
-                Attach your resume and approval mail from reporting manager.
-              </p>
-            </div>
 
+          {/* Attach Documents */}
+          <div>
+            <h4 className="text-sm font-medium text-gray-900">Attach Documents</h4>
+            <p className="text-xs text-gray-500 mb-3">
+              Attach your resume and approval mail from reporting manager.
+            </p>
+
+            {/* Two Upload Zones */}
             <div className="grid grid-cols-2 gap-4">
-              {/* Upload Area 1 */}
-              <div className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center gap-2 hover:border-primary/50 transition-colors cursor-pointer">
-                <Upload className="w-6 h-6 text-muted-foreground" />
-                <div className="text-center">
-                  <span className="text-sm text-muted-foreground">
-                    Drag and drop to upload or{" "}
-                  </span>
-                  <span className="text-sm text-primary cursor-pointer hover:underline">
-                    Browse
-                  </span>
-                </div>
+
+              {/* Box 1 */}
+              <div className="
+                h-[140px] border-2 border-dashed border-gray-300 bg-gray-50
+                rounded-lg flex flex-col items-center justify-center gap-2
+                cursor-pointer hover:border-[#006E74] hover:bg-teal-50 transition
+              ">
+                <img src={upload} className="w-8 h-8 text-gray-400" />
+                <p className="text-sm text-gray-500">Drag and drop to upload or</p>
+                <span className="text-[#006E74] font-semibold cursor-pointer hover:underline text-sm">Browse</span>
               </div>
 
-              {/* Upload Area 2 */}
-              <div className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center gap-2 hover:border-primary/50 transition-colors cursor-pointer">
-                <Upload className="w-6 h-6 text-muted-foreground" />
-                <div className="text-center">
-                  <span className="text-sm text-muted-foreground">
-                    Drag and drop to upload or{" "}
-                  </span>
-                  <span className="text-sm text-primary cursor-pointer hover:underline">
-                    Browse
-                  </span>
-                </div>
+              {/* Box 2 */}
+              <div className="
+                h-[140px] border-2 border-dashed border-gray-300 bg-gray-50
+                rounded-lg flex flex-col items-center justify-center gap-2
+                cursor-pointer hover:border-[#006E74] hover:bg-teal-50 transition
+              ">
+                <img src={upload} className="w-8 h-8 text-gray-400" />
+                <p className="text-sm text-gray-500">Drag and drop to upload or</p>
+                <span className="text-[#006E74] font-semibold cursor-pointer hover:underline text-sm">Browse</span>
               </div>
             </div>
 
-            {/* Attached Files List */}
-            <div className="space-y-2">
+            {/* Attached Files */}
+            <div className="mt-4 space-y-2">
               {attachedFiles.map((file) => (
-                <div
-                  key={file.name}
-                  className="flex items-center gap-2 text-sm"
-                >
+                <div key={file.name} className="flex items-center gap-2 text-sm">
                   {file.type === "doc" ? (
-                    <FileText className="w-4 h-4 text-red-500" />
+                    <img src={pdf} className="w-4 h-4 text-red-500" />
                   ) : (
-                    <Mail className="w-4 h-4 text-blue-500" />
+                    <img src={mail}  className="w-4 h-4 text-blue-500" />
                   )}
-                  <span className="text-foreground">{file.name}</span>
-                  <button
-                    onClick={() => handleRemoveFile(file.name)}
-                    className="ml-1 text-muted-foreground hover:text-foreground"
-                  >
-                    <X className="w-3 h-3" />
+                  <span className="text-gray-800">{file.name}</span>
+                  <button onClick={() => handleRemoveFile(file.name)}>
+                    <X className="w-4 h-4 text-gray-500 hover:text-black" />
                   </button>
                 </div>
               ))}
             </div>
+
           </div>
         </div>
 
         {/* Footer */}
-        <div className="flex justify-start gap-3 p-6 pt-4 border-t border-border">
-          <Button
-            variant="outline"
+        <div className="px-8 py-6 flex justify-center gap-3">
+          <button
+            className="w-[98px] h-[49px] border border-black rounded text-black hover:bg-black hover:text-white"
             onClick={() => onOpenChange(false)}
-            className="px-6"
           >
             Cancel
-          </Button>
-          <Button
+          </button>
+
+          <button
+            className="w-[98px] h-[49px] bg-[#006E74] border border-black rounded text-white hover:bg-black"
             onClick={handleConfirm}
-            className="px-6 bg-primary hover:bg-primary/90"
           >
             Confirm
-          </Button>
+          </button>
         </div>
+
       </DialogContent>
     </Dialog>
   );
