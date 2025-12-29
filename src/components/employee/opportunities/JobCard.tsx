@@ -106,45 +106,49 @@ export const JobCard = ({ job }: { job: Job }) => {
 
   return (
     <div
-      className={`relative w-full h-[215px] rounded-[8px] overflow-hidden font-rubik flex flex-col cursor-pointer border border-transparent transition-all duration-500 ease-in-out ${
+      className={`relative w-full h-[230px] rounded-[10px] overflow-hidden font-rubik flex flex-col cursor-pointer border border-transparent transition-all duration-500 ease-in-out ${
         isHovered ? "shadow-xl" : "bg-white shadow-sm"
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`px-[15px] pt-[15px] pb-[10px] transition-colors duration-500 ${isHovered ? "bg-[#555555]" : "bg-white"}`}>
-        <span className={`text-[13.5px] font-normal uppercase transition-colors duration-500 block ${isHovered ? "text-white" : "text-[#006E74]"}`}>
+      {/* HEADER SECTION (SO#) */}
+      <div className={`px-[20px] pt-[20px] pb-[10px] transition-colors duration-500 ${isHovered ? "bg-[#555555]" : "bg-white"}`}>
+        <span className={`text-[15px] font-normal uppercase transition-colors duration-500 block ${isHovered ? "text-white" : "text-[#006E74]"}`}>
           {job.id}
         </span>
       </div>
 
       <div className="flex-1 relative bg-white">
-        <div className={`absolute inset-0 px-[15px] pb-[15px] transition-opacity duration-500 ease-in-out ${isHovered ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-          <h3 className="text-[13px] font-medium text-[#231F20] mb-[3px] truncate">{job.role}</h3>
-          <p className="text-[11.5px] text-[#7A7480] mb-[5px]">{job.band}</p>
-          <div className="flex items-center gap-1 text-[11.5px] text-[#7A7480] mb-[8px]">
-            <MapPin size={11} strokeWidth={2.5} />
+        {/* DEFAULT VIEW CONTENT (LAYER 1) */}
+        <div className={`absolute inset-0 px-[20px] pb-[20px] transition-opacity duration-500 ease-in-out ${isHovered ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+          <h3 className="text-[14px] leading-tight font-bold text-[#231F20] mb-[3px] truncate">{job.role}</h3>
+          <p className="text-[12px] text-[#7A7480] mb-[5px]">{job.band}</p>
+          <div className="flex items-center gap-1 text-[12px] text-[#7A7480] mb-[10px]">
+            <MapPin size={12} strokeWidth={2.5} className="text-[#7A7480]" />
             <span>{job.location}</span>
           </div>
 
           {job.status && (
-            <span className={`px-2 py-0.5 rounded-[3px] text-[9.5px] font-bold capitalize inline-block ${
+            <span className={`px-2 py-0.5 rounded-[3px] text-[10px] font-bold capitalize inline-block ${
               job.status === "Shortlisted" ? "bg-[#E6F9F3] text-[#01B27C]" : 
               job.status === "Actioned" ? "bg-[#FFF9E6] text-[#FFBF00]" : "bg-[#FFEBEB] text-[#FC6A59]"
             }`}> {job.status} </span>
           )}
 
-          <div className="absolute bottom-[15px] left-[15px] right-[15px] flex items-center gap-1.5">
-            <span className="bg-[#F2F7F8] px-2 py-0.5 rounded-full text-[10.5px] text-[#231F20]">JS</span>
-            <span className="bg-[#F2F7F8] px-2 py-0.5 rounded-full text-[10.5px] text-[#231F20]">Python</span>
-            <span className="border border-[#7A7480] px-1.5 rounded-full text-[10.5px] text-[#7A7480] font-medium">+2</span>
+          {/* SKILLS SECTION: BEIGE PILLS & CIRCULAR PLUS TAG */}
+          <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center gap-2">
+            <span className="bg-[#ECECE1] px-3 py-1 rounded-full text-[11px] text-[#231F20] font-medium whitespace-nowrap">Java Script</span>
+            <span className="bg-[#ECECE1] px-3 py-1 rounded-full text-[11px] text-[#231F20] font-medium whitespace-nowrap">Python</span>
+            <span className="bg-white border border-[#D7E0E3] w-7 h-7 flex items-center justify-center rounded-full text-[11px] text-[#7A7480] font-medium shrink-0">+2</span>
           </div>
         </div>
 
-        <div className={`absolute inset-0 px-[15px] pb-[15px] pt-[5px] bg-white transition-opacity duration-500 ease-in-out ${isHovered ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-          <p className="text-[11px] leading-[16px] text-[#231F20] font-normal line-clamp-6">{job.description}</p>
-          <button className="absolute bottom-[15px] left-[15px] text-[#0097AC] font-bold text-[11.5px] flex items-center gap-1 hover:text-black">
-            View Detail <span>→</span>
+        {/* HOVER VIEW CONTENT (LAYER 2) */}
+        <div className={`absolute inset-0 px-[20px] pb-[20px] pt-[5px] bg-white transition-opacity duration-500 ease-in-out ${isHovered ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+          <p className="text-[12px] leading-[18px] text-[#231F20] font-normal line-clamp-6">{job.description}</p>
+          <button className="absolute bottom-[20px] left-[20px] text-[#0097AC] font-bold text-[12px] flex items-center gap-1 hover:text-black">
+            View in Detail <span>→</span>
           </button>
         </div>
       </div>

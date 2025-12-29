@@ -41,6 +41,8 @@
 //     </header>
 //   );
 // };
+
+
 import { Bell } from "lucide-react";
 
 interface HeaderProps {
@@ -53,18 +55,20 @@ export const Header = ({ onBellClick, activePage, setActivePage }: HeaderProps) 
   const navItems = ['Home', 'Opportunities', 'Assigning & Tracking', 'My Applications'];
 
   return (
-    <header className="h-[60px] bg-white flex items-center justify-between px-10 border-b border-border-grey relative z-[100] w-full shrink-0">
+    <header className="h-[60px] bg-white flex items-center justify-between px-10 border-b border-[#D7E0E3] relative z-[100] w-full shrink-0 font-rubik">
+      {/* Logo */}
       <div className="flex items-center gap-1">
         <span className="text-[17px] font-bold text-[#231F20]">UST</span>
         <span className="text-[17px] font-light text-[#888]">IJP</span>
       </div>
       
+      {/* Navigation */}
       <nav className="flex gap-[22px] h-full items-center">
         {navItems.map((item) => (
           <span 
             key={item}
-            onClick={() => setActivePage(item)} // This switches the page in App.tsx
-            className={`cursor-pointer text-[12.5px] font-medium transition-all h-full flex items-center px-1 border-b-2 leading-none pt-1 ${
+            onClick={() => setActivePage(item)}
+            className={`cursor-pointer text-[12.5px] font-medium transition-all h-full flex items-center px-1 border-b-2 pt-1 ${
               activePage === item 
               ? 'text-[#006E74] border-[#006E74]' 
               : 'text-[#7A7480] border-transparent hover:text-[#006E74]'
@@ -75,11 +79,13 @@ export const Header = ({ onBellClick, activePage, setActivePage }: HeaderProps) 
         ))}
       </nav>
 
+      {/* Right Side Icons */}
       <div className="flex items-center gap-6">
         <div className="relative cursor-pointer text-[#7A7480]" onClick={onBellClick}>
           <Bell size={18} strokeWidth={1.5} />
           <span className="absolute -top-1 -right-1 bg-[#FC6A59] text-white w-3 h-3 text-[8px] rounded-full flex items-center justify-center font-bold">1</span>
         </div>
+        
         <div className="flex items-center gap-3">
           <div className="text-right">
             <span className="block text-[12.5px] font-bold text-[#231F20] leading-tight">Sarah Anderson</span>

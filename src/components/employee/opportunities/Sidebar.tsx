@@ -103,65 +103,77 @@
 //   );
 // };
 
+
 import { ChevronDown } from "lucide-react";
 import calendarImg from "../../../assets/calendar.jpg";
 
-interface SidebarProps { activeTab: string; }
-
-export const Sidebar = ({ activeTab }: SidebarProps) => {
+export const Sidebar = ({ activeTab }: { activeTab: string }) => {
   const sections = ["Matching Role", "Primary Skills", activeTab === "Applied" ? "Domains" : "Category"];
 
   return (
-    <div className="w-[280px] bg-white rounded-[8px] p-[18px] shadow-sm border border-[#D7E0E3] flex flex-col shrink-0">
-      <div className="flex justify-between items-center mb-4">
-        <span className="font-semibold text-[14px] text-[#231F20]">Filter</span>
-        <button className="text-[#0097AC] text-[11px] font-bold hover:underline">Clear All</button>
+    /* Width 420px, Height 850px as per XD spec */
+    <div className="w-[420px] h-[850px] bg-white rounded-[10px] p-[30px] shadow-sm border border-[#D7E0E3] flex flex-col">
+      <div className="flex justify-between items-center mb-[30px] w-full">
+        <span className="font-semibold text-[16px] text-[#231F20]">Filter</span>
+        <button className="text-[#0097AC] text-[14px] font-bold hover:underline">Clear All</button>
       </div>
 
-      <div className="space-y-4">
-        {/* Stacked radios vertically for better fit in 280px width */}
-        <div className="flex flex-col gap-2">
-          <label className="flex items-center cursor-pointer text-[10.5px] text-[#231F20] gap-1.5 whitespace-nowrap">
-            <input type="radio" name="av" className="accent-[#006E74] w-3.5 h-3.5" /> Currently Available
+      <div className="space-y-[25px]">
+        {/* Horizontal Radio Buttons Fix */}
+        <div className="flex flex-row items-center gap-6 mb-2">
+          <label className="flex items-center cursor-pointer text-[13px] text-[#231F20] gap-2 whitespace-nowrap">
+            <input type="radio" name="av" className="accent-[#006E74] w-[18px] h-[18px]" /> 
+            Currently Available
           </label>
-          <label className="flex items-center cursor-pointer text-[10.5px] text-[#231F20] gap-1.5 whitespace-nowrap">
-            <input type="radio" name="av" defaultChecked className="accent-[#006E74] w-3.5 h-3.5" /> Available After Date
+          <label className="flex items-center cursor-pointer text-[13px] text-[#231F20] gap-2 whitespace-nowrap">
+            <input type="radio" name="av" defaultChecked className="accent-[#006E74] w-[18px] h-[18px]" /> 
+            Available After Date
           </label>
         </div>
 
+        {/* Input sizing exactly as XD (360px centered) */}
         <div className="relative w-full">
-          <input type="text" className="w-full h-[36px] px-3 border border-[#D7E0E3] rounded-[5px] text-[12px] text-[#231F20] outline-none" defaultValue="12 - Jan - 2024" readOnly />
-          <img src={calendarImg} alt="c" className="absolute right-3 top-1/2 -translate-y-1/2 w-4" />
+          <input 
+            type="text" 
+            className="w-full h-[49px] px-[15px] border border-[#D7E0E3] rounded-[5px] text-[14px] text-[#231F20] outline-none bg-white" 
+            defaultValue="12 - January - 2024" 
+            readOnly 
+          />
+          <img src={calendarImg} alt="cal" className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5" />
         </div>
 
-        <div className="w-full h-[36px] px-3 border border-[#D7E0E3] rounded-[5px] flex items-center justify-between cursor-pointer text-[#7A7480] text-[12px]">
+        <div className="w-full h-[49px] px-[15px] border border-[#D7E0E3] rounded-[5px] flex items-center justify-between cursor-pointer text-[#7A7480] text-[14px]">
           <span>Location</span>
-          <ChevronDown size={14} />
+          <ChevronDown size={18} />
         </div>
       </div>
 
-      <hr className="my-5 border-[#F2F7F8]" />
+      <hr className="my-[35px] border-[#F2F7F8]" />
 
-      <div className="w-full px-1">
-        <h4 className="text-[12.5px] mb-6 text-[#231F20] font-medium">My Fitment</h4>
-        <div className="relative px-1">
-          <div className="absolute -top-[25px] left-[75%] -translate-x-1/2 bg-[#006E74] text-white px-1.5 py-0.5 rounded-[2px] text-[9px] font-bold">75%
-            <div className="absolute top-full left-1/2 -translate-x-1/2 border-[3px] border-transparent border-t-[#006E74]"></div>
+      <div className="w-full">
+        <h4 className="text-[15px] mb-10 text-[#231F20] font-medium">My Fitment</h4>
+        <div className="relative px-2">
+          {/* Slider Bubble */}
+          <div className="absolute -top-10 left-[75%] -translate-x-1/2 bg-[#006E74] text-white px-2 py-1 rounded-[2px] text-[12px] font-bold">
+            75%
+            <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-[#006E74]"></div>
           </div>
-          <div className="h-[1.5px] w-full bg-[#D7E0E3] relative">
+          {/* Slider Track */}
+          <div className="h-[2px] w-full bg-[#D7E0E3] relative">
             <div className="absolute h-full bg-[#006E74] w-[75%]"></div>
-            <div className="absolute -top-[4px] left-[75%] -translate-x-1/2 w-2.5 h-2.5 bg-[#006E74] rounded-full border border-white"></div>
+            <div className="absolute -top-[6.5px] left-[75%] -translate-x-1/2 w-4 h-4 bg-[#006E74] rounded-full border-2 border-white shadow-md"></div>
           </div>
         </div>
       </div>
 
-      <hr className="my-7 border-[#F2F7F8]" />
+      <hr className="my-[45px] border-[#F2F7F8]" />
 
-      <div className="space-y-2.5">
+      {/* Accordions */}
+      <div className="space-y-4">
         {sections.map((item) => (
-          <div key={item} className="w-full h-[36px] px-3 border border-[#D7E0E3] rounded-[5px] flex items-center justify-between cursor-pointer text-[#7A7480] text-[12px] bg-white">
+          <div key={item} className="w-full h-[49px] px-[15px] border border-[#D7E0E3] rounded-[5px] flex items-center justify-between cursor-pointer text-[#7A7480] text-[14px] bg-white">
             <span>{item}</span>
-            <ChevronDown size={14} />
+            <ChevronDown size={18} />
           </div>
         ))}
       </div>
