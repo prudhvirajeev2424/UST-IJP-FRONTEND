@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
-import { X, Upload } from 'lucide-react';
-import { Button } from '../../ui/Button';
-import uploadSvg from '../../../assets/upload_svg.svg';
+import { useState, useEffect, useRef } from "react";
+import { X, Upload } from "lucide-react";
+import { Button } from "../ui/Button";
+import uploadSvg from "../../assets/download.svg";
 
 interface UpdateResumeDrawerProps {
   isOpen: boolean;
@@ -9,10 +9,21 @@ interface UpdateResumeDrawerProps {
   onConfirm: () => void;
 }
 
-export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeDrawerProps) {
-  const [attachedFile, setAttachedFile] = useState<string | null>('Sarah Anderson - Resume.docx');
+export function UpdateResumeDrawer({
+  isOpen,
+  onClose,
+  onConfirm,
+}: UpdateResumeDrawerProps) {
+  const [attachedFile, setAttachedFile] = useState<string | null>(
+    "Sarah Anderson - Resume.docx"
+  );
   const [isDragging, setIsDragging] = useState(false);
-  const [rect, setRect] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
+  const [rect, setRect] = useState<{
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+  } | null>(null);
   const touchStartRef = useRef<number | null>(null);
 
   // compute position of the ResumeDetailModal and update rect when drawer opens
@@ -22,7 +33,7 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
       return;
     }
     const updateRect = () => {
-      const el = document.getElementById('resume-detail-modal');
+      const el = document.getElementById("resume-detail-modal");
       if (el) {
         const r = el.getBoundingClientRect();
         setRect({
@@ -39,19 +50,19 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
 
     updateRect();
     // update on resize/scroll to keep alignment
-    window.addEventListener('resize', updateRect);
-    window.addEventListener('scroll', updateRect, true);
+    window.addEventListener("resize", updateRect);
+    window.addEventListener("scroll", updateRect, true);
     return () => {
-      window.removeEventListener('resize', updateRect);
-      window.removeEventListener('scroll', updateRect, true);
+      window.removeEventListener("resize", updateRect);
+      window.removeEventListener("scroll", updateRect, true);
     };
   }, [isOpen]);
 
   // forward wheel delta to the modal's scroll container
   const forwardWheelToModal = (deltaY: number) => {
-    const sc = document.getElementById('resume-modal-scroll');
+    const sc = document.getElementById("resume-modal-scroll");
     if (sc) {
-      sc.scrollBy({ top: deltaY, behavior: 'auto' });
+      sc.scrollBy({ top: deltaY, behavior: "auto" });
     }
   };
 
@@ -92,7 +103,6 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
     }
   };
 
-  
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -109,7 +119,7 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
   return (
     <div className="fixed inset-0 z-[60]">
       {/* Overlay (below drawer) */}
-      <div 
+      <div
         className="fixed inset-0 bg-black/50"
         onClick={onClose}
         style={{ zIndex: 60 }}
@@ -117,7 +127,7 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
         onTouchStart={handleOverlayTouchStart}
         onTouchMove={handleOverlayTouchMove}
       />
-      
+
       {/* Drawer aligned to ResumeDetailModal when open (solid white panel) */}
       <div
         className="fixed left-1/2 top-[480px] bottom-0 -translate-x-1/2 w-[1000px] bg-white shadow-xl z-50 flex flex-col"
@@ -127,11 +137,11 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
           // left: 235,
           width: 1000,
           height: 680,
-          backgroundColor: '#FFFFFF',
-          borderRadius: '10px 10px 0 0',
-          boxSizing: 'border-box',
+          backgroundColor: "#FFFFFF",
+          borderRadius: "10px 10px 0 0",
+          boxSizing: "border-box",
           zIndex: 70,
-          overflow: 'hidden',
+          overflow: "hidden",
         }}
       >
         <style>{`
@@ -140,11 +150,13 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
             to { transform: translateX(-50%) translateY(0); }
           }
         `}</style>
-        
+
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-3 border-b border-border">
-          <h2 className="text-lg font-semibold text-foreground">Update resume?</h2>
-          <button 
+          <h2 className="text-lg font-semibold text-foreground">
+            Update resume?
+          </h2>
+          <button
             onClick={onClose}
             className="p-2 hover:bg-muted rounded-lg transition-colors"
             aria-label="Close drawer"
@@ -155,21 +167,23 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
 
         {/* Content - ensure left-aligned text */}
         <div className="p-6 space-y-1 text-left">
-          <p className="text-sm text-muted-foreground">Upload your resume in a PDF format</p>
-          
+          <p className="text-sm text-muted-foreground">
+            Upload your resume in a PDF format
+          </p>
+
           {/* Drop Zone */}
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             className={`rounded-lg p-6 transition-colors flex flex-col items-center justify-center text-center ${
-              isDragging ? 'border-primary' : ''
+              isDragging ? "border-primary" : ""
             }`}
             style={{
               minHeight: 80,
-              border: '1px dashed var(---d7e0e3)',
-              background: '#F7F9FA',
-              borderRadius: '10px',
+              border: "1px dashed var(---d7e0e3)",
+              background: "#F7F9FA",
+              borderRadius: "10px",
               opacity: 1,
             }}
           >
@@ -181,7 +195,7 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
               className="mb-3 object-contain"
             />
             <p className="text-sm text-muted-foreground">
-              Drag and drop to upload or{' '}
+              Drag and drop to upload or{" "}
               <label className="text-primary cursor-pointer hover:underline">
                 Browse
                 <input
@@ -198,13 +212,24 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
           {attachedFile && (
             <div className="flex items-center gap-1">
               <div className="w-8 h-5 bg-red-100 rounded flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-red-600" fill="currentColor">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-                  <path d="M14 2v6h6" fill="none" stroke="currentColor" strokeWidth="2"/>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-5 h-5 text-red-600"
+                  fill="currentColor"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
+                  <path
+                    d="M14 2v6h6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
                 </svg>
               </div>
-              <span className="text-sm text-foreground flex-1">{attachedFile}</span>
-              <button 
+              <span className="text-sm text-foreground flex-1">
+                {attachedFile}
+              </span>
+              <button
                 onClick={handleRemoveFile}
                 className="p-1 hover:bg-muted rounded transition-colors"
                 aria-label="Remove file"
@@ -217,11 +242,7 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
 
         {/* Footer */}
         <div className="flex items-center justify-center gap-3 px-6 py-4 border-t border-border">
-          <Button
-            variant="outline"
-            onClick={onClose}
-            className="px-6 py-5"
-          >
+          <Button variant="outline" onClick={onClose} className="px-6 py-5">
             Cancel
           </Button>
           <Button
