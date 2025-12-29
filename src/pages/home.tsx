@@ -2,34 +2,35 @@ import React from "react";
 import { useActiveRole } from "../context/ActiveRoleContext";
 import EmpHome from "./layout/EmpHome";
 import WfmHome from "./layout/WfmHome";
-import ProfileCard from "../components/tp_manager/home/ProfileCard";
 import ApplicationStatus from "../components/tp_manager/home/ApplicationStatus";
 import RecentActivities from "../components/tp_manager/home/RecentActivities";
-import type { Profile } from "../types";
-import { profiles } from "../data/profiles";
 import ProfilesReceived from "../components/tp_manager/home/ProfilesReceived";
-
-const sampleProfiles: Profile[] = profiles;
 
 const TpManagerHome: React.FC = () => {
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-gray-50 pt-6 pb-8 scrollbar-hide overflow-auto">
-      <div className="max-w-7xl mx-auto w-full px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          {/* Left: Application status */}
-          <aside className="lg:col-span-1 order-2 lg:order-1">
-            <ApplicationStatus />
-          </aside>
+    <div className="w-[1920px] h-[1080px] bg-[#F2F7F8] mx-auto overflow-auto">
+      {/* Full-width pale dashboard band (inside the fixed-size home) */}
+      <div className="w-full px-6 py-6 h-full">
+        <div className="bg-[#f3f8f8] rounded-2xl p-8 w-full relative h-full">
+          {/* Center the inner content to a comfortable max width while letting the pale band span the home container */}
+          <div className="max-w-[1920px] mx-auto relative h-full">
+            {/* ApplicationStatus positioned slightly left of the centered container (adjacent to logo) */}
+            <div className="hidden lg:block absolute -left-6 top-8 z-10">
+              <ApplicationStatus />
+            </div>
 
-          {/* Center: profile cards / profiles received */}
-          <div className="lg:col-span-3 order-1 lg:order-2">
-            <ProfilesReceived />
+            {/* RecentActivities positioned slightly right of the centered container (adjacent to profile) */}
+            <div className="hidden lg:block absolute -right-6 top-8 z-10">
+              <RecentActivities />
+            </div>
+
+            <div className="grid grid-cols-1 gap-y-6 items-start lg:ml-[320px] lg:mr-[320px] h-full">
+              {/* Center: profile cards / profiles received (full width) */}
+              <div className="order-1 lg:order-1">
+                <ProfilesReceived />
+              </div>
+            </div>
           </div>
-
-          {/* Right: recent activities */}
-          <aside className="lg:col-span-1 order-3 lg:order-3">
-            <RecentActivities />
-          </aside>
         </div>
       </div>
     </div>

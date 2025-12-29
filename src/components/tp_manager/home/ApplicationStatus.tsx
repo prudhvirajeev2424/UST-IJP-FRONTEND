@@ -1,8 +1,6 @@
-import React from "react";
-
-const ApplicationStatus: React.FC = () => {
+const ApplicationStatus = () => {
   return (
-  <div className="bg-white rounded-[10px] p-5 w-full shadow-sm mt-5 h-fit">
+    <div className="bg-white rounded-[10px] p-5 w-full shadow-sm mt-5 box-border">
       {/* Title */}
       <h2 className="text-[16px] font-normal text-[#231F20] text-center mb-3 leading-[24px]">
         Application Status
@@ -58,22 +56,22 @@ const ApplicationStatus: React.FC = () => {
       </div>
 
       {/* Stats */}
-      <div className="flex justify-around text-center pt-4">
-        <div>
+      <div className="flex justify-between items-center gap-6 pt-4">
+        <div className="flex flex-col items-center min-w-[80px]">
           <div className="text-[32px] font-normal leading-[38px] text-[#01B27C]">
             28
           </div>
           <div className="text-sm text-[#231F20]">Accepted</div>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center min-w-[80px]">
           <div className="text-[32px] font-normal leading-[38px] text-[#881E87]">
             20
           </div>
           <div className="text-sm text-[#231F20]">Shortlisted</div>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center min-w-[80px]">
           <div className="text-[32px] font-normal leading-[38px] text-[#FC6A59]">
             08
           </div>
