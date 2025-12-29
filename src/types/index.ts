@@ -7,6 +7,7 @@ export type Profile = {
   uid?: string;
   score: number;
   status?: string;
+  description?: string;
   skills: string[];
   avatar?: string;
 };
