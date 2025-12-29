@@ -7,8 +7,9 @@ export type Activity = {
 };
 
 export const activities: Activity[] = [
-  { id: "1", candidate: "Zamira Peterson", position: "Developer III - B3", status: "Allocated", time: "Now" },
-  { id: "2", candidate: "Andrea Peterson", position: "Developer III - B3", status: "Allocated", time: "1m" },
-  { id: "3", candidate: "John Mathews", position: "Developer II - B2", status: "Allocated", time: "2d" },
-  { id: "4", candidate: "Sophia Williams", position: "Developer I - B1", status: "Rejected", time: "3d" },
+  { id: "1", candidate: "Eric Warne", position: "Developer I - A1", status: "Allocated", time: "12 hrs ago" },
+  { id: "2", candidate: "James Albertson", position: "Product Manager", status: "Allocated", time: "Yesterday" },
+  { id: "3", candidate: "James Albertson", position: "Product Manager", status: "Rejected", time: "3 days ago" },
+  { id: "4", candidate: "James Albertson", position: "Product Designer", status: "Rejected", time: "3 days ago" },
+
 ];
