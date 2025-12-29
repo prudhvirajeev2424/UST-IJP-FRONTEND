@@ -75,37 +75,40 @@ const Assigning_and_tracking: React.FC = () => {
   return (
     <>
       {/* Scroll wrapper: remaining viewport below the main Navbar */}
-      <div className="h-[calc(100vh-64px)] overflow-auto scrollbar-thin-4 bg-[#F2F7F8]">
-        <div className="max-w-[1920px] mx-auto px-6 py-6 relative ">
+      <div className="h-[calc(100vh-64px)] overflow-auto scrollbar-thin-1 bg-[#F2F7F8]">
+        <div className="max-w-[1920px] mx-auto px-6 py-6 relative">
           {/* ================= TOP BAR ================= */}
-          <div className="flex items-start justify-between gap-6 mb-6">
-            {/* LEFT */}
+          <div className="flex items-center justify-between gap-4 mb-6">
             <h1 className="font-rubik font-medium text-[18px] leading-[20px] text-[#231F20] whitespace-nowrap mt-6">
               Task & Course Tracker
             </h1>
 
-            {/* CENTER */}
-            <div className="flex items-center gap-2">
-              <FilterPill
-                label="All"
-                active={activeFilter === "all"}
-                onClick={() => setActiveFilter("all")}
-              />
-              <FilterPill
-                label="< 50% completed"
-                active={activeFilter === "below50"}
-                onClick={() => setActiveFilter("below50")}
-              />
-              <FilterPill
-                label="> 50% completed"
-                active={activeFilter === "above50"}
-                onClick={() => setActiveFilter("above50")}
-              />
+            {/* CENTER: Filter Buttons (moved to middle) */}
+            <div className="flex items-center justify-center w-full max-w-[600px]">
+              <div className="flex items-center gap-4">
+                <FilterPill
+                  label="All"
+                  active={activeFilter === "all"}
+                  onClick={() => setActiveFilter("all")}
+                />
+                <FilterPill
+                  label="< 50% completed"
+                  active={activeFilter === "below50"}
+                  onClick={() => setActiveFilter("below50")}
+                />
+                <FilterPill
+                  label="> 50% completed"
+                  active={activeFilter === "above50"}
+                  onClick={() => setActiveFilter("above50")}
+                />
+              </div>
             </div>
 
-            {/* RIGHT */}
-            <div className="flex items-center gap-3">
-              <SearchInput value={searchQuery} onChange={setSearchQuery} />
+            {/* RIGHT: Search Input + Export and Assign Task Buttons */}
+            <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center w-full max-w-[600px]">
+                <SearchInput value={searchQuery} onChange={setSearchQuery} />
+              </div>
 
               <button className="w-[48px] h-[48px] flex items-center justify-center">
                 <img
@@ -114,62 +117,36 @@ const Assigning_and_tracking: React.FC = () => {
                   className="w-[48px] h-[48px] object-contain"
                 />
               </button>
-
               <button
                 onClick={() => setIsAssignModalOpen(true)}
-                className="
-                w-[138px]
-                h-[49px]
-                bg-[#006E74]
-                rounded-[4px]
-                font-rubik
-                font-medium
-                text-white
-                text-[14px]
-                flex
-                items-center
-                justify-center
-                whitespace-nowrap
-                hover:bg-[#006E74]
-              "
+                className="w-[138px] h-[49px] bg-[#006E74] rounded-[4px] text-white text-[16px] flex items-center justify-center whitespace-nowrap hover:bg-[#006E74] font-[Rubik],Regular font-normal px-4"
               >
                 Assign a task
               </button>
             </div>
           </div>
 
-          <div
-            className="
-    grid
-    grid-cols-[1fr_auto]
-    gap-x-[40.5px]
-  "
-          >
+          {/* ================= CONTENT LAYOUT ================= */}
+          <div className="grid grid-cols-[1fr_auto] gap-x-[40.5px]">
             {/* TASK CARDS (LEFT) */}
-            <div
-              className="
-    grid
-    grid-cols-[repeat(auto-fit,320px)]
-    gap-x-[40.5px]
-    gap-y-[16px]
-    justify-start
-  "
-            >
+            <div className="grid grid-cols-[repeat(auto-fit,320px)] gap-x-[40.5px] gap-y-[16px] justify-start">
               {filteredTasks.map((task) => (
                 <TaskCard key={task.id} task={task} />
               ))}
             </div>
 
             {/* STATS SUMMARY (RIGHT) */}
+            <div className="self-start">
               <StatsSummary
                 completedCount={stats.completed}
                 inProgressCount={stats.inProgress}
                 notStartedCount={stats.notStarted}
               />
-
+            </div>
           </div>
         </div>
       </div>
+
       {showBanner && (
         <SuccessBanner
           message={bannerMessage}

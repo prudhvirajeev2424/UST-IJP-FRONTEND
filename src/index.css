@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Remove outer browser scrollbar: let internal app containers control scrolling */
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+  font-family: "Rubik", Regular;
+  font-weight: 400; /* regular */
+}
+
 :root {
   --unnamed-color-ffbf00: #ffbf00;
   ---ffffff: #ffffff;
@@ -35,8 +45,8 @@
     display: none;
   }
   .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;     /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }
 
@@ -87,13 +97,11 @@
   }
 }
 
-
-
 /* Compact grid for skills: 4 items per row, tightly packed */
 .skill-grid {
   display: grid;
   grid-template-columns: repeat(4, auto);
-  gap: 8px 10px;       /* row gap 8px, column gap 10px */
+  gap: 8px 10px; /* row gap 8px, column gap 10px */
   justify-content: start;
   align-items: center;
 }
@@ -103,13 +111,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 33px;                 /* design height */
-  padding: 0 10px;              /* slightly tighter horizontal padding */
-  background: #ECECE1;          /* exact background color */
-  border-radius: 30px;          /* pill shape */
+  height: 33px; /* design height */
+  padding: 0 10px; /* slightly tighter horizontal padding */
+  background: #ecece1; /* exact background color */
+  border-radius: 30px; /* pill shape */
   box-sizing: border-box;
   opacity: 1;
-  border: 1px solid rgba(0,0,0,0.06); /* subtle border */
+  border: 1px solid rgba(0, 0, 0, 0.06); /* subtle border */
   box-shadow: none;
   cursor: default;
   white-space: nowrap;
@@ -120,11 +128,11 @@
 
 /* Skill text inside the pill */
 .skill-text {
-  font-family: Rubik, sans-serif;
+  font-family: Rubik, Regular;
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0;
-  color: #231F20;
+  color: #231f20;
   display: inline-block;
   padding: 0;
 }
@@ -138,7 +146,7 @@
 
 /* Experience container card (light bg, 10px radius, no shadow) */
 .experience-box {
-  background: rgba(242,247,248,0.6); /* #F2F7F8 at 60% */
+  background: rgba(242, 247, 248, 0.6); /* #F2F7F8 at 60% */
   border-radius: 10px;
   padding: 16px;
   box-sizing: border-box;
@@ -147,7 +155,7 @@
 
 /* Education card: same style as experiences, flat (no shadow) */
 .education-box {
-  background: rgba(242,247,248,0.6); /* #F2F7F8 at 60% */
+  background: rgba(242, 247, 248, 0.6); /* #F2F7F8 at 60% */
   border-radius: 10px;
   padding: 16px;
   box-sizing: border-box;
@@ -176,9 +184,9 @@
 .timeline-dot {
   width: 12px;
   height: 12px;
-  background: #0097AC;
+  background: #0097ac;
   border-radius: 50%;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
   box-sizing: border-box;
   z-index: 10;
   position: relative;
@@ -186,7 +194,7 @@
 
 /* Certificate card - remove shadow */
 .cert-box {
-  background: rgba(236,236,225,0.4); /* #ECECE1 at 40% */
+  background: rgba(236, 236, 225, 0.4); /* #ECECE1 at 40% */
   border-radius: 10px;
   padding: 16px;
   box-sizing: border-box;
@@ -196,7 +204,7 @@
 
 /* Accolade card - remove shadow */
 .accolade-box {
-  background: rgba(136,30,135,0.1); /* keep background setting */
+  background: rgba(136, 30, 135, 0.1); /* keep background setting */
   border-radius: 10px;
   padding: 16px;
   box-sizing: border-box;
@@ -206,7 +214,7 @@
 
 /* Testimonial card - flat */
 .testimonial-box {
-  background: rgba(242,247,248,0.6); /* #F2F7F8 at 60% */
+  background: rgba(242, 247, 248, 0.6); /* #F2F7F8 at 60% */
   border-radius: 10px;
   padding: 16px;
   box-sizing: border-box;
@@ -214,25 +222,33 @@
 }
 
 /* Minor helpers to align visuals with spec */
-.experience-box h4 { margin: 0 0 8px 0; }
-.experience-box p { margin: 0; }
+.experience-box h4 {
+  margin: 0 0 8px 0;
+}
+.experience-box p {
+  margin: 0;
+}
 
 /* Preserve the hide-scrollbar rules */
-.hide-scrollbar::-webkit-scrollbar { display: none; }
-.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 /* Table Header Styling */
 .opportunities-table thead tr {
-  background: #D7E0E3 !important;
+  background: #d7e0e3 !important;
   opacity: 0.15 !important;
   border-radius: 10px 10px 0px 0px !important;
   height: 60px !important;
-  
 }
 
 /* Table Row Styling */
 .opportunities-table tbody tr {
-  background: #FFFFFF !important;
+  background: #ffffff !important;
   opacity: 1 !important;
   height: 65px !important;
 }
