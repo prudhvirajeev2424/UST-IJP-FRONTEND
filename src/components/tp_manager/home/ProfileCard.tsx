@@ -1,87 +1,129 @@
-import React from "react";
-import ScoreBadge from "../../common/ScoreBadge/ScoreBadge";
+import { useState } from "react";
 import type { Profile } from "../../../types";
-import avatarImg from "../../../assets/DP_2@2x.jpg";
+import ScoreBadge from "../../common/ScoreBadge/ScoreBadge";
+import ProfilePic from "../../../assets/DP_2@2x.jpg";
 
-const ProfileCard: React.FC<{ profile: Profile }> = ({ profile }) => {
+const ProfileCard = ({ profile }: { profile: Profile }) => {
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <div className="relative w-full cursor-pointer rounded-xl border border-gray-200 bg-white overflow-hidden box-border h-64">
-      <div className="p-3 flex flex-col justify-between h-full box-border">
-        {/* ---------- HEADER ---------- */}
-        <div className="mb-2 flex items-start justify-between">
-          <div className="flex items-center gap-3 min-w-0">
-            {/* Avatar image: square with rounded corners */}
-            <div className="flex items-center justify-center">
-              <img
-                src={avatarImg}
-                alt={`${profile.name} avatar`}
-                className="h-12 w-12 rounded-lg object-cover"
-              />
-            </div>
-
-            {/* Info */}
-            <div className="min-w-0">
-              <div className="mb-[2px] text-[14px] font-semibold text-gray-900">
-                {profile.name}
-              </div>
-              <div className="mb-[1px] text-[12px] text-gray-500">
-                {profile.developer}
-              </div>
-              <div className="text-[11px] text-gray-400">{profile.uid}</div>
-            </div>
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative w-[300px] h-64 cursor-pointer rounded-xl border border-gray-200 bg-white p-3 overflow-hidden box-border"
+    >
+      {/* ---------- HEADER ---------- */}
+      <div className="mb-2 flex items-start justify-between">
+        <div className="flex items-center gap-3">
+          {/* Avatar */}
+          <div className="h-12 w-12 rounded-lg overflow-hidden bg-gray-200">
+            <img
+              src={ProfilePic}
+              alt="Profile"
+              className="h-full w-full object-cover rounded-lg"
+            />
           </div>
 
-          {/* Score */}
-          <div className="shrink-0 ml-2">
-            <ScoreBadge score={profile.score} />
+          {/* Info */}
+          <div>
+            <div className="mb-[2px] text-[14px] font-semibold text-gray-900">
+              {profile.name}
+            </div>
+            <div className="mb-[1px] text-[12px] text-gray-500">
+              {profile.developer}
+            </div>
+            <div className="text-[11px] text-gray-400">{profile.uid}</div>
           </div>
         </div>
 
-        {/* ---------- ID ---------- */}
-        <div className="mb-2 mt-1 text-[14px] font-semibold text-teal-500">
-          {profile.id}
-        </div>
+        {/* Score */}
+        <ScoreBadge score={profile.score} />
+      </div>
 
-        {/* ---------- STATUS (badge) ---------- */}
-        <div className="mb-3">
-          <span
-            className={
-              `inline-flex items-center rounded-lg px-3 py-1 text-[11px] font-medium ` +
-              (profile.status === "Allocated"
-                ? "bg-teal-50 text-teal-600"
-                : profile.status === "Rejected"
-                ? "bg-red-50 text-red-600"
-                : "bg-gray-50 text-gray-600")
-            }
-          >
-            {profile.status}
-          </span>
-        </div>
+      {/* ---------- ID ---------- */}
+      <div className="mb-2 mt-1 text-[14px] font-semibold text-teal-500">
+        {profile.id}
+      </div>
 
-        {/* ---------- SKILLS ---------- */}
-        <div className="mt-3 flex flex-wrap items-center gap-2 max-w-full">
-          {profile.skills.map((skill, i) => {
-            const isCount = skill.startsWith("+");
+      {/* ---------- STATUS ---------- */}
+      <div className="mb-3 inline-block rounded bg-[#F2F7F8] px-3 py-1 text-[11px] font-medium text-[#0097AC]">
+        {profile.status}
+      </div>
 
-            return isCount ? (
-              // +2 → outlined pill (no background)
-              <span
-                key={i}
-                className="rounded-xl border border-gray-300 px-3 py-1 text-[11px] font-medium text-gray-500 bg-transparent"
-              >
-                {skill}
-              </span>
-            ) : (
-              // Normal skill → filled pill
-              <span
-                key={i}
-                className="rounded-xl bg-gray-100 px-3 py-1 text-[11px] text-gray-700"
-              >
-                {skill}
-              </span>
+      {/* ---------- SKILLS ---------- */}
+      <div className="flex flex-wrap items-center gap-2">
+        {profile.skills.map((skill, i) => {
+          const isCount = skill.startsWith("+");
+
+          return isCount ? (
+            // +2 → outlined pill (no background)
+            <span
+              key={i}
+              className="
+                rounded-xl
+                border border-gray-300
+                px-3 py-1
+                text-[11px]
+                font-medium
+                text-gray-500
+                bg-transparent
+              "
+            >
+              {skill}
+            </span>
+          ) : (
+            // Normal skill → filled pill
+            <span
+              key={i}
+              className="
+                rounded-xl
+                bg-gray-100
+                px-3 py-1
+                text-[11px]
+                text-gray-700
+              "
+            >
+              {skill}
+            </span>
+          );
+        })}
+      </div>
+
+      {/* Hover visuals: overlay (top) and bottom panel */}
+      <div
+        className={`absolute inset-x-0 top-0 h-1/2 rounded-t-xl bg-gray-600/60 pointer-events-none transition-all duration-300 ease-out ${
+          hovered ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
+        }`}
+      />
+
+      <div
+        className={`absolute left-0 right-0 bottom-0 mx-0 w-full bg-white p-3 rounded-b-xl shadow-lg transition-all duration-300 ease-out ${
+          hovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+        }`}
+        style={{ height: "120px" }}
+      >
+        <p className="mb-2 text-sm text-gray-700">
+          Highly skilled Java Developer with expertise in designing, developing,
+          and maintaining robust Java applications.
+        </p>
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            window.dispatchEvent(
+              new CustomEvent("navigate", {
+                detail: {
+                  view: "Applications",
+                  source: "card",
+                  profileId: profile.id,
+                },
+              })
             );
-          })}
-        </div>
+          }}
+          className="inline-flex items-center text-sm font-medium text-teal-600"
+        >
+          View in Detail →
+        </a>
       </div>
     </div>
   );

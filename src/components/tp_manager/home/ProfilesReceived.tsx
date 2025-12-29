@@ -75,9 +75,8 @@ const ProfilesReceived: React.FC = () => {
       </div>
 
       {/* ---------- CONTENT ---------- */}
-      {viewMode === "grid" ? (
-        // 1 column mobile, 2 columns small screens, 3 columns on large screens to ensure three cards per row
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {viewMode === 'grid' ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-6">
           {profiles.map((profile) => (
             <ProfileCard key={profile.id} profile={profile} />
           ))}

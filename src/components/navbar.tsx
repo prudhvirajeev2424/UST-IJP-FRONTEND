@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
 import LogoImg from "../assets/Group 172287@2x.jpg";
@@ -22,7 +22,31 @@ const Navbar = ({ role }: NavbarProps) => {
   /* ---------------- STATE ---------------- */
   const [view, setView] = useState<View>("app"); // 👈 controls landing vs app
   const [active, setActive] = useState("Home");
+  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);
   const [showNotifications, setShowNotifications] = useState(false);
+
+  // listen for global navigation events (ProfileCard dispatches CustomEvent 'navigate')
+  useEffect(() => {
+    const handler = (e: Event) => {
+      try {
+        const custom = e as CustomEvent;
+        const viewName = custom?.detail?.view as string | undefined;
+        const profileId = custom?.detail?.profileId as string | undefined;
+
+        if (viewName) {
+          // ensure we are in app view and set the active tab
+          setView("app");
+          setActive(viewName);
+        }
+        if (profileId) setSelectedProfileId(profileId);
+      } catch (err) {
+        // ignore
+      }
+    };
+
+    window.addEventListener("navigate", handler as EventListener);
+    return () => window.removeEventListener("navigate", handler as EventListener);
+  }, []);
 
   /* ---------------- LANDING PAGE ---------------- */
   if (view === "landing") {
@@ -77,7 +101,14 @@ const Navbar = ({ role }: NavbarProps) => {
                 {links.map((link) => (
                   <div key={link} className="relative">
                     <button
-                      onClick={() => setActive(link)}
+                      onClick={() => {
+                        // If user clicks the Applications nav link directly, clear any selected profile
+                        // so the Application page will render the plain white view instead of a detail view.
+                        if (link.toLowerCase().includes('application')) {
+                          setSelectedProfileId(null);
+                        }
+                        setActive(link);
+                      }}
                       className={`px-2 py-1 text-sm font-semibold ${
                         active === link
                           ? "text-black"
@@ -177,7 +208,7 @@ const Navbar = ({ role }: NavbarProps) => {
       <div className="mt-20">
         {active === "Home" && <Home />}
         {active === "Applications" && effectiveRole === "TP Manager" && (
-          <Application />
+          <Application profileId={selectedProfileId ?? undefined} />
         )}
 
         {active !== "Home" && active !== "Applications" && (
