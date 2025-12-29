@@ -11,20 +11,52 @@ import Testimonials from "../../components/TP_Manager/application/Testimonials";
 import ProjectInfo from "../../components/TP_Manager/application/ProjectInfo";
 import CoverLetter from "../../components/TP_Manager/application/CoverLetter";
 
-import {
-  candidateData,
-  jobs,
-  certifications,
-  education,
-  skills,
-  accolades,
-  testimonials,
-  projectData,
-} from "../../data/mockData";
+import { 
+  candidateData, 
+  jobs, 
+  certifications, 
+  education, 
+  skills, 
+  accolades, 
+  testimonials, 
+  projectData 
+} from '../../data/mockData';
+import { profiles } from '../../data/profiles';
+import type { Candidate } from '../../types/candidate';
 
-const TP_Applications: React.FC = () => {
-  const [activeSection, setActiveSection] = useState("introduction");
+interface TPApplicationsProps {
+  profileId?: string | undefined;
+}
+
+const TP_Applications: React.FC<TPApplicationsProps> = ({ profileId }) => {
+  const [activeSection, setActiveSection] = useState('introduction');
   const contentRef = useRef<HTMLDivElement>(null);
+  const [candidate, setCandidate] = useState<Candidate | null>(candidateData);
+
+  useEffect(() => {
+    if (!profileId) {
+      setCandidate(candidateData);
+      return;
+    }
+
+    const found = profiles.find((p) => p.id === profileId);
+    if (found) {
+      const mapped: Candidate = {
+        id: found.id,
+        name: found.name,
+        position: found.developer ?? 'Developer',
+        phone: found.uid ?? 'N/A',
+        email: '',
+        avatar: found.avatar ?? '',
+        reportingManager: 'N/A',
+        introduction: candidateData.introduction ?? found.name,
+      };
+
+      setCandidate(mapped);
+    } else {
+      setCandidate(candidateData);
+    }
+  }, [profileId]);
 
   useEffect(() => {
     if (!contentRef.current) return;
@@ -65,9 +97,9 @@ const TP_Applications: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#F2F7F8" }}>
-      {/* CandidateHeader - directly below navbar */}
-      <CandidateHeader candidate={candidateData} />
+    <div className="min-h-screen" style={{ backgroundColor: '#F2F7F8' }}>
+  {/* CandidateHeader - directly below navbar */}
+  <CandidateHeader candidate={candidate ?? candidateData} />
 
       <div className="flex px-8 py-6 space-x-6">
         {/* Left Sidebar */}
@@ -82,7 +114,7 @@ const TP_Applications: React.FC = () => {
           className="flex-1 bg-white rounded-lg shadow-sm p-8 overflow-y-auto max-h-[calc(100vh-240px)] scrollbar-hide scroll-smooth"
         >
           <section id="introduction" className="scroll-mt-20">
-            <Introduction introduction={candidateData.introduction} />
+            <Introduction introduction={candidate?.introduction ?? candidateData.introduction} />
           </section>
 
           <section id="experience" className="scroll-mt-20">
