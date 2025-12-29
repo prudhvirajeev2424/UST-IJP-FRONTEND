@@ -24,7 +24,7 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-end"
+      className="fixed inset-0 z-50 flex items-start justify-end "
       style={{ paddingTop: "80px", paddingRight: "60px" }}
     >
       {/* backdrop */}
@@ -35,16 +35,7 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
       />
 
       {/* panel - exact dimensions from XD */}
-      <div
-        className="relative z-10 flex flex-col shadow-xl"
-        style={{
-          width: "518px",
-          height: "850px",
-          background: "#FFFFFF 0% 0% no-repeat padding-box",
-          borderRadius: "10px",
-          opacity: 1,
-        }}
-      >
+      <div className="relative z-10 flex flex-col shadow-xl w-[518px] h-[850px] bg-white rounded-[10px] opacity-100" >
         {/* Header */}
         <div
           className="flex-shrink-0 px-6"
