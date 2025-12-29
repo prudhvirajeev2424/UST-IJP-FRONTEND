@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Mail, Bell, X } from "lucide-react";
-import ProfilePic from "../assets/DP@2x.png";
-import Home from "../pages/Home";
+import ProfilePic from "../assets/DP@2x.png"
 
 interface NavbarProps {
   role?: string | null;
 }
 
-const Navbar = ({ role }: NavbarProps) => {
+const Navbar = ({ role = "Employee" }: NavbarProps) => {
   const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
 
@@ -17,7 +16,12 @@ const Navbar = ({ role }: NavbarProps) => {
   if (role === "TP Manager") {
     links = allLinks;
   } else if (role === "Employee") {
-    links = ["Home", "Opportunities", "Assigning & Tracking", "My Applications"];
+    links = [
+      "Home",
+      "Opportunities",
+      "Assigning & Tracking",
+      "My Applications",
+    ];
   } else if (role === "WFM") {
     links = allLinks.filter(
       (l) => l !== "Assigning & Tracking" && l !== "Reports"
@@ -27,17 +31,22 @@ const Navbar = ({ role }: NavbarProps) => {
   }
 
   return (
-    <>
     <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
-      <div className="max-w-7xl mx-auto w-full px-6 py-[14px]">
+      <div className="max-w-[1920px] mx-auto w-full px-6 py-[14px]">
         <div className="flex items-center justify-between">
           {/* Left */}
           <div className="flex-shrink-0">
             <div className="flex items-center">
-              <span className="text-2xl font-bold" style={{ color: "var(--003c51)" }}>
+              <span
+                className="text-2xl font-bold"
+                style={{ color: "var(--003c51)" }}
+              >
                 UST
               </span>
-              <span className="text-2xl font-light ml-1" style={{ color: "var(--7a7480)" }}>
+              <span
+                className="text-2xl font-light ml-1"
+                style={{ color: "var(--7a7480)" }}
+              >
                 IJP
               </span>
             </div>
@@ -48,17 +57,18 @@ const Navbar = ({ role }: NavbarProps) => {
             <div className="flex gap-5">
               {links.map((link) => (
                 <div key={link} className="relative">
-                  <a
-                    href="#"
+                  <button
+                    type="button"
                     onClick={() => setActive(link)}
                     className={`text-sm font-semibold px-2 py-1 ${
                       active === link
                         ? "text-black"
                         : "text-gray-500 hover:text-black"
                     }`}
+                    aria-current={active === link ? "page" : undefined}
                   >
                     {link}
-                  </a>
+                  </button>
 
                   {active === link && (
                     <span className="absolute -bottom-0.5 left-0 right-0 h-1 bg-teal-600 rounded-full" />
@@ -70,9 +80,9 @@ const Navbar = ({ role }: NavbarProps) => {
 
           {/* Right */}
           <div className="flex-shrink-0 flex items-center gap-4 relative">
-            {role !== "WFM" ? (
+            {role !== "WFM" && (
               <Mail size={24} className="text-gray-700" />
-            ) : null}
+            )}
 
             {/* Bell */}
             <div className="relative">
@@ -93,9 +103,7 @@ const Navbar = ({ role }: NavbarProps) => {
 
                   {/* Header */}
                   <div className="flex items-center justify-between px-4 py-3 border-b border-teal-600">
-                    <h3 className="text-sm font-semibold">
-                      Notifications (3)
-                    </h3>
+                    <h3 className="text-sm font-semibold">Notifications (3)</h3>
                     <X
                       size={18}
                       className="cursor-pointer opacity-80 hover:opacity-100"
@@ -112,9 +120,7 @@ const Navbar = ({ role }: NavbarProps) => {
                       />
                       <div className="text-sm">
                         <p>
-                          <span className="font-semibold">
-                            Zamira Peterson
-                          </span>{" "}
+                          <span className="font-semibold">Zamira Peterson</span>{" "}
                           has applied for the SO 32443388
                         </p>
                         <span className="text-xs opacity-80">Now</span>
@@ -128,9 +134,7 @@ const Navbar = ({ role }: NavbarProps) => {
                       />
                       <div className="text-sm">
                         <p>
-                          <span className="font-semibold">
-                            Zamira Peterson
-                          </span>{" "}
+                          <span className="font-semibold">Zamira Peterson</span>{" "}
                           has uploaded the resume and manager’s approval mail
                         </p>
                         <span className="text-xs opacity-80">1m</span>
@@ -144,9 +148,7 @@ const Navbar = ({ role }: NavbarProps) => {
                       />
                       <div className="text-sm">
                         <p>
-                          <span className="font-semibold">
-                            Angie Johnson
-                          </span>{" "}
+                          <span className="font-semibold">Angie Johnson</span>{" "}
                           has been approved for the SO 32987221
                         </p>
                         <span className="text-xs opacity-80">2 days</span>
@@ -176,11 +178,6 @@ const Navbar = ({ role }: NavbarProps) => {
         </div>
       </div>
     </header>
-    {/* Page Content */}
-      <main className="mt-20 p-6">
-        {active === "Home" && <Home />}
-      </main>
-      </>
   );
 };
 

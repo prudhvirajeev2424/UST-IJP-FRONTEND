@@ -17,7 +17,7 @@ const ApplicationStatus = () => {
   const selected = (4 / total) * circumference;
 
   return (
-    <div className="bg-white w-[360px] h-[416px] rounded-[10px] opacity-100 absolute top-[116px] left-[60px] shadow-lg border border-gray-200">
+    <div className=" bg-white w-[360px] h-[416px] rounded-[10px] opacity-100 absolute top-[116px] left-[60px] shadow-lg border border-gray-200">
       <h3 className="font-rubik text-[16px] leading-[19px] font-medium tracking-[0px] text-[#231F20] text-center mt-6 mb-4 py-2">
         Application Status
       </h3>
@@ -97,7 +97,7 @@ const ApplicationStatus = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 gap-4 px-1 mb-4 ">
+      <div className="grid grid-cols-2 gap-4  mb-4 ">
         {stats.map((stat) => (
           <div key={stat.label} className="flex items-center gap-2 justify-start px-4 ">
             <p

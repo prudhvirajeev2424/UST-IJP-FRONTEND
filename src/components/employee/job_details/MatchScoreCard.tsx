@@ -1,4 +1,4 @@
-import { Card, CardContent } from '../components/ui';
+import { Card, CardContent } from "../../ui";
 
 interface MatchScoreCardProps {
   percentage: number;
@@ -6,15 +6,15 @@ interface MatchScoreCardProps {
 
 export function MatchScoreCard({ percentage }: MatchScoreCardProps) {
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-success';
-    if (score >= 60) return 'text-warning';
-    return 'text-destructive';
+    if (score >= 80) return "text-success";
+    if (score >= 60) return "text-warning";
+    return "text-destructive";
   };
 
   const getTrackColor = (score: number) => {
-    if (score >= 80) return 'stroke-success';
-    if (score >= 60) return 'stroke-warning';
-    return 'stroke-destructive';
+    if (score >= 80) return "stroke-success";
+    if (score >= 60) return "stroke-warning";
+    return "stroke-destructive";
   };
 
   const circumference = 2 * Math.PI * 40;
@@ -41,7 +41,9 @@ export function MatchScoreCard({ percentage }: MatchScoreCardProps) {
               fill="none"
               strokeWidth="8"
               strokeLinecap="round"
-              className={`transition-all duration-1000 ease-out ${getTrackColor(percentage)}`}
+              className={`transition-all duration-1000 ease-out ${getTrackColor(
+                percentage
+              )}`}
               style={{
                 strokeDasharray: circumference,
                 strokeDashoffset,

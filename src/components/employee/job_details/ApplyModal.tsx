@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { X, Upload, FileText, Mail } from 'lucide-react';
+import { useState } from "react";
+import { X, Upload, FileText, Mail } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -7,11 +7,11 @@ import {
   DialogTitle,
   Button,
   Textarea,
-} from '../components/ui';
+} from "../../ui";
 
 interface AttachedFile {
   name: string;
-  type: 'doc' | 'email';
+  type: "doc" | "email";
 }
 
 interface ApplyModalProps {
@@ -21,14 +21,18 @@ interface ApplyModalProps {
   jobTitle?: string;
 }
 
-const ApplyModal = ({ open, onOpenChange, onConfirm, jobTitle }: ApplyModalProps) => {
+const ApplyModal = ({
+  open,
+  onOpenChange,
+  onConfirm,
+}: ApplyModalProps) => {
   const [coverLetter, setCoverLetter] = useState(
     `I am interested in joining the [Project Name] team at [Company Name]. With experience in [Key Skills], I have contributed to [mention relevant achievement]. I believe my expertise aligns well with the project's goals and would love the opportunity to contribute.
 Looking forward to discussing this further.`
   );
   const [attachedFiles, setAttachedFiles] = useState<AttachedFile[]>([
-    { name: 'Sarah Anderson - Resume.docx', type: 'doc' },
-    { name: 'Approval Mail.eml', type: 'email' },
+    { name: "Sarah Anderson - Resume.docx", type: "doc" },
+    { name: "Approval Mail.eml", type: "email" },
   ]);
 
   const handleRemoveFile = (fileName: string) => {
@@ -37,7 +41,7 @@ Looking forward to discussing this further.`
 
   const handleConfirm = () => {
     // Handle application submission
-    console.log('Application submitted:', { coverLetter, attachedFiles });
+    console.log("Application submitted:", { coverLetter, attachedFiles });
     onConfirm();
     onOpenChange(false);
   };
@@ -68,7 +72,7 @@ Looking forward to discussing this further.`
             <div className="relative">
               <Textarea
                 value={coverLetter}
-                onChange={(e) => setCoverLetter(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setCoverLetter(e.target.value)}
                 className="min-h-[100px] resize-none text-sm border-border focus:border-primary"
                 placeholder="Write your cover letter..."
               />
@@ -81,7 +85,9 @@ Looking forward to discussing this further.`
           {/* Attach Documents Section */}
           <div className="space-y-3">
             <div>
-              <h4 className="text-sm font-medium text-foreground">Attach Documents</h4>
+              <h4 className="text-sm font-medium text-foreground">
+                Attach Documents
+              </h4>
               <p className="text-xs text-muted-foreground">
                 Attach your resume and approval mail from reporting manager.
               </p>
@@ -92,8 +98,12 @@ Looking forward to discussing this further.`
               <div className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center gap-2 hover:border-primary/50 transition-colors cursor-pointer">
                 <Upload className="w-6 h-6 text-muted-foreground" />
                 <div className="text-center">
-                  <span className="text-sm text-muted-foreground">Drag and drop to upload or </span>
-                  <span className="text-sm text-primary cursor-pointer hover:underline">Browse</span>
+                  <span className="text-sm text-muted-foreground">
+                    Drag and drop to upload or{" "}
+                  </span>
+                  <span className="text-sm text-primary cursor-pointer hover:underline">
+                    Browse
+                  </span>
                 </div>
               </div>
 
@@ -101,8 +111,12 @@ Looking forward to discussing this further.`
               <div className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center gap-2 hover:border-primary/50 transition-colors cursor-pointer">
                 <Upload className="w-6 h-6 text-muted-foreground" />
                 <div className="text-center">
-                  <span className="text-sm text-muted-foreground">Drag and drop to upload or </span>
-                  <span className="text-sm text-primary cursor-pointer hover:underline">Browse</span>
+                  <span className="text-sm text-muted-foreground">
+                    Drag and drop to upload or{" "}
+                  </span>
+                  <span className="text-sm text-primary cursor-pointer hover:underline">
+                    Browse
+                  </span>
                 </div>
               </div>
             </div>
@@ -114,7 +128,7 @@ Looking forward to discussing this further.`
                   key={file.name}
                   className="flex items-center gap-2 text-sm"
                 >
-                  {file.type === 'doc' ? (
+                  {file.type === "doc" ? (
                     <FileText className="w-4 h-4 text-red-500" />
                   ) : (
                     <Mail className="w-4 h-4 text-blue-500" />
