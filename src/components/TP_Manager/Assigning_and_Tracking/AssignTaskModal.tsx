@@ -35,7 +35,23 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
       />
 
       {/* panel - exact dimensions from XD */}
-      <div className="relative z-10 flex flex-col shadow-xl w-[518px] h-[850px] bg-white rounded-[10px] opacity-100" >
+      <div
+        className="relative z-10 flex flex-col shadow-xl"
+        style={{
+          position: "fixed",
+          top: "80px",
+          right: "60px",
+          // prefer the exact design size on large screens, but be responsive on smaller viewports
+          width: "min(518px, 90vw)",
+          maxWidth: "518px",
+          height: "min(850px, calc(100vh - 230px))",
+          maxHeight: "850px",
+          background: "#FFFFFF 0% 0% no-repeat padding-box",
+          borderRadius: "10px",
+          opacity: 1,
+          overflow: "hidden",
+        }}
+      >
         {/* Header */}
         <div
           className="flex-shrink-0 px-6"
