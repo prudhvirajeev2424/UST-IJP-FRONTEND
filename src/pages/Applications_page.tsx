@@ -42,8 +42,9 @@ const ApplicationsPage: React.FC = () => {
         <div className="flex-1 w-full min-w-0">
           <div className="bg-white rounded-lg shadow-sm w-full overflow-hidden">
             {view === "table" ? (
-              // Table view with CSS-based responsive scrolling
-              <div className="w-full max-h-[calc(100vh-220px)] overflow-auto">
+              // Table view: constrain scrolling only on small viewports.
+              // At wider viewports (md and up) show full table without internal scroll
+              <div className="w-full max-h-[calc(100vh-220px)] overflow-auto md:max-h-none md:overflow-visible">
                 <ApplicationsTable applications={mockApplications} />
               </div>
             ) : (
