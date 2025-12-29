@@ -1,5 +1,5 @@
 import React from "react";
-import type { Application } from "../types";
+import type { Application } from "../types/ApplicationProfile";
 import { User } from "lucide-react";
 
 // TableRow: renders one application row; only the first row is interactive

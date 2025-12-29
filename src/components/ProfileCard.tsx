@@ -1,21 +1,18 @@
 // components/ProfileCard.tsx
 import React, { useState } from "react";
 import DP from "../assets/DP.png";
-import type { Profile } from "../types/index";
+import type { Profile } from "../types/ApplicationProfile";
 
 // ProfileCard: compact Kanban card with hover reveal and "View in Detail" CTA
 interface ProfileCardProps {
   profile: Profile;
 }
 
-
 const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-
   // No per-profile avatar: we always show project DP.png — if avatars are
   // introduced later, replace DP import with profile.avatar.
-
 
   return (
     <div
@@ -65,7 +62,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
               if (fit > 75) color = "#01B27C"; // green
               else if (fit >= 50) color = "#D97706"; // amber
 
-
               return (
                 <div
                   style={{
@@ -91,7 +87,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
         </div>
       </div>
 
-
       {/* BODY SECTION - Relative container for two layers */}
       <div className="flex-1 relative">
         {/* DEFAULT VIEW CONTENT (LAYER 1) - Fades out on hover */}
@@ -105,7 +100,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           <p className="text-[14px] font-normal text-[#006E74] mb-1">
             {profile.soId}
           </p>
-
 
           {/* Status - shown inside a pill per design */}
           <div className="pt-2 mb-4">
@@ -122,7 +116,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
               {profile.status}
             </div>
           </div>
-
 
           {/* Skills - placed directly after status (not absolute) */}
           <div className="mt-2 flex items-center gap-2 flex-wrap">
@@ -141,7 +134,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
             )}
           </div>
         </div>
-
 
         {/* HOVER VIEW CONTENT (LAYER 2) - Fades in on hover */}
         <div
@@ -162,7 +154,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           <p className="text-[14px] leading-[22px] text-[#231F20] font-normal line-clamp-6">
             {profile.description}
           </p>
-
 
           {/* View Detail Button */}
           <button
@@ -188,6 +179,4 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
   );
 };
 
-
 export default ProfileCard;
-

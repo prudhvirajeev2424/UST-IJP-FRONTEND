@@ -1,5 +1,5 @@
 import React from "react";
-import type { Application } from "../types";
+import type { Application } from "../types/ApplicationProfile";
 import { TableRow } from "./TableRow";
 
 // ApplicationsTable: renders applications list with a sticky header for scrolling
