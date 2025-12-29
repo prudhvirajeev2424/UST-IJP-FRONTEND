@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import Navbar from "../components/navbar";
-import Home from "./Home";
+import Home from "./home";
 
 // Create context for active role
 export const ActiveRoleContext = createContext<{
