@@ -1,4 +1,5 @@
 import React from "react";
+import { useActiveRole } from "../../pages/landing_page";
 import { ArrowLeft, Grid, List } from "lucide-react";
 
 /**
@@ -25,8 +26,12 @@ const StatusTabs: React.FC<StatusTabsProps> = ({
   onViewChange,
   view = "table",
 }) => {
-  const tabs = ["All", "Pending Action", "Accepted", "Rejected"];
+  const { activeRole } = useActiveRole();
 
+  const tabs =
+    activeRole && activeRole.toLowerCase() === "wfm"
+      ? ["All", "Pending", "Interviewing", "Selected", "Allocated", "Rejected"]
+      : ["All", "Pending Action", "Accepted", "Rejected"];
   return (
     <div className="px-4 md:px-8 py-2 mb-4">
       <div className="grid grid-cols-1 md:[grid-template-columns:420px_1fr_auto] items-center gap-6 mb-0">
