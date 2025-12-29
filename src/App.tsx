@@ -17,8 +17,8 @@
 
 
 import React, { useState } from "react";
-import { Header } from "./components/employee/opportunities/Header";
-import { NotificationPanel } from "./components/employee/opportunities/NotificationPanel";
+import { Header } from "./components/Employee/opportunities/Header";
+import { NotificationPanel } from "./components/Employee/opportunities/NotificationPanel";
 
 // IMPORT TEAM PAGES HERE
 import Opportunities from "./pages/Opportunies";
