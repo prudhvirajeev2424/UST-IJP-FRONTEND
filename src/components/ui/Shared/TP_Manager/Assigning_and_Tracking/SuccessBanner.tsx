@@ -15,7 +15,6 @@ const SuccessBanner: React.FC<SuccessBannerProps> = React.memo(
     return (
       <div
         role="alert"
-        className="fixed left-1/2 top-[75px] z-50 transform -translate-x-1/2"
         className="fixed left-1/2 top-[65px] z-50 transform -translate-x-1/2"
       >
         <div className="max-w-[900px] w-full px-4">
