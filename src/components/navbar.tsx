@@ -53,7 +53,9 @@ const Navbar = ({ role }: NavbarProps) => {
     "My Applications": <ApplicationsPage />,
     Opportunities: <ApplicationsPage />,
     "Assigning & Tracking": <Assigning_and_tracking />,
-    Reports: <ReportsPage />,
+    // Render ReportsPage without its internal Navbar when embedded here so
+    // the top-level Navbar (this component) remains the primary header.
+    Reports: <ReportsPage showNavbar={false} />,
   };
 
   return (

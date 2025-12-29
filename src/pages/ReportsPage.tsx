@@ -43,21 +43,30 @@ import MatchingJobsModal from "../components/TP_Manager/Reports/MatchingJobsModa
 
 /**
  * ReportsPage - Main container for Talent Pool Reports
- * 
+ *
  * This page serves as the primary interface for talent pool managers to:
  * 1. View all employees currently in the talent pool
  * 2. Search and filter employees (search currently disabled)
  * 3. View matching job opportunities for each employee
  * 4. Navigate to other report sections (via sidebar)
- * 
+ *
  * @returns {JSX.Element} Full-page reports interface
  */
-const ReportsPage: React.FC = () => {
+interface ReportsPageProps {
+  /**
+   * When false, do not render the page-level Navbar. This allows embedding the
+   * Reports content inside another layout (like the top Navbar) without
+   * duplicating navigation.
+   */
+  showNavbar?: boolean;
+}
+
+const ReportsPage: React.FC<ReportsPageProps> = ({ showNavbar = true }) => {
   /**
    * Selected employee for viewing matching jobs
    * Set when user clicks "View matching jobs" button
    * Reset to null when modal closes
-   * 
+   *
    * @type {Employee | null}
    */
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
@@ -68,7 +77,7 @@ const ReportsPage: React.FC = () => {
    * Controls visibility of the matching jobs modal
    * Opened when user clicks "View matching jobs"
    * Closed via modal close button or backdrop click
-   * 
+   *
    * @type {boolean}
    */
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,19 +86,19 @@ const ReportsPage: React.FC = () => {
    * Controls sidebar drawer state on mobile
    * Only affects mobile viewports (< 1024px)
    * Desktop sidebar is always visible (not controlled by this state)
-   * 
+   *
    * @type {boolean}
    */
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   /**
    * Opens the matching jobs modal for a selected employee
-   * 
+   *
    * Triggered by clicking "View matching jobs" button in employee table.
    * Sets both the selected employee and modal visibility state.
-   * 
+   *
    * @param {Employee} employee - The employee to view matching jobs for
-   * 
+   *
    * @example
    * handleViewMatchingJobs(employeeData)
    * // Result: Modal opens showing jobs matching employeeData
@@ -101,12 +110,12 @@ const ReportsPage: React.FC = () => {
 
   /**
    * Closes the matching jobs modal and resets state
-   * 
+   *
    * Triggered by:
    * - Clicking the modal close button
    * - Clicking outside the modal (backdrop)
    * - Pressing Escape key (if Modal component supports it)
-   * 
+   *
    * Resets both modal visibility and selected employee to ensure
    * clean state for the next modal open.
    */
@@ -117,10 +126,10 @@ const ReportsPage: React.FC = () => {
 
   /**
    * Toggles sidebar drawer visibility on mobile
-   * 
+   *
    * Only affects mobile viewports where sidebar is a drawer.
    * Desktop sidebar is always visible and unaffected by this function.
-   * 
+   *
    * Triggered by:
    * - Floating action button (bottom-left on mobile)
    * - Clicking overlay backdrop
@@ -138,11 +147,11 @@ const ReportsPage: React.FC = () => {
         - Navbar at top, content area fills remaining space
       */}
       <div className="flex flex-col h-screen">
-        {/* 
-          Fixed Navigation Bar
-          - Spans full width
-        */}
-        <Navbar />
+        {/* Only render the page-level Navbar when requested. When this
+            component is embedded inside the existing `Navbar` (see
+            `src/components/navbar.tsx`) we disable the inner Navbar to avoid
+            duplicate headers. */}
+        {showNavbar && <Navbar />}
 
         {/* 
           Content Area Container
@@ -163,12 +172,14 @@ const ReportsPage: React.FC = () => {
             onClick={toggleSidebar}
             className="lg:hidden fixed bottom-4 left-4 z-50 w-12 h-12 rounded-full shadow-lg flex items-center justify-center stroke-white"
             style={{ backgroundColor: "#0097AC" }}
-            aria-label={isSidebarOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-label={
+              isSidebarOpen ? "Close navigation menu" : "Open navigation menu"
+            }
             aria-expanded={isSidebarOpen}
           >
-            <svg 
-              className="w-6 h-6" 
-              fill="none" 
+            <svg
+              className="w-6 h-6"
+              fill="none"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
@@ -363,7 +374,7 @@ const ReportsPage: React.FC = () => {
                       >
                         Talent Pool employee list
                       </h1>
-                      
+
                       {/* 
                         Page Subtitle/Description
                         - Slightly smaller and lighter than title
