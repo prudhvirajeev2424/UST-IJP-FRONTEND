@@ -43,23 +43,19 @@ interface DialogContentProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
-  ({ className = "", children, ...props }, ref) => (
+  ({ className, children, ...props }, ref) => (
     <div
       ref={ref}
-      className={
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg " +
-        "translate-x-[-50%] translate-y-[-50%] gap-0 border bg-background " +
-        "shadow-lg sm:rounded-lg overflow-hidden " +
-        "animate-in fade-in-0 zoom-in-95 " +
+      className={cn(
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg sm:rounded-lg animate-in fade-in-0 zoom-in-95",
         className
-      }
+      )}
       {...props}
     >
       {children}
     </div>
   )
 );
-
 DialogContent.displayName = "DialogContent";
 
 const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (

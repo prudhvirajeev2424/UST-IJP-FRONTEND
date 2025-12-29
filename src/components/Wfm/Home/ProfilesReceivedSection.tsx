@@ -9,7 +9,7 @@ export default function ProfilesReceivedSection() {
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
 
     return (
-        <section className="w-full">
+        <section className="w-1000px">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold text-gray-800">Profiles Received</h2>
