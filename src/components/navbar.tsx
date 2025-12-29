@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { Mail, Bell, X } from "lucide-react";
-import ProfilePic from "../assets/DP@2x.png";
-
-interface NavbarProps {
-  role?: string | null;
-}
+import ProfilePic from "/src/assets/DP@2x.png";
 
 const Navbar = ({ role = "Employee" }: NavbarProps) => {
   const [active, setActive] = useState("Home");
@@ -52,10 +48,22 @@ const Navbar = ({ role = "Employee" }: NavbarProps) => {
             </div>
           </div>
 
-          {/* Center Nav */}
-          <nav className="flex-1 flex justify-center">
-            <div className="flex gap-5">
-              {links.map((link) => (
+          {/* Navbar Links */}
+          <nav className="ml-80 flex gap-5">
+            {links.map((link) => {
+              // determine route for known pages; fallback to '#' for non-routed items
+              const path =
+                link === "Home"
+                  ? "/home"
+                  : link === "Applications"
+                  ? "/applications"
+                  : link === "Assigning & Tracking"
+                  ? "/assigning"
+                  : link === "Reports"
+                  ? "/reports"
+                  : "#";
+
+              return (
                 <div key={link} className="relative">
                   <button
                     type="button"
@@ -74,9 +82,10 @@ const Navbar = ({ role = "Employee" }: NavbarProps) => {
                     <span className="absolute -bottom-0.5 left-0 right-0 h-1 bg-teal-600 rounded-full" />
                   )}
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </nav>
+        </div>
 
           {/* Right */}
           <div className="flex-shrink-0 flex items-center gap-4 relative">
@@ -84,22 +93,22 @@ const Navbar = ({ role = "Employee" }: NavbarProps) => {
               <Mail size={24} className="text-gray-700" />
             )}
 
-            {/* Bell */}
-            <div className="relative">
-              <Bell
-                size={24}
-                className="text-gray-700 cursor-pointer"
-                onClick={() => setShowNotifications(!showNotifications)}
-              />
-              <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
-                3
-              </span>
+          {/* Bell */}
+          <div className="relative">
+            <Bell
+              size={24}
+              className="text-gray-700 cursor-pointer"
+              onClick={() => setShowNotifications(!showNotifications)}
+            />
+            <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
+              3
+            </span>
 
-              {/* Notifications Panel */}
-              {showNotifications && (
-                <div className="absolute right-0 mt-3 w-96 rounded-xl bg-teal-700 text-white shadow-xl">
-                  {/* Arrow */}
-                  <div className="absolute -top-2 right-6 h-4 w-4 rotate-45 bg-teal-700" />
+            {/* 🔔 Notification Dropdown */}
+            {showNotifications && (
+              <div className="absolute right-0 mt-3 w-96 rounded-xl bg-teal-700 text-white shadow-xl">
+                {/* Arrow */}
+                <div className="absolute -top-2 right-6 h-4 w-4 rotate-45 bg-teal-700" />
 
                   {/* Header */}
                   <div className="flex items-center justify-between px-4 py-3 border-b border-teal-600">
@@ -159,21 +168,18 @@ const Navbar = ({ role = "Employee" }: NavbarProps) => {
               )}
             </div>
 
-            {/* Profile */}
-            <div className="flex items-center gap-3">
-              <div className="text-right">
-                <div className="text-sm font-semibold">Andrea Stephen</div>
-                <div className="text-xs text-gray-500">
-                  {role ?? "TP Manager"}
-                </div>
-              </div>
-
-              <img
-                src={ProfilePic}
-                alt="Profile"
-                className="h-9 w-9 rounded-lg object-cover"
-              />
+          {/* Profile */}
+          <div className="flex items-center gap-3">
+            <div className="text-right">
+              <div className="text-sm font-semibold">Andrea Stephen</div>
+              <div className="text-xs text-gray-500">TP Manager</div>
             </div>
+
+            <img
+              src={ProfilePic}
+              alt="Profile"
+              className="h-9 w-9 rounded-lg object-cover"
+            />
           </div>
         </div>
       </div>
