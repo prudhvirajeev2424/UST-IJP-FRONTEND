@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin } from 'lucide-react';
+import { MapPin ,ArrowRight} from 'lucide-react';
 import StatusBadge from './StatusBadge';
 import type { Opportunity } from '../../../types/opportunity';
 
@@ -12,7 +12,7 @@ interface OpportunityCardProps {
  
  
 export function OpportunityCard({ opportunity }: OpportunityCardProps) {
-  const [isHovered] = useState(false);
+  const [isHovered,setIsHovered] = useState(false);
   const displayedSkills = opportunity.skills.slice(0, 2);
   const remainingSkills = opportunity.skills.length - 2;
  
@@ -25,6 +25,8 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
         height: '287px',
         width: '320px'
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Default State Content */}
       <div className="flex flex-col"
@@ -90,6 +92,49 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
       </div>
         </div>
  
+          
+      {/* Hover State Content - Covers from Title to End */}
+      <div
+        className="flex flex-col absolute left-0 right-0 rounded-lg overflow-hidden"
+        style={{
+          top: '3.625rem', // Position after SO ID (text-lg + mb-4)
+          bottom: 0,
+          opacity: isHovered ? 1 : 0,
+          visibility: isHovered ? 'visible' : 'hidden',
+          transition: 'opacity 300ms ease-out, visibility 300ms ease-out',
+          pointerEvents: isHovered ? 'auto' : 'none',
+          zIndex: 10
+        }}
+      >
+ 
+        {/* White Card Body */}
+        <div className="flex-1 bg-white px-5 py-4 flex flex-col justify-between">
+          {/* Description */}
+          <p
+            className="text-sm mb-6"
+            style={{
+              color: '#4A4A4A',
+              lineHeight: '1.6',
+              fontFamily: 'system-ui, -apple-system, sans-serif'
+            }}
+          >
+            {opportunity.description}
+          </p>
+ 
+          {/* View in Detail Link */}
+          <a
+            href="#"
+            className="inline-flex items-center gap-1.5 font-medium hover:underline"
+            style={{
+              color: '#006E74',
+              fontSize: '0.9375rem'
+            }}
+          >
+            View in Detail
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
         
     </div>
   );
