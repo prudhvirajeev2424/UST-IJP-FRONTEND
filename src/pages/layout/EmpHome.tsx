@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { UploadResumeModal } from '../../components/employee/home_components/UploadResumeModal';
-import { ResumeDetailModal } from '../../components/employee/home_components/ResumeDetailModal';
-import { UpdateResumeDrawer } from '../../components/employee/home_components/UpdateResumeDrawer';
-import { ResumeNotFoundCard } from '../../components/employee/home_components/ResumeNotFoundCard';
-import { EmpHomeRightSideBar } from '../../components/employee/home_components/EmpHomeRightSideBar';
-import { EmpHomeLeftSideBar } from '../../components/employee/home_components/EmpHomeLeftSideBar';
+import { UploadResumeModal } from '../../components/employee/UploadResumeModal';
+import { ResumeDetailModal } from '../../components/employee/ResumeDetailModal';
+import { UpdateResumeDrawer } from '../../components/employee/UpdateResumeDrawer';
+import { ResumeNotFoundCard } from '../../components/employee/ResumeNotFoundCard';
+import { EmpHomeRightSideBar } from '../../components/employee/EmpHomeRightSideBar';
+import { EmpHomeLeftSideBar } from '../../components/employee/EmpHomeLeftSideBar';
 import { stats, opportunities, recentActivities } from '../../data/mockData';
 import { profileData } from '../../data/profiles';
 import { EmpHomeGrid } from '../../components/employee/home_components/EmpHomeGrid';

@@ -1,5 +1,5 @@
 // React import not required with the new JSX transform
-import ApplicationStatus from '../../components/Wfm/Home/ApplicationStatus'
+import ApplicationStatus from '../../components/tp_manager/home/ApplicationStatus';
 
 const WfmHome = () => {
   return (

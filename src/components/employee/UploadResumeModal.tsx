@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "../../ui/Dialog";
+} from "../ui/Dialog";
  
 import pdf_svg from "../../../assets/Icon awesome-file-pdf.svg";
 import upload_svg from "../../../assets/Icon feather-upload-cloud.svg";
