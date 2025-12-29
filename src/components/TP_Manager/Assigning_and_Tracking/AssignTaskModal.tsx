@@ -25,12 +25,10 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
   return (
     // <div className="fixed inset-0 z-50 flex items-start justify-end">
     <div className="fixed inset-0 z-50 flex items-center justify-end">
-
       {/* backdrop */}
       <div
         // className="absolute inset-0 bg-black/50"
         className="absolute inset-0 bg-black/40"
-
         onClick={onClose}
         aria-hidden
       />
@@ -38,13 +36,12 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
       {/* panel */}
       {/* <div className="relative z-10 w-full max-w-[480px] h-screen overflow-auto bg-white rounded-l-lg shadow-lg"> */}
       <div className="relative z-10 w-[420px] h-[90vh] overflow-auto bg-white rounded-xl shadow-xl mr-6">
-
-        <div className="px-6 py-5 border-b">
-        
-
+        <div className="px-6 py-6 border-b">
           <div className="flex items-center justify-between">
             {/* <h2 className="text-lg font-semibold">Assign a new task</h2> */}
-            <h2 className="text-base font-semibold text-gray-800">Assign a new task</h2>
+            <h2 className="text-base font-semibold text-gray-800">
+              Assign a new task
+            </h2>
 
             <button
               aria-label="Close"
@@ -69,7 +66,6 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
 
         {/* <div className="px-6 py-6 space-y-4"> */}
         <div className="px-5 py-5 space-y-3">
-
           {/* Title */}
           <div>
             <label className="block text-xs text-gray-500 mb-1">Title</label>
@@ -160,7 +156,6 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
             </label>
             {/* <div className="flex items-center gap-3 border rounded-md p-3"> */}
             <div className="flex items-center gap-3 border rounded-md p-2">
-
               <img
                 src={ProfilePic}
                 alt="creator"
@@ -176,7 +171,6 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
 
         {/* Footer */}
         <div className="px-6 py-4 border-t bg-gray-50 flex items-center justify-end gap-3">
-        
           <button
             onClick={onClose}
             className="h-9 px-4 rounded-md border border-gray-300 bg-white text-sm"
