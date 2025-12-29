@@ -5,9 +5,10 @@ import LogoImg from "../assets/Group 172287@2x.jpg";
 
 import Home from "../pages/home";
 import LandingPage from "../pages/landing_page";
-import Application from "../pages/Application";
+// import Application from "../pages/Application";
 
 import { useActiveRole } from "../context/ActiveRoleContext";
+import TP_Applications from "../pages/layout/TP_Applications";
 
 interface NavbarProps {
   role?: string | null;
@@ -177,7 +178,8 @@ const Navbar = ({ role }: NavbarProps) => {
       <div className="mt-20">
         {active === "Home" && <Home />}
         {active === "Applications" && effectiveRole === "TP Manager" && (
-          <Application />
+          // <Application />
+          <TP_Applications/>
         )}
 
         {active !== "Home" && active !== "Applications" && (
