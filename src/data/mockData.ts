@@ -10,9 +10,9 @@ export const candidateData: Candidate = {
   position: 'Developer  - B3',
   phone: '+91 9876543210',
   email: 'zamira.peterson@ust.com',
-  avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop',
+  avatar: '',
   reportingManager: 'Andreas Stephen',
-  introduction: 'A highly skilled and results-driven Java Developer with 10 years of experience in designing, developing, and deploying scalable software solutions using modern frameworks and cloud technologies.'
+  introduction: 'A highly skilled and results-driven Java Developer with 10 years of experience in designing, developing, and deploying scalable software solutions.Adept a leveraging modern frameworks,microservices architecture,and cloud technologies to build high-performance applications.Passionate about clean coding,Agile methodologies,and mentoring junior developers.',
 };
 
 export const jobs: Job[] = [
@@ -23,7 +23,7 @@ export const jobs: Job[] = [
     startDate: 'JAN 2020',
     endDate: 'Present',
     description: 'Architected microservices-based solutions using Spring Boot,Hibernate,and RESTful APIs.Led a team of 5 developers, conductiong  ',
-    skills: ['Spring Boot', 'Hibernate', 'REST APIs']
+    skills: ['Spring Boot', 'Hibernate', 'RESTful APIs']
   },
   {
     id: '2',
