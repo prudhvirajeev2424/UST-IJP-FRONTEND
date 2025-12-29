@@ -1,10 +1,5 @@
 import React from "react";
-
-interface ProgressBarProps {
-  percentage: number;
-  label?: string;
-  showPercentage?: boolean;
-}
+import type { ProgressBarProps } from "../../../../types/AssigningandTrackingTypes";
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   percentage,

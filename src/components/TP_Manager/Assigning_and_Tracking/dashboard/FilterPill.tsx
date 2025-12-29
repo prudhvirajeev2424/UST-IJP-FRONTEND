@@ -1,10 +1,5 @@
 import React from "react";
-
-interface FilterPillProps {
-  label: string;
-  active?: boolean;
-  onClick?: () => void;
-}
+import type { FilterPillProps } from "../../../../types/AssigningandTrackingTypes";
 
 const FilterPill: React.FC<FilterPillProps> = ({
   label,
