@@ -29,6 +29,7 @@ const Navbar = ({ role }: NavbarProps) => {
   const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
   const [appOpenedByCard, setAppOpenedByCard] = useState(false);
+  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);
 
   /* ---------------- LANDING PAGE ---------------- */
   if (view === "landing") {
@@ -63,10 +64,11 @@ const Navbar = ({ role }: NavbarProps) => {
         setActive(detail);
         setAppOpenedByCard(false);
       } else if (detail && typeof detail === "object") {
-        const { view: viewName, source } = detail as any;
+        const { view: viewName, source, layout, profileId } = detail as any;
         if (viewName) setActive(viewName);
-        // Only mark appOpenedByCard when navigation originates from a card
-        setAppOpenedByCard(source === "card");
+        // mark appOpenedByCard when navigation originates from a card or list or when a specific layout is requested
+        setAppOpenedByCard(layout === 'TP_Applications' || source === "card" || source === "list");
+        if (profileId) setSelectedProfileId(profileId as string);
       }
     };
 
@@ -233,7 +235,9 @@ const Navbar = ({ role }: NavbarProps) => {
         {active === "Home" && <Home />}
         {active === "Applications" &&
           effectiveRole === "TP Manager" &&
-          appOpenedByCard && <TP_Applications />}
+          appOpenedByCard && (
+            <TP_Applications profileId={selectedProfileId ?? undefined} />
+          )}
 
         {/* Employee-specific pages */}
         {active === "Opportunities" && effectiveRole === "Employee" && (<Opportunities />)}

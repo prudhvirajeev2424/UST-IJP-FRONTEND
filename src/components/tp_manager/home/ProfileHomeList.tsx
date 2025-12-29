@@ -12,7 +12,16 @@ const ProfileHomeList: React.FC<ProfileHomeListProps> = ({ profiles }) => {
   }, [profiles]);
 
   const handleRowClick = (soNumber: string) => {
-    console.log('Profile clicked:', soNumber);
+    // Dispatch navigation event to open the Applications view with this profile id
+    window.dispatchEvent(
+      new CustomEvent('navigate', {
+        detail: {
+          view: 'Applications',
+          source: 'list',
+          profileId: soNumber,
+        },
+      })
+    );
   };
 
   return (
