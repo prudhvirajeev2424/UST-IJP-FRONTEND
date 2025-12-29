@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, ArrowLeft } from "lucide-react";
 import type { Candidate } from "../../../types/candidate";
 import Button from "./common/Button";
 import ShortlistModal from "./shortListModal/ShortlistModal";
 import { useShortlist } from "./context/ShortlistContext";
 
-// 👉 Import your static DP image
 import DP from "../../../assets/DP.png";
 
 interface CandidateHeaderProps {
   candidate: Candidate;
+  onBack?: () => void; // optional custom back handler
 }
 
-const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
+const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate, onBack }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setShortlisted, shortlisted } = useShortlist();
 
@@ -35,21 +35,39 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
     }
   };
 
+  const handleBackClick = () => {
+    if (onBack) {
+      onBack(); // use custom handler if provided
+    } else {
+      window.history.back(); // fallback to browser back
+    }
+  };
+
   return (
-    <div className="bg-[#1e3a4c] text-white px-8 py-6">
+    <div className="bg-[#1e3a4c] text-white px-4 py-6"> {/* shifted left */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          {/* 👉 Square DP image instead of candidate.avatar */}
+        <div className="flex items-center space-x-3">
+          {/* Back Arrow */}
+          <button
+            onClick={handleBackClick}
+            className="p-2 rounded-full" // no hover effect
+            aria-label="Go back"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+
+          {/* Square DP image */}
           <img
             src={DP}
             alt={candidate.name}
-            className="w-16 h-16 rounded-none object-cover"
+            className="w-16 h-16 rounded-lg object-cover"
           />
           <div>
             <h1 className="text-xl font-semibold">{candidate.name}</h1>
             <p className="text-sm text-gray-300">{candidate.position}</p>
           </div>
         </div>
+
         <div className="flex flex-col space-y-2">
           <div className="flex items-center space-x-2">
             <Phone className="w-4 h-4" />
@@ -62,9 +80,10 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
         </div>
 
         <div className="text-right">
-          <div className="text-xs text-gray-300">Reporting Manager</div>
-          <div className="text-sm font-medium">{candidate.reportingManager}</div>
+          <div className="text-xs text-[#5dd4e8]">Reporting Manager</div>
+          <div className="text-sm font-medium text-white">{candidate.reportingManager}</div>
         </div>
+
         <div className="flex space-x-3">
           <Button variant="secondary" disabled={shortlisted}>
             Reject
