@@ -101,20 +101,22 @@ export default function JobDetails({ jobId, onBack }: JobDetailsProps) {
             </button>
 
             {hasApplied ? (
-              <Button
+              <button
                 onClick={handleWithdraw}
-                variant="outline"
-                className="border-red-500 text-red-500 hover:bg-red-50 px-6"
+                className="px-6 py-3 border border-red-500 text-red-500 bg-white hover:bg-red-500 hover:text-white rounded-md"
+
               >
                 Withdraw
-              </Button>
+              </button>
+
             ) : (
               <button
                 onClick={() => setApplyModalOpen(true)}
-                className="bg-green hover:bg-primary/90 px-6"
+                className="px-6 py-4 bg-[#006E74] border border-black rounded text-white hover:bg-black disabled:opacity-50"
               >
                 Apply
               </button>
+              
             )}
           </div>
 
