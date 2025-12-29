@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { List } from "lucide-react";
 import ProfileCard from "./ProfileCard";
 import Toggle from "../../common/Toggle/Toggle";
-import { profiles } from "../../../data/TPManagerProfileCardandListView";
+import { profiles } from "../../../data/TPManagerProfileCardandListViewMockData";
 
 /* ---------- Feather Grid Icon ---------- */
 const FeatherGridIcon = ({ active }: { active: boolean }) => (

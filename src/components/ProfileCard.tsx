@@ -162,7 +162,20 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           </p>
 
           {/* View Detail Button */}
-          <button className="absolute bottom-6 left-6 text-[#0097AC] font-medium text-[16px] flex items-center gap-2 transition-all duration-300 ease-out focus:outline-none">
+          <button
+            onClick={() => {
+              try {
+                window.dispatchEvent(
+                  new CustomEvent("navigate", {
+                    detail: { page: "Application", fromProfileId: profile.id },
+                  })
+                );
+              } catch (err) {
+                console.log("navigate to application", profile.id);
+              }
+            }}
+            className="absolute bottom-6 left-6 text-[#0097AC] font-medium text-[16px] flex items-center gap-2 transition-all duration-300 ease-out focus:outline-none"
+          >
             View in Detail
             <span className="text-[18px] leading-none">→</span>
           </button>
