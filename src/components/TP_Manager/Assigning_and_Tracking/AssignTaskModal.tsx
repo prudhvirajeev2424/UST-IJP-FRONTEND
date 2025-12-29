@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ProfilePic from "/src/assets/DP.png";
+import ProfilePic from "/src/assets/DP@2x.png";
 
 interface AssignTaskModalProps {
   isOpen: boolean;
@@ -64,7 +64,23 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
           }}
         >
           <div className="flex items-center justify-between h-full">
-            <h2 className="text-lg font-semibold text-[#231F20]">
+            <h2
+              style={{
+                fontFamily:
+                  "Rubik, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial",
+                fontStyle: "normal",
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "22px",
+                letterSpacing: "0px",
+                color: "#231F20",
+                textAlign: "left",
+                margin: 0,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
               Assign a new task
             </h2>
 
@@ -93,7 +109,21 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
         <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4">
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-[#231F20] mb-2">
+            <label
+              className="block mb-2"
+              style={{
+                fontFamily:
+                  "Rubik, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial",
+                fontStyle: "normal",
+                fontWeight: "400",
+                fontSize: "14px",
+                lineHeight: "17px",
+                letterSpacing: "0px",
+                color: "#7A7480",
+                textAlign: "left",
+                margin: 0,
+              }}
+            >
               Title
             </label>
             <select
@@ -205,15 +235,33 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
         {/* Footer - fixed at bottom */}
         <div
           className="flex-shrink-0 px-6 py-4 border-t border-gray-200 bg-white flex items-center justify-end gap-3"
-          style={{ borderRadius: "0 0 10px 10px" }}
+          style={{
+            top: "821px",
+            left: "1342px",
+            width: "518px",
+            height: "109px",
+            background: "#F2F7F8 0% 0% no-repeat padding-box",
+            borderRadius: "0px 0px 10px 10px",
+            opacity: 1,
+          }}
         >
           <button
             onClick={onClose}
-            className="h-10 px-6 rounded-md border border-gray-300 bg-white text-sm font-medium text-[#231F20] hover:bg-gray-50 transition-colors"
+            className="h-10 px-6 rounded-md bg-white text-sm font-medium text-[#231F20] hover:bg-gray-50 transition-colors"
+            style={{
+              top: "851px",
+              left: "1612px",
+              width: "90px",
+              height: "49px",
+              border: "1px solid #231F20",
+              borderRadius: "4px",
+              opacity: 1,
+            }}
           >
             Cancel
           </button>
 
+          
           <button
             onClick={() => {
               if (typeof onSuccess === "function") {
@@ -224,6 +272,15 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
               onClose();
             }}
             className="h-10 px-6 rounded-md bg-[#006E74] text-white text-sm font-medium hover:bg-[#005a5f] transition-colors"
+            style={{
+              top: "851px",
+              left: "1722px",
+              width: "98px",
+              height: "49px",
+              background: "#006E74 0% 0% no-repeat padding-box",
+              borderRadius: "4px",
+              opacity: 1,
+            }}
           >
             Confirm
           </button>
