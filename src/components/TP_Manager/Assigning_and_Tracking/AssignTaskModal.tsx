@@ -23,7 +23,10 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-end" style={{ paddingTop: "80px", paddingRight: "60px" }}>
+    <div
+      className="fixed inset-0 z-50 flex items-start justify-end "
+      style={{ paddingTop: "80px", paddingRight: "60px" }}
+    >
       {/* backdrop */}
       <div
         className="absolute inset-0 bg-black/40"
@@ -32,19 +35,19 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
       />
 
       {/* panel - exact dimensions from XD */}
-      <div
-        className="relative z-10 flex flex-col shadow-xl"
-        style={{
-          width: "518px",
-          height: "850px",
-          background: "#FFFFFF 0% 0% no-repeat padding-box",
-          borderRadius: "10px",
-          opacity: 1,
-        }}
-      >
+      <div className="relative z-10 flex flex-col shadow-xl w-[518px] h-[850px] bg-white rounded-[10px] opacity-100" >
         {/* Header */}
-        <div className="flex-shrink-0 px-6 py-6 border-b border-gray-200">
-          <div className="flex items-center justify-between">
+        <div
+          className="flex-shrink-0 px-6"
+          style={{
+            height: "62px",
+            background: "#F2F7F8",
+            borderTopLeftRadius: "10px",
+            borderTopRightRadius: "10px",
+            boxSizing: "border-box",
+          }}
+        >
+          <div className="flex items-center justify-between h-full">
             <h2 className="text-lg font-semibold text-[#231F20]">
               Assign a new task
             </h2>
@@ -174,7 +177,9 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
                 className="h-10 w-10 rounded-full object-cover flex-shrink-0"
               />
               <div>
-                <div className="text-sm font-semibold text-[#231F20]">Andrea Stephen</div>
+                <div className="text-sm font-semibold text-[#231F20]">
+                  Andrea Stephen
+                </div>
                 <div className="text-xs text-gray-500">TP Manager</div>
               </div>
             </div>
@@ -182,7 +187,10 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({
         </div>
 
         {/* Footer - fixed at bottom */}
-        <div className="flex-shrink-0 px-6 py-4 border-t border-gray-200 bg-white flex items-center justify-end gap-3" style={{ borderRadius: "0 0 10px 10px" }}>
+        <div
+          className="flex-shrink-0 px-6 py-4 border-t border-gray-200 bg-white flex items-center justify-end gap-3"
+          style={{ borderRadius: "0 0 10px 10px" }}
+        >
           <button
             onClick={onClose}
             className="h-10 px-6 rounded-md border border-gray-300 bg-white text-sm font-medium text-[#231F20] hover:bg-gray-50 transition-colors"
