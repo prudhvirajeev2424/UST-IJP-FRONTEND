@@ -51,9 +51,9 @@ const Navbar = ({ role }: NavbarProps) => {
   return (
     <>
       {/* ================= NAVBAR ================= */}
-      <header className="fixed top-0 left-0 z-50 w-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
-        <div className="mx-auto max-w-8xl px-6 py-3">
-          <div className="flex items-center justify-between">
+      <header className="fixed top-0 left-0 z-50 w-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)] h-20">
+        <div className="mx-auto max-w-[1920px] px-6 h-full">
+          <div className="flex items-center justify-between h-full">
             {/* ---------- LOGO (CLICK → LANDING) ---------- */}
             <button
               type="button"
@@ -174,7 +174,7 @@ const Navbar = ({ role }: NavbarProps) => {
       </header>
 
       {/* ================= PAGE CONTENT ================= */}
-      <div className="mt-16">
+      <div className="mt-20">
         {active === "Home" && <Home />}
         {active === "Applications" && effectiveRole === "TP Manager" && (
           <Application />
