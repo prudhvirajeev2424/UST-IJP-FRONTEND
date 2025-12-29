@@ -6,15 +6,7 @@ import { ApplicationsTable } from "../components/ApplicationsTable";
 import RightSideProfileCards from "../components/RightSideProfileCards";
 import { mockApplications } from "../data/ApplicationsMockdata";
 
-/**
- * ApplicationsPage
- * Parent page that composes NavigationBar, StatusTabs, the left FilterTab,
- * and the right content area which can be either a List (table) or Kanban
- * (profile cards).
- *
- * Now fully responsive using CSS-based layout that works at all zoom levels.
- * Layout structure matches StatusTabs for perfect alignment.
- */
+// ApplicationsPage: composes Navbar, StatusTabs, FilterTab and table/kanban content
 const ApplicationsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("All");
   // default to kanban so clicking Applications shows Kanban view first

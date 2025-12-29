@@ -3,15 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ProfileCard from "./ProfileCard";
 import { mockProfiles } from "../data/ApplicationsMockdata";
 
-/**
- * RightSideProfileCards
- * The kanban-style grid of profile cards. This component watches the window
- * width to decide between a responsive multi-column layout and a compact
- * 2×4 footprint used when the viewport is reduced/zoomed.
- *
- * It intentionally avoids inner horizontal padding so the cards align with
- * the FilterTab on the left.
- */
+// RightSideProfileCards: kanban grid of ProfileCard items with a compact mode
 const RightSideProfileCards: React.FC = () => {
   const [isNarrow, setIsNarrow] = useState(false);
   const initialWidthRef = useRef<number | null>(null);

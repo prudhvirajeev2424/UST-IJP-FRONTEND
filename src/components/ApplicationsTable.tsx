@@ -2,12 +2,7 @@ import React from "react";
 import type { Application } from "../types";
 import { TableRow } from "./TableRow";
 
-/**
- * ApplicationsTable
- * Renders the applications list as a table. The table header uses `position:sticky`
- * (via Tailwind's `sticky top-0`) so the header remains visible when the tbody
- * is scrolled inside a constrained container.
- */
+// ApplicationsTable: renders applications list with a sticky header for scrolling
 interface ApplicationsTableProps {
   applications: Application[];
 }
