@@ -1,3 +1,5 @@
+
+
 import React from "react";
 import type { Task } from "../../../data/taskTrackingData";
 
@@ -42,12 +44,11 @@ const Right_Side_Task_History: React.FC<RightSideTaskHistoryProps> = ({
         Task history
       </h2>
 
-      <div className="bg-[#D7E0E3] bg-opacity-25 rounded-t-xl h-[52px] flex items-center px-6 text-[14px] font-medium text-[#7A7480]">
+      <div className="bg-[#D7E0E3] bg-opacity-25 rounded-t-xl h-[60px] flex items-center px-10 text-[14px] font-medium text-[#7A7480]">
         <div className="flex-[2]">Course/Task Assigned</div>
         <div className="flex-[1]">Assigned By</div>
         <div className="flex-[1]">Start Date</div>
-        {/* Fixed width column to prevent wrapping at 100% zoom */}
-        <div className="w-[160px]">Overall percentage of Completion</div>
+        <div className="flex-[1.5]">Overall percentage of Completion</div>
       </div>
 
       <div className="bg-white rounded-b-xl shadow-sm overflow-hidden">
@@ -60,7 +61,7 @@ const Right_Side_Task_History: React.FC<RightSideTaskHistoryProps> = ({
               onClick={() =>
                 setExpandedId(expandedId === task.id ? null : task.id)
               }
-              className={`flex items-center h-[52px] px-6 py-3 transition-colors duration-300 ${
+              className={`flex items-center px-10 py-6 transition-colors duration-300 ${
                 expandedId === task.id
                   ? "bg-[#F9FAFB] cursor-default"
                   : "hover:bg-gray-50 cursor-pointer"
@@ -71,9 +72,8 @@ const Right_Side_Task_History: React.FC<RightSideTaskHistoryProps> = ({
               </div>
               <div className="flex-[1] text-[14px]">{task.assignedBy}</div>
               <div className="flex-[1] text-[14px]">{task.startDate}</div>
-              {/* Use fixed pixel widths to keep bar and percent on one line */}
-              <div className="w-[160px] flex items-center gap-2">
-                <div className="w-[120px] h-[6px] bg-gray-100 rounded-full overflow-hidden">
+              <div className="flex-[1.5] flex items-center gap-4">
+                <div className="flex-1 h-[7px] bg-gray-100 rounded-full overflow-hidden">
                   <div
                     className={`h-full transition-all duration-700 ${getOverallBarColor(
                       task
@@ -82,10 +82,9 @@ const Right_Side_Task_History: React.FC<RightSideTaskHistoryProps> = ({
                   />
                 </div>
                 <span
-                  className={`w-[32px] text-right text-[14px] font-medium whitespace-nowrap ${getOverallTextColor(
+                  className={`w-10 text-right text-[14px] font-medium whitespace-nowrap ${getOverallTextColor(
                     task
                   )}`}
-                  style={{ lineHeight: "17px" }}
                 >
                   {task.progress}%
                 </span>
@@ -101,10 +100,10 @@ const Right_Side_Task_History: React.FC<RightSideTaskHistoryProps> = ({
               }`}
             >
               <div className="overflow-hidden">
-                <div className="px-6 pb-6 border-t border-[#E6EEF0] bg-white">
+                <div className="px-10 pb-8 border-t border-[#E6EEF0] bg-white">
                   {/* Stagger 1: Description */}
                   <div
-                    className={`mt-4 transition-all duration-500 delay-100 transform ${
+                    className={`mt-6 transition-all duration-500 delay-100 transform ${
                       expandedId === task.id
                         ? "translate-y-0 opacity-100"
                         : "translate-y-4 opacity-0"
@@ -120,7 +119,7 @@ const Right_Side_Task_History: React.FC<RightSideTaskHistoryProps> = ({
 
                   {/* Stagger 2: Progress Box (Verified Size: 113x49) */}
                   <div
-                    className={`mt-4 transition-all duration-500 delay-200 transform ${
+                    className={`mt-6 transition-all duration-500 delay-200 transform ${
                       expandedId === task.id
                         ? "translate-y-0 opacity-100"
                         : "translate-y-4 opacity-0"
@@ -130,24 +129,13 @@ const Right_Side_Task_History: React.FC<RightSideTaskHistoryProps> = ({
                       Update progress
                     </p>
                     <div
-                      className="w-[113px] h-[49px] border border-[#7A7480] rounded-[5px] flex items-center justify-between px-3 bg-white"
-                      style={{ borderWidth: "1.5px" }}
+                      className="w-[100px] h-[49px] border border-[#D7E0E3] rounded-[5px]
+                flex items-center gap-[24px] px-4 bg-white"
                     >
-                      <span
-                        className="text-[14px] text-[#231F20] font-rubik leading-[17px]"
-                        style={{
-                          width: "17px",
-                          height: "17px",
-                          display: "inline-block",
-                          textAlign: "left",
-                        }}
-                      >
+                      <span className="text-[14px] text-[#231F20] leading-[17px]">
                         {task.progress}
                       </span>
-                      <span
-                        className="text-[14px] text-[#231F20] font-rubik leading-[17px]"
-                        style={{ display: "inline-block" }}
-                      >
+                      <span className="text-[14px] text-[#231F20] leading-[17px]">
                         %
                       </span>
                     </div>
