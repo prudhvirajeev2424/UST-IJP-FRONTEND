@@ -12,7 +12,10 @@ interface CandidateHeaderProps {
   onBack?: () => void; // optional custom back handler
 }
 
-const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate, onBack }) => {
+const CandidateHeader: React.FC<CandidateHeaderProps> = ({
+  candidate,
+  onBack,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setShortlisted, shortlisted } = useShortlist();
 
@@ -39,12 +42,15 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate, onBack }) 
     if (onBack) {
       onBack(); // use custom handler if provided
     } else {
-      window.history.back(); // fallback to browser back
+      // Dispatch app-level navigation to Home so Navbar (which listens for 'navigate') will switch views
+      window.dispatchEvent(new CustomEvent("navigate", { detail: "Home" }));
     }
   };
 
   return (
-    <div className="bg-[#1e3a4c] text-white px-4 py-6"> {/* shifted left */}
+    <div className="bg-[#1e3a4c] text-white px-4 py-6">
+      {" "}
+      {/* shifted left */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           {/* Back Arrow */}
@@ -81,7 +87,9 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate, onBack }) 
 
         <div className="text-right">
           <div className="text-xs text-[#5dd4e8]">Reporting Manager</div>
-          <div className="text-sm font-medium text-white">{candidate.reportingManager}</div>
+          <div className="text-sm font-medium text-white">
+            {candidate.reportingManager}
+          </div>
         </div>
 
         <div className="flex space-x-3">
@@ -100,7 +108,6 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate, onBack }) 
           </button>
         </div>
       </div>
-
       {/* Shortlist Modal */}
       <ShortlistModal
         isOpen={isModalOpen}

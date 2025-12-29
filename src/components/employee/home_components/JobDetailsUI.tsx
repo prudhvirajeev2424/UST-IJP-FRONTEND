@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, MapPin } from 'lucide-react';
+import emilyImage from '../../../assets/DP_emila_stephen.png';
 
 interface JobDetailsUIProps {
   onClose: () => void;
@@ -35,7 +36,7 @@ const JobDetailsUI: React.FC<JobDetailsUIProps> = ({ onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header with Close Button */}
-        <div className="bg-white px-6 py-4 flex justify-between items-center flex-shrink-0">
+        <div className="bg-white px-6 py-4 ml-[30px] flex justify-between items-center flex-shrink-0">
           <span className="text-xl font-normal" style={{ color: '#231F20', lineHeight: '24px', letterSpacing: '0px' }}>
             SO : 32443388
           </span>
@@ -93,7 +94,11 @@ const JobDetailsUI: React.FC<JobDetailsUIProps> = ({ onClose }) => {
                     <h3 className="mb-3" style={{ fontSize: '14px', lineHeight: '17px', letterSpacing: '0px', color: '#7A7480', fontWeight: 'normal' }}>Hiring Manager</h3>
                     <div className="flex items-center gap-3">
                       <div className="overflow-hidden" style={{ width: '40px', height: '40px', backgroundColor: '#E5E5E5', borderRadius: '4px' }}>
-                        <div className="w-full h-full bg-gradient-to-br from-pink-300 to-purple-300"></div>
+                        <img
+                          src={emilyImage}
+                          alt="Emily Stephen"
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <span style={{ fontSize: '16px', lineHeight: '19px', letterSpacing: '0px', color: '#231F20', fontWeight: 'normal' }}>Emily Stephen</span>
                     </div>
