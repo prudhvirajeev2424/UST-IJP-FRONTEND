@@ -1,39 +1,56 @@
 import React, { useState } from "react";
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, ArrowLeft } from "lucide-react";
 import type { Candidate } from "../../../types/candidate";
-import Avatar from "./common/Avatar";
 import Button from "./common/Button";
+<<<<<<< HEAD
 import ShortlistModal from "./shortListModal/ShortlistModal"; // Import the ShortlistModal
 import RejectModal from "./rejectModal/RejectModal";
+=======
+import ShortlistModal from "./shortListModal/ShortlistModal";
+>>>>>>> 88fa95eee6ae529922eab4be50958a1856de05fd
 import { useShortlist } from "./context/ShortlistContext";
+
+import DP from "../../../assets/DP.png";
 
 interface CandidateHeaderProps {
   candidate: Candidate;
+  onBack?: () => void; // optional custom back handler
 }
 
-const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
+const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate, onBack }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setShortlisted, shortlisted } = useShortlist();
   const [isRejectModalOpen, setIsRejectModalOpen] = React.useState(false);
 
   const handleShortlistClick = () => {
-    if (shortlisted) return; // prevent opening again if already shortlisted
-    setIsModalOpen(true); // Open the modal when "Shortlist" is clicked
+    if (shortlisted) return;
+    setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false); // Close the modal
+    setIsModalOpen(false);
   };
 
   const handleConfirmShortlist = (reason: string) => {
     console.log("Candidate Shortlisted for Reason:", reason);
-    // Add additional logic to handle candidate shortlisting (e.g., API call)
-    setIsModalOpen(false); // Close modal after confirmation
+    setIsModalOpen(false);
     try {
       setShortlisted(true);
     } catch (e) {
+<<<<<<< HEAD
       // if context isn't available, silently ignore
       console.warn("Shortlist context not available", e);
+=======
+      console.warn("Shortlist context not available", e);
+    }
+  };
+
+  const handleBackClick = () => {
+    if (onBack) {
+      onBack(); // use custom handler if provided
+    } else {
+      window.history.back(); // fallback to browser back
+>>>>>>> 88fa95eee6ae529922eab4be50958a1856de05fd
     }
   };
 
@@ -48,15 +65,30 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
   };
 
   return (
-    <div className="bg-[#1e3a4c] text-white px-8 py-6">
+    <div className="bg-[#1e3a4c] text-white px-4 py-6"> {/* shifted left */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <Avatar src={candidate.avatar} alt={candidate.name} size="md" />
+        <div className="flex items-center space-x-3">
+          {/* Back Arrow */}
+          <button
+            onClick={handleBackClick}
+            className="p-2 rounded-full" // no hover effect
+            aria-label="Go back"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+
+          {/* Square DP image */}
+          <img
+            src={DP}
+            alt={candidate.name}
+            className="w-16 h-16 rounded-lg object-cover"
+          />
           <div>
             <h1 className="text-xl font-semibold">{candidate.name}</h1>
             <p className="text-sm text-gray-300">{candidate.position}</p>
           </div>
         </div>
+
         <div className="flex flex-col space-y-2">
           <div className="flex items-center space-x-2">
             <Phone className="w-4 h-4" />
@@ -69,17 +101,20 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
         </div>
 
         <div className="text-right">
-          <div className="text-xs text-gray-300">Reporting Manager</div>
-          <div className="text-sm font-medium">
-            {candidate.reportingManager}
-          </div>
+          <div className="text-xs text-[#5dd4e8]">Reporting Manager</div>
+          <div className="text-sm font-medium text-white">{candidate.reportingManager}</div>
         </div>
+
         <div className="flex space-x-3">
+<<<<<<< HEAD
           <Button
             variant="secondary"
             disabled={shortlisted}
             onClick={handleRejectClick}
           >
+=======
+          <Button variant="secondary" disabled={shortlisted}>
+>>>>>>> 88fa95eee6ae529922eab4be50958a1856de05fd
             Reject
           </Button>
           <button
@@ -93,7 +128,6 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({ candidate }) => {
             Shortlist
           </button>
         </div>
-        {/* shortlist banner intentionally removed from CandidateHeader; rendered in ProjectInfo */}
       </div>
 
       {/* Shortlist Modal */}

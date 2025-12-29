@@ -1,0 +1,112 @@
+import type { Job, Notification } from '../types/application'; // created by team 6
+
+export const mockJobs: Job[] = [
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    status: 'Shortlisted',
+    description: "Full stack expert needed for internal portal development. Requires deep knowledge of backend integration.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    status: 'Actioned',
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    status: 'Rejected',
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+  {
+    id: "SO#32443388",
+    role: "Lead 2 - Software Eng.",
+    band: "Band B2",
+    location: "Bangalore",
+    skills: ["Java Script", "Python", "Java", "C++"],
+    status: 'Rejected',
+    description: "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+  },
+
+  
+];
+
+export const mockNotifications: Notification[] = [
+  { user: "Zamira Peterson", action: "has applied for", target: "SO 32443388", time: "Now", avatar: "https://i.pravatar.cc/150?u=1" },
+  { user: "Zamira Peterson", action: "has uploaded the resume and manager's approval mail", target: "", time: "1m", avatar: "https://i.pravatar.cc/150?u=1" },
+  { user: "Angie Johnson", action: "has been approved for the", target: "SO 32982721", time: "2 days", avatar: "https://i.pravatar.cc/150?u=2" },
+];
