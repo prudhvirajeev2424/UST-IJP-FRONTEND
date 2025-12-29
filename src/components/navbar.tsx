@@ -32,7 +32,9 @@ const Navbar = ({ role }: NavbarProps) => {
   const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
   const [appOpenedByCard, setAppOpenedByCard] = useState(false);
-  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);
+  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(
+    null
+  );
 
   /* ---------------- LANDING PAGE ---------------- */
   if (view === "landing") {
@@ -69,7 +71,9 @@ const Navbar = ({ role }: NavbarProps) => {
         const { view: viewName, source, layout, profileId } = detail as any;
         if (viewName) setActive(viewName);
         // mark appOpenedByCard when navigation originates from a card or list or when a specific layout is requested
-        setAppOpenedByCard(layout === 'TP_Applications' || source === "card" || source === "list");
+        setAppOpenedByCard(
+          layout === "TP_Applications" || source === "card" || source === "list"
+        );
         if (profileId) setSelectedProfileId(profileId as string);
       }
     };
@@ -233,11 +237,24 @@ const Navbar = ({ role }: NavbarProps) => {
       {/* ================= PAGE CONTENT ================= */}
       <div className="mt-20">
         {active === "Home" && <Home />}
-        {active === "Applications" &&
-          effectiveRole === "TP Manager" &&
-          appOpenedByCard && (
-            <TP_Applications profileId={selectedProfileId ?? undefined} />
-          )}
+
+        {/* TP Manager pages */}
+        {/* Clicking the nav 'Applications' should show the Applications page first. */}
+        {active === "Applications" && effectiveRole === "TP Manager" && (
+          <ApplicationsPage />
+        )}
+        {/* When a profile card requests a detailed view, it will emit a
+            navigation event with view: 'ApplicationsDetail' — render the
+            full TP applications/detail view in that case. */}
+        {active === "ApplicationsDetail" && effectiveRole === "TP Manager" && (
+          <TP_Applications />
+        )}
+        {active === "Assigning & Tracking" &&
+          effectiveRole === "TP Manager" && <AssigningTracking />}
+
+        {active === "Reports" && effectiveRole === "TP Manager" && (
+          <ReportsPage />
+        )}
 
         {/* Employee-specific pages */}
         {active === "Opportunities" && effectiveRole === "Employee" && (
