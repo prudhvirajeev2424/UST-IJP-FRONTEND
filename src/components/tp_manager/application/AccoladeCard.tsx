@@ -20,7 +20,6 @@ const AccoladeCard: React.FC<AccoladeCardProps> = ({ accolade }) => {
       <h3 className="text-sm font-semibold text-gray-900 mb-1">
         {accolade.title}
       </h3>
-      <p className="text-xs text-gray-600">{accolade.description}</p>
     </div>
   );
 };
