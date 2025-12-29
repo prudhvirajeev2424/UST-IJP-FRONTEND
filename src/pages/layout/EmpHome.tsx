@@ -4,10 +4,10 @@ import { ResumeDetailModal } from '../../components/employee/home_components/Res
 import { UpdateResumeDrawer } from '../../components/employee/home_components/UpdateResumeDrawer';
 import { ResumeNotFoundCard } from '../../components/employee/home_components/ResumeNotFoundCard';
 import { EmpHomeRightSideBar } from '../../components/employee/home_components/EmpHomeRightSideBar';
-import { EmpHomeLeftSideBar } from '../../components/employee/home_components//EmpHomeLeftSideBar';
-import { stats, opportunities,recentActivities } from '../../data/mockData';
+import { EmpHomeLeftSideBar } from '../../components/employee/home_components/EmpHomeLeftSideBar';
+import { stats, opportunities, recentActivities } from '../../data/mockData';
 import { profileData } from '../../data/profiles';
-import { EmpHomeGrid } from '../../components/employee/home_components//EmpHomeGrid';
+import { EmpHomeGrid } from '../../components/employee/home_components/EmpHomeGrid';
 
 
 
@@ -37,6 +37,12 @@ export default function Home() {
     setResumeModalOpen(false);
   };
 
+  // Build a minimal ProfileSummary from the named profileData export for the left sidebar
+  const profileSummary = {
+    description: profileData?.description ?? 'Profile summary',
+    primarySkills: profileData?.primarySkills ?? [],
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* <Header activeTab={activeTab} onTabChange={setActiveTab} /> */}
@@ -47,7 +53,7 @@ export default function Home() {
             {/* Left Column - Profile Summary */}
 
 
-            <EmpHomeLeftSideBar profile={profileData} hasresume={hasResume} handleresume={handleResumeClick} />
+            <EmpHomeLeftSideBar profile={profileSummary} hasresume={hasResume} handleresume={handleResumeClick} />
 
             {/* Center Column - Resume Upload or Uploaded State */}
 
