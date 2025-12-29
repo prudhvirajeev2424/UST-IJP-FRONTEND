@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import type { Root } from "react-dom/client";
-import { CheckCircle, X, XCircle, Info } from "lucide-react";
+import { CheckCircle, X, Info } from "lucide-react";
 
 type ToastType = "success" | "error" | "info";
 
@@ -74,9 +74,9 @@ function render() {
           >
             {toast.type === "success" ? (
               <CheckCircle size={24} color="#FFFFFF" />
-            ) : toast.type === "error" ? (
-              <XCircle size={24} color="#FFFFFF" />
             ) : (
+              // Use the 'Info' circle icon for both error and info types to match the
+              // screenshot where the red toast shows an "i" in a circle.
               <Info size={24} color="#FFFFFF" />
             )}
             <span> {toast.message} </span>
