@@ -77,12 +77,14 @@ interface ApprovalModalProps {
   isOpen?: boolean;
   onClose?: () => void;
   onConfirm?: (comments: string) => void;
+  applicantName?: string;
 }
 
 const ApprovalModal: React.FC<ApprovalModalProps> = ({ 
   isOpen: controlledIsOpen, 
   onClose, 
   onConfirm 
+  , applicantName
 }) => {
   const [internalIsOpen, setInternalIsOpen] = useState(true);
   const [comments, setComments] = useState('');
@@ -97,7 +99,12 @@ const ApprovalModal: React.FC<ApprovalModalProps> = ({
 
   const handleConfirm = () => {
     onConfirm?.(comments);
-    showToast('Candidate has been approved for this opportunity', { type: 'success', duration: 3000 });
+    // Render message using applicantName when provided
+    const toastMessage = applicantName
+      ? `Candidate ${applicantName} has been approved and his ready for interview`
+      : 'Candidate has been approved for this opportunity';
+
+    showToast(toastMessage, { type: 'success', duration: 3000 });
     
     if (approvalCtx && typeof approvalCtx.setApproved === 'function') {
       try {
