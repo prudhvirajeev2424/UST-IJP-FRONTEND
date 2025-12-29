@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { List } from "lucide-react";
 import type { Opportunity } from "../../../types/opportunity";
-import excelIcon from "../../../assets/Icon awesome-file-pdf.svg";
+import excelIcon from "../../../assets/ExcelIcon.svg";
 import { OpportunityCard } from "./OpportunityCard";
 import EmpHomeList from "./EmpHomeList";
 
@@ -52,7 +52,7 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
 
             {/* Export Excel */}
             <button className="p-2 hover:bg-muted rounded transition-colors">
-              <img src={excelIcon} alt="Export to Excel" className="w-5 h-5" />
+              <img src={excelIcon} alt="Export to Excel" className="w-[48px] h-[48px]" />
             </button>
 
             {/* View Mode Toggle */}
