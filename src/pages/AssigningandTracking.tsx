@@ -16,7 +16,7 @@ import TaskCard from "../components/TP_Manager/Assigning_and_Tracking/dashboard/
 import { mockTasks } from "../data/TPManagerAssigningandTrackingMockData";
 import { type FilterType } from "../types/AssigningandTrackingTypes";
 
-const Assigning_and_tracking: React.FC = () => {
+const AssigningTracking: React.FC = () => {
   // Local UI state
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
@@ -186,4 +186,4 @@ const Assigning_and_tracking: React.FC = () => {
   );
 };
 
-export default Assigning_and_tracking;
+export default AssigningTracking;

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Phone, Mail, ArrowLeft } from "lucide-react";
 import type { Candidate } from "../../../types/candidate";
-import Button from "./common/Button";
-import ShortlistModal from "./shortListModal/ShortlistModal";
+import Button from "../../TP_Manager/application/common/Button";
+import ShortlistModal from "../../TP_Manager/application/shortListModal/ShortlistModal";
 import { useShortlist } from "./context/ShortlistContext";
 
 import DP from "../../../assets/DP.png";
+import RejectModal from "./rejectModal/RejectModal";
 
 interface CandidateHeaderProps {
   candidate: Candidate;
@@ -104,7 +105,11 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({
         </div>
 
         <div className="flex space-x-3">
-          <Button variant="secondary" disabled={shortlisted}>
+          <Button
+            variant="secondary"
+            disabled={shortlisted}
+            onClick={handleRejectClick}
+          >
             Reject
           </Button>
           <button
@@ -125,7 +130,6 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({
         onClose={handleModalClose}
         onConfirm={handleConfirmShortlist}
       />
-
       {/* Reject Modal */}
       <RejectModal
         isOpen={isRejectModalOpen}

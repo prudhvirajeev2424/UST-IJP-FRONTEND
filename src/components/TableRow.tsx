@@ -41,9 +41,15 @@ export const TableRow: React.FC<TableRowProps> = ({
     // Dispatch a navigation event so the Navbar can render the Application
     // detail view. We keep the console log as a fallback for debugging.
     try {
+      // Use the same 'view' convention as other TP Manager cards so the
+      // Navbar can render `TP_Applications` when a row requests the
+      // detailed applications view.
       window.dispatchEvent(
         new CustomEvent("navigate", {
-          detail: { page: "Application", fromApplicationId: application.id },
+          detail: {
+            view: "ApplicationsDetail",
+            fromApplicationId: application.id,
+          },
         })
       );
     } catch (err) {

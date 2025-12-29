@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import ScoreBadge from "../../common/ScoreBadge/ScoreBadge";
-import type { Profile } from "../../../types/ApplicationProfile";
-=======
 import { useState } from "react";
 import type { Profile } from "../../../types";
 import ScoreBadge from "../../common/ScoreBadge/ScoreBadge";
@@ -10,7 +5,6 @@ import ProfilePic from "../../../assets/DP_2@2x.jpg";
 
 const ProfileCard = ({ profile }: { profile: Profile }) => {
   const [hovered, setHovered] = useState(false);
->>>>>>> 21c8a8c8503f8470c2998185674060585c247ffd
 
   return (
     <div
@@ -119,10 +113,15 @@ const ProfileCard = ({ profile }: { profile: Profile }) => {
           href="#"
           onClick={(e) => {
             e.preventDefault();
+            // When a card's "View in Detail" is clicked we want the app to
+            // navigate to the detailed TP Manager applications view. Use a
+            // distinct view string so the Navbar can distinguish a simple
+            // Applications nav click (which shows the ApplicationsPage) from a
+            // card-driven request to open the TP applications detail screen.
             window.dispatchEvent(
               new CustomEvent("navigate", {
                 detail: {
-                  view: "Applications",
+                  view: "ApplicationsDetail",
                   source: "card",
                   profileId: profile.id,
                 },

@@ -62,7 +62,7 @@ const RejectModal: React.FC<RejectModalProps> = ({
           left: "50%",
           transform: "translate(-50%, -50%)",
           width: "601px",
-          height: "360px",
+          height: "448px",
           background: "#FFFFFF",
           borderRadius: "10px",
           boxShadow:
@@ -113,16 +113,21 @@ const RejectModal: React.FC<RejectModalProps> = ({
           </button>
         </div>
 
-        <div className="flex-1 flex items-center justify-center px-6">
+        <div
+          className="flex-1 flex items-center justify-center"
+          style={{ padding: "40px" }}
+        >
           <div
             className="relative opacity-100"
             style={{
-              // match user's requested width/height tokens
-              width: "481px",
-              height: "120px",
+              // exact textarea panel per spec
+              width: "521px",
+              height: "128px",
               background: "#FFFFFF",
+              border: "1px solid #D7E0E3",
               borderRadius: "5px",
-              padding: "12px",
+              padding: "0",
+              boxSizing: "border-box",
             }}
           >
             <label
@@ -154,21 +159,16 @@ const RejectModal: React.FC<RejectModalProps> = ({
               style={{
                 width: "100%",
                 height: "100%",
-                border: "1px solid",
-                borderColor:
-                  touched && reason.trim().length === 0
-                    ? "#FC6A59"
-                    : focused
-                    ? "#006E74"
-                    : "#D7E0E3",
+                border: "none",
                 outline: "none",
                 resize: "none",
                 fontFamily: "Rubik, system-ui, -apple-system, sans-serif",
                 fontSize: "14px",
+                color: "#231F20",
                 textAlign: "left",
-                padding: "8px",
-                borderRadius: "4px",
+                padding: "16px",
                 boxSizing: "border-box",
+                background: "transparent",
               }}
             />
             {touched && reason.trim().length === 0 && (

@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
-import CandidateHeader from '../../components/tp_manager/application/CandidateHeader';
-import Sidebar from '../../components/tp_manager/application/Sidebar';
-import Introduction from '../../components/tp_manager/application/Introduction';
-import ProfessionalExperience from '../../components/tp_manager/application/ProfessionalExperience';
-import Certifications from '../../components/tp_manager/application/Certifications';
-import Education from '../../components/tp_manager/application/Education';
-import Skills from '../../components/tp_manager/application/Skills';
-import Accolades from '../../components/tp_manager/application/Accolades';
-import Testimonials from '../../components/tp_manager/application/Testimonials';
-import ProjectInfo from '../../components/tp_manager/application/ProjectInfo';
-import CoverLetter from '../../components/tp_manager/application/CoverLetter';
+import React, { useState, useEffect, useRef } from "react";
+import CandidateHeader from "../../components/TP_Manager/application/CandidateHeader";
+import Sidebar from "../../components/TP_Manager/application/Sidebar";
+import Introduction from "../../components/TP_Manager/application/Introduction";
+import ProfessionalExperience from "../../components/TP_Manager/application/ProfessionalExperience";
+import Certifications from "../../components/TP_Manager/application/Certifications";
+import Education from "../../components/TP_Manager/application/Education";
+import Skills from "../../components/TP_Manager/application/Skills";
+import Accolades from "../../components/TP_Manager/application/Accolades";
+import Testimonials from "../../components/TP_Manager/application/Testimonials";
+import ProjectInfo from "../../components/TP_Manager/application/ProjectInfo";
+import CoverLetter from "../../components/TP_Manager/application/CoverLetter";
 
-import { 
-  candidateData, 
-  jobs, 
-  certifications, 
-  education, 
-  skills, 
-  accolades, 
-  testimonials, 
-  projectData 
-} from '../../data/mockData';
+import {
+  candidateData,
+  jobs,
+  certifications,
+  education,
+  skills,
+  accolades,
+  testimonials,
+  projectData,
+} from "../../data/mockData";
 
 const TP_Applications: React.FC = () => {
-  const [activeSection, setActiveSection] = useState('introduction');
+  const [activeSection, setActiveSection] = useState("introduction");
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const TP_Applications: React.FC = () => {
 
     const sections = Array.from(
       rootEl.querySelectorAll<HTMLElement>(
-        '#introduction, #experience, #certifications, #education, #accolades, #skills, #testimonials'
+        "#introduction, #experience, #certifications, #education, #accolades, #skills, #testimonials"
       )
     );
 
@@ -50,7 +50,7 @@ const TP_Applications: React.FC = () => {
       {
         root: rootEl,
         threshold: 0.2,
-        rootMargin: '0px 0px -40% 0px',
+        rootMargin: "0px 0px -40% 0px",
       }
     );
 
@@ -61,19 +61,19 @@ const TP_Applications: React.FC = () => {
   const handleSectionChange = (id: string) => {
     setActiveSection(id);
     const section = contentRef.current?.querySelector<HTMLElement>(`#${id}`);
-    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F2F7F8' }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#F2F7F8" }}>
       {/* CandidateHeader - directly below navbar */}
       <CandidateHeader candidate={candidateData} />
 
       <div className="flex px-8 py-6 space-x-6">
         {/* Left Sidebar */}
-        <Sidebar 
-          activeSection={activeSection} 
-          onSectionChange={handleSectionChange} 
+        <Sidebar
+          activeSection={activeSection}
+          onSectionChange={handleSectionChange}
         />
 
         {/* Main Content Panel */}

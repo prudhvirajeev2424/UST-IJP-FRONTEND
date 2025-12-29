@@ -159,9 +159,14 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           <button
             onClick={() => {
               try {
+                // Dispatch a standardized navigation event so the top-level
+                // Navbar can render the TP Manager detailed applications view.
                 window.dispatchEvent(
                   new CustomEvent("navigate", {
-                    detail: { page: "Application", fromProfileId: profile.id },
+                    detail: {
+                      view: "ApplicationsDetail",
+                      fromProfileId: profile.id,
+                    },
                   })
                 );
               } catch (err) {

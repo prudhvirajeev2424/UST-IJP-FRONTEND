@@ -6,6 +6,7 @@ import LogoImg from "../assets/Group 172287@2x.jpg";
 import Home from "../pages/home";
 import LandingPage from "../pages/landing_page";
 // import Application from "../pages/Application";
+// import Application from "../pages/Application";
 
 import { useActiveRole } from "../context/ActiveRoleContext";
 // import Application from "../pages/Application";
@@ -13,7 +14,9 @@ import Opportunities from "../pages/Opportunies";
 import AssigningAndTracking from "../pages/Assigning_and_Tracking";
 import MyApplications from "../pages/MyApplications";
 import TP_Applications from "../pages/layout/TP_Applications";
-
+import ApplicationsPage from "../pages/Applications_page";
+import ReportsPage from "../pages/ReportsPage";
+import AssigningTracking from "../pages/AssigningandTracking";
 interface NavbarProps {
   role?: string | null;
 }
@@ -28,7 +31,6 @@ const Navbar = ({ role }: NavbarProps) => {
   const [view, setView] = useState<View>("app"); // 👈 controls landing vs app
   const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
-  const [appOpenedByCard, setAppOpenedByCard] = useState(false);
 
   /* ---------------- LANDING PAGE ---------------- */
   if (view === "landing") {
@@ -61,12 +63,9 @@ const Navbar = ({ role }: NavbarProps) => {
       if (typeof detail === "string") {
         // string payload — treat as simple navigation (not from card)
         setActive(detail);
-        setAppOpenedByCard(false);
       } else if (detail && typeof detail === "object") {
-        const { view: viewName, source } = detail as any;
+        const { view: viewName } = detail as any;
         if (viewName) setActive(viewName);
-        // Only mark appOpenedByCard when navigation originates from a card
-        setAppOpenedByCard(source === "card");
       }
     };
 
@@ -96,7 +95,6 @@ const Navbar = ({ role }: NavbarProps) => {
                 className="h-4 object-contain mr-3"
                 style={{ display: "block" }}
               />
-              
             </button>
 
             {/* ---------- CENTER NAV ---------- */}
@@ -108,7 +106,6 @@ const Navbar = ({ role }: NavbarProps) => {
                       onClick={() => {
                         // clicking the nav link should NOT open the Applications view
                         setActive(link);
-                        if (link === "Applications") setAppOpenedByCard(false);
                       }}
                       className={`px-2 py-1 text-sm font-semibold ${
                         active === link
@@ -231,14 +228,35 @@ const Navbar = ({ role }: NavbarProps) => {
       {/* ================= PAGE CONTENT ================= */}
       <div className="mt-20">
         {active === "Home" && <Home />}
-        {active === "Applications" &&
-          effectiveRole === "TP Manager" &&
-          appOpenedByCard && <TP_Applications />}
+
+        {/* TP Manager pages */}
+        {/* Clicking the nav 'Applications' should show the Applications page first. */}
+        {active === "Applications" && effectiveRole === "TP Manager" && (
+          <ApplicationsPage />
+        )}
+        {/* When a profile card requests a detailed view, it will emit a
+            navigation event with view: 'ApplicationsDetail' — render the
+            full TP applications/detail view in that case. */}
+        {active === "ApplicationsDetail" && effectiveRole === "TP Manager" && (
+          <TP_Applications />
+        )}
+        {active === "Assigning & Tracking" &&
+          effectiveRole === "TP Manager" && <AssigningTracking />}
+          
+        {active === "Reports" && effectiveRole === "TP Manager" && (
+          <ReportsPage />
+        )}
 
         {/* Employee-specific pages */}
-        {active === "Opportunities" && effectiveRole === "Employee" && (<Opportunities />)}
-        {active === "Assigning & Tracking" && effectiveRole === "Employee" && (<AssigningAndTracking />)}
-        {active === "My Applications" && effectiveRole === "Employee" && (<MyApplications />)}
+        {active === "Opportunities" && effectiveRole === "Employee" && (
+          <Opportunities />
+        )}
+        {active === "Assigning & Tracking" && effectiveRole === "Employee" && (
+          <AssigningAndTracking />
+        )}
+        {active === "My Applications" && effectiveRole === "Employee" && (
+          <MyApplications />
+        )}
 
         {/* Fallback for any other nav labels */}
         {active !== "Home" &&

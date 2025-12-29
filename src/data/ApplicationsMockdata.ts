@@ -1,4 +1,5 @@
-import type { Profile } from "../types/Profile";
+import type { Profile } from "../types/ApplicationProfile";
+import type { Application } from "../types/ApplicationProfile";
 
 /**
  * Mock data for profile cards
@@ -119,8 +120,6 @@ export const mockProfiles: Profile[] = [
       "UI/UX Designer and Front-end Developer with a passion for creating intuitive and accessible web interfaces. Proficient in design systems and component libraries.",
   },
 ];
-
-import type { Application } from "../types/application";
 
 export const mockApplications: Application[] = [
   {
