@@ -1,43 +1,41 @@
 import { useState, useEffect } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
+import LogoImg from "../assets/Group 172287@2x.jpg";
 
 import Home from "../pages/home";
-import ApplicationsPage from "../pages/Applications_page";
+import LandingPage from "../pages/landing_page";
+// import Application from "../pages/Application";
+
 import { useActiveRole } from "../context/ActiveRoleContext";
-import Application from "../pages/Application";
-import Assigning_and_tracking from "../pages/AssigningandTracking";
-import ReportsPage from "../pages/ReportsPage";
+// import Application from "../pages/Application";
+import Opportunities from "../pages/Opportunies";
+import AssigningAndTracking from "../pages/Assigning_and_Tracking";
+import MyApplications from "../pages/MyApplications";
+import TP_Applications from "../pages/layout/TP_Applications";
 
 interface NavbarProps {
   role?: string | null;
 }
 
+type View = "landing" | "app";
+
 const Navbar = ({ role }: NavbarProps) => {
   const { activeRole } = useActiveRole();
   const effectiveRole = role ?? activeRole ?? "Employee";
+
+  /* ---------------- STATE ---------------- */
+  const [view, setView] = useState<View>("app"); // 👈 controls landing vs app
   const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
+  const [appOpenedByCard, setAppOpenedByCard] = useState(false);
 
-  // listen for cross-component navigation events (used by ProfileCard)
-  useEffect(() => {
-    const handler = (e: Event) => {
-      try {
-        const ev = e as CustomEvent;
-        const detail = ev.detail || {};
-        if (detail.page) {
-          setActive(detail.page);
-        }
-      } catch (err) {
-        // ignore malformed events
-      }
-    };
+  /* ---------------- LANDING PAGE ---------------- */
+  if (view === "landing") {
+    return <LandingPage />;
+  }
 
-    window.addEventListener("navigate", handler as EventListener);
-    return () =>
-      window.removeEventListener("navigate", handler as EventListener);
-  }, []);
-
+  /* ---------------- NAV LINKS ---------------- */
   const allLinks = ["Home", "Applications", "Assigning & Tracking", "Reports"];
 
   let links: string[];
@@ -51,65 +49,95 @@ const Navbar = ({ role }: NavbarProps) => {
       "My Applications",
     ];
   } else if (effectiveRole === "WFM") {
-    // WFM should see only Home and Applications
     links = ["Home", "Applications"];
   } else {
     links = ["Home", "Applications"];
   }
 
+  // Listen for app-level navigation events (e.g., from profile cards)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (typeof detail === "string") {
+        // string payload — treat as simple navigation (not from card)
+        setActive(detail);
+        setAppOpenedByCard(false);
+      } else if (detail && typeof detail === "object") {
+        const { view: viewName, source } = detail as any;
+        if (viewName) setActive(viewName);
+        // Only mark appOpenedByCard when navigation originates from a card
+        setAppOpenedByCard(source === "card");
+      }
+    };
+
+    window.addEventListener("navigate", handler as EventListener);
+    return () =>
+      window.removeEventListener("navigate", handler as EventListener);
+  }, []);
+
   return (
     <>
-      <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
-        <div className="max-w-[1920px] mx-auto w-full px-6 py-[14px]">
-          <div className="flex items-center justify-between">
-            {/* Left */}
-            <div className="flex-shrink-0">
-              <div className="flex items-center">
-                <span
-                  className="text-2xl font-bold"
-                  style={{ color: "var(--003c51)" }}
-                >
-                  UST
-                </span>
-                <span
-                  className="text-2xl font-light ml-1"
-                  style={{ color: "var(--7a7480)" }}
-                >
-                  IJP
-                </span>
-              </div>
-            </div>
+      {/* ================= NAVBAR ================= */}
+      <header className="fixed top-0 left-0 z-50 w-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)] h-20">
+        <div className="mx-auto max-w-[1920px] px-6 h-full">
+          <div className="flex items-center justify-between h-full">
+            {/* ---------- LOGO (CLICK → LANDING) ---------- */}
+            <button
+              type="button"
+              onClick={() => {
+                setView("landing"); // 👈 go to landing page
+                setActive("Home"); // reset app state
+              }}
+              className="flex items-center cursor-pointer bg-transparent p-0"
+            >
+              <img
+                src={LogoImg}
+                alt="UST IJP"
+                className="h-4 object-contain mr-3"
+                style={{ display: "block" }}
+              />
+              
+            </button>
 
-            {/* Center Nav */}
-            <nav className="flex-1 flex justify-center">
+            {/* ---------- CENTER NAV ---------- */}
+            <nav className="flex flex-1 justify-center">
               <div className="flex gap-5">
                 {links.map((link) => (
                   <div key={link} className="relative">
                     <button
-                      type="button"
-                      onClick={() => setActive(link)}
-                      className={`text-sm font-semibold px-2 py-1 ${
+                      onClick={() => {
+                        // clicking the nav link should NOT open the Applications view
+                        setActive(link);
+                        if (link === "Applications") setAppOpenedByCard(false);
+                      }}
+                      className={`px-2 py-1 text-sm font-semibold ${
                         active === link
                           ? "text-black"
                           : "text-gray-500 hover:text-black"
                       }`}
-                      aria-current={active === link ? "page" : undefined}
                     >
                       {link}
                     </button>
 
                     {active === link && (
-                      <span className="absolute -bottom-0.5 left-0 right-0 h-1 bg-teal-600 rounded-full" />
+                      <span className="absolute -bottom-0.5 left-0 right-0 h-1 rounded-full bg-teal-600" />
                     )}
                   </div>
                 ))}
               </div>
             </nav>
 
-            {/* Right */}
-            <div className="flex-shrink-0 flex items-center gap-4 relative">
-              <Mail size={24} className="text-gray-700" />
+            {/* ---------- RIGHT ---------- */}
+            <div className="relative flex items-center gap-4">
+              <Mail
+                size={24}
+                className="cursor-pointer text-gray-700"
+                onClick={() => {
+                  // alert("Mail icon clicked");
+                }}
+              />
 
+              {/* Notifications */}
               <div className="relative">
                 <Bell
                   size={24}
@@ -133,6 +161,7 @@ const Navbar = ({ role }: NavbarProps) => {
                         onClick={() => setShowNotifications(false)}
                       />
                     </div>
+
                     <div className="divide-y divide-teal-600">
                       <div className="flex gap-3 px-4 py-3 hover:bg-teal-600 cursor-pointer">
                         <img
@@ -182,6 +211,7 @@ const Navbar = ({ role }: NavbarProps) => {
                 )}
               </div>
 
+              {/* Profile */}
               <div className="flex items-center gap-3">
                 <div className="text-right">
                   <div className="text-sm font-semibold">Andrea Stephen</div>
@@ -198,26 +228,24 @@ const Navbar = ({ role }: NavbarProps) => {
         </div>
       </header>
 
-      <div className="mt-16">
+      {/* ================= PAGE CONTENT ================= */}
+      <div className="mt-20">
         {active === "Home" && <Home />}
+        {active === "Applications" &&
+          effectiveRole === "TP Manager" &&
+          appOpenedByCard && <TP_Applications />}
 
-        {/* Applications link - render Applications page when clicked */}
-        {active === "Applications" && <ApplicationsPage />}
+        {/* Employee-specific pages */}
+        {active === "Opportunities" && effectiveRole === "Employee" && (<Opportunities />)}
+        {active === "Assigning & Tracking" && effectiveRole === "Employee" && (<AssigningAndTracking />)}
+        {active === "My Applications" && effectiveRole === "Employee" && (<MyApplications />)}
 
-        {/* When a single application's "View in Detail" is requested, render Application detail */}
-        {active === "Application" && <Application />}
-
-        {/* Assigning & Tracking link - render the Assigning_and_tracking page */}
-        {active === "Assigning & Tracking" && <Assigning_and_tracking />}
-
-        {/* Reports link - render ReportsPage but hide its internal Navbar to avoid duplicating headers */}
-        {active === "Reports" && <ReportsPage showNavbar={false} />}
-
-        {/* Fallback for other links (e.g., Opportunities, My Applications) */}
+        {/* Fallback for any other nav labels */}
         {active !== "Home" &&
           active !== "Applications" &&
+          active !== "Opportunities" &&
           active !== "Assigning & Tracking" &&
-          active !== "Reports" && (
+          active !== "My Applications" && (
             <div className="p-6">
               <h2 className="text-lg font-semibold">{active}</h2>
               <p className="text-sm text-gray-600">
@@ -229,4 +257,5 @@ const Navbar = ({ role }: NavbarProps) => {
     </>
   );
 };
+
 export default Navbar;

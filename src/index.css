@@ -264,3 +264,31 @@ body,
   padding: 16px 24px;
   height: 65px;
 }
+
+/* Make scrollbars visually transparent but still usable */
+/* Webkit browsers (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: transparent; /* fully transparent thumb */
+  border-radius: 9999px;
+  border: 2px solid transparent; /* keep hit area */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* Optional: show a faint thumb on hover for usability (uncomment if needed) */
+/*
+*:hover::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.08);
+}
+*/

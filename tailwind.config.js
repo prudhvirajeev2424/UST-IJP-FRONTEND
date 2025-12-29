@@ -1,62 +1,52 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  theme: {
-    extend: {
-      colors: {
-        primary: {
-          darkest: "#003C51",
-          dark: "#006E74",
-          DEFAULT: "#0097AC",
-          bright: "#01B27C",
-        },
-        warning: "#FFBF00",
-        danger: "#FC6A59",
-        accent: "#881E87",
-        dark: "#231F20",
-        gray: {
-          primary: "#7A7480",
-          secondary: "#C2BCBE",
-          light: "#D7E0E3",
-          beige: "#DBD3BD",
-        },
-        background: {
-          DEFAULT: "#F2F7F8",
-          alt: "#ECECE1",
-        },
+export const content = ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"];
+export const theme = {
+  extend: {
+    colors: {
+      background: "hsl(var(--background))",
+      foreground: "hsl(var(--foreground))",
+      card: "hsl(var(--card))",
+      "card-foreground": "hsl(var(--card-foreground))",
+      popover: "hsl(var(--popover))",
+      "popover-foreground": "hsl(var(--popover-foreground))",
+      primary: "hsl(var(--primary))",
+      "primary-foreground": "hsl(var(--primary-foreground))",
+      secondary: "hsl(var(--secondary))",
+      "secondary-foreground": "hsl(var(--secondary-foreground))",
+      success: {
+        DEFAULT: "#01B27C",
+        foreground: "hsl(var(--success-foreground))",
       },
-      fontFamily: {
-        sans: ["Rubik", "sans-serif"],
+      warning: {
+        DEFAULT: "#FFBF00",
+        foreground: "hsl(var(--warning-foreground))",
       },
-      fontSize: {
-        xs: "12px",
-        sm: "14px",
-        base: "16px",
-        lg: "18px",
-        xl: "20px",
-        "2xl": "24px",
-        "3xl": "28px",
-        "4xl": "32px",
+      danger: {
+        DEFAULT: "#FC6A59",
+        foreground: "hsl(var(--danger-foreground))",
       },
-      lineHeight: {
-        tight: "1.2",
-        snug: "1.375",
-        normal: "1.5",
-        relaxed: "1.57",
-      },
-      borderRadius: {
-        card: "12px",
-        button: "8px",
-      },
-      boxShadow: {
-        card: "0 2px 8px rgba(0, 0, 0, 0.08)",
-        "card-hover": "0 4px 16px rgba(0, 0, 0, 0.12)",
-      },
-      transitionDuration: {
-        200: "200ms",
-        300: "300ms",
-      },
+      muted: "hsl(var(--muted))",
+      "muted-foreground": "hsl(var(--muted-foreground))",
+      accent: "hsl(var(--accent))",
+      "accent-foreground": "hsl(var(--accent-foreground))",
+      destructive: "hsl(var(--destructive))",
+      "destructive-foreground": "hsl(var(--destructive-foreground))",
+      border: "hsl(var(--border))",
+      input: "hsl(var(--input))",
+      ring: "hsl(var(--ring))",
+      overlay: "hsl(var(--overlay))",
+      // custom status
+      "status-allocated": "hsl(var(--status-allocated))",
+      "status-shortlisted": "hsl(var(--status-shortlisted))",
+      "status-rejected": "hsl(var(--status-rejected))",
+      // chart
+      "chart-accepted": "hsl(var(--chart-accepted))",
+      "chart-shortlisted": "hsl(var(--chart-shortlisted))",
+      "chart-rejected": "hsl(var(--chart-rejected))",
+    },
+    borderRadius: {
+      DEFAULT: "var(--radius)",
     },
   },
-  plugins: [],
 };
+export const plugins = [];

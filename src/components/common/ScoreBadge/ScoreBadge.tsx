@@ -15,10 +15,11 @@ const ScoreBadge: React.FC<Props> = ({ score }) => {
         px-2.5 py-1
         rounded-full
         border
+        bg-white
       "
       style={{
         color: color.color,
-        backgroundColor: color.backgroundColor,
+        backgroundColor: "#ffffff",
         borderColor: color.borderColor,
       }}
     >

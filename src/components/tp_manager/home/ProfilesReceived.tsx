@@ -1,8 +1,19 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { List } from "lucide-react";
 import ProfileCard from "./ProfileCard";
 import Toggle from "../../common/Toggle/Toggle";
 import { profiles } from "../../../data/TPManagerProfileCardandListViewMockData";
+=======
+import React, { useState } from 'react';
+import { List } from 'lucide-react';
+import ProfileCard from './ProfileCard';
+import Toggle from '../../common/Toggle/Toggle';
+import { profiles } from '../../../data/profiles';
+import { opportunities as mockOpportunities } from '../../../data/mockData';
+import type { Opportunity } from '../../../types/opportunity';
+import EmpHomeList from '../../employee/home_components/EmpHomeList';
+>>>>>>> 21c8a8c8503f8470c2998185674060585c247ffd
 
 /* ---------- Feather Grid Icon ---------- */
 const FeatherGridIcon = ({ active }: { active: boolean }) => (
@@ -26,6 +37,11 @@ const FeatherGridIcon = ({ active }: { active: boolean }) => (
 const ProfilesReceived: React.FC = () => {
   const [showActionNeeded, setShowActionNeeded] = useState(true);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+
+  // Use the mock opportunities data (already typed) for the list view
+  const opportunities: Opportunity[] = mockOpportunities.map((o) => ({
+    ...o,
+  }));
 
   return (
     <div className="flex-1 rounded-lg bg-[#f9fafb86] p-6">
@@ -82,13 +98,8 @@ const ProfilesReceived: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col gap-3">
-          {profiles.map((profile) => (
-            <div key={profile.id} className="rounded-lg bg-white p-4 shadow-sm">
-              <strong className="text-gray-900">{profile.name}</strong>
-            </div>
-          ))}
-        </div>
+        // Use the shared EmpHomeList component to render the list view
+        <EmpHomeList opportunities={opportunities} />
       )}
     </div>
   );
