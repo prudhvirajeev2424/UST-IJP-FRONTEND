@@ -4,7 +4,7 @@ import AdobeLogo from "../../../assets/Image46.png";
 import PdfIcon from "../../../assets/IconFilePdf.svg";
 import ShortlistImg from '../../../assets/Group 173611.svg';
 import { useShortlist } from './context/ShortlistContext';
-import JobDetailsUI from "./JobDetailsUI";
+import JobDetailsUI from "../../employee/home_components/JobDetailsUI";
 
 interface ProjectInfoProps {
   project: Project;
