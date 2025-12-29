@@ -1,0 +1,7 @@
+<svg id="Icons" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <g id="Group_172833" data-name="Group 172833">
+    <rect id="Rectangle_154499" data-name="Rectangle 154499" width="48" height="48" rx="4" fill="#fff"/>
+    <rect id="Rectangle_154498" data-name="Rectangle 154498" width="48" height="48" rx="4" fill="#fff" opacity="0.5"/>
+    <path id="Icon_open-sort-ascending" data-name="Icon open-sort-ascending" d="M4,0V12H0l5,4,5-4H6V0ZM8,0V2h4V0ZM8,4V6h6V4ZM8,8v2h8V8Z" transform="translate(16 16)" fill="#7a7480"/>
+  </g>
+</svg>

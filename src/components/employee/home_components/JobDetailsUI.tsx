@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, MapPin } from 'lucide-react';
+import emilyImage from '../../../assets/DP_emila_stephen.png';
 
 interface JobDetailsUIProps {
   onClose: () => void;
 }
 
 const JobDetailsUI: React.FC<JobDetailsUIProps> = ({ onClose }) => {
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    // Prevent background page from scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+    return () => {
+      // Restore original overflow when modal is closed/unmounted
+      document.body.style.overflow = originalOverflow || '';
+    };
+  }, []);
   return (
     <div 
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
@@ -15,16 +25,18 @@ const JobDetailsUI: React.FC<JobDetailsUIProps> = ({ onClose }) => {
         className="bg-white rounded-lg shadow-2xl overflow-hidden"
         style={{ 
           fontFamily: 'Rubik, sans-serif',
-          width: '90%',
-          maxWidth: '1400px',
-          maxHeight: '90vh',
+           width: '1520px',
+          height: '928px',
+          marginTop: '152px',
+          marginRight:'179px',
+          marginLeft:'221px',
           display: 'flex',
           flexDirection: 'column'
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header with Close Button */}
-        <div className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center flex-shrink-0">
+        <div className="bg-white px-6 py-4 ml-[30px] flex justify-between items-center flex-shrink-0">
           <span className="text-xl font-normal" style={{ color: '#231F20', lineHeight: '24px', letterSpacing: '0px' }}>
             SO : 32443388
           </span>
@@ -37,14 +49,14 @@ const JobDetailsUI: React.FC<JobDetailsUIProps> = ({ onClose }) => {
         </div>
 
         {/* Scrollable Content */}
-        <div className="overflow-y-auto flex-1" style={{ backgroundColor: '#FFFFFF' }}>
+        <div style={{ backgroundColor: '#FFFFFF' }}>
           <div className="px-12 py-6">
             <div className="flex gap-6">
               {/* LEFT SIDEBAR */}
               <div className="flex-shrink-0" style={{ width: '360px' }}>
-                <div className="p-5" style={{ backgroundColor: '#F2F7F8', borderRadius: '10px', minHeight: '663px' }}>
+                <div className="p-5" style={{ backgroundColor: '#F2F7F8', borderRadius: '10px' }}>
                   {/* Summary */}
-                  <div className="mb-6">
+                  <div className="mb-6 ">
                     <h3 className="mb-2" style={{ fontSize: '16px', lineHeight: '19px', letterSpacing: '0px', color: '#7A7480', fontWeight: 'normal' }}>Summary</h3>
                     <p style={{ fontSize: '14px', lineHeight: '22px', letterSpacing: '0px', color: '#231F20', fontWeight: 'normal' }}>
                       Join our team as a Software Development Lead, where you will oversee and guide the development of software solutions from concept to deployment. This leadership role involves managing a team of developers, collaborating with stakeholders, and ensuring projects meet quality standards and timelines.
@@ -82,7 +94,11 @@ const JobDetailsUI: React.FC<JobDetailsUIProps> = ({ onClose }) => {
                     <h3 className="mb-3" style={{ fontSize: '14px', lineHeight: '17px', letterSpacing: '0px', color: '#7A7480', fontWeight: 'normal' }}>Hiring Manager</h3>
                     <div className="flex items-center gap-3">
                       <div className="overflow-hidden" style={{ width: '40px', height: '40px', backgroundColor: '#E5E5E5', borderRadius: '4px' }}>
-                        <div className="w-full h-full bg-gradient-to-br from-pink-300 to-purple-300"></div>
+                        <img
+                          src={emilyImage}
+                          alt="Emily Stephen"
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <span style={{ fontSize: '16px', lineHeight: '19px', letterSpacing: '0px', color: '#231F20', fontWeight: 'normal' }}>Emily Stephen</span>
                     </div>
@@ -92,7 +108,7 @@ const JobDetailsUI: React.FC<JobDetailsUIProps> = ({ onClose }) => {
 
               {/* MAIN COMPONENT - RIGHT SIDE */}
               <div className="flex-1">
-                <div className="p-6" style={{ backgroundColor: '#F2F7F8', borderRadius: '10px', minHeight: '663px' }}>
+                <div className="p-6" style={{ backgroundColor: '#F2F7F8', borderRadius: '10px' }}>
                   {/* Header Row */}
                   <div className="flex justify-between items-start mb-6">
                     <h1 className="text-xl font-semibold text-gray-900">Lead 2 - Software Engineer</h1>

@@ -10,9 +10,13 @@ const EducationItem: React.FC<EducationItemProps> = ({ education }) => {
   return (
     <div className="ml-8">
       {/* Timeline dot + date row */}
-      <div className="flex items-center space-x-2 text-sm text-gray-500 mb-4 -ml-6">
-        <div className="w-2 h-2 bg-teal-500 rounded-full" />
-        <span>
+      <div className="flex items-center space-x-2 text-sm mb-4 -ml-6">
+        <div
+          data-timeline-dot
+          className="w-2 h-2 rounded-full"
+          style={{ background: '#14b8a6', zIndex: 20 }}
+        />
+        <span style={{ color: '#374151' }}>
           {education.startYear} - {education.endYear}
         </span>
       </div>

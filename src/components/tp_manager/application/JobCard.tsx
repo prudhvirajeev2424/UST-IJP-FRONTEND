@@ -4,15 +4,24 @@ import SkillTag from './SkillTag';
 
 interface JobCardProps {
   job: Job;
+  /** Hex color for the dot and connector; parent can pass different colors per job */
+  dotColor?: string;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ job }) => {
+const JobCard: React.FC<JobCardProps> = ({ job, dotColor = '#14b8a6' }) => {
   return (
     <div className="ml-8">
       {/* Timeline dot + date row shifted left */}
-      <div className="flex items-center space-x-2 text-sm text-gray-500 mb-4 -ml-6">
-        <div className="w-2 h-2 bg-teal-500 rounded-full" />
-        <span>
+      <div className="flex items-center space-x-2 text-sm mb-4 -ml-6">
+        {/* give the dot a data attribute so the parent can measure its position */}
+        <div
+          data-timeline-dot
+          className="w-2 h-2 rounded-full"
+          style={{ background: dotColor, zIndex: 20 }}
+        />
+
+        {/* date text should be dark gray (not the dot color) */}
+        <span style={{ color: '#374151' }}>
           {job.startDate} - {job.isPresent ? 'Present' : job.endDate}
         </span>
       </div>
