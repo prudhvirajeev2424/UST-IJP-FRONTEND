@@ -102,8 +102,8 @@ const WfmApplications: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#F2F7F8]">
-      <main className="max-w-[1800px] mx-auto p-6">
-        <div className="grid grid-cols-12 gap-6">
+      <main className="max-w-[1800px] mx-auto">
+        <div className="grid grid-cols-12 gap-1">
           {/* Status bar full width above columns */}
           <div className="col-span-12">
             <div className="mb-1">
