@@ -30,6 +30,22 @@ const Navbar = ({ role }: NavbarProps) => {
     links = ["Home", "Applications"];
   }
 
+  const handleNavClick = (link: string) => {
+    setActive(link);
+    setMobileOpen(false);
+  };
+
+  const pageMap: Record<string, ReactNode> = {
+    Home: <Home />,
+    Applications: <ApplicationsPage />,
+    "My Applications": <ApplicationsPage />,
+    Opportunities: <ApplicationsPage />,
+    "Assigning & Tracking": <Assigning_and_tracking />,
+    // Render ReportsPage without its internal Navbar when embedded here so
+    // the top-level Navbar (this component) remains the primary header.
+    Reports: <ReportsPage showNavbar={false} />,
+  };
+
   return (
     <>
       <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
