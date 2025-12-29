@@ -1,182 +1,141 @@
-// import { ChevronDown } from "lucide-react";
-// import calendarImg from "../../../assets/calendar.jpg";
+import { useState } from "react";
+import { ChevronDown, Calendar } from "lucide-react";
 
-// interface SidebarProps {
-//   activeTab: string;
-// }
+interface SidebarProps {
+  activeTab: string;
+}
 
-// export const Sidebar = ({ activeTab }: SidebarProps) => {
-//   // Logic: Change 'Category' to 'Domains' if Applied tab is active
-//   const accordionSections = [
-//     "Matching Role",
-//     "Primary Skills",
-//     activeTab === "Applied" ? "Domains" : "Category",
-//   ];
+export const Sidebar = ({ activeTab }: SidebarProps) => {
+  const [isLocationOpen, setIsLocationOpen] = useState(false);
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
 
-//   return (
-//     <div className="w-[420px] bg-white rounded-[10px] p-[30px] shadow-sm border border-[#D7E0E3] flex flex-col h-[850px]">
-//       <div className="w-[360px] mx-auto">
-//         <div className="flex justify-between items-center mb-[30px]">
-//           <span className="font-semibold text-[16px] text-[#231F20]">
-//             Filter
-//           </span>
-//           <button className="text-[#0097AC] text-[14px] font-bold">
-//             Clear All
-//           </button>
-//         </div>
-
-//         <div className="space-y-[20px]">
-//           <div className="flex justify-start gap-[25px] mb-[5px]">
-//             <label className="flex items-center cursor-pointer text-[14px] text-[#231F20] font-normal gap-2 whitespace-nowrap leading-none">
-//               <input
-//                 type="radio"
-//                 name="avail"
-//                 className="accent-[#006E74] w-[18px] h-[18px]"
-//               />
-//               Currently Available
-//             </label>
-//             <label className="flex items-center cursor-pointer text-[14px] text-[#231F20] font-normal gap-2 whitespace-nowrap leading-none">
-//               <input
-//                 type="radio"
-//                 name="avail"
-//                 defaultChecked
-//                 className="accent-[#006E74] w-[18px] h-[18px]"
-//               />
-//               Available After Date
-//             </label>
-//           </div>
-
-//           <div className="relative w-full">
-//             <input
-//               type="text"
-//               className="w-full h-[49px] px-[15px] border border-[#D7E0E3] rounded-[5px] text-[14px] text-[#231F20] outline-none bg-white"
-//               defaultValue="12 - January - 2024"
-//               readOnly
-//             />
-//             <img
-//               src={calendarImg}
-//               alt="calendar"
-//               className="absolute right-4 top-1/2 -translate-y-1/2 w-[20px] h-[20px]"
-//             />
-//           </div>
-
-//           <div className="w-full h-[49px] px-[15px] border border-[#D7E0E3] rounded-[5px] flex items-center justify-between cursor-pointer bg-white">
-//             <span className="text-[#7A7480] text-[14px]">Location</span>
-//             <ChevronDown size={18} className="text-[#7A7480]" />
-//           </div>
-//         </div>
-
-//         <hr className="my-[30px] border-[#F2F7F8]" />
-
-//         <div className="w-full">
-//           <h4 className="text-[15px] mb-[45px] text-[#231F20] font-medium">
-//             My Fitment
-//           </h4>
-//           <div className="relative px-2">
-//             <div className="absolute -top-[35px] left-[75%] -translate-x-1/2 bg-[#006E74] text-white px-2 py-0.5 rounded-[2px] text-[12px] font-bold whitespace-nowrap">
-//               75%
-//               <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-[#006E74]"></div>
-//             </div>
-//             <div className="h-[2px] w-full bg-[#D7E0E3] relative">
-//               <div className="absolute h-full bg-[#006E74] w-[75%]"></div>
-//               <div className="absolute -top-[6px] left-[75%] -translate-x-1/2 w-3.5 h-3.5 bg-[#006E74] rounded-full border-2 border-white shadow-md"></div>
-//             </div>
-//           </div>
-//         </div>
-
-//         <hr className="my-[40px] border-[#F2F7F8]" />
-
-//         {/* Dynamic Accordions */}
-//         <div className="space-y-[15px]">
-//           {accordionSections.map((item) => (
-//             <div
-//               key={item}
-//               className="w-full h-[49px] px-[15px] border border-[#D7E0E3] rounded-[5px] flex items-center justify-between cursor-pointer text-[#7A7480] text-[14px] bg-white"
-//             >
-//               <span>{item}</span>
-//               <ChevronDown size={18} />
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-
-import { ChevronDown } from "lucide-react";
-import calendarImg from "../../../assets/calendar.jpg";
-
-export const Sidebar = ({ activeTab }: { activeTab: string }) => {
   const sections = ["Matching Role", "Primary Skills", activeTab === "Applied" ? "Domains" : "Category"];
+  const locations = ["Bangalore", "Chennai", "Kochi"];
+
+  const toggleLocation = (loc: string) => {
+    setSelectedLocations(prev => 
+      prev.includes(loc) ? prev.filter(l => l !== loc) : [...prev, loc]
+    );
+  };
 
   return (
-    /* Width 420px, Height 850px as per XD spec */
-    <div className="w-[420px] h-[850px] bg-white rounded-[10px] p-[30px] shadow-sm border border-[#D7E0E3] flex flex-col">
-      <div className="flex justify-between items-center mb-[30px] w-full">
-        <span className="font-semibold text-[16px] text-[#231F20]">Filter</span>
-        <button className="text-[#0097AC] text-[14px] font-bold hover:underline">Clear All</button>
-      </div>
+    <div className="w-[330px] flex flex-col font-rubik shrink-0">
+      {/* 1. Opportunities Title (Alignment matching Toolbar) */}
+      {/* <h2 className="text-[18px] font-bold text-[#231F20] mb-5 px-1 uppercase tracking-tight">Opportunities</h2> */}
 
-      <div className="space-y-[25px]">
-        {/* Horizontal Radio Buttons Fix */}
-        <div className="flex flex-row items-center gap-6 mb-2">
-          <label className="flex items-center cursor-pointer text-[13px] text-[#231F20] gap-2 whitespace-nowrap">
-            <input type="radio" name="av" className="accent-[#006E74] w-[18px] h-[18px]" /> 
-            Currently Available
-          </label>
-          <label className="flex items-center cursor-pointer text-[13px] text-[#231F20] gap-2 whitespace-nowrap">
-            <input type="radio" name="av" defaultChecked className="accent-[#006E74] w-[18px] h-[18px]" /> 
-            Available After Date
-          </label>
-        </div>
-
-        {/* Input sizing exactly as XD (360px centered) */}
-        <div className="relative w-full">
-          <input 
-            type="text" 
-            className="w-full h-[49px] px-[15px] border border-[#D7E0E3] rounded-[5px] text-[14px] text-[#231F20] outline-none bg-white" 
-            defaultValue="12 - January - 2024" 
-            readOnly 
-          />
-          <img src={calendarImg} alt="cal" className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5" />
-        </div>
-
-        <div className="w-full h-[49px] px-[15px] border border-[#D7E0E3] rounded-[5px] flex items-center justify-between cursor-pointer text-[#7A7480] text-[14px]">
-          <span>Location</span>
-          <ChevronDown size={18} />
-        </div>
-      </div>
-
-      <hr className="my-[35px] border-[#F2F7F8]" />
-
-      <div className="w-full">
-        <h4 className="text-[15px] mb-10 text-[#231F20] font-medium">My Fitment</h4>
-        <div className="relative px-2">
-          {/* Slider Bubble */}
-          <div className="absolute -top-10 left-[75%] -translate-x-1/2 bg-[#006E74] text-white px-2 py-1 rounded-[2px] text-[12px] font-bold">
-            75%
-            <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-[#006E74]"></div>
+      {/* Main Filter Card */}
+      <div className="bg-white rounded-xl border border-[#D7E0E3] shadow-sm flex flex-col overflow-hidden">
+        
+        {/* SECTION 1: TOP FILTERS */}
+        <div className="p-6 pb-8">
+          <div className="flex justify-between items-center mb-6">
+            <span className="font-bold text-[15px] text-[#231F20]">Filter</span>
+            <button className="text-[#0097AC] text-[12px] font-bold hover:underline">Clear All</button>
           </div>
-          {/* Slider Track */}
-          <div className="h-[2px] w-full bg-[#D7E0E3] relative">
-            <div className="absolute h-full bg-[#006E74] w-[75%]"></div>
-            <div className="absolute -top-[6.5px] left-[75%] -translate-x-1/2 w-4 h-4 bg-[#006E74] rounded-full border-2 border-white shadow-md"></div>
+
+          <div className="space-y-5">
+            {/* Horizontal Radio Buttons */}
+            <div className="flex flex-row items-center gap-5">
+              <label className="flex items-center cursor-pointer text-[11px] text-[#7A7480] gap-2 whitespace-nowrap group">
+                <div className="w-4 h-4 border border-[#D7E0E3] rounded-full flex items-center justify-center bg-white group-hover:border-[#006E74]">
+                   <input type="radio" name="availability" className="sr-only peer" />
+                   <div className="w-2 h-2 rounded-full bg-transparent peer-checked:bg-[#006E74]"></div>
+                </div>
+                Currently Available
+              </label>
+              <label className="flex items-center cursor-pointer text-[11px] text-[#7A7480] gap-2 whitespace-nowrap group">
+                <div className="w-4 h-4 border border-[#D7E0E3] rounded-full flex items-center justify-center bg-white group-hover:border-[#006E74]">
+                   <input type="radio" name="availability" defaultChecked className="sr-only peer" />
+                   <div className="w-2 h-2 rounded-full bg-transparent peer-checked:bg-[#006E74]"></div>
+                </div>
+                Available After Date
+              </label>
+            </div>
+
+            {/* Date Input */}
+            <div className="relative w-full">
+              <div className="w-full h-[40px] px-3 border border-[#D7E0E3] rounded-md flex items-center justify-between bg-white cursor-text">
+                <span className="text-[12px] text-[#231F20]">12 - January - 2024</span>
+                <Calendar size={16} className="text-[#7A7480]" />
+              </div>
+            </div>
+
+            {/* LOCATION DROPDOWN (Fieldset Style) */}
+            <div className="relative pt-1">
+              <div className={`border rounded-md relative transition-all duration-300 ${isLocationOpen ? 'border-[#006E74]' : 'border-[#D7E0E3]'}`}>
+                {/* Label sitting on the border line */}
+                <span className="absolute -top-2 left-2 bg-white px-1 text-[10px] text-[#7A7480] z-10">Location</span>
+                
+                <div 
+                  className="flex items-center justify-between px-3 h-[40px] cursor-pointer"
+                  onClick={() => setIsLocationOpen(!isLocationOpen)}
+                >
+                  <span className="text-[12px] text-[#231F20] truncate pr-4">
+                    {selectedLocations.length > 0 ? selectedLocations.join(", ") : ""}
+                  </span>
+                  <ChevronDown size={14} className={`text-[#7A7480] transition-transform duration-300 ${isLocationOpen ? 'rotate-180' : ''}`} />
+                </div>
+
+                {/* Dropdown Content */}
+                {isLocationOpen && (
+                  <div className="bg-white border-t border-[#F2F7F8] py-1 animate-in fade-in slide-in-from-top-1 duration-200">
+                    {locations.map((loc) => (
+                      <label key={loc} className="flex items-center gap-3 px-3 py-2.5 hover:bg-[#F2F7F8] cursor-pointer group">
+                        <input 
+                          type="checkbox" 
+                          className="w-3.5 h-3.5 accent-[#006E74] rounded border-[#D7E0E3]" 
+                          checked={selectedLocations.includes(loc)}
+                          onChange={() => toggleLocation(loc)}
+                        />
+                        <span className="text-[12px] text-[#231F20] font-normal group-hover:text-[#006E74] transition-colors">{loc}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <hr className="my-[45px] border-[#F2F7F8]" />
+        {/* Divider Line 1 */}
+        <div className="h-[1px] bg-[#d6d5d5] w-full"></div>
 
-      {/* Accordions */}
-      <div className="space-y-4">
-        {sections.map((item) => (
-          <div key={item} className="w-full h-[49px] px-[15px] border border-[#D7E0E3] rounded-[5px] flex items-center justify-between cursor-pointer text-[#7A7480] text-[14px] bg-white">
-            <span>{item}</span>
-            <ChevronDown size={18} />
+        {/* SECTION 2: MY FITMENT */}
+        <div className="p-6 py-8">
+          <h4 className="text-[13px] mb-10 text-[#231F20] font-medium">My Fitment</h4>
+          <div className="relative px-1">
+            {/* Tooltip Bubble */}
+            <div className="absolute -top-[32px] left-[75%] -translate-x-1/2 bg-[#005F6B] text-white px-2.5 py-1 rounded-[2px] text-[10px] font-bold">
+              75%
+              <div className="absolute top-full left-1/2 -translate-x-1/2 border-[4px] border-transparent border-t-[#005F6B]"></div>
+            </div>
+            {/* Slider Track */}
+            <div className="h-[1.5px] w-full bg-[#D7E0E3] relative rounded-full">
+              <div className="absolute h-full bg-[#006E74] w-[75%] rounded-full"></div>
+              {/* Thumb with Glow */}
+              <div className="absolute -top-[5px] left-[75%] -translate-x-1/2 w-3 h-3 bg-[#006E74] rounded-full border border-white shadow-[0_0_0_6px_rgba(0,110,116,0.05)] cursor-pointer"></div>
+            </div>
           </div>
-        ))}
+        </div>
+
+        {/* Divider Line 2 */}
+        <div className="h-[1px] bg-[#d6d5d5] w-full"></div>
+
+        {/* SECTION 3: BOTTOM ACCORDIONS */}
+        <div className="p-6 space-y-[12px]">
+          {sections.map((item) => (
+            <div 
+              key={item} 
+              className="w-full h-[40px] px-3 border border-[#D7E0E3] rounded-md flex items-center justify-between cursor-pointer text-[#231F20] text-[12.5px] bg-white hover:border-[#006E74] transition-colors"
+            >
+              <span>{item}</span>
+              <ChevronDown size={16} className="text-[#7A7480]" />
+            </div>
+          ))}
+        </div>
+
       </div>
     </div>
   );
 };
+
