@@ -1,16 +1,7 @@
 import React from "react";
 import { ArrowLeft, Grid, List } from "lucide-react";
 
-/**
- * StatusTabs
- * Reusable header component used by the Applications page. It centralizes:
- * - The left heading (Profiles)
- * - The status tabs (All / Pending Action / Accepted / Rejected)
- * - Search + action icons
- * - View toggle (Kanban / List)
- *
- * Layout matches the FilterTab + Content layout below (420px left, flex-1 right)
- */
+// StatusTabs: reusable header for Applications page (tabs, search, actions, view toggle)
 interface StatusTabsProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;

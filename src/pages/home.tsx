@@ -4,8 +4,8 @@ import { useActiveRole } from "../context/ActiveRoleContext";
 import ProfileCard from "../components/TP_Manager/home/ProfileCard";
 import ApplicationStatus from "../components/TP_Manager/home/ApplicationStatus";
 import RecentActivities from "../components/TP_Manager/home/RecentActivities";
-import type { Profile } from "../types";
-import { profiles } from "../data/profiles";
+import type { Profile } from "../types/ApplicationProfile";
+import { profiles } from "../data/TPManagerProfileCardandListViewMockData";
 import ProfilesReceived from "../components/TP_Manager/home/ProfilesReceived";
 
 const sampleProfiles: Profile[] = profiles;

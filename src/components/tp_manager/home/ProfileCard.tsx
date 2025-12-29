@@ -1,6 +1,6 @@
 import React from "react";
 import ScoreBadge from "../../common/ScoreBadge/ScoreBadge";
-import type { Profile } from "../../../types";
+import type { Profile } from "../../../types/ApplicationProfile";
 
 const ProfileCard: React.FC<{ profile: Profile }> = ({ profile }) => {
   return (

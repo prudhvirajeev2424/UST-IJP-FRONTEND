@@ -1,16 +1,8 @@
 import React from "react";
-import type { Application } from "../types";
+import type { Application } from "../types/ApplicationProfile";
 import { User } from "lucide-react";
 
-/**
- * TableRow
- * Renders a single application row inside the ApplicationsTable.
- *
- * Notes:
- * - Only the first row is interactive (receives click/keyboard handlers). This
- *   was an explicit UX requirement so other rows remain non-focusable.
- * - The profile badge shows a tooltip on hover.
- */
+// TableRow: renders one application row; only the first row is interactive
 interface TableRowProps {
   application: Application;
   isFirst?: boolean;
