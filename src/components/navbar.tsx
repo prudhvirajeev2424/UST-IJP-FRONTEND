@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
 import LogoImg from "../assets/Group 172287@2x.jpg";
@@ -13,6 +13,9 @@ import Opportunities from "../pages/Opportunies";
 import AssigningAndTracking from "../pages/Assigning_and_Tracking";
 import MyApplications from "../pages/MyApplications";
 import TP_Applications from "../pages/layout/TP_Applications";
+import ApplicationsPage from "../pages/Applications_page";
+import Assigning_and_tracking from "../pages/AssigningandTracking";
+import ReportsPage from "../pages/ReportsPage";
 
 interface NavbarProps {
   role?: string | null;
@@ -246,3 +249,7 @@ const Navbar = ({ role }: NavbarProps) => {
 };
 
 export default Navbar;
+function setMobileOpen(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
+

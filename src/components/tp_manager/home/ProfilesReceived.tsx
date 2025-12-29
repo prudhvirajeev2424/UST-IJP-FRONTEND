@@ -5,7 +5,7 @@ import Toggle from '../../common/Toggle/Toggle';
 import { profiles } from '../../../data/profiles';
 import { opportunities as mockOpportunities } from '../../../data/mockData';
 import type { Opportunity } from '../../../types/opportunity';
-import EmpHomeList from '../../employee/home_components/EmpHomeList';
+import EmpHomeList from '../../employee/EmpHomeList';
 
 /* ---------- Feather Grid Icon ---------- */
 const FeatherGridIcon = ({ active }: { active: boolean }) => (
