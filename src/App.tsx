@@ -1,14 +1,10 @@
 import "./App.css";
-import { ShortlistProvider } from "./components/TP_Manager/application/context/ShortlistContext";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginPage from "./pages/landing_page";
-import Home from "./pages/home";
-import ReportsPage from "./pages/ReportsPage";
-import Applications from "./pages/Applications_page";
-import { ActiveRoleContext } from "./context/ActiveRoleContext";
-import AssigningAndTracking from "./pages/AssigningandTracking";
-
+// react-router removed: login/role state controls which UI is shown
 import { useState } from "react";
+
+import LoginPage from "./pages/landing_page";
+import { ShortlistProvider } from "./components/TP_Manager/application/context/ShortlistContext";
+import { ActiveRoleContext } from "./context/ActiveRoleContext";
 
 function App() {
   const [activeRole, setActiveRole] = useState<string | null>(null);
@@ -16,15 +12,7 @@ function App() {
   return (
     <ShortlistProvider>
       <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
-        <Router>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/applications" element={<Applications />} />
-            <Route path="/assigning" element={<AssigningAndTracking />} />
-            <Route path="/reports" element={<ReportsPage />} />
-          </Routes>
-        </Router>
+        <LoginPage />
       </ActiveRoleContext.Provider>
     </ShortlistProvider>
   );

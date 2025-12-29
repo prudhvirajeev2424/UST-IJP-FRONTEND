@@ -7,29 +7,10 @@ import ProfilePhoto from "/src/assets/ProfilePhoto.png";
    ICONS
 ============================ */
 
-const IDIcon: React.FC = () => (
-  <svg
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="text-[#7A7480]"
-  >
-    <rect x="3" y="4" width="18" height="18" rx="2" />
-    <line x1="16" y1="2" x2="16" y2="6" />
-    <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-  </svg>
-);
-
 const LocationIcon: React.FC = () => (
   <svg
-    width="14"
-    height="14"
+    width="13.09"
+    height="16"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -53,44 +34,45 @@ interface UserInfoProps {
   location: string;
 }
 
-export const UserInfo: React.FC<UserInfoProps> = ({ name, uid, location }) => {
-  return (
-    <div className="flex items-start gap-3">
-      <div
-        className="rounded-lg overflow-auto flex-shrink-0"
-        style={{
-          width: "40px",
-          height: "40px",
-          backgroundImage: `url(${ProfilePhoto})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "0% 0%",
-          backgroundSize: "100%",
-          backgroundColor: "transparent",
-          opacity: 1,
-        }}
-      />
+const textBase =
+  "text-[14px] leading-[17px] font-normal tracking-[0px] text-[#7A7480] opacity-100 font-[Rubik] truncate";
 
-      <div className="flex-1 min-w-0">
-        <div className="text-[14px] text-[#231F20] mb-1 truncate">{name}</div>
+const UserInfo: React.FC<UserInfoProps> = ({ name, uid, location }) => (
+  <div className="flex items-start gap-3">
+    {/* DP */}
+    <div
+      className="flex-shrink-0 opacity-100"
+      style={{
+        width: "40px",
+        height: "40px",
+        background: `transparent url(${ProfilePhoto}) 0% 0% no-repeat padding-box`,
+      }}
+    />
 
-        <div className="flex flex-wrap items-center gap-2 text-[14px] text-[#7A7480]">
-          <div className="flex items-center gap-1">
-            <IDIcon />
-            <span>UID - {uid}</span>
-          </div>
-          <span>|</span>
-          <div className="flex items-center gap-1">
-            <LocationIcon />
-            <span>{location}</span>
-          </div>
+    <div className="flex-1 min-w-0">
+      {/* Name */}
+      <p className="text-[14px] text-[#231F20] truncate font-[Rubik]">{name}</p>
+
+      {/* UID + Location */}
+      <div className="flex items-center gap-2 mt-1">
+        {/* UID */}
+        <span className={`${textBase} w-[85px] h-[17px]`}>UID - {uid}</span>
+
+        {/* Divider */}
+        <span className="text-[#7A7480] leading-[17px] opacity-100">|</span>
+
+        {/* Location */}
+        <div className="flex items-center gap-1">
+          <LocationIcon />
+          <span className={`${textBase} w-[66px] h-[17px]`}>{location}</span>
         </div>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 /* ============================
-   TASK CARD (XD EXACT)
+   TASK CARD
 ============================ */
 
 interface TaskCardProps {
@@ -103,24 +85,21 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   return (
     <div
       className="
-    bg-white
-    rounded-[10px]
-    p-6
-    w-full
-    h-[294px]
-    transition-shadow
-    hover:shadow-card-hover
-    flex
-    flex-col
-    overflow-hidden
-  "
+        w-[320px]
+        h-[294px]
+        bg-[#FFFFFF]
+        rounded-[10px]
+        p-6
+        opacity-100
+        flex
+        flex-col
+        overflow-hidden
+      "
     >
-      {/* USER INFO */}
       <div className="mb-5">
         <UserInfo {...user} />
       </div>
 
-      {/* TASK TITLE */}
       <div className="mb-4">
         <p className="text-sm text-[#7A7480] mb-1">Task Assigned :</p>
         <p className="text-sm font-semibold text-[#231F20] break-words">
@@ -128,15 +107,29 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         </p>
       </div>
 
-      {/* PROGRESS */}
-      <div className="mb-3 h-[40px] flex flex-col justify-center">
+      <div className="mb-2">
         <ProgressBar percentage={progress} />
-      </div>
 
-      {/* UPDATED INFO */}
-      <p className="text-xs text-[#C2BCBE]">
-        Updated {updatedDaysAgo} {updatedDaysAgo === 1 ? "day" : "days"} ago
-      </p>
+        {/* Updated days should sit immediately below the progress bar with small spacing */}
+        <p
+  className="
+    text-[12px]
+    leading-[14px]
+    font-normal
+    text-[#7A7480]
+    tracking-[0px]
+    text-left
+    opacity-100
+    w-[111px]
+    h-[14px]
+    font-[Rubik]
+    mt-1
+  "
+>
+  Updated {updatedDaysAgo} {updatedDaysAgo === 1 ? "day" : "days"} ago
+</p>
+
+      </div>
     </div>
   );
 };

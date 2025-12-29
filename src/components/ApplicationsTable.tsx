@@ -1,7 +1,13 @@
 import React from "react";
-import type { Application } from "../types/application";
+import type { Application } from "../types";
 import { TableRow } from "./TableRow";
 
+/**
+ * ApplicationsTable
+ * Renders the applications list as a table. The table header uses `position:sticky`
+ * (via Tailwind's `sticky top-0`) so the header remains visible when the tbody
+ * is scrolled inside a constrained container.
+ */
 interface ApplicationsTableProps {
   applications: Application[];
 }
@@ -13,8 +19,8 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
     <div className="w-full bg-white rounded-lg overflow-visible">
       <table className="w-full border-collapse">
         <thead>
-          <tr style={{ backgroundColor: "#D7E0E3" }}>
-            <th className="px-3 py-2 text-left overflow-visible">
+          <tr>
+            <th className="sticky top-0 z-10 px-3 py-2 text-left overflow-visible bg-[#D7E0E3]">
               <div className="flex items-center gap-2">
                 <div className="w-[20px] flex-shrink-0"></div>
                 <span
@@ -25,7 +31,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 </span>
               </div>
             </th>
-            <th className="px-3 py-2 text-left">
+            <th className="sticky top-0 z-10 px-3 py-2 text-left bg-[#D7E0E3]">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -33,7 +39,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 UID
               </span>
             </th>
-            <th className="px-3 py-2 text-left">
+            <th className="sticky top-0 z-10 px-3 py-2 text-left bg-[#D7E0E3]">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -41,7 +47,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 Name
               </span>
             </th>
-            <th className="px-3 py-2 text-left">
+            <th className="sticky top-0 z-10 px-3 py-2 text-left bg-[#D7E0E3]">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -49,7 +55,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 Role
               </span>
             </th>
-            <th className="px-3 py-2 text-left">
+            <th className="sticky top-0 z-10 px-3 py-2 text-left bg-[#D7E0E3]">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -57,7 +63,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 Location
               </span>
             </th>
-            <th className="px-3 py-2 text-left">
+            <th className="sticky top-0 z-10 px-3 py-2 text-left bg-[#D7E0E3]">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -65,7 +71,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 Applied date
               </span>
             </th>
-            <th className="px-3 py-2 text-left">
+            <th className="sticky top-0 z-10 px-3 py-2 text-left bg-[#D7E0E3]">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}
@@ -73,7 +79,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                 Match Score
               </span>
             </th>
-            <th className="px-3 py-2 text-left">
+            <th className="sticky top-0 z-10 px-3 py-2 text-left bg-[#D7E0E3]">
               <span
                 className="font-rubik font-normal text-[13px] leading-[15px] tracking-[0px]"
                 style={{ color: "#7A7480" }}

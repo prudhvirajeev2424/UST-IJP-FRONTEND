@@ -26,11 +26,10 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       : "text-primary";
 
   return (
-    /* Use fixed heights and prevent wrapping so the component never grows vertically.
-       Ensure label row truncates and percentage uses whitespace-nowrap. */
-    <div className="w-full h-[40px] flex flex-col justify-center min-h-0">
-      {/* LABEL ROW (fixed height, prevents wrapping) */}
-      <div className="flex justify-between items-center h-[18px] min-h-0">
+    /* Reduce vertical footprint: slightly smaller label row and tighter gap to the bar. */
+    <div className="w-full h-[32px] flex flex-col justify-center min-h-0">
+      {/* LABEL ROW (slightly smaller) */}
+      <div className="flex justify-between items-center h-[16px] min-h-0">
         <span className="text-sm text-[#7A7480] truncate min-w-0 block">
           {label}
         </span>
@@ -44,8 +43,8 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         )}
       </div>
 
-      {/* BAR (fixed height) */}
-      <div className="w-full h-[3px] bg-[#D7E0E3] rounded-full overflow-hidden mt-2">
+      {/* BAR (keep slim and closer to label) */}
+      <div className="w-full h-[3px] bg-[#D7E0E3] rounded-full overflow-hidden mt-1">
         <div
           className={`h-full ${barColor} rounded-full transition-all duration-300`}
           style={{ width: `${percentage}%` }}

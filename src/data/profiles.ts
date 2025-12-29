@@ -1,126 +1,67 @@
-import type { Profile } from "../types/Profile";
+import type { Profile, Application } from "../types";
 
-/**
- * Mock data for profile cards
- * Contains sample employee profiles with various fitment scores and statuses
- */
-export const mockProfiles: Profile[] = [
+export const profiles: Profile[] = [
   {
-    id: "1",
+    id: "SO#129856",
     name: "Zamira Peterson",
-    // sample avatar from pravatar as placeholder
-    imageUrl: "https://i.pravatar.cc/150?img=32",
-    position: "Developer II - R3",
+    developer: "Developer III - B3",
     uid: "UID - 123456",
-    soId: "SO#129856",
+    score: 90,
     status: "Allocated",
-    fitment: 90,
-    skills: ["Java Script", "Python"],
-    additionalSkills: 2,
-    description:
-      "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+    skills: ["Java Script", "Python", "+2"],
+    avatar: "ZP",
   },
   {
-    id: "2",
+    id: "SO#129857",
     name: "Andrea Peterson",
-    imageUrl: "https://i.pravatar.cc/150?img=12",
-    position: "Developer II - R3",
-    uid: "UID - 123456",
-    soId: "SO#129856",
+    developer: "Developer III - B3",
+    uid: "UID - 123457",
+    score: 65,
     status: "Allocated",
-    fitment: 65,
-    skills: ["Java Script", "Python"],
-    additionalSkills: 2,
-    description:
-      "Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.",
+    skills: ["Java Script", "Python", "+2"],
+    avatar: "AP",
   },
   {
-    id: "3",
-    name: "Andrea Peterson",
-    imageUrl: "https://i.pravatar.cc/150?img=25",
-    position: "Developer II - R3",
-    uid: "UID - 123456",
-    soId: "SO#129856",
+    id: "SO#129858",
+    name: "John Mathews",
+    developer: "Developer II - B2",
+    uid: "UID - 123458",
+    score: 90,
     status: "Allocated",
-    fitment: 90,
-    skills: ["Java Script", "Python"],
-    additionalSkills: 2,
-    description:
-      "Senior Full Stack Developer specializing in React and Node.js. Expert in building scalable microservices and implementing cloud-native solutions on AWS and Azure platforms.",
+    skills: ["React", "Node", "+1"],
+    avatar: "JM",
   },
   {
-    id: "4",
-    name: "Andrea Peterson",
-    imageUrl: "https://i.pravatar.cc/150?img=6",
-    position: "Developer II - R3",
-    uid: "UID - 123456",
-    soId: "SO#129856",
-    status: "Allocated",
-    fitment: 90,
-    skills: ["Java Script", "Python"],
-    additionalSkills: 2,
-    description:
-      "Experienced DevOps Engineer with strong background in CI/CD pipeline automation, Kubernetes orchestration, and infrastructure as code using Terraform and Ansible.",
+    id: "SO#129859",
+    name: "Sophia Williams",
+    developer: "Developer I - B1",
+    uid: "UID - 123459",
+    score: 90,
+    status: "Rejected",
+    skills: ["HTML", "CSS", "+1"],
+    avatar: "SW",
   },
   {
-    id: "5",
-    name: "Andrea Peterson",
-    imageUrl: "https://i.pravatar.cc/150?img=7",
-    position: "Developer II - R3",
-    uid: "UID - 123456",
-    soId: "SO#129856",
+    id: "SO#129860",
+    name: "Daniel Roberts",
+    developer: "Senior Developer - B4",
+    uid: "UID - 123460",
+    score: 90,
     status: "Allocated",
-    fitment: 90,
-    skills: ["Java Script", "Python"],
-    additionalSkills: 2,
-    description:
-      "Data Engineer with expertise in building ETL pipelines, data warehousing, and big data technologies including Spark, Hadoop, and Kafka for real-time data processing.",
+    skills: ["Java", "Spring", "+2"],
+    avatar: "DR",
   },
   {
-    id: "6",
-    name: "Andrea Peterson",
-    imageUrl: "https://i.pravatar.cc/150?img=24",
-    position: "Developer II - R3",
-    uid: "UID - 123456",
-    soId: "SO#129856",
+    id: "SO#129861",
+    name: "Emily Johnson",
+    developer: "Developer II - B2",
+    uid: "UID - 123461",
+    score: 90,
     status: "Allocated",
-    fitment: 90,
-    skills: ["Java Script", "Python"],
-    additionalSkills: 2,
-    description:
-      "Mobile Application Developer proficient in React Native and Flutter. Delivered multiple cross-platform applications with focus on performance optimization and user experience.",
-  },
-  {
-    id: "7",
-    name: "Andrea Peterson",
-    imageUrl: "https://i.pravatar.cc/150?img=14",
-    position: "Developer II - R3",
-    uid: "UID - 123456",
-    soId: "SO#129856",
-    status: "Allocated",
-    fitment: 90,
-    skills: ["Java Script", "Python"],
-    additionalSkills: 2,
-    description:
-      "QA Automation Engineer with extensive experience in test automation frameworks like Selenium, Cypress, and JUnit. Strong advocate for test-driven development practices.",
-  },
-  {
-    id: "8",
-    name: "Andrea Peterson",
-    imageUrl: "https://i.pravatar.cc/150?img=18",
-    position: "Developer II - R3",
-    uid: "UID - 123456",
-    soId: "SO#129856",
-    status: "Allocated",
-    fitment: 90,
-    skills: ["Java Script", "Python"],
-    additionalSkills: 2,
-    description:
-      "UI/UX Designer and Front-end Developer with a passion for creating intuitive and accessible web interfaces. Proficient in design systems and component libraries.",
+    skills: ["Python", "Django", "+1"],
+    avatar: "EJ",
   },
 ];
-
-import type { Application } from "../types/application";
 
 export const mockApplications: Application[] = [
   {

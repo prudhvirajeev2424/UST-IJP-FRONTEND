@@ -1,18 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import NavigationBar from "../components/navbar";
 import FilterTab from "../components/ui/FilterTab";
 import StatusTabs from "../components/ui/StatusTabs";
 import { ApplicationsTable } from "../components/ApplicationsTable";
 import RightSideProfileCards from "../components/RightSideProfileCards";
-import { mockApplications } from "../data/profiles";
+import { mockApplications } from "../data/ApplicationsMockdata";
 
+/**
+ * ApplicationsPage
+ * Parent page that composes NavigationBar, StatusTabs, the left FilterTab,
+ * and the right content area which can be either a List (table) or Kanban
+ * (profile cards). The view toggle is lifted here and passed into
+ * StatusTabs via onViewChange.
+ */
 const ApplicationsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("All");
-  const [view, setView] = useState<"table" | "kanban">("table");
+  // default to kanban so clicking Applications shows Kanban view first
+  const [view, setView] = useState<"table" | "kanban">("kanban");
+  const [isCompact, setIsCompact] = useState<boolean>(false);
+  const initialHeightRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    // store the initial viewport height on first mount
+    if (!initialHeightRef.current)
+      initialHeightRef.current = window.innerHeight;
+
+    const checkCompact = () => {
+      const initial = initialHeightRef.current || window.innerHeight;
+      // compact when current height is less than 75% of initial
+      setIsCompact(window.innerHeight < initial * 0.75);
+    };
+
+    // run once and on resize/orientation change
+    checkCompact();
+    window.addEventListener("resize", checkCompact);
+    window.addEventListener("orientationchange", checkCompact);
+
+    return () => {
+      window.removeEventListener("resize", checkCompact);
+      window.removeEventListener("orientationchange", checkCompact);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#F2F7F8]">
-      <NavigationBar />
+      {/* Page content assumes the top-level Navbar is rendered separately */}
 
       <StatusTabs
         activeTab={activeTab}
@@ -29,7 +62,15 @@ const ApplicationsPage: React.FC = () => {
         <div className="flex-1 pt-0 self-stretch w-full">
           <div className="bg-white rounded-lg shadow-sm w-full overflow-x-visible">
             {view === "table" ? (
-              <ApplicationsTable applications={mockApplications} />
+              // Only enable the constrained scrollable area when the viewport height
+              // drops below 75% of the initial mount height (user zoomed in / small viewport).
+              <div
+                className={`w-full ${
+                  isCompact ? "max-h-[calc(100vh-220px)] overflow-y-auto" : ""
+                }`}
+              >
+                <ApplicationsTable applications={mockApplications} />
+              </div>
             ) : (
               <RightSideProfileCards />
             )}
