@@ -1,4 +1,10 @@
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+  useCallback,
+} from "react";
 import xlIcon from "../assets/XlIcon.png";
 import AssignTaskModal from "../components/TP_Manager/Assigning_and_Tracking/AssignTaskModal";
 import SuccessBanner from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SuccessBanner";
@@ -11,27 +17,40 @@ import { mockTasks } from "../data/TPManagerAssigningandTrackingMockData";
 import { type FilterType } from "../types/AssigningandTrackingTypes";
 
 const Assigning_and_tracking: React.FC = () => {
+  // Local UI state
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showBanner, setShowBanner] = useState(false);
   const [bannerMessage, setBannerMessage] = useState("");
+
+  // timer ref used to auto-dismiss the success banner
   const bannerTimerRef = useRef<number | null>(null);
 
-  const showSuccess = (message: string) => {
+  /**
+   * showSuccess
+   * - Shows the success banner with the provided message for 4s.
+   * - Memoized with useCallback so it's stable when passed to children.
+   */
+  const showSuccess = useCallback((message: string) => {
+    // clear any existing timer so messages don't overlap
     if (bannerTimerRef.current) {
       clearTimeout(bannerTimerRef.current);
       bannerTimerRef.current = null;
     }
+
     setBannerMessage(message);
     setShowBanner(true);
+
     const id = window.setTimeout(() => {
       setShowBanner(false);
       bannerTimerRef.current = null;
     }, 4000);
-    bannerTimerRef.current = id;
-  };
 
+    bannerTimerRef.current = id; // store timer id for cleanup
+  }, []);
+
+  // Cleanup on unmount: clear any pending banner timer
   useEffect(() => {
     return () => {
       if (bannerTimerRef.current) clearTimeout(bannerTimerRef.current);
@@ -39,18 +58,19 @@ const Assigning_and_tracking: React.FC = () => {
   }, []);
 
   /* ---------------- FILTER TASKS ---------------- */
+  // Filter tasks based on selected filter and search query.
+  // Kept identical in behavior; memoized to avoid re-calculation on unrelated renders.
   const filteredTasks = useMemo(() => {
-    let tasks = [...mockTasks];
+    // Start with the mock tasks array
+    let tasks = mockTasks;
 
-    if (activeFilter === "below50") {
+    if (activeFilter === "below50")
       tasks = tasks.filter((t) => t.progress < 50);
-    }
-    if (activeFilter === "above50") {
+    if (activeFilter === "above50")
       tasks = tasks.filter((t) => t.progress >= 50);
-    }
 
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
+    const q = searchQuery.trim().toLowerCase();
+    if (q) {
       tasks = tasks.filter(
         (t) =>
           t.user.name.toLowerCase().includes(q) ||
@@ -62,6 +82,8 @@ const Assigning_and_tracking: React.FC = () => {
   }, [activeFilter, searchQuery]);
 
   /* ---------------- STATS ---------------- */
+  // Simple aggregated counts for the right-hand stats panel.
+  // Derived from mockTasks and memoized since mockTasks is static.
   const stats = useMemo(
     () => ({
       completed: mockTasks.filter((t) => t.progress === 100).length,
@@ -106,7 +128,7 @@ const Assigning_and_tracking: React.FC = () => {
 
             {/* RIGHT: Search Input + Export and Assign Task Buttons */}
             <div className="flex items-center gap-4">
-              <div className="flex items-center justify-center w-full max-w-[600px]">
+              <div className="flex items-center justify-center w-320px">
                 <SearchInput value={searchQuery} onChange={setSearchQuery} />
               </div>
 
@@ -154,10 +176,11 @@ const Assigning_and_tracking: React.FC = () => {
         />
       )}
 
+      {/* Assign task modal: onSuccess uses memoized showSuccess to avoid unnecessary re-renders */}
       <AssignTaskModal
         isOpen={isAssignModalOpen}
         onClose={() => setIsAssignModalOpen(false)}
-        onSuccess={(msg: string) => showSuccess(msg)}
+        onSuccess={showSuccess}
       />
     </>
   );

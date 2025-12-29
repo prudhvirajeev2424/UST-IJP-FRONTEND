@@ -27,6 +27,11 @@ export interface FilterOption {
 }
 
 
+export interface SearchInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+}
 
 export interface ProgressBarProps {
   percentage: number;
