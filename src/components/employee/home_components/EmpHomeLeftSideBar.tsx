@@ -14,7 +14,7 @@ export function EmpHomeLeftSideBar({ profile ,hasresume,handleresume}: SidebarPr
   
   return (
     <aside className="flex-shrink-0 pt-6 w-[360px]">
-      <div className="w-full min-h-[479px] relative rounded-lg p-5 cursor-pointer shadow-lg overflow-hidden bg-white">
+      <div className="w-full min-h-[479px] relative rounded-lg cursor-pointer shadow-lg overflow-hidden bg-white">
         {/* Profile Summary */}
         <div className="mt-[40px] mx-[30px] mt-[40px]">
           <h3 className="text-left font-medium text-text-muted mb-3 opacity-60 ">
@@ -41,8 +41,9 @@ export function EmpHomeLeftSideBar({ profile ,hasresume,handleresume}: SidebarPr
             ))}
           </div>
         </div>
-        <div className="mt-[40px] mb-[40.63px] mx-[30px] bg-[#006E74] bg-opacity-5">
+        <div >
           {hasResume ? (
+            <div className="">
             <button
               onClick={handleResumeClick}
               className="w-full flex items-center justify-between py-3 px-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
@@ -64,20 +65,31 @@ export function EmpHomeLeftSideBar({ profile ,hasresume,handleresume}: SidebarPr
               </div>
               <ArrowRight className="w-5 h-5 text-primary" />
             </button>
-          ) : (
-            <div className="flex items-center justify-between py-2 px-3 bg-muted/30 rounded-lg w-[300px] h-[76px]">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <img
-                  src="src\assets\Icon ionic-md-contact.svg"
-                  alt="UST Logo"
-                  className="w-4 h-4"
-                />
-                <span>Resume not found</span>
-
-                <AlertCircle className="w-4 h-4 text-coral" />
-              </div>
             </div>
-          )}
+          ) : (
+            // <div className="flex items-center justify-between  bg-muted/30 rounded-lg w-[300px] h-[76.8px] ml-[30px] mb-[40.63px] mr=[30px]">
+            <div className="
+              h-[76.38px] w-[300px]
+              bg-[#006E74]/5
+              border border-[#006E74]/5
+              rounded-[10px]
+              mt-[48px] mb-[40.63px]
+              ml-[30px] mr-[30px]
+              flex items-center 
+            ">
+  {/* <div className="flex items-center gap-[12px]"> */}
+    <img
+      src="src/assets/Icon ionic-md-contact.svg"
+      alt="UST Logo"
+      className="w-[36px] h-[36px] text-[#7A7480] ml-[30px] mb-[20px] mt-[20.38px] "
+    />
+    <span className="text-sm ml-[10px] mr-[33px]">Resume not found</span>
+  
+
+  <AlertCircle className="text-[#FC6A59] mr-[30px] color-red" />
+  {/* </div> */}
+</div>
+ )}
         </div>
       </div>
     </aside>
