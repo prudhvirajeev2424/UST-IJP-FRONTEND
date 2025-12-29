@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 // import Header from '../components/layout/Header';
-import CandidateHeader from "../components/TP_Manager/application/CandidateHeader";
-import Sidebar from "../components/TP_Manager/application/Sidebar";
-import Introduction from "../components/TP_Manager/application/Introduction";
-import ProfessionalExperience from "../components/TP_Manager/application/ProfessionalExperience";
-import Certifications from "../components/TP_Manager/application/Certifications";
-import Education from "../components/TP_Manager/application/Education";
-import Skills from "../components/TP_Manager/application/Skills";
-import Accolades from "../components/TP_Manager/application/Accolades";
-import Testimonials from "../components/TP_Manager/application/Testimonials";
-import ProjectInfo from "../components/TP_Manager/application/ProjectInfo";
-import CoverLetter from "../components/TP_Manager/application/CoverLetter";
+import CandidateHeader from "../components/tp_manager/application/CandidateHeader";
+import Sidebar from "../components/tp_manager/application/Sidebar";
+import Introduction from "../components/tp_manager/application/Introduction";
+import ProfessionalExperience from "../components/tp_manager/application/ProfessionalExperience";
+import Certifications from "../components/tp_manager/application/Certifications";
+import Education from "../components/tp_manager/application/Education";
+import Skills from "../components/tp_manager/application/Skills";
+import Accolades from "../components/tp_manager/application/Accolades";
+import Testimonials from "../components/tp_manager/application/Testimonials";
+import ProjectInfo from "../components/tp_manager/application/ProjectInfo";
+import CoverLetter from "../components/tp_manager/application/CoverLetter";
 import {
   candidateData,
   jobs,
