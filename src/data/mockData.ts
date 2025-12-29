@@ -20,7 +20,7 @@ export const jobs: Job[] = [
     startDate: 'JAN 2020',
     endDate: 'Present',
     description: 'Architected microservices-based solutions using Spring Boot,Hibernate,and RESTful APIs.Led a team of 5 developers, conductiong  ',
-    skills: ['Spring Boot', 'Hibernate', 'REST APIs']
+    skills: ['Spring Boot', 'Hibernate', 'RESTful APIs']
   },
   {
     id: '2',
