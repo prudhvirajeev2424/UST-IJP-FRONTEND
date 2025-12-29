@@ -1,9 +1,6 @@
-/**
- * Centralized type definitions.
- * Merged `Profile` and `Application` interfaces for simpler imports.
- * Keep this file as the single source of truth for these shared types.
- */
-export interface Profile {
+// Shared types
+
+export type Profile = {
   id: string;
   name: string;
   position: string;
@@ -12,23 +9,14 @@ export interface Profile {
   status: string;
   fitment: number;
   skills: string[];
-  additionalSkills: number;
-  description: string;
-  /** Optional URL to the profile image/avatar */
-  imageUrl?: string;
-}
+  avatar?: string;
+};
 
-export interface Application {
-  id: number;
-  sid: string;
-  uid: string;
-  name: string;
-  role: string;
-  location: string;
-  date: string;
-  score: string;
-  action: string;
-  hasIcon: boolean;
-}
+export type CandidateStatus =
+  | "PENDING_WFM"
+  | "WFM_APPROVED"
+  | "SELECTED"
+  | "ALLOCATED"
+  | "REJECTED";
 
-export type { Profile as ProfileType, Application as ApplicationType };
+export default {} as unknown as {};
