@@ -1,4 +1,4 @@
-import type { CandidateStatus } from "../types";
+import type { CandidateStatus } from "../types/CandidateStatus";
 
 export const STEPS = [
   {

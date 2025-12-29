@@ -1,0 +1,251 @@
+import React from "react";
+import type { Application } from "../../types/application";
+// TableRow expects a lightweight application shape used by mock data; keep a local type
+type TableRowApplication = {
+  id?: number | string;
+  sid?: string;
+  uid?: string;
+  name?: string;
+  role?: string;
+  location?: string;
+  date?: string;
+  score?: string | number;
+  action?: string;
+  hasIcon?: boolean;
+};
+import { User } from "lucide-react";
+
+/**
+ * TableRow
+ * Renders a single application row inside the ApplicationsTable.
+ *
+ * Notes:
+ * - Only the first row is interactive (receives click/keyboard handlers). This
+ *   was an explicit UX requirement so other rows remain non-focusable.
+ * - The profile badge shows a tooltip on hover.
+ */
+interface TableRowProps {
+  application: TableRowApplication | Application;
+  isFirst?: boolean;
+}
+
+export const TableRow: React.FC<TableRowProps> = ({
+  application,
+  isFirst = false,
+}) => {
+  const [showTooltip, setShowTooltip] = React.useState(false);
+
+  // normalize fields between the mock table shape and full Application type
+  const appObj = application as TableRowApplication | Application;
+  const sid =
+    "sid" in appObj ? appObj.sid ?? "" : (appObj as Application).soId ?? "";
+  const uid = "uid" in appObj ? appObj.uid ?? "" : "";
+  const name =
+    "name" in appObj
+      ? appObj.name ?? (appObj as Application).hiringManager ?? ""
+      : (appObj as Application).hiringManager ?? "";
+  const role = appObj.role ?? "";
+  const location = "location" in appObj ? appObj.location ?? "" : "";
+  const date =
+    "date" in appObj
+      ? appObj.date ?? (appObj as Application).appliedDate ?? ""
+      : (appObj as Application).appliedDate ?? "";
+  const score = "score" in appObj ? appObj.score ?? "" : "";
+  const action =
+    "action" in appObj
+      ? appObj.action ?? (appObj as Application).status ?? ""
+      : (appObj as Application).status ?? "";
+  const hasIcon = "hasIcon" in appObj ? appObj.hasIcon ?? false : false;
+
+  /**
+   * Return color tokens for the action pill. Kept inline for readability; if
+   * design grows consider extracting to a shared constants file.
+   */
+  const getActionColor = (action: string) => {
+    switch (action) {
+      case "Shortlisted":
+        return { color: "#01B27C", backgroundColor: "#D4F4E7" };
+      case "Allocated":
+        return { color: "#0097AC", backgroundColor: "#D4EEF3" };
+      case "Rejected":
+        return { color: "#FC6A59", backgroundColor: "#FFE5E1" };
+      case "Pending":
+        return { color: "#B77FB8", backgroundColor: "#F3E5F2" };
+      case "Actioned":
+        return { color: "#E6B800", backgroundColor: "#FFF4D4" };
+      default:
+        return { color: "#7A7480", backgroundColor: "#F2F2F2" };
+    }
+  };
+
+  const actionStyle = getActionColor(action ?? "");
+
+  const id =
+    (application as TableRowApplication).id ??
+    (application as Application).id ??
+    "";
+
+  const handleActivate = () => {
+    // Navigation/detail opening should be wired by the page. Keep a console
+    // fallback for now as a no-op placeholder.
+    // TODO: replace with router navigation or detail panel open
+    // e.g. navigate(`/applications/${application.id}`)
+    console.log("open row", id);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      handleActivate();
+    }
+  };
+
+  // Use a typed props object for the <tr> element. We intentionally keep the
+  // inline style here so the table design stays identical.
+  const trProps: React.HTMLAttributes<HTMLTableRowElement> = {
+    style: { backgroundColor: "#FFFFFF" },
+    className: isFirst ? "hover:bg-[#F8FBFB] cursor-pointer group" : "",
+  };
+
+  if (isFirst) {
+    // Only the first row should be focusable / interactive per the UX spec.
+    // These attributes are safe to add to a <tr> in modern browsers.
+    trProps.role = "button";
+    (trProps as unknown as { tabIndex?: number }).tabIndex = 0; // set tabIndex without using `any`
+    trProps.onClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+      handleActivate();
+    };
+    trProps.onKeyDown = handleKeyDown;
+  }
+
+  return (
+    // only the first row receives interactive handlers and the hover group
+    <tr {...trProps}>
+      <td
+        className="px-2 py-2 overflow-visible relative"
+        style={{ borderBottom: "2px solid #FFFFFF" }}
+      >
+        <div className="flex items-center gap-1">
+          <div className="w-6 flex-shrink-0 -ml-1">
+            {hasIcon && (
+              <div
+                className="relative z-50"
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+              >
+                {/* Circular user badge with #006E74 ring and matching icon color (tight fit) */}
+                <div
+                  className="w-6 h-6 rounded-full flex items-center justify-center cursor-pointer"
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    border: "2px solid #006E74",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  <User className="w-3 h-3 text-[#006E74]" />
+                </div>
+
+                {showTooltip && (
+                  <div
+                    className="absolute left-1/2 -translate-x-1/2 bottom-8 z-[100] px-4 py-2 rounded-lg shadow-lg whitespace-nowrap"
+                    style={{ backgroundColor: "#006E74", color: "#FFFFFF" }}
+                  >
+                    <div className="text-[13px] font-normal">
+                      External request
+                    </div>
+                    <div
+                      className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0"
+                      style={{
+                        borderLeft: "6px solid transparent",
+                        borderRight: "6px solid transparent",
+                        borderTop: "8px solid #006E74",
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("open sid", sid);
+            }}
+            className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px] flex-shrink-0 text-[#006E74] hover:underline"
+            style={{ minWidth: "60px" }}
+          >
+            {sid}
+          </a>
+        </div>
+      </td>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
+        <span
+          className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px]"
+          style={{ color: "#7A7480" }}
+        >
+          {uid}
+        </span>
+      </td>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
+        <span
+          className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px]"
+          style={{ color: "#7A7480" }}
+        >
+          {name}
+        </span>
+      </td>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            console.log("open role", role);
+          }}
+          className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px] text-[#006E74] hover:underline"
+        >
+          {role}
+        </a>
+      </td>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
+        <span
+          className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px]"
+          style={{ color: "#7A7480" }}
+        >
+          {location}
+        </span>
+      </td>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
+        <span
+          className="font-rubik font-normal text-[14px] leading-[17px] tracking-[0px]"
+          style={{ color: "#7A7480" }}
+        >
+          {date}
+        </span>
+      </td>
+      <td className="px-4 py-3" style={{ borderBottom: "2px solid #FFFFFF" }}>
+        <span
+          className="inline-flex items-center justify-center w-[65px] h-[32px] rounded-full text-[14px] font-medium border-2"
+          style={{
+            color: "#01B27C",
+            backgroundColor: "#FFFFFF",
+            borderColor: "#01B27C",
+          }}
+        >
+          {score}
+        </span>
+      </td>
+      <td className="px-2 py-2" style={{ borderBottom: "2px solid #FFFFFF" }}>
+        <span
+          className="inline-flex items-center justify-center min-w-[95px] h-[30px] px-4 rounded-md text-[13px] font-normal"
+          style={{
+            color: actionStyle.color,
+            backgroundColor: actionStyle.backgroundColor,
+          }}
+        >
+          {action}
+        </span>
+      </td>
+    </tr>
+  );
+};

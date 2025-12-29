@@ -37,7 +37,7 @@ const TpManagerHome: React.FC = () => {
   );
 };
 
-const home: React.FC = () => {
+const Home: React.FC = () => {
   const { activeRole } = useActiveRole();
 
   if (activeRole === "Employee") return <EmpHome />;
@@ -46,4 +46,4 @@ const home: React.FC = () => {
   return <TpManagerHome />;
 };
 
-export default home;
+export default Home;

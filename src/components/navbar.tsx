@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
 import LogoImg from "../assets/Group 172287@2x.jpg";
 
 import Home from "../pages/home";
 import LandingPage from "../pages/landing_page";
-import Application from "../pages/Application";
+import Application from "../pages/Applications";
+import TP_Applications from "../pages/layout/TP_Applications";
+import WfmApplications from "../pages/layout/WfmApplications";
 
 import { useActiveRole } from "../context/ActiveRoleContext";
 
@@ -22,9 +24,46 @@ const Navbar = ({ role }: NavbarProps) => {
   /* ---------------- STATE ---------------- */
   const [view, setView] = useState<View>("app"); // 👈 controls landing vs app
   const [active, setActive] = useState("Home");
+  const [appVariant, setAppVariant] = useState<string | null>(null);
   const [showNotifications, setShowNotifications] = useState(false);
 
   /* ---------------- LANDING PAGE ---------------- */
+  // listen for navigation events from other components (e.g., profile card)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const ce = e as CustomEvent<unknown>;
+      const d = ce?.detail as unknown;
+      if (typeof d === "string") {
+        setActive(String(d));
+        setAppVariant(null);
+      } else if (d && typeof d === "object") {
+        const obj = d as Record<string, unknown>;
+        if (obj.page === "Applications") {
+          setActive("Applications");
+          setAppVariant((obj.variant as string) ?? null);
+        }
+      }
+    };
+
+    window.addEventListener("navigate", handler as EventListener);
+
+    // on mount, consider hash for direct links like #Applications:TP
+    const hash = window.location.hash.replace(/^#/, "");
+    if (hash) {
+      const [page, variant] = hash.split(":");
+      if (page && page.toLowerCase() === "applications") {
+        // defer to avoid synchronous setState during render
+        setTimeout(() => {
+          setActive("Applications");
+          setAppVariant(variant ?? null);
+        }, 0);
+      }
+    }
+
+    return () =>
+      window.removeEventListener("navigate", handler as EventListener);
+  }, []);
+
   if (view === "landing") {
     return <LandingPage />;
   }
@@ -77,7 +116,10 @@ const Navbar = ({ role }: NavbarProps) => {
                 {links.map((link) => (
                   <div key={link} className="relative">
                     <button
-                      onClick={() => setActive(link)}
+                      onClick={() => {
+                        setActive(link);
+                        if (link === "Applications") setAppVariant(null);
+                      }}
                       className={`px-2 py-1 text-sm font-semibold ${
                         active === link
                           ? "text-black"
@@ -176,9 +218,15 @@ const Navbar = ({ role }: NavbarProps) => {
       {/* ================= PAGE CONTENT ================= */}
       <div className="mt-16">
         {active === "Home" && <Home />}
-        {active === "Applications" && effectiveRole === "TP Manager" && (
-          <Application />
-        )}
+        {active === "Applications" &&
+          (effectiveRole === "TP Manager" || effectiveRole === "WFM") &&
+          (appVariant === "TP" ? (
+            <TP_Applications />
+          ) : effectiveRole === "WFM" ? (
+            <WfmApplications />
+          ) : (
+            <Application />
+          ))}
 
         {active !== "Home" && active !== "Applications" && (
           <div className="p-6">

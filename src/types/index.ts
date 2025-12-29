@@ -3,12 +3,19 @@
 export type Profile = {
   id: string;
   name: string;
+  // legacy/variant fields used by mock data
   developer?: string;
   uid?: string;
-  score: number;
+  soId?: string;
+  position?: string;
+  score?: number;
   status?: string;
-  skills: string[];
+  skills?: string[];
   avatar?: string;
+  imageUrl?: string;
+  fitment?: number;
+  additionalSkills?: number;
+  description?: string;
 };
 
 export type CandidateStatus =
@@ -18,4 +25,7 @@ export type CandidateStatus =
   | "ALLOCATED"
   | "REJECTED";
 
-export default {} as unknown as {};
+// Re-export common types for simpler imports
+export type { Application } from "./application";
+
+// no default export required for types module

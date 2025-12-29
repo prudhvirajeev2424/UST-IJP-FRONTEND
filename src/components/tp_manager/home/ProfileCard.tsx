@@ -33,7 +33,7 @@ const ProfileCard: React.FC<{ profile: Profile }> = ({ profile }) => {
 
           {/* Score */}
           <div className="shrink-0 ml-2">
-            <ScoreBadge score={profile.score} />
+            <ScoreBadge score={profile.score ?? 0} />
           </div>
         </div>
 
@@ -60,7 +60,7 @@ const ProfileCard: React.FC<{ profile: Profile }> = ({ profile }) => {
 
         {/* ---------- SKILLS ---------- */}
         <div className="mt-3 flex flex-wrap items-center gap-2 max-w-full">
-          {profile.skills.map((skill, i) => {
+          {(profile.skills ?? []).map((skill, i) => {
             const isCount = skill.startsWith("+");
 
             return isCount ? (

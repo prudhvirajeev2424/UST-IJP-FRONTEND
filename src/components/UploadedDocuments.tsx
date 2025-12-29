@@ -18,7 +18,7 @@ const UploadedDocuments = () => {
     <div className="bg-white rounded-lg shadow-sm border border-gray-100 w-[320px]">
       {/* Header */}
       <div className="px-4 py-3">
-        <h3 className="text-[15px] font-medium text-[#010102]">
+        <h3 className="text-[15px] font-medium text-[#0e0e18]">
           Uploaded Documents
         </h3>
       </div>

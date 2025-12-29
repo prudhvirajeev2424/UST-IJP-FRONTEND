@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    // Move tsBuildInfoFile out of node_modules to avoid stale casing issues on Windows
+    "tsBuildInfoFile": "./.tsbuildinfo",
     "target": "ES2022",
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],

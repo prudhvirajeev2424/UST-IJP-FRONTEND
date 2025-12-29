@@ -1,28 +1,36 @@
-import React, { useState, useEffect, useRef } from 'react';
-import CandidateHeader from '../components/tp_manager/application/CandidateHeader';
-import Sidebar from '../components/tp_manager/application/Sidebar';
-import Introduction from '../components/tp_manager/application/Introduction';
-import ProfessionalExperience from '../components/tp_manager/application/ProfessionalExperience';
-import Certifications from '../components/tp_manager/application/Certifications';
-import Education from '../components/tp_manager/application/Education';
-import Skills from '../components/tp_manager/application/Skills';
-import Accolades from '../components/tp_manager/application/Accolades';
-import Testimonials from '../components/tp_manager/application/Testimonials';
-import ProjectInfo from '../components/tp_manager/application/ProjectInfo';
-import CoverLetter from '../components/tp_manager/application/CoverLetter';
-import { 
-  candidateData, 
-  jobs, 
-  certifications, 
-  education, 
-  skills, 
-  accolades, 
-  testimonials, 
-  projectData 
-} from '../data/mockData';
+import React, { useState, useEffect, useRef } from "react";
+import CandidateHeader from "../../components/tp_manager/application/CandidateHeader";
+import Sidebar from "../../components/tp_manager/application/Sidebar";
+import Introduction from "../../components/tp_manager/application/Introduction";
+import ProfessionalExperience from "../../components/tp_manager/application/ProfessionalExperience";
+import Certifications from "../../components/tp_manager/application/Certifications";
+import Education from "../../components/tp_manager/application/Education";
+import Skills from "../../components/tp_manager/application/Skills";
+import Accolades from "../../components/tp_manager/application/Accolades";
+import Testimonials from "../../components/tp_manager/application/Testimonials";
+import ProjectInfo from "../../components/tp_manager/application/ProjectInfo";
+import CoverLetter from "../../components/tp_manager/application/CoverLetter";
+import {
+  candidateData,
+  jobs,
+  certifications,
+  education,
+  skills,
+  accolades,
+  testimonials,
+  projectData,
+} from "../../data/mockData";
+import UploadedDocuments from "../../components/UploadedDocuments";
+import ProgressBar from "../../components/Wfm/Applications/ProgressBar";
+import { useActiveRole } from "../../context/ActiveRoleContext";
+import type { CandidateStatus } from "../../types/CandidateStatus";
 
 const Application: React.FC = () => {
-  const [activeSection, setActiveSection] = useState('introduction');
+  const { activeRole } = useActiveRole();
+  const [status, setStatus] = useState<CandidateStatus>(
+    activeRole === "WFM" ? "PENDING_WFM" : "PENDING_WFM"
+  );
+  const [activeSection, setActiveSection] = useState("introduction");
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,7 +40,7 @@ const Application: React.FC = () => {
 
     const sections = Array.from(
       rootEl.querySelectorAll<HTMLElement>(
-        '#introduction, #experience, #certifications, #education, #accolades, #skills, #testimonials'
+        "#introduction, #experience, #certifications, #education, #accolades, #skills, #testimonials"
       )
     );
 
@@ -49,7 +57,7 @@ const Application: React.FC = () => {
       {
         root: rootEl,
         threshold: 0.2,
-        rootMargin: '0px 0px -40% 0px',
+        rootMargin: "0px 0px -40% 0px",
       }
     );
 
@@ -60,19 +68,23 @@ const Application: React.FC = () => {
   const handleSectionChange = (id: string) => {
     setActiveSection(id);
     const section = contentRef.current?.querySelector<HTMLElement>(`#${id}`);
-    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F2F7F8' }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#F2F7F8" }}>
       {/* CandidateHeader - directly below navbar */}
-      <CandidateHeader candidate={candidateData} />
+      <CandidateHeader
+        candidate={candidateData}
+        onApprove={(newStatus) => setStatus(newStatus)}
+        onReject={(newStatus) => setStatus(newStatus)}
+      />
 
       <div className="flex px-8 py-6 space-x-6">
         {/* Left Sidebar */}
-        <Sidebar 
-          activeSection={activeSection} 
-          onSectionChange={handleSectionChange} 
+        <Sidebar
+          activeSection={activeSection}
+          onSectionChange={handleSectionChange}
         />
 
         {/* Main Content Panel */}
@@ -111,8 +123,18 @@ const Application: React.FC = () => {
 
         {/* Right Sidebar - Project Info & Cover Letter */}
         <div className="w-80 flex-shrink-0 space-y-6 sticky top-6 self-start">
+          {activeRole === "WFM" && (
+            <>
+              <ProgressBar status={status} />
+            </>
+          )}
           <ProjectInfo project={projectData} />
           <CoverLetter coverLetter={projectData.coverLetter} />
+          {activeRole === "WFM" && (
+            <>
+              <UploadedDocuments />
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { List } from "lucide-react";
 import ProfileCard from "./ProfileCard";
 import Toggle from "../../common/Toggle/Toggle";
-import { profiles } from "../../../data/profiles";
+import { mockProfiles } from "../../../data/profiles";
+import type { Profile } from "../../../types";
 
 /* ---------- Feather Grid Icon ---------- */
 const FeatherGridIcon = ({ active }: { active: boolean }) => (
@@ -78,13 +79,13 @@ const ProfilesReceived: React.FC = () => {
       {viewMode === "grid" ? (
         // 1 column mobile, 2 columns small screens, 3 columns on large screens to ensure three cards per row
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {profiles.map((profile) => (
+          {mockProfiles.map((profile: Profile) => (
             <ProfileCard key={profile.id} profile={profile} />
           ))}
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          {profiles.map((profile) => (
+          {mockProfiles.map((profile: Profile) => (
             <div key={profile.id} className="rounded-lg bg-white p-4 shadow-sm">
               <strong className="text-gray-900">{profile.name}</strong>
             </div>
