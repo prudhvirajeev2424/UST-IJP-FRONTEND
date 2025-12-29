@@ -10,13 +10,13 @@ const ProfileCard = ({ profile }: { profile: Profile }) => {
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative h-[260px] w-[260px] cursor-pointer rounded-xl border border-gray-200 bg-white p-4"
+      className="relative w-[300px] h-64 cursor-pointer rounded-xl border border-gray-200 bg-white p-3 overflow-hidden box-border"
     >
       {/* ---------- HEADER ---------- */}
       <div className="mb-2 flex items-start justify-between">
         <div className="flex items-center gap-3">
           {/* Avatar */}
-          <div className="h-10 w-10 rounded-lg overflow-hidden bg-gray-200">
+          <div className="h-12 w-12 rounded-lg overflow-hidden bg-gray-200">
             <img
               src={ProfilePic}
               alt="Profile"
@@ -26,13 +26,13 @@ const ProfileCard = ({ profile }: { profile: Profile }) => {
 
           {/* Info */}
           <div>
-            <div className="mb-[2px] text-[13px] font-semibold text-gray-900 truncate max-w-[160px]">
+            <div className="mb-[2px] text-[14px] font-semibold text-gray-900">
               {profile.name}
             </div>
-            <div className="mb-[1px] text-[11px] text-gray-500 truncate max-w-[160px]">
+            <div className="mb-[1px] text-[12px] text-gray-500">
               {profile.developer}
             </div>
-            <div className="text-[11px] text-gray-400 truncate max-w-[160px]">{profile.uid}</div>
+            <div className="text-[11px] text-gray-400">{profile.uid}</div>
           </div>
         </div>
 
@@ -41,7 +41,7 @@ const ProfileCard = ({ profile }: { profile: Profile }) => {
       </div>
 
       {/* ---------- ID ---------- */}
-      <div className="mb-2 mt-1 text-[13px] font-semibold text-teal-500 truncate">
+      <div className="mb-2 mt-1 text-[14px] font-semibold text-teal-500">
         {profile.id}
       </div>
 
@@ -97,14 +97,11 @@ const ProfileCard = ({ profile }: { profile: Profile }) => {
       />
 
       <div
-        className={`absolute left-0 right-0 bottom-0 mx-0 w-full bg-white p-4 rounded-b-xl shadow-lg transition-all duration-300 ease-out ${
+        className={`absolute left-0 right-0 bottom-0 mx-0 w-full bg-white p-3 rounded-b-xl shadow-lg transition-all duration-300 ease-out ${
           hovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
         }`}
-        style={{ height: "160px" }}
+        style={{ height: "120px" }}
       >
-        {profile.description ? (
-          <p className="mb-3 text-sm text-gray-700">{profile.description}</p>
-        ) : null}
         <p className="mb-2 text-sm text-gray-700">
           Highly skilled Java Developer with expertise in designing, developing,
           and maintaining robust Java applications.
