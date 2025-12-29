@@ -1,4 +1,4 @@
-import { Card, CardContent } from "../ui";
+import { Card, CardContent } from "../../ui";
 
 interface MatchScoreCardProps {
   percentage: number;

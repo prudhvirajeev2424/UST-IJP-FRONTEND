@@ -169,3 +169,22 @@ export const opportunities: Opportunity[] = [
   { id: '83924860', role: 'Level 2 - Software Engineer', band: 'B3', location: 'Bangalore', skills: ['Java'], status: 'Shortlisted',description: 'Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.', },
   { id: '83924861', role: 'Level 2 - Software Engineer', band: 'B3', location: 'Bangalore', skills: ['Java Script', 'Python', 'c#', 'MongoDB', 'PostgreSQL'], status: 'Rejected',description: 'Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.', },
 ];
+
+
+export const getJobById = (id: string): Opportunity | undefined => {
+  return opportunities.find((job) => job.id === id);
+};
+
+export const getSimilarJobs = (currentId: string, limit: number = 3) => {
+  return opportunities
+    .filter((job) => job.id !== currentId)
+    .slice(0, limit)
+    .map((job) => ({
+      id: job.id,
+      role: job.role,
+      skills: job.skills.slice(0, 2),
+      band: job.band,
+      location: job.location,
+    }));
+};
+ 
