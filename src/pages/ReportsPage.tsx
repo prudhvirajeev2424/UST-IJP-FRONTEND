@@ -36,10 +36,10 @@ import { useState } from "react";
 import type { Employee } from "../types/TPManagerReportsTypes";
 import { mockEmployees } from "../data/TPManagerReportsMockEmployeesData";
 import Navbar from "../components/navbar";
-import Sidebar from "../components/tp_manager/Reports/Sidebar";
-import EmployeeTable from "../components/tp_manager/Reports/EmployeeTable";
+import Sidebar from "../components/TP_Manager/Reports/Sidebar";
+import EmployeeTable from "../components/TP_Manager/Reports/EmployeeTable";
 import Modal from "../components/ui/Popup";
-import MatchingJobsModal from "../components/tp_manager/Reports/MatchingJobsModal";
+import MatchingJobsModal from "../components/TP_Manager/Reports/MatchingJobsModal";
 
 /**
  * ReportsPage - Main container for Talent Pool Reports
