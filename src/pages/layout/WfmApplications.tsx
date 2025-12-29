@@ -1,42 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
-import FilterTab from "../components/ui/FilterTab";
-import StatusTabs from "../components/ui/StatusTabs";
-import { ApplicationsTable } from "../components/ApplicationsTable";
-import RightSideProfileCards from "../components/RightSideProfileCards";
-import RecentActivities from "../components/Wfm/Home/RecentActivities";
-import { mockApplications } from "../data/profiles";
+import FilterTab from "../../components/ui/FilterTab";
+import StatusTabs from "../../components/ui/StatusTabs";
+import { ApplicationsTable } from "../../components/ApplicationsTable";
+import { ProfileCard } from "../../components/Wfm/Home/ProfileCard";
+import { wfmProfiles } from "../../data/wfmProfiles";
+import { mockApplications } from "../../data/profiles";
 
 /**
- * ApplicationsPage
- * Parent page that composes NavigationBar, StatusTabs, the left FilterTab,
- * and the right content area which can be either a List (table) or Kanban
- * (profile cards). The view toggle is lifted here and passed into
- * StatusTabs via onViewChange.
+ * WfmApplications
+ * Renders the applications view for WFM with a 3-column layout:
+ * - Left: FilterTab (fixed width card)
+ * - Center: StatusTabs + either table or kanban (ProfileCard grid)
+ * - Right: RecentActivities
  */
-const ApplicationsPage: React.FC = () => {
+const WfmApplications: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("All");
-  // default to kanban so clicking Applications shows Kanban view first
   const [view, setView] = useState<"table" | "kanban">("kanban");
   const [isCompact, setIsCompact] = useState<boolean>(false);
   const initialHeightRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    // store the initial viewport height on first mount
     if (!initialHeightRef.current)
       initialHeightRef.current = window.innerHeight;
 
     const checkCompact = () => {
       const initial = initialHeightRef.current || window.innerHeight;
-      // compact when current height is less than 75% of initial
       setIsCompact(window.innerHeight < initial * 0.75);
     };
 
-    // run once and on resize/orientation change
     checkCompact();
     window.addEventListener("resize", checkCompact);
     window.addEventListener("orientationchange", checkCompact);
-
     return () => {
       window.removeEventListener("resize", checkCompact);
       window.removeEventListener("orientationchange", checkCompact);
@@ -44,20 +39,11 @@ const ApplicationsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F2F7F8]">
       <main className="max-w-[1800px] mx-auto p-6">
-        <div className="grid grid-cols-12">
-          {/* Left: Filter */}
-          <div className="col-span-1">
-            <div className="flex flex-col">
-              <div className="bg-white rounded-lg shadow-sm p-4">
-                <FilterTab />
-              </div>
-            </div>
-          </div>
-
-          {/* Middle: Applications content */}
-          <div className="col-span-10 min-w-0">
+        <div className="grid grid-cols-12 gap-6">
+          
+          <div className="col-span-12 min-w-0">
             <div className="mb-6">
               <StatusTabs
                 activeTab={activeTab}
@@ -66,6 +52,9 @@ const ApplicationsPage: React.FC = () => {
                 view={view}
               />
             </div>
+            <div className="col-span-3">
+            <FilterTab />
+          </div>
 
             <div className="bg-white rounded-lg shadow-sm w-full overflow-x-visible p-4">
               {view === "table" ? (
@@ -77,17 +66,16 @@ const ApplicationsPage: React.FC = () => {
                   <ApplicationsTable applications={mockApplications} />
                 </div>
               ) : (
-                <RightSideProfileCards />
+                <div className="pb-8 px-0">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 justify-items-start auto-rows-[340px]">
+                    {wfmProfiles.map((p) => (
+                      <div key={p.id} className="w-[320px]">
+                        <ProfileCard profile={p} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               )}
-            </div>
-          </div>
-
-          {/* Right: Recent activities / cards */}
-          <div className="col-span-1">
-            <div className="flex flex-col">
-              <div className="bg-white rounded-lg shadow-sm p-4">
-                <RecentActivities />
-              </div>
             </div>
           </div>
         </div>
@@ -96,4 +84,4 @@ const ApplicationsPage: React.FC = () => {
   );
 };
 
-export default ApplicationsPage;
+export default WfmApplications;

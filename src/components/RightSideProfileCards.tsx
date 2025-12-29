@@ -44,15 +44,21 @@ const RightSideProfileCards: React.FC = () => {
             - Compact (narrow/zoomed): show 2 columns × 4 rows visible
         */}
         {isNarrow ? (
-          <div className="grid grid-cols-2 grid-rows-4 gap-4 justify-items-center">
+          // Compact: 2 columns, fixed card width, ensure enough row height for hover layer
+          <div className="grid grid-cols-2 grid-rows-4 gap-4 justify-items-start auto-rows-[340px]">
             {mockProfiles.map((profile) => (
-              <ProfileCard key={profile.id} profile={profile} />
+              <div key={profile.id} className="w-[320px]">
+                <ProfileCard profile={profile} />
+              </div>
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 justify-items-center">
+          // Responsive grid: up to 4 columns, fixed card width per cell, and enough row height
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 justify-items-start auto-rows-[340px]">
             {mockProfiles.map((profile) => (
-              <ProfileCard key={profile.id} profile={profile} />
+              <div key={profile.id} className="w-[320px]">
+                <ProfileCard profile={profile} />
+              </div>
             ))}
           </div>
         )}
