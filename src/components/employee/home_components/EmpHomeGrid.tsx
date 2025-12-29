@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { List } from "lucide-react";
 import type { Opportunity } from "../../../types/opportunity";
-import excelIcon from "../../../assets/Icon awesome-file-pdf.svg";
+import excelIcon from "../../../assets/ExcelIcon.svg";
 import { OpportunityCard } from "./OpportunityCard";
 import EmpHomeList from "./EmpHomeList";
 
@@ -52,15 +52,15 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
 
             {/* Export Excel */}
             <button className="p-2 hover:bg-muted rounded transition-colors">
-              <img src={excelIcon} alt="Export to Excel" className="w-5 h-5" />
+              <img src={excelIcon} alt="Export to Excel" className="w-[48px] h-[48px]" />
             </button>
 
             {/* View Mode Toggle */}
-            <div className="flex items-center gap-1 border border-border-light rounded">
+            <div className="flex items-center gap-1 bg-[#FFFFFF] border rounded-sm w-[80px] h-[48px]">
               <button
                 onClick={() => setViewMode("grid")}
                 className={`p-2 transition-colors ${
-                  viewMode === "grid" ? "bg-muted" : "hover:bg-muted"
+                  viewMode === "grid" ? "opacity-100" : "opacity-30"
                 }`}
               >
                 <svg
@@ -68,7 +68,7 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
                   fill="none"
                   stroke={viewMode === "grid" ? "#0f0f10ff" : "currentColor"}
                   strokeWidth="1.5"
-                  className={`w-4 h-4 ${
+                  className={`w-5 h-4 ${
                     viewMode === "grid" ? "text-primary" : "text-text-muted"
                   }`}
                 >
@@ -78,11 +78,11 @@ export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
                   <rect x="14" y="14" width="7" height="7" rx="1" />
                 </svg>
               </button>
-              <div className="w-px h-[35px] bg-gray-300" />
+              <div className="w-px h-[48px] bg-gray-300" />
               <button
                 onClick={() => setViewMode("list")}
                 className={`p-2 transition-colors ${
-                  viewMode === "list" ? "bg-muted" : "hover:bg-muted"
+                  viewMode === "list" ? "opacity-100" : "opacity-30"
                 }`}
               >
                 <List
