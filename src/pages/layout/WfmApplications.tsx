@@ -42,9 +42,9 @@ const WfmApplications: React.FC = () => {
     <div className="min-h-screen bg-[#F2F7F8]">
       <main className="max-w-[1800px] mx-auto p-6">
         <div className="grid grid-cols-12 gap-6">
-          
-          <div className="col-span-12 min-w-0">
-            <div className="mb-6">
+          <div className="col-span-12">
+            {/* Status Bar */}
+            <div className="mb-1">
               <StatusTabs
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
@@ -52,10 +52,15 @@ const WfmApplications: React.FC = () => {
                 view={view}
               />
             </div>
-            <div className="col-span-3">
+          </div>
+
+          {/* Filter Tab - spans 3 columns */}
+          <div className="col-span-3">
             <FilterTab />
           </div>
 
+          {/* Profile Cards Section - spans 9 columns */}
+          <div className="col-span-9">
             <div className="bg-white rounded-lg shadow-sm w-full overflow-x-visible p-4">
               {view === "table" ? (
                 <div
@@ -79,6 +84,7 @@ const WfmApplications: React.FC = () => {
             </div>
           </div>
         </div>
+
       </main>
     </div>
   );
