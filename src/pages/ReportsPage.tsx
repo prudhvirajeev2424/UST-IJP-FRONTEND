@@ -34,7 +34,7 @@
 import type React from "react";
 import { useState } from "react";
 import type { Employee } from "../types/TPManagerReportsTypes";
-import { mockEmployees } from "../data/TPManagerReportsMockEMployeesData";
+import { mockEmployees } from "../data/TPManagerReportsMockEmployeesData";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/TP_Manager/Reports/Sidebar";
 import EmployeeTable from "../components/TP_Manager/Reports/EmployeeTable";
