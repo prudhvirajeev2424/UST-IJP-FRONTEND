@@ -1,13 +1,389 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+/* stylelint-disable at-rule-no-unknown */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
 
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 220 13% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 18%;
+
+    --primary: 171 77% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 13% 18%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 13% 18%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 171 77% 40%;
+
+    --radius: 0.5rem;
+
+    /* Custom status colors */
+    --status-allocated: 142 71% 45%;
+    --status-shortlisted: 271 81% 56%;
+    --status-rejected: 0 72% 51%;
+
+    /* Chart colors */
+    --chart-accepted: 142 71% 45%;
+    --chart-shortlisted: 271 81% 56%;
+    --chart-rejected: 0 72% 51%;
+
+    /* Overlay */
+    --overlay: 220 13% 18%;
+  }
+}
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
   .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;     /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }
+
+@layer base {
+  * {
+    border-color: hsl(var(--border)); /* ✅ fixed */
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem; /* py-1 px-3 */
+    border-radius: 9999px;
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 500; /* font-medium */
+  }
+
+  .status-allocated {
+    /* Light background, colored text and border using custom status variable */
+    background-color: hsl(var(--status-allocated) / 0.12);
+    color: hsl(var(--status-allocated));
+    border: 1px solid hsl(var(--status-allocated) / 0.2);
+  }
+
+  .status-shortlisted {
+    background-color: hsl(var(--status-shortlisted) / 0.12);
+    color: hsl(var(--status-shortlisted));
+    border: 1px solid hsl(var(--status-shortlisted) / 0.2);
+  }
+
+  .status-rejected {
+    background-color: hsl(var(--status-rejected) / 0.12);
+    color: hsl(var(--status-rejected));
+    border: 1px solid hsl(var(--status-rejected) / 0.2);
+  }
+
+  .skill-tag {
+    display: inline-flex;
+    align-items: center;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: hsl(var(--muted));
+    color: hsl(var(--muted-foreground));
+  }
+
+  .nav-link {
+    color: hsl(var(--muted-foreground));
+    position: relative;
+    padding: 0.5rem 0.25rem; /* py-2 px-1 */
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: hsl(var(--foreground));
+  }
+
+  .nav-link-active {
+    color: hsl(var(--foreground));
+    font-weight: 500;
+  }
+
+  .nav-link-active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0.125rem; /* h-0.5 */
+    background-color: hsl(var(--primary));
+  }
+
+  .card-shadow {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* approximate shadow-sm */
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: hsl(var(--foreground) / 0.2);
+    backdrop-filter: blur(4px); /* approximate backdrop-blur-sm */
+    z-index: 50;
+  }
+
+  .percentage-badge {
+    width: 2.5rem; /* w-10 */
+    height: 2.5rem; /* h-10 */
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 600; /* font-semibold */
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(171 77% 35%) 100%
+    );
+    color: white;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+/* Compact grid for skills: 4 items per row, tightly packed */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 8px 10px; /* row gap 8px, column gap 10px */
+  justify-content: start;
+  align-items: center;
+}
+
+/* Skill pill — compact, no forced slot width, centered content */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 33px; /* design height */
+  padding: 0 10px; /* slightly tighter horizontal padding */
+  background: #ecece1; /* exact background color */
+  border-radius: 30px; /* pill shape */
+  box-sizing: border-box;
+  opacity: 1;
+  border: 1px solid rgba(0, 0, 0, 0.06); /* subtle border */
+  box-shadow: none;
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  gap: 6px;
+}
+
+/* Skill text inside the pill */
+.skill-text {
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0;
+  color: #231f20;
+  display: inline-block;
+  padding: 0;
+}
+
+/* inner-small kept for experience chips if used */
+.skill-text.inner-small {
+  width: 83px;
+  text-align: center;
+  display: block;
+}
+
+/* Experience container card (light bg, 10px radius, no shadow) */
+.experience-box {
+  background: rgba(242, 247, 248, 0.6); /* #F2F7F8 at 60% */
+  border-radius: 10px;
+  padding: 16px;
+  box-sizing: border-box;
+  box-shadow: none !important; /* force remove any Tailwind shadow */
+}
+
+/* Education card: same style as experiences, flat (no shadow) */
+.education-box {
+  background: rgba(242, 247, 248, 0.6); /* #F2F7F8 at 60% */
+  border-radius: 10px;
+  padding: 16px;
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+
+/* Timeline column: vertical line behind dots */
+.timeline-column {
+  position: relative;
+}
+
+/* draw vertical line behind the dots */
+.timeline-column::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px; /* line thickness */
+  background: rgba(215, 224, 227, 0.6); /* subtle light grey line */
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+/* ensure dots render above the vertical line */
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  background: #0097ac;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  z-index: 10;
+  position: relative;
+}
+
+/* Certificate card - remove shadow */
+.cert-box {
+  background: rgba(236, 236, 225, 0.4); /* #ECECE1 at 40% */
+  border-radius: 10px;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: left;
+  box-shadow: none !important;
+}
+
+/* Accolade card - remove shadow */
+.accolade-box {
+  background: rgba(136, 30, 135, 0.1); /* keep background setting */
+  border-radius: 10px;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: left;
+  box-shadow: none !important;
+}
+
+/* Testimonial card - flat */
+.testimonial-box {
+  background: rgba(242, 247, 248, 0.6); /* #F2F7F8 at 60% */
+  border-radius: 10px;
+  padding: 16px;
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+
+/* Minor helpers to align visuals with spec */
+.experience-box h4 {
+  margin: 0 0 8px 0;
+}
+.experience-box p {
+  margin: 0;
+}
+
+/* Preserve the hide-scrollbar rules */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Table Header Styling */
+.opportunities-table thead tr {
+  background: #d7e0e3 !important;
+  opacity: 0.15 !important;
+  border-radius: 10px 10px 0px 0px !important;
+  height: 60px !important;
+}
+
+/* Table Row Styling */
+.opportunities-table tbody tr {
+  background: #ffffff !important;
+  opacity: 1 !important;
+  height: 65px !important;
+}
+
+/* Table Header Cells */
+.opportunities-table thead th {
+  padding: 16px 24px;
+  height: 60px;
+}
+
+/* Table Body Cells */
+.opportunities-table tbody td {
+  padding: 16px 24px;
+  height: 65px;
+}
+
+/* Make scrollbars visually transparent but still usable */
+/* Webkit browsers (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: transparent; /* fully transparent thumb */
+  border-radius: 9999px;
+  border: 2px solid transparent; /* keep hit area */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* Optional: show a faint thumb on hover for usability (uncomment if needed) */
+/*
+*:hover::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.08);
+}
+*/

@@ -1,23 +1,13 @@
-import "./App.css";
-import { useState } from "react";
-
-import LoginPage from "./pages/landing_page";
-import { ShortlistProvider } from "./components/tp_manager/application/context/ShortlistContext";
-import { ActiveRoleContext } from "./context/ActiveRoleContext";
-import Application from "./pages/Application";
-
+import './App.css'
+import './pages/landing_page'
+import LoginPage from './pages/landing_page';
 function App() {
-  const [activeRole, setActiveRole] = useState<string | null>(null);
-
+  
   return (
-    <ShortlistProvider>
-      <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
-        <LoginPage />
-      </ActiveRoleContext.Provider>
-
-      {/* <Application/> */}
-    </ShortlistProvider>
-  );
+    <>
+    <LoginPage />
+    </>
+  )
 }
 
-export default App;
+export default App
