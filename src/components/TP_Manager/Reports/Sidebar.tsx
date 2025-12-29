@@ -1,108 +1,53 @@
-/**
- * Sidebar Component
- * 
- * A responsive navigation sidebar that displays menu items with active state indication.
- * Features mobile-specific close functionality and smooth hover interactions.
- * 
- * Design Features:
- * - Active state indicated by left border accent and medium font weight
- * - Hover animations (translateY and translateX) for inactive items
- * - Responsive padding and spacing across breakpoints
- * - Optional close button for mobile overlay scenarios
- * 
- * @component
- * @example
- * ```tsx
- * // Desktop usage (no close handler)
- * <Sidebar />
- * 
- * // Mobile usage (with drawer close handler)
- * <Sidebar onClose={() => setDrawerOpen(false)} />
- * ```
- */
-
 import React from "react"
-
-/**
- * Props for the Sidebar component
- * 
- * @interface SidebarProps
- * @property {() => void} [onClose] - Optional callback to close sidebar (typically for mobile drawer)
- *                                    When provided, displays a close button on mobile viewports
- */
+ 
+// Define the types for Sidebar component props
 interface SidebarProps {
-  onClose?: () => void
+  onClose?: () => void // Optional onClose function to close the sidebar
 }
-
-/**
- * Sidebar Component
- * 
- * Navigation sidebar with the following characteristics:
- * - Vertical menu layout with active state tracking
- * - Custom CSS animations for hover states
- * - Responsive design with breakpoint-specific styling
- * - Accessibility-friendly with proper semantic HTML
- * 
- * @param {SidebarProps} props - Component props
- * @returns {JSX.Element} Rendered sidebar navigation
- */
+ 
 const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
  
+  // Menu items with label and active state
   const menuItems = [
-    { label: "TP employee list", active: true },
+    { label: "TP employee list", active: true }, // Active menu item
     { label: "Certifications", active: false },
     { label: "Education", active: false },
   ]
-
+ 
   return (
     <aside className="h-full w-full bg-white overflow-y-auto">
+      {/* Inline styles for sidebar item transitions and hover effects */}
       <style>{`
         /* Base transition for all sidebar items */
         .sidebar-item {
           transition: transform 0.25s ease-out, font-weight 0.2s ease;
         }
-        
-        /* 
-          Hover effect for inactive items
-          - Subtle upward and rightward movement creates depth
-          - Font weight increase provides tactile feedback
-          - Creates anticipation of interaction
-        */
+       
+        /* Hover effect for inactive items */
         .sidebar-item.inactive:hover {
           font-weight: 500;
           transform: translateY(-2px) translateX(3px);
         }
-        
-        /* 
-          No hover effect for active item
-          - Prevents confusion about current location
-          - Active state is already visually distinct
-        */
+       
+        /* No hover effect for active item */
         .sidebar-item.active:hover {
           transform: none;
         }
       `}</style>
-
-      {/* 
-        Mobile Close Button
-        - Only rendered when onClose prop is provided
-        - Hidden on desktop (lg:hidden) where sidebar is persistent
-        - Touch-friendly 32x32px minimum size
-        - Border bottom provides visual separation from menu
-      */}
+ 
+      {/* Mobile Close Button - Displayed on small screens */}
       {onClose && (
-        <div 
-          className="lg:hidden flex justify-end p-4 border-b" 
+        <div
+          className="lg:hidden flex justify-end p-5 border-b"
           style={{ borderColor: "#D7E0E3" }}
         >
           <button
-            onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100"
-            aria-label="Close sidebar navigation"
+            onClick={onClose} // Close the sidebar when clicked
+            className="w-10 h-10 flex items-center justify-center rounded hover:bg-gray-100"
+            aria-label="Close sidebar navigation" // Accessibility label
           >
-            {/* X icon for close action - universally recognized pattern */}
             <svg
-              className="w-5 h-5"
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -118,54 +63,46 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
           </button>
         </div>
       )}
-
-      {/* 
-        Menu Items Container
-        
-        Top padding considerations:
-        - 90px accounts for fixed header height
-        - Prevents menu items from being obscured by header
-        - Should match header height from layout system
-      */}
-      <div className="pt-[90px] pb-4">
+ 
+      {/* Menu Items Container - Adds padding and adjusts font sizes for mobile */}
+      <div className="pt-[120px] pb-5">
         {menuItems.map((item) => (
           <div
-            key={item.label}
+            key={item.label} // Unique key for each menu item
             className={`
               sidebar-item
-              font-rubik text-[13px] leading-[16px] tracking-[0px]
-              py-[10px] px-5
+              font-rubik text-[17px] leading-[22px] tracking-[0px]
+              py-[14px] px-7
               cursor-pointer relative bg-transparent
-              md:max-lg:py-[10px] md:max-lg:px-[18px]
-              max-md:py-3 max-md:px-6 max-md:text-[14px] max-md:leading-[18px]
-              ${item.active 
-                ? 'active font-medium border-l-2 pl-[18px] md:max-lg:pl-4 max-md:pl-[22px]' 
+              md:max-lg:py-[14px] md:max-lg:px-6
+              max-md:py-4 max-md:px-8 max-md:text-[18px] max-md:leading-[24px]
+              ${item.active
+                ? 'active font-medium border-l-[3px] pl-[25px] md:max-lg:pl-[21px] max-md:pl-[29px]'
                 : 'inactive font-normal'
               }
             `}
             style={{
-              color: "#231F20",
-              // Active border creates visual indicator of current page/section
-              borderColor: item.active ? "#0097AC" : "transparent"
+              color: "#231F20", // Text color
+              borderColor: item.active ? "#0097AC" : "transparent" // Active item border color
             }}
-            onClick={onClose}
-            role="button"
-            tabIndex={0}
+            onClick={onClose} // Close the sidebar when a menu item is clicked
+            role="button" // Mark the item as a button for accessibility
+            tabIndex={0} // Enable keyboard navigation
             onKeyDown={(e) => {
-              // Keyboard accessibility: Enter or Space triggers click
+              // Handle keyboard events (Enter/Space) to trigger onClose
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault()
                 onClose?.()
               }
             }}
-            aria-current={item.active ? 'page' : undefined}
+            aria-current={item.active ? 'page' : undefined} // Indicate the active menu item for accessibility
           >
-            {item.label}
+            {item.label} {/* Menu item label */}
           </div>
         ))}
       </div>
     </aside>
   )
 }
-
+ 
 export default Sidebar
