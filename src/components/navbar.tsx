@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
 import LogoImg from "../assets/Group 172287@2x.jpg";
+import BulkMessagePopup from "./BulkMessagePopup";
+
 import Home from "../pages/home";
 import LandingPage from "../pages/landing_page";
 import { useActiveRole } from "../context/ActiveRoleContext";
@@ -28,6 +30,7 @@ const Navbar = ({ role }: NavbarProps) => {
   const [view, setView] = useState<View>("app");
   const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showBulkPopup, setShowBulkPopup] = useState(false);
   const [appOpenedByCard, setAppOpenedByCard] = useState(false);
   const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);  // Track selected profile ID
 
@@ -127,11 +130,16 @@ const Navbar = ({ role }: NavbarProps) => {
 
             {/* ---------- RIGHT ---------- */}
             <div className="relative flex items-center gap-4">
-              <Mail
-                size={24}
-                className="cursor-pointer text-gray-700"
-                onClick={() => {}}
-              />
+              {role === "TP Manager" && (
+                <Mail
+                  size={24}
+                  className="cursor-pointer text-gray-700"
+                  onClick={() => {
+                    // Open bulk message popup
+                    setShowBulkPopup(true);
+                  }}
+                />
+              )}
 
               {/* Notifications */}
               <div className="relative">
@@ -182,17 +190,30 @@ const Navbar = ({ role }: NavbarProps) => {
         </div>
       </header>
 
+      {/* Bulk message popup (mounted when Mail icon clicked) */}
+      {showBulkPopup && (
+        <BulkMessagePopup onClose={() => setShowBulkPopup(false)} />
+      )}
+
       {/* ================= PAGE CONTENT ================= */}
       <div className="mt-20">
         {active === "Home" && <Home />}
 
-        {activeRole === "WFM" && active === "Applications" && <WfmApplications />}
+        {activeRole === "WFM" && active === "Applications" && (
+          <WfmApplications />
+        )}
 
         {/* TP Manager pages */}
         {active === "Applications" && effectiveRole === "TP Manager" && (
           <ApplicationsPage />
         )}
-
+        {/* When a profile card requests a detailed view, it will emit a
+            navigation event with view: 'ApplicationsDetail' — render the
+            full TP applications/detail view in that case. */}
+        {active === "ApplicationsDetail" &&
+          (effectiveRole === "TP Manager" || appOpenedByCard) && (
+            <TP_Applications />
+          )}
         {active === "Assigning & Tracking" &&
           effectiveRole === "TP Manager" && <AssigningTracking />}
 

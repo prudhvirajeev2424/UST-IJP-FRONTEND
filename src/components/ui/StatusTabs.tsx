@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowLeft, Grid, List } from "lucide-react";
+import { useActiveRole } from "../../context/ActiveRoleContext";
 
 // StatusTabs: reusable header for Applications page (tabs, search, actions, view toggle)
 interface StatusTabsProps {
@@ -15,7 +16,12 @@ const StatusTabs: React.FC<StatusTabsProps> = ({
   onViewChange,
   view = "table",
 }) => {
-  const tabs = ["All", "Pending Action", "Accepted", "Rejected"];
+  const { activeRole } = useActiveRole();
+
+  const tabs =
+    activeRole && activeRole.toLowerCase() === "wfm"
+      ? ["All", "Pending", "Interviewing", "Selected", "Allocated", "Rejected"]
+      : ["All", "Pending Action", "Accepted", "Rejected"];
 
   return (
     <div className="px-4 md:px-8 py-2 mb-4">

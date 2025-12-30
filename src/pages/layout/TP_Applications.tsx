@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
-import CandidateHeader from '../../components/tp_manager/application/CandidateHeader';
-import Sidebar from '../../components/tp_manager/application/Sidebar';
-import Introduction from '../../components/tp_manager/application/Introduction';
-import ProfessionalExperience from '../../components/tp_manager/application/ProfessionalExperience';
-import Certifications from '../../components/tp_manager/application/Certifications';
-import Education from '../../components/tp_manager/application/Education';
-import Skills from '../../components/tp_manager/application/Skills';
-import Accolades from '../../components/tp_manager/application/Accolades';
-import Testimonials from '../../components/tp_manager/application/Testimonials';
-import ProjectInfo from '../../components/tp_manager/application/ProjectInfo';
-import CoverLetter from '../../components/tp_manager/application/CoverLetter';
-
+import React, { useState, useEffect, useRef } from "react";
+import CandidateHeader from "../../components/tp_manager/application/CandidateHeader";
+import Sidebar from "../../components/tp_manager/application/Sidebar";
+import Introduction from "../../components/tp_manager/application/Introduction";
+import ProfessionalExperience from "../../components/tp_manager/application/ProfessionalExperience";
+import Certifications from "../../components/tp_manager/application/Certifications";
+import Education from "../../components/tp_manager/application/Education";
+import Skills from "../../components/tp_manager/application/Skills";
+import Accolades from "../../components/tp_manager/application/Accolades";
+import Testimonials from "../../components/tp_manager/application/Testimonials";
+import ProjectInfo from "../../components/tp_manager/application/ProjectInfo";
+import CoverLetter from "../../components/tp_manager/application/CoverLetter";
+import UploadedDocuments from "../../components/Wfm/UploadedDocuments";
 import { 
   candidateData, 
   jobs, 
@@ -21,8 +21,21 @@ import {
   testimonials, 
   projectData 
 } from '../../data/mockData';
+import { profiles } from '../../data/profiles';
+import type { Candidate } from '../../types/candidate';
+import ProgressBar from "../../components/Wfm/Applications/ProgressBar";
+import { useActiveRole } from "../../context/ActiveRoleContext";
+import type { CandidateStatus } from "../../types/CandidateStatus";
 
-const TP_Applications: React.FC = () => {
+interface TPApplicationsProps {
+  profileId?: string | undefined;
+}
+
+const TP_Applications: React.FC<TPApplicationsProps> = ({ profileId }) => {
+    const { activeRole } = useActiveRole();
+  const [status, setStatus] = useState<CandidateStatus>(
+    activeRole === "WFM" ? "PENDING_WFM" : "PENDING_WFM"
+  );
   const [activeSection, setActiveSection] = useState('introduction');
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -66,10 +79,12 @@ const TP_Applications: React.FC = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F2F7F8' }}>
-      {/* CandidateHeader - fixed at the top */}
-      <div className="sticky top-0 z-10 bg-white">
-        <CandidateHeader candidate={candidateData} />
-      </div>
+  {/* CandidateHeader - directly below navbar */}
+ <CandidateHeader
+        candidate={candidateData}
+        onApprove={(newStatus) => setStatus(newStatus)}
+        onReject={(newStatus) => setStatus(newStatus)}
+      />
 
       <div className="flex px-8 py-6 space-x-6 h-[calc(100vh-140px)]">
         {/* Left Sidebar */}
@@ -114,8 +129,18 @@ const TP_Applications: React.FC = () => {
 
         {/* Right Sidebar - Project Info & Cover Letter */}
         <div className="w-80 flex-shrink-0 space-y-6 sticky top-6 self-start">
+           {activeRole === "WFM" && (
+            <>
+              <ProgressBar status={status} />
+            </>
+          )}
           <ProjectInfo project={projectData} />
           <CoverLetter coverLetter={projectData.coverLetter} />
+          {activeRole === "WFM" && (
+            <>
+              <UploadedDocuments />
+            </>
+          )}
         </div>
       </div>
     </div>

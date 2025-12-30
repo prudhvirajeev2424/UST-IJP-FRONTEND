@@ -35,10 +35,18 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => {
         if (activeRole === "WFM") {
-          // dispatch navigation event for navbar to pick up
+          // Dispatch navigation event in the shape the navbar expects.
+          // This marks the navigation as originating from a card so the
+          // navbar can render the TP applications/detail view even for WFM
+          // when the navigation comes from a card.
+          const detail = {
+            view: "ApplicationsDetail",
+            source: "card",
+            layout: "TP_Applications",
+            profileId: (profile as any).id ?? (profile as any).uid,
+          };
+
           window.dispatchEvent(new CustomEvent("navigate", { detail }));
-          // also set a hash for direct linking
-          window.location.hash = "#Applications:TP";
         }
       }}
     >
