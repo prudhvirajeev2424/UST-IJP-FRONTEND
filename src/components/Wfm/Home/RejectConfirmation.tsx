@@ -2,9 +2,7 @@ import React, { useState, useContext } from "react";
 import { X } from "lucide-react";
 
 // Singleton toast service (inline for demonstration)
-let toastRoot: any = null;
 let toastContainer: HTMLDivElement | null = null;
-let toasts: any[] = [];
 
 function showToast(
   message: string,
@@ -86,7 +84,9 @@ function showToast(
 }
 
 // ApprovalContext placeholder
-const ApprovalContext = React.createContext<any>(undefined);
+const ApprovalContext = React.createContext<
+  Record<string, unknown> | undefined
+>(undefined);
 
 interface ApprovalModalProps {
   isOpen?: boolean;
@@ -95,7 +95,7 @@ interface ApprovalModalProps {
   applicantName?: string;
 }
 
-const ApprovalModal: React.FC<ApprovalModalProps> = ({
+const RejectModal: React.FC<ApprovalModalProps> = ({
   isOpen: controlledIsOpen,
   onClose,
   onConfirm,
@@ -106,7 +106,7 @@ const ApprovalModal: React.FC<ApprovalModalProps> = ({
 
   const isOpen =
     controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
-  const approvalCtx = useContext(ApprovalContext as React.Context<any>);
+  const approvalCtx = useContext(ApprovalContext);
 
   const handleClose = () => {
     setInternalIsOpen(false);
@@ -215,42 +215,33 @@ const ApprovalModal: React.FC<ApprovalModalProps> = ({
                 className="relative opacity-100"
                 style={{
                   width: "521px",
-                  height: "120px",
+                  minHeight: "120px",
                   background: "#FFFFFF",
                   border: "1px solid #D7E0E3",
                   borderRadius: "5px",
                   padding: "20px 16px 16px 16px",
                 }}
               >
-                <span
+                <label
                   className="absolute bg-white px-2"
                   style={{
                     top: "-10px",
                     left: "12px",
                     fontFamily: "Rubik",
-                    fontStyle: "Regular",
                     fontSize: "14px",
-                    fontWeight: "400",
-                    lineHeight: "14px",
                     color: "#808080",
-                    letterSpacing: "0px",
                   }}
                 >
                   Enter Comments
-                </span>
-                <p
-                  className="m-0"
-                  style={{
-                    fontFamily: "Rubik",
-                    fontSize: "14px",
-                    fontWeight: "400",
-                    lineHeight: "20px",
-                    color: "#000000",
-                    letterSpacing: "0px",
-                  }}
-                >
-                  Still missmatch and not enough experience
-                </p>
+                </label>
+
+                <textarea
+                  value={comments}
+                  onChange={(e) => setComments(e.target.value)}
+                  placeholder="Reason for rejection (optional)"
+                  className="w-full mt-2 p-3 border rounded resize-none"
+                  rows={4}
+                />
               </div>
             </div>
 
@@ -317,4 +308,4 @@ const ApprovalModal: React.FC<ApprovalModalProps> = ({
   );
 };
 
-export default ApprovalModal;
+export default RejectModal;

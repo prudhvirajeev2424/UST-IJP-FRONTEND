@@ -10,7 +10,7 @@ import Accolades from "../../components/tp_manager/application/Accolades";
 import Testimonials from "../../components/tp_manager/application/Testimonials";
 import ProjectInfo from "../../components/tp_manager/application/ProjectInfo";
 import CoverLetter from "../../components/tp_manager/application/CoverLetter";
-
+import UploadedDocuments from "../../components/Wfm/UploadedDocuments";
 import { 
   candidateData, 
   jobs, 
@@ -23,12 +23,19 @@ import {
 } from '../../data/mockData';
 import { profiles } from '../../data/profiles';
 import type { Candidate } from '../../types/candidate';
+import ProgressBar from "../../components/Wfm/Applications/ProgressBar";
+import { useActiveRole } from "../../context/ActiveRoleContext";
+import type { CandidateStatus } from "../../types/CandidateStatus";
 
 interface TPApplicationsProps {
   profileId?: string | undefined;
 }
 
 const TP_Applications: React.FC<TPApplicationsProps> = ({ profileId }) => {
+    const { activeRole } = useActiveRole();
+  const [status, setStatus] = useState<CandidateStatus>(
+    activeRole === "WFM" ? "PENDING_WFM" : "PENDING_WFM"
+  );
   const [activeSection, setActiveSection] = useState('introduction');
   const contentRef = useRef<HTMLDivElement>(null);
   const [candidate, setCandidate] = useState<Candidate | null>(candidateData);
@@ -99,7 +106,11 @@ const TP_Applications: React.FC<TPApplicationsProps> = ({ profileId }) => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F2F7F8' }}>
   {/* CandidateHeader - directly below navbar */}
-  <CandidateHeader candidate={candidate ?? candidateData} />
+ <CandidateHeader
+        candidate={candidateData}
+        onApprove={(newStatus) => setStatus(newStatus)}
+        onReject={(newStatus) => setStatus(newStatus)}
+      />
 
       <div className="flex px-8 py-6 space-x-6">
         {/* Left Sidebar */}
@@ -144,8 +155,18 @@ const TP_Applications: React.FC<TPApplicationsProps> = ({ profileId }) => {
 
         {/* Right Sidebar - Project Info & Cover Letter */}
         <div className="w-80 flex-shrink-0 space-y-6 sticky top-6 self-start">
+           {activeRole === "WFM" && (
+            <>
+              <ProgressBar status={status} />
+            </>
+          )}
           <ProjectInfo project={projectData} />
           <CoverLetter coverLetter={projectData.coverLetter} />
+          {activeRole === "WFM" && (
+            <>
+              <UploadedDocuments />
+            </>
+          )}
         </div>
       </div>
     </div>
