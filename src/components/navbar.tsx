@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, act } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
 import LogoImg from "../assets/Group 172287@2x.jpg";
@@ -17,7 +17,8 @@ import MyApplications from "../pages/MyApplications";
 import TP_Applications from "../pages/layout/TP_Applications";
 import ApplicationsPage from "../pages/Applications_page";
 import ReportsPage from "../pages/ReportsPage";
-import AssigningTracking from "../pages/TP_AssigningandTracking";
+import AssigningTracking from "../pages/AssigningandTracking";
+import WfmApplications from "../pages/layout/WfmApplications";
 interface NavbarProps {
   role?: string | null;
 }
@@ -237,7 +238,9 @@ const Navbar = ({ role }: NavbarProps) => {
 
       {/* ================= PAGE CONTENT ================= */}
       <div className="mt-20">
-        {active === "Home" && effectiveRole === "TP Manager" && <Home />}
+        {active === "Home" && <Home />}
+
+        {activeRole === "WFM" && active === "Applications" && <WfmApplications />}
 
         {/* TP Manager pages */}
         {/* Clicking the nav 'Applications' should show the Applications page first. */}
