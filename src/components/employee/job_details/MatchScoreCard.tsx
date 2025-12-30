@@ -14,7 +14,7 @@ export function MatchScoreCard({ percentage }: MatchScoreCardProps) {
 
   return (
     <Card className="bg-white rounded-2xl shadow-sm border border-gray-100">
-      <CardContent className="flex flex-row items-center gap-6 px-8 py-6">
+      <CardContent className="flex flex-row items-center gap-6 px-8 py-6 mt-8">
         {/* SVG - Left Side */}
         <svg
           width="96"
