@@ -2,10 +2,10 @@ import type React from "react";
 import { useState } from "react";
 import type { Employee } from "../types/TPManagerReportsTypes";
 import { mockEmployees } from "../data/TPManagerReportsMockEmployeesData";
-import Sidebar from "../components/TP_Manager/Reports/Sidebar";
-import EmployeeTable from "../components/TP_Manager/Reports/EmployeeTable";
+import Sidebar from "../components/tp_manager/Reports/Sidebar";
+import EmployeeTable from "../components/tp_manager/Reports/EmployeeTable";
 import Modal from "../components/ui/Popup";
-import MatchingJobsModal from "../components/TP_Manager/Reports/MatchingJobsModal";
+import MatchingJobsModal from "../components/tp_manager/Reports/MatchingJobsModal";
 import MeetingIcon from "/src/assets/meeting_icon.png";
 
 interface ReportsPageProps {
@@ -40,8 +40,6 @@ const ReportsPage: React.FC<ReportsPageProps> = () => {
   return (
     <div className="w-full min-h-screen bg-[#f2f7f8]">
       <div className="flex flex-col h-screen">
-        
-
         <div className="flex flex-1 overflow-hidden relative">
           {/* Mobile Sidebar Toggle Button */}
           <button

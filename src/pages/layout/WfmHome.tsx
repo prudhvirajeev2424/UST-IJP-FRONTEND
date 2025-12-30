@@ -1,8 +1,8 @@
 // React import not required with the new JSX transform
 // Use the TP Manager application status component (path used elsewhere in the app)
-import ApplicationStatus from "../../components/TP_Manager/home/ApplicationStatus";
+import ApplicationStatus from "../../components/tp_manager/home/ApplicationStatus";
 // React import not required with the new JSX transform
-import ApplicationStatus from '../../components/tp_manager/home/ApplicationStatus';
+import ApplicationStatus from "../../components/tp_manager/home/ApplicationStatus";
 
 const WfmHome = () => {
   return (

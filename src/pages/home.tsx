@@ -2,9 +2,9 @@ import React from "react";
 import { useActiveRole } from "../context/ActiveRoleContext";
 // import EmpHome from "./layout/EmpHome";
 // import WfmHome from "./layout/WfmHome";
-import ApplicationStatus from "../components/TP_Manager/home/ApplicationStatus";
-import RecentActivities from "../components/TP_Manager/home/RecentActivities";
-import ProfilesReceived from "../components/TP_Manager/home/ProfilesReceived";
+import ApplicationStatus from "../components/tp_manager/home/ApplicationStatus";
+import RecentActivities from "../components/tp_manager/home/RecentActivities";
+import ProfilesReceived from "../components/tp_manager/home/ProfilesReceived";
 
 const TpManagerHome: React.FC = () => {
   return (

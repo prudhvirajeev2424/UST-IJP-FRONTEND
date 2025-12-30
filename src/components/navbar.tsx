@@ -7,6 +7,7 @@ import Home from "../pages/home";
 import LandingPage from "../pages/landing_page";
 // import Application from "../pages/Application";
 // import Application from "../pages/Application";
+import EmpHome from "../pages/layout/EmpHome";
 
 import { useActiveRole } from "../context/ActiveRoleContext";
 // import Application from "../pages/Application";
@@ -236,7 +237,7 @@ const Navbar = ({ role }: NavbarProps) => {
 
       {/* ================= PAGE CONTENT ================= */}
       <div className="mt-20">
-        {active === "Home" && <Home />}
+        {active === "Home" && effectiveRole === "TP Manager" && <Home />}
 
         {/* TP Manager pages */}
         {/* Clicking the nav 'Applications' should show the Applications page first. */}
@@ -255,6 +256,8 @@ const Navbar = ({ role }: NavbarProps) => {
         {active === "Reports" && effectiveRole === "TP Manager" && (
           <ReportsPage />
         )}
+
+        {active === "EmpHome" && effectiveRole === "Employee" && <EmpHome />}
 
         {/* Employee-specific pages */}
         {active === "Opportunities" && effectiveRole === "Employee" && (

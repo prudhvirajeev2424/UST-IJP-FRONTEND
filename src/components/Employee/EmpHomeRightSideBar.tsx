@@ -1,18 +1,18 @@
 import type { Stats,Activity } from "../../types/activity";
-import { getStatusColorActivity } from "../../utils/Helper";
-
+import { getStatusColor } from "./../../utils/Helper";
+ 
 interface RightSidebarProps {
   stats: Stats;
   activities: Activity[];
 }
-
+ 
 function getStatusLabel(status: Activity["status"]): string {
   return status.charAt(0).toUpperCase() + status.slice(1);
 }
-
+ 
 export function EmpHomeRightSideBar({ stats, activities }: RightSidebarProps) {
   return (
-    <aside className="w-[360px] flex-shrink-0 pt-6">
+    <aside className="w-[360px] h-[110px] flex-shrink-0 pt-6 ">
       {/* Stats */}
       <div className="w-full h-[110px] bg-white relative rounded-lg p-5 cursor-pointer shadow-lg overflow-hidden flex justify-around mb-10">
         <div className="text-center">
@@ -40,7 +40,7 @@ export function EmpHomeRightSideBar({ stats, activities }: RightSidebarProps) {
           <div className="text-sm text-text-muted">Rejected</div>
         </div>
       </div>
-
+ 
       {/* Recent Activities */}
       <div className="w-full min-h-[450px] bg-white relative rounded-lg cursor-pointer shadow-lg overflow-hidden">
         <div className="flex items-center justify-between pt-5 pl-5 pr-5 mb-4">
@@ -58,33 +58,33 @@ export function EmpHomeRightSideBar({ stats, activities }: RightSidebarProps) {
               {/* Timeline column */}
               <div className="w-4 flex justify-center">
                 {/* Dot */}
-                <span className="w-2.5 h-2.5 mt-2 rounded-full bg-secondary z-10" />
+                <span className="w-2.5 h-2.5 mt-2  rounded-full z-10 bg-[#0097AC]" />
               </div>
-
+ 
               {/* Vertical line (absolute, full height) */}
               {index < activities.length - 1 && (
                 <span className="absolute left-[7px] top-4 -bottom-4 w-px bg-gray-300" />
               )}
-
+ 
               {/* Content */}
               <div className="flex-1">
-                <p className="text-base text-text-primary leading-6">
+                <p className="text-left text-text-primary leading-6">
                   Applied job{" "}
                   <span className="font-semibold">
                     "{activity.title} ({activity.soId})"
                   </span>
                 </p>
-
+ 
                 <div className="flex items-center justify-between mt-1">
                   <span
-                    className={`text-xs font-medium px-2 py-1 rounded-md ${getStatusColorActivity(
-                      activity
+                    className={`text-xs font-medium px-2 py-1 rounded-md ${getStatusColor(
+                      activity.status
                     )}`}
                   >
                     {getStatusLabel(activity.status)}
                   </span>
-
-                  <span className="text-xs text-text-muted">
+ 
+                  <span className="text-xs text-text-muted text-[#7A7480] opacity-50">
                     {activity.timestamp}
                   </span>
                 </div>
@@ -96,3 +96,5 @@ export function EmpHomeRightSideBar({ stats, activities }: RightSidebarProps) {
     </aside>
   );
 }
+ 
+ 

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Phone, Mail, ArrowLeft } from "lucide-react";
 import type { Candidate } from "../../../types/candidate";
-import Button from "../../TP_Manager/application/common/Button";
-import ShortlistModal from "../../TP_Manager/application/shortListModal/ShortlistModal";
+import Button from "./common/Button";
+import ShortlistModal from "./shortListModal/ShortlistModal";
 import { useShortlist } from "./context/ShortlistContext";
 
 import DP from "../../../assets/DP.png";

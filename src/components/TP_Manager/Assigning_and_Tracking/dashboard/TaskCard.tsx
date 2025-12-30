@@ -1,7 +1,7 @@
 import React from "react";
 import { ProgressBar } from "./ProgressBar";
 import type { Task } from "../../../../types/AssigningandTrackingTypes";
-import UserInfo from "../../../TP_Manager/Assigning_and_Tracking/dashboard/UserInfo";
+import UserInfo from "./UserInfo";
 
 /* ============================
    TASK CARD

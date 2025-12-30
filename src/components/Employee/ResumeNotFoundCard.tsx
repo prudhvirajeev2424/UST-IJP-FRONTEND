@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import notfound from "../../../assets/not_found.svg";
-=======
 import notfound from "../../assets/not_found.svg";
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
 
 interface ResumeNotFoundCardProps {
   onUploadClick: () => void;

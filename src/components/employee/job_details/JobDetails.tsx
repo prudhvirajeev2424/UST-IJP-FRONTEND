@@ -5,7 +5,7 @@ import ApplyModal from "./ApplyModal";
 import { JobSummaryCard } from "./JobSummaryCard";
 import { JobDetailsCard } from "./JobDetailsCard";
 import { MatchScoreCard } from "./MatchScoreCard";
-// import { SimilarJObPanel } from "./SimilarJobsPanel";
+import { SimilarJobsPanel } from "./SimilarJobsPanel";
 import { getJobById, getSimilarJobs } from "../../../data/mockData";
 
 interface JobDetailsProps {

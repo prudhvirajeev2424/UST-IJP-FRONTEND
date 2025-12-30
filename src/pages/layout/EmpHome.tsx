@@ -9,7 +9,7 @@ import { stats, opportunities, recentActivities } from "../../data/mockData";
 import { profileData } from "../../data/profiles";
 import { EmpHomeGrid } from "../../components/employee/home_components/EmpHomeGrid";
 
-export default function Home() {
+export default function EmpHome() {
   const [hasResume, setHasResume] = useState(false);
   const [uploadResumeModalOpen, setUploadResumeModalOpen] = useState(false);
   const [resumeModalOpen, setResumeModalOpen] = useState(false);

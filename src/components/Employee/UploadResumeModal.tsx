@@ -1,33 +1,15 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-<<<<<<< HEAD
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "../ui/Dialog";
- 
-import pdf_svg from "../../../assets/Icon awesome-file-pdf.svg";
-import upload_svg from "../../../assets/Icon feather-upload-cloud.svg";
- 
-=======
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/Dialog";
+import { Dialog, DialogContent, DialogTitle } from "../ui/Dialog";
 
 import pdf_svg from "../../assets/Icon awesome-file-pdf.svg";
 import upload_svg from "../../assets/download.svg";
 
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
 interface UploadResumeModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onConfirm: (file: File) => void;
 }
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
 export function UploadResumeModal({
   open,
   onOpenChange,
@@ -50,11 +32,6 @@ export function UploadResumeModal({
       "application/msword",
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     ];
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
     if (!validTypes.includes(file.type)) {
       alert("Please upload a PDF or Word document");
       return;
@@ -164,11 +141,6 @@ export function UploadResumeModal({
                 }
               />
             </div>
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
             {uploadedFile && (
               <div className="flex items-center gap-2">
                 <img src={pdf_svg} className="h-5 w-5" />
@@ -207,8 +179,3 @@ export function UploadResumeModal({
     </Dialog>
   );
 }
-<<<<<<< HEAD
- 
- 
-=======
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e

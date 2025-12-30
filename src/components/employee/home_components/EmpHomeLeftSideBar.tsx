@@ -1,17 +1,21 @@
 import type { ProfileSummary } from "../../../types/profilesummary";
-import { AlertCircle, ArrowRight } from 'lucide-react';
- 
+import { AlertCircle, ArrowRight } from "lucide-react";
+
 interface SidebarProps {
   profile: Omit<ProfileSummary, "resumeUpdated">;
-  hasresume:any
-  handleresume:any
+  hasresume: any;
+  handleresume: any;
 }
- 
-export function EmpHomeLeftSideBar({ profile ,hasresume,handleresume}: SidebarProps) {
-  const { description,primarySkills} = profile
-  const hasResume = hasresume
-  const handleResumeClick = handleresume
-  
+
+export function EmpHomeLeftSideBar({
+  profile,
+  hasresume,
+  handleresume,
+}: SidebarProps) {
+  const { description, primarySkills } = profile;
+  const hasResume = hasresume;
+  const handleResumeClick = handleresume;
+
   return (
     <aside className="flex-shrink-0 pt-6 w-[360px]">
       <div className="w-full min-h-[479px] relative rounded-lg p-5 cursor-pointer shadow-lg overflow-hidden bg-white">
@@ -83,4 +87,3 @@ export function EmpHomeLeftSideBar({ profile ,hasresume,handleresume}: SidebarPr
     </aside>
   );
 }
- 

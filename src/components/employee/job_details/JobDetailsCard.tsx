@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../../ui";
-import  SkillsBadge from "../myapplications/SkillsBadge";
+import { SkillBadge } from "../home_components/SkillBadge";
 
 interface JobDetailsCardProps {
   title: string;
@@ -44,7 +44,7 @@ export function JobDetailsCard({
               <p className="text-xs text-muted-foreground mb-2">Primary</p>
               <div className="flex flex-wrap gap-2">
                 {mustHaveSkills.primary.map((skill) => (
-                  <SkillsBadge key={skill} skill={skill} variant="primary" />
+                  <SkillBadge key={skill} skill={skill} variant="primary" />
                 ))}
               </div>
             </div>
@@ -52,7 +52,7 @@ export function JobDetailsCard({
               <p className="text-xs text-muted-foreground mb-2">Others</p>
               <div className="flex flex-wrap gap-2">
                 {mustHaveSkills.others.map((skill) => (
-                  <SkillsBadge key={skill} skill={skill} variant="secondary" />
+                  <SkillBadge key={skill} skill={skill} variant="secondary" />
                 ))}
               </div>
             </div>
@@ -65,7 +65,7 @@ export function JobDetailsCard({
           </h4>
           <div className="flex flex-wrap gap-2">
             {goodToHaveSkills.map((skill) => (
-              <SkillsBadge key={skill} skill={skill} variant="secondary" />
+              <SkillBadge key={skill} skill={skill} variant="secondary" />
             ))}
           </div>
         </div>

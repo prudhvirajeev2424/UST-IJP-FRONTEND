@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-import { useState, useEffect, useRef } from 'react';
-import { X, Upload } from 'lucide-react';
-import { Button } from '../../ui/Button';
-import uploadSvg from '../../../assets/upload_svg.svg';
-=======
 import { useState, useEffect, useRef } from "react";
 import { X, Upload } from "lucide-react";
 import { Button } from "../ui/Button";
 import uploadSvg from "../../assets/download.svg";
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
 
 interface UpdateResumeDrawerProps {
   isOpen: boolean;
@@ -134,11 +127,6 @@ export function UpdateResumeDrawer({
         onTouchStart={handleOverlayTouchStart}
         onTouchMove={handleOverlayTouchMove}
       />
-<<<<<<< HEAD
-      
-=======
-
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
       {/* Drawer aligned to ResumeDetailModal when open (solid white panel) */}
       <div
         className="fixed left-1/2 top-[480px] bottom-0 -translate-x-1/2 w-[1000px] bg-white shadow-xl z-50 flex flex-col"
@@ -164,15 +152,10 @@ export function UpdateResumeDrawer({
 
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-3 border-b border-border">
-<<<<<<< HEAD
-          <h2 className="text-lg font-semibold text-foreground">Update resume?</h2>
-          <button 
-=======
           <h2 className="text-lg font-semibold text-foreground">
             Update resume?
           </h2>
           <button
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
             onClick={onClose}
             className="p-2 hover:bg-muted rounded-lg transition-colors"
             aria-label="Close drawer"
@@ -183,26 +166,17 @@ export function UpdateResumeDrawer({
 
         {/* Content - ensure left-aligned text */}
         <div className="p-6 space-y-1 text-left">
-<<<<<<< HEAD
-          <p className="text-sm text-muted-foreground">Upload your resume in a PDF format</p>
-          
-=======
           <p className="text-sm text-muted-foreground">
             Upload your resume in a PDF format
           </p>
 
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
           {/* Drop Zone */}
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             className={`rounded-lg p-6 transition-colors flex flex-col items-center justify-center text-center ${
-<<<<<<< HEAD
-              isDragging ? 'border-primary' : ''
-=======
               isDragging ? "border-primary" : ""
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
             }`}
             style={{
               minHeight: 80,
@@ -237,11 +211,6 @@ export function UpdateResumeDrawer({
           {attachedFile && (
             <div className="flex items-center gap-1">
               <div className="w-8 h-5 bg-red-100 rounded flex items-center justify-center">
-<<<<<<< HEAD
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-red-600" fill="currentColor">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-                  <path d="M14 2v6h6" fill="none" stroke="currentColor" strokeWidth="2"/>
-=======
                 <svg
                   viewBox="0 0 24 24"
                   className="w-5 h-5 text-red-600"
@@ -254,7 +223,6 @@ export function UpdateResumeDrawer({
                     stroke="currentColor"
                     strokeWidth="2"
                   />
->>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
                 </svg>
               </div>
               <span className="text-sm text-foreground flex-1">

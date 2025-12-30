@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import { ActiveRoleContext } from "../context/ActiveRoleContext";
-import { ShortlistProvider } from "../components/TP_Manager/application/context/ShortlistContext";
- 
+import { ShortlistProvider } from "../components/tp_manager/application/context/ShortlistContext";
+
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +14,7 @@ const LoginPage: React.FC = () => {
   const [errorShake, setErrorShake] = useState(false);
   const [fadeWhite, setFadeWhite] = useState(false);
   const [activeRole, setActiveRole] = useState<string | null>(null);
- 
+
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
     return () => clearTimeout(t);
@@ -79,7 +79,7 @@ const LoginPage: React.FC = () => {
           .login-card.zoom-out { transform: scale(0.7); opacity: 0; filter: blur(8px); }
           .ust-ring { animation: pulseRing 1600ms infinite; }
         `}</style>
- 
+
         {/* Zoom animation overlay */}
         {zoomOut && (
           <div className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none">
