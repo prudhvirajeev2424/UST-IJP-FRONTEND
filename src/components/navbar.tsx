@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
 import LogoImg from "../assets/Group 172287@2x.jpg";
-
 import Home from "../pages/home";
 import LandingPage from "../pages/landing_page";
-
 import { useActiveRole } from "../context/ActiveRoleContext";
 import Opportunities from "../pages/Opportunies";
 import AssigningAndTracking from "../pages/Assigning_and_Tracking";
@@ -14,6 +12,7 @@ import TP_Applications from "../pages/layout/TP_Applications";
 import ApplicationsPage from "../pages/Applications_page";
 import ReportsPage from "../pages/ReportsPage";
 import AssigningTracking from "../pages/AssigningandTracking";
+import WfmApplications from "../pages/layout/WfmApplications";
 
 interface NavbarProps {
   role?: string | null;
@@ -30,9 +29,7 @@ const Navbar = ({ role }: NavbarProps) => {
   const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
   const [appOpenedByCard, setAppOpenedByCard] = useState(false);
-  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(
-    null
-  );
+  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);  // Track selected profile ID
 
   /* ---------------- LANDING PAGE ---------------- */
   if (view === "landing") {
@@ -70,7 +67,7 @@ const Navbar = ({ role }: NavbarProps) => {
         setAppOpenedByCard(
           layout === "TP_Applications" || source === "card" || source === "list"
         );
-        if (profileId) setSelectedProfileId(profileId as string);
+        if (profileId) setSelectedProfileId(profileId as string);  // Set profile ID on event
       }
     };
 
@@ -162,52 +159,7 @@ const Navbar = ({ role }: NavbarProps) => {
                     </div>
 
                     <div className="divide-y divide-teal-600">
-                      <div className="flex gap-3 px-4 py-3 hover:bg-teal-600 cursor-pointer">
-                        <img
-                          src={ProfilePic}
-                          className="h-9 w-9 rounded-full object-cover"
-                          alt="Profile"
-                        />
-                        <div className="text-sm">
-                          <p>
-                            <span className="font-semibold">
-                              Zamira Peterson
-                            </span>{" "}
-                            has applied for the SO 32443388
-                          </p>
-                          <span className="text-xs opacity-80">Now</span>
-                        </div>
-                      </div>
-                      <div className="flex gap-3 px-4 py-3 hover:bg-teal-600 cursor-pointer">
-                        <img
-                          src={ProfilePic}
-                          className="h-9 w-9 rounded-full object-cover"
-                          alt="Profile"
-                        />
-                        <div className="text-sm">
-                          <p>
-                            <span className="font-semibold">
-                              Zamira Peterson
-                            </span>{" "}
-                            has uploaded the resume and manager's approval mail
-                          </p>
-                          <span className="text-xs opacity-80">1m</span>
-                        </div>
-                      </div>
-                      <div className="flex gap-3 px-4 py-3 hover:bg-teal-600 cursor-pointer">
-                        <img
-                          src={ProfilePic}
-                          className="h-9 w-9 rounded-full object-cover"
-                          alt="Profile"
-                        />
-                        <div className="text-sm">
-                          <p>
-                            <span className="font-semibold">Angie Johnson</span>{" "}
-                            has been approved for the SO 32987221
-                          </p>
-                          <span className="text-xs opacity-80">2 days</span>
-                        </div>
-                      </div>
+                      {/* Sample Notifications */}
                     </div>
                   </div>
                 )}
@@ -231,55 +183,37 @@ const Navbar = ({ role }: NavbarProps) => {
       </header>
 
       {/* ================= PAGE CONTENT ================= */}
-      {/* Special handling for ApplicationsDetail to render full screen */}
-      {active === "ApplicationsDetail" && effectiveRole === "TP Manager" ? (
-        <div className="fixed top-20 left-0 right-0 bottom-0 w-full h-[calc(100vh-5rem)] overflow-hidden">
-          <TP_Applications />
-        </div>
-      ) : (
-        <div className="mt-20">
-          {active === "Home" && <Home />}
+      <div className="mt-20">
+        {active === "Home" && <Home />}
 
-          {/* TP Manager pages */}
-          {active === "Applications" && effectiveRole === "TP Manager" && (
-            <ApplicationsPage />
-          )}
-          
-          {active === "Assigning & Tracking" &&
-            effectiveRole === "TP Manager" && <AssigningTracking />}
+        {activeRole === "WFM" && active === "Applications" && <WfmApplications />}
 
-          {active === "Reports" && effectiveRole === "TP Manager" && (
-            <ReportsPage />
-          )}
+        {/* TP Manager pages */}
+        {active === "Applications" && effectiveRole === "TP Manager" && (
+          <ApplicationsPage />
+        )}
 
-          {/* Employee-specific pages */}
-          {active === "Opportunities" && effectiveRole === "Employee" && (
-            <Opportunities />
-          )}
-          {active === "Assigning & Tracking" && effectiveRole === "Employee" && (
-            <AssigningAndTracking />
-          )}
-          {active === "My Applications" && effectiveRole === "Employee" && (
-            <MyApplications />
-          )}
+        {active === "Assigning & Tracking" &&
+          effectiveRole === "TP Manager" && <AssigningTracking />}
 
-          {/* Fallback for any other nav labels */}
-          {active !== "Home" &&
-            active !== "Applications" &&
-            active !== "ApplicationsDetail" &&
-            active !== "Opportunities" &&
-            active !== "Assigning & Tracking" &&
-            active !== "My Applications" &&
-            active !== "Reports" && (
-              <div className="p-6">
-                <h2 className="text-lg font-semibold">{active}</h2>
-                <p className="text-sm text-gray-600">
-                  Content for {active} goes here.
-                </p>
-              </div>
-            )}
-        </div>
-      )}
+        {active === "Reports" && effectiveRole === "TP Manager" && <ReportsPage />}
+
+        {/* Employee-specific pages */}
+        {active === "Opportunities" && effectiveRole === "Employee" && (
+          <Opportunities />
+        )}
+        {active === "Assigning & Tracking" && effectiveRole === "Employee" && (
+          <AssigningAndTracking />
+        )}
+        {active === "My Applications" && effectiveRole === "Employee" && (
+          <MyApplications />
+        )}
+
+        {/* TP_Applications page when profile is selected */}
+        {selectedProfileId && (
+          <TP_Applications/>
+        )}
+      </div>
     </>
   );
 };
