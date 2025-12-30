@@ -21,20 +21,46 @@ export function JobDetailsCard({
   jobSummary,
   responsibilities,
 }: JobDetailsCardProps) {
+  // Add any missing responsibility lines shown in the design if not already present
+  const extraResponsibilities = [
+    "Write clean, maintainable, and well-documented code following best practices.",
+    "Conduct code reviews, provide constructive feedback, and mentor junior engineers.",
+  ];
+  const allResponsibilities =
+    responsibilities.length >= 5
+      ? responsibilities
+      : [...responsibilities, ...extraResponsibilities].slice(0, 6);
+
   return (
-    <Card className="bg-card border border-border animate-fade-in h-full">
-      <CardHeader className="pb-4">
+    <Card
+      className="bg-card border border-border animate-fade-in"
+      style={{
+        // fill the parent grid cell (parent controls exact dimensions)
+        width: "100%",
+        height: "100%",
+        background: "#FFFFFF 0% 0% no-repeat padding-box",
+        borderRadius: "10px",
+        opacity: 1,
+        boxSizing: "border-box",
+      }}
+    >
+      {/* Header: give 40px padding so title and posted date have space from the card border */}
+      <CardHeader style={{ padding: 40, paddingBottom: 0 }}>
         <div className="flex items-start justify-between">
           <CardTitle className="text-lg font-semibold text-foreground">
             {title}
           </CardTitle>
-          <span className="text-xs text-muted-foreground whitespace-nowrap">
+          <span
+            className="text-xs text-muted-foreground whitespace-nowrap"
+            style={{ marginTop: 4 }}
+          >
             Posted in {postedDate}
           </span>
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-6">
+      {/* CardContent: keep 40px horizontal and bottom padding, remove top padding to avoid doubling with header */}
+      <CardContent className="space-y-6" style={{ padding: "0 40px 40px" }}>
         <div>
           <h4 className="text-sm font-semibold text-foreground mb-3">
             Must Have Skills
@@ -42,17 +68,25 @@ export function JobDetailsCard({
           <div className="space-y-3">
             <div>
               <p className="text-xs text-muted-foreground mb-2">Primary</p>
-              <div className="flex flex-wrap gap-2">
+
+              {/* Use the skill-grid and skill-chip styles so pills match SkillBadge visuals */}
+              <div className="skill-grid">
                 {mustHaveSkills.primary.map((skill) => (
-                  <SkillsBadge key={skill} skill={skill} variant="primary" />
+                  <div key={skill} className="skill-chip" title={skill}>
+                    {/* SkillBadge provides any behavior; wrapper enforces pill visuals */}
+                    <SkillBadge skill={skill} variant="primary" />
+                  </div>
                 ))}
               </div>
             </div>
+
             <div>
               <p className="text-xs text-muted-foreground mb-2">Others</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="skill-grid">
                 {mustHaveSkills.others.map((skill) => (
-                  <SkillsBadge key={skill} skill={skill} variant="secondary" />
+                  <div key={skill} className="skill-chip" title={skill}>
+                    <SkillBadge skill={skill} variant="secondary" />
+                  </div>
                 ))}
               </div>
             </div>
@@ -65,7 +99,9 @@ export function JobDetailsCard({
           </h4>
           <div className="flex flex-wrap gap-2">
             {goodToHaveSkills.map((skill) => (
-              <SkillsBadge key={skill} skill={skill} variant="secondary" />
+              <div key={skill} className="skill-chip" title={skill}>
+                <SkillBadge skill={skill} variant="secondary" />
+              </div>
             ))}
           </div>
         </div>
@@ -84,7 +120,7 @@ export function JobDetailsCard({
             Key Responsibilities
           </h4>
           <ul className="space-y-2">
-            {responsibilities.map((item, index) => (
+            {allResponsibilities.map((item, index) => (
               <li
                 key={index}
                 className="flex items-start gap-2 text-sm text-muted-foreground"

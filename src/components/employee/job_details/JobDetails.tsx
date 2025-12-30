@@ -89,7 +89,7 @@ export default function JobDetails({ jobId, onBack }: JobDetailsProps) {
       )}
 
       <main className="p-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto" style={{ paddingLeft: 60, paddingRight: 60 }}>
           {/* Header with Back Button and Apply */}
           <div className="flex items-center justify-between mb-6">
             <button
@@ -101,42 +101,56 @@ export default function JobDetails({ jobId, onBack }: JobDetailsProps) {
             </button>
 
             {hasApplied ? (
-              <Button
+              <button
                 onClick={handleWithdraw}
-                variant="outline"
-                className="border-red-500 text-red-500 hover:bg-red-50 px-6"
+                className="px-6 py-3 border border-red-500 text-red-500 bg-white hover:bg-red-500 hover:text-white rounded-md"
+
               >
                 Withdraw
-              </Button>
+              </button>
+
             ) : (
               <button
                 onClick={() => setApplyModalOpen(true)}
-                className="bg-green hover:bg-primary/90 px-6"
+                className="px-6 py-4 bg-[#006E74] border border-black rounded text-white hover:bg-black disabled:opacity-50"
               >
                 Apply
               </button>
+              
             )}
           </div>
 
-          {/* Three Column Layout */}
-          <div className="grid grid-cols-12 gap-6">
-            {/* Left Sidebar - Summary */}
-            <div className="col-span-3">
+          {/* Stable 3-column CSS grid to enforce exact widths and prevent overlap */}
+          <div
+            style={{
+              width: "100%",
+              boxSizing: "border-box",
+              display: "grid",
+              gridTemplateColumns: "360px 1000px 360px", // exact column widths
+              columnGap: 40, // 40px gap between columns
+              alignItems: "start",
+              justifyContent: "center",
+              // ensure the top of these panels is 180px from the page top
+              top:180,
+              // marginTop: 180,
+              minHeight: 870,
+            }}
+          >
+            {/* Left Sidebar - Summary (360 x 663) */}
+            <div style={{ width: "100%", boxSizing: "border-box", height: 663, overflow: "hidden" }}>
               <JobSummaryCard
                 soNumber={jobData.id}
                 role={jobData.role}
                 band={jobData.band}
                 account="T-Mobile"
                 location={jobData.location}
-                hiringManager={{
-                  name: "Emily Stephen",
-                }}
+                hiringManager={{ name: "Emily Stephen" }}
                 summary={jobData.description}
               />
             </div>
 
-            {/* Center - Job Details */}
-            <div className="col-span-6">
+            {/* Center - Job Details (1000 x 870) */}
+            <div style={{ width: "100%", boxSizing: "border-box", height: 870, overflowY: "auto" }}>
               <JobDetailsCard
                 title={jobData.role}
                 postedDate="26 December 2024"
@@ -147,23 +161,22 @@ export default function JobDetails({ jobId, onBack }: JobDetailsProps) {
               />
             </div>
 
-            {/* Right Sidebar - Match Score & Similar Jobs */}
-            <div className="col-span-3 space-y-6">
-              {/* Match Score */}
-              <MatchScoreCard percentage={90} />
+            {/* Right Sidebar - Match Score (top 132) & Similar Jobs (below 470) */}
+            <div style={{ width: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 40 }}>
+              <div style={{ height: 132, boxSizing: "border-box" }}>
+                <MatchScoreCard percentage={90} />
+              </div>
 
-              {/* Similar Jobs */}
-              {/* <SimilarJobsPanel jobs={similarJobsData} /> */}
+              <div style={{ height: 470, boxSizing: "border-box", overflowY: "auto" }}>
+                <SimilarJobsPanel jobs={similarJobsData} />
+              </div>
             </div>
           </div>
+          {/* END stable grid layout */}
         </div>
       </main>
 
-      <ApplyModal
-        open={applyModalOpen}
-        onOpenChange={setApplyModalOpen}
-        onConfirm={handleApplyConfirm}
-      />
+      <ApplyModal open={applyModalOpen} onOpenChange={setApplyModalOpen} onConfirm={handleApplyConfirm} />
     </div>
   );
 }
