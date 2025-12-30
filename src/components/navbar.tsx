@@ -5,11 +5,8 @@ import LogoImg from "../assets/Group 172287@2x.jpg";
 
 import Home from "../pages/home";
 import LandingPage from "../pages/landing_page";
-// import Application from "../pages/Application";
-// import Application from "../pages/Application";
 
 import { useActiveRole } from "../context/ActiveRoleContext";
-// import Application from "../pages/Application";
 import Opportunities from "../pages/Opportunies";
 import AssigningAndTracking from "../pages/Assigning_and_Tracking";
 import MyApplications from "../pages/MyApplications";
@@ -17,6 +14,7 @@ import TP_Applications from "../pages/layout/TP_Applications";
 import ApplicationsPage from "../pages/Applications_page";
 import ReportsPage from "../pages/ReportsPage";
 import AssigningTracking from "../pages/AssigningandTracking";
+
 interface NavbarProps {
   role?: string | null;
 }
@@ -28,7 +26,7 @@ const Navbar = ({ role }: NavbarProps) => {
   const effectiveRole = role ?? activeRole ?? "Employee";
 
   /* ---------------- STATE ---------------- */
-  const [view, setView] = useState<View>("app"); // 👈 controls landing vs app
+  const [view, setView] = useState<View>("app");
   const [active, setActive] = useState("Home");
   const [showNotifications, setShowNotifications] = useState(false);
   const [appOpenedByCard, setAppOpenedByCard] = useState(false);
@@ -65,12 +63,10 @@ const Navbar = ({ role }: NavbarProps) => {
     const handler = (e: Event) => {
       const detail = (e as CustomEvent).detail;
       if (typeof detail === "string") {
-        // string payload — treat as simple navigation (not from card)
         setActive(detail);
       } else if (detail && typeof detail === "object") {
         const { view: viewName, source, layout, profileId } = detail as any;
         if (viewName) setActive(viewName);
-        // mark appOpenedByCard when navigation originates from a card or list or when a specific layout is requested
         setAppOpenedByCard(
           layout === "TP_Applications" || source === "card" || source === "list"
         );
@@ -93,8 +89,8 @@ const Navbar = ({ role }: NavbarProps) => {
             <button
               type="button"
               onClick={() => {
-                setView("landing"); // 👈 go to landing page
-                setActive("Home"); // reset app state
+                setView("landing");
+                setActive("Home");
               }}
               className="flex items-center cursor-pointer bg-transparent p-0"
             >
@@ -113,7 +109,6 @@ const Navbar = ({ role }: NavbarProps) => {
                   <div key={link} className="relative">
                     <button
                       onClick={() => {
-                        // clicking the nav link should NOT open the Applications view
                         setActive(link);
                       }}
                       className={`px-2 py-1 text-sm font-semibold ${
@@ -138,9 +133,7 @@ const Navbar = ({ role }: NavbarProps) => {
               <Mail
                 size={24}
                 className="cursor-pointer text-gray-700"
-                onClick={() => {
-                  // alert("Mail icon clicked");
-                }}
+                onClick={() => {}}
               />
 
               {/* Notifications */}
@@ -173,6 +166,7 @@ const Navbar = ({ role }: NavbarProps) => {
                         <img
                           src={ProfilePic}
                           className="h-9 w-9 rounded-full object-cover"
+                          alt="Profile"
                         />
                         <div className="text-sm">
                           <p>
@@ -188,13 +182,14 @@ const Navbar = ({ role }: NavbarProps) => {
                         <img
                           src={ProfilePic}
                           className="h-9 w-9 rounded-full object-cover"
+                          alt="Profile"
                         />
                         <div className="text-sm">
                           <p>
                             <span className="font-semibold">
                               Zamira Peterson
                             </span>{" "}
-                            has uploaded the resume and manager’s approval mail
+                            has uploaded the resume and manager's approval mail
                           </p>
                           <span className="text-xs opacity-80">1m</span>
                         </div>
@@ -203,6 +198,7 @@ const Navbar = ({ role }: NavbarProps) => {
                         <img
                           src={ProfilePic}
                           className="h-9 w-9 rounded-full object-cover"
+                          alt="Profile"
                         />
                         <div className="text-sm">
                           <p>
@@ -235,52 +231,55 @@ const Navbar = ({ role }: NavbarProps) => {
       </header>
 
       {/* ================= PAGE CONTENT ================= */}
-      <div className="mt-20">
-        {active === "Home" && <Home />}
-
-        {/* TP Manager pages */}
-        {/* Clicking the nav 'Applications' should show the Applications page first. */}
-        {active === "Applications" && effectiveRole === "TP Manager" && (
-          <ApplicationsPage />
-        )}
-        {/* When a profile card requests a detailed view, it will emit a
-            navigation event with view: 'ApplicationsDetail' — render the
-            full TP applications/detail view in that case. */}
-        {active === "ApplicationsDetail" && effectiveRole === "TP Manager" && (
+      {/* Special handling for ApplicationsDetail to render full screen */}
+      {active === "ApplicationsDetail" && effectiveRole === "TP Manager" ? (
+        <div className="fixed top-20 left-0 right-0 bottom-0 w-full h-[calc(100vh-5rem)] overflow-hidden">
           <TP_Applications />
-        )}
-        {active === "Assigning & Tracking" &&
-          effectiveRole === "TP Manager" && <AssigningTracking />}
+        </div>
+      ) : (
+        <div className="mt-20">
+          {active === "Home" && <Home />}
 
-        {active === "Reports" && effectiveRole === "TP Manager" && (
-          <ReportsPage />
-        )}
-
-        {/* Employee-specific pages */}
-        {active === "Opportunities" && effectiveRole === "Employee" && (
-          <Opportunities />
-        )}
-        {active === "Assigning & Tracking" && effectiveRole === "Employee" && (
-          <AssigningAndTracking />
-        )}
-        {active === "My Applications" && effectiveRole === "Employee" && (
-          <MyApplications />
-        )}
-
-        {/* Fallback for any other nav labels */}
-        {active !== "Home" &&
-          active !== "Applications" &&
-          active !== "Opportunities" &&
-          active !== "Assigning & Tracking" &&
-          active !== "My Applications" && (
-            <div className="p-6">
-              <h2 className="text-lg font-semibold">{active}</h2>
-              <p className="text-sm text-gray-600">
-                Content for {active} goes here.
-              </p>
-            </div>
+          {/* TP Manager pages */}
+          {active === "Applications" && effectiveRole === "TP Manager" && (
+            <ApplicationsPage />
           )}
-      </div>
+          
+          {active === "Assigning & Tracking" &&
+            effectiveRole === "TP Manager" && <AssigningTracking />}
+
+          {active === "Reports" && effectiveRole === "TP Manager" && (
+            <ReportsPage />
+          )}
+
+          {/* Employee-specific pages */}
+          {active === "Opportunities" && effectiveRole === "Employee" && (
+            <Opportunities />
+          )}
+          {active === "Assigning & Tracking" && effectiveRole === "Employee" && (
+            <AssigningAndTracking />
+          )}
+          {active === "My Applications" && effectiveRole === "Employee" && (
+            <MyApplications />
+          )}
+
+          {/* Fallback for any other nav labels */}
+          {active !== "Home" &&
+            active !== "Applications" &&
+            active !== "ApplicationsDetail" &&
+            active !== "Opportunities" &&
+            active !== "Assigning & Tracking" &&
+            active !== "My Applications" &&
+            active !== "Reports" && (
+              <div className="p-6">
+                <h2 className="text-lg font-semibold">{active}</h2>
+                <p className="text-sm text-gray-600">
+                  Content for {active} goes here.
+                </p>
+              </div>
+            )}
+        </div>
+      )}
     </>
   );
 };

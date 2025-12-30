@@ -10,7 +10,7 @@ const ProfileCard = ({ profile }: { profile: Profile }) => {
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative w-[300px] h-64 cursor-pointer rounded-xl border border-gray-200 bg-white p-3 overflow-hidden box-border"
+      className="relative w-[350px] h-64 cursor-pointer rounded-xl border border-gray-200 bg-white p-3 overflow-hidden box-border"
     >
       {/* ---------- HEADER ---------- */}
       <div className="mb-2 flex items-start justify-between">
