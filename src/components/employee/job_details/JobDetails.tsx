@@ -5,7 +5,7 @@ import ApplyModal from "./ApplyModal";
 import { JobSummaryCard } from "./JobSummaryCard";
 import { JobDetailsCard } from "./JobDetailsCard";
 import { MatchScoreCard } from "./MatchScoreCard";
-import { SimilarJobsPanel } from "./SimilarJobsPanel";
+import { SimilarJobs } from "./SimilarJobsPanel";
 import { getJobById, getSimilarJobs } from "../../../data/mockData";
 
 interface JobDetailsProps {
@@ -76,7 +76,7 @@ export default function JobDetails({ jobId, onBack }: JobDetailsProps) {
       {showToast && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-teal-600 text-white px-4 py-3 rounded-lg shadow-lg">
           <CheckCircle className="w-5 h-5" />
-          <span className="text-sm font-medium">
+          <span className="text-sm font-medium ">
             You have applied for "SO #{jobData.id}" successfully
           </span>
           <button
@@ -92,31 +92,74 @@ export default function JobDetails({ jobId, onBack }: JobDetailsProps) {
         <div className="max-w-7xl mx-auto" style={{ paddingLeft: 60, paddingRight: 60 }}>
           {/* Header with Back Button and Apply */}
           <div className="flex items-center justify-between mb-6">
+            {/* Fixed back control placed 60px from left and 118px from top (contains arrow + SO text) */}
             <button
               onClick={onBack}
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Back"
+              style={{
+                position: "absolute",
+                top: 108,
+                left: 50,
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                width: 200,
+                height: 24,
+                boxSizing: "border-box",
+                background: "transparent",
+                border: "none",
+                padding: 0,
+                cursor: "pointer",
+                zIndex: 70,
+              }}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span>SO: {jobData.id}</span>
+              <span
+                style={{
+                  font: "20px/24px Rubik",
+                  fontWeight: 700,
+                  letterSpacing: "0px",
+                  color: "#231F20",
+                  textAlign: "left",
+                  opacity: 1,
+                  margin: 0,
+                  padding: 0,
+                  boxSizing: "border-box",
+                  lineHeight: "24px",
+                }}
+              >
+                SO: {jobData.id}
+              </span>
             </button>
 
+            {/* Apply / Withdraw (unchanged) */}
             {hasApplied ? (
               <button
                 onClick={handleWithdraw}
+                style={{
+                  position: "absolute",
+                  top: 100,
+                  right: 60,
+                  zIndex: 60,
+                }}
                 className="px-6 py-3 border border-red-500 text-red-500 bg-white hover:bg-red-500 hover:text-white rounded-md"
-
               >
                 Withdraw
               </button>
-
             ) : (
               <button
                 onClick={() => setApplyModalOpen(true)}
-                className="px-6 py-4 bg-[#006E74] border border-black rounded text-white hover:bg-black disabled:opacity-50"
+                style={{
+                  position: "absolute",
+                  top: 100,
+                  right: 60,
+                  zIndex: 60,
+                }}
+                className="px-6 py-3 bg-[#006E74] border border-black rounded text-white hover:bg-black disabled:opacity-50"
               >
                 Apply
               </button>
-              
             )}
           </div>
 
@@ -130,9 +173,8 @@ export default function JobDetails({ jobId, onBack }: JobDetailsProps) {
               columnGap: 40, // 40px gap between columns
               alignItems: "start",
               justifyContent: "center",
-              // ensure the top of these panels is 180px from the page top
-              top:180,
-              // marginTop: 180,
+              // push the grid content below the fixed header controls to avoid overlap
+              marginTop: 70,
               minHeight: 870,
             }}
           >
@@ -168,7 +210,7 @@ export default function JobDetails({ jobId, onBack }: JobDetailsProps) {
               </div>
 
               <div style={{ height: 470, boxSizing: "border-box", overflowY: "auto" }}>
-                <SimilarJobsPanel jobs={similarJobsData} />
+                <SimilarJobs jobs={similarJobsData} />
               </div>
             </div>
           </div>

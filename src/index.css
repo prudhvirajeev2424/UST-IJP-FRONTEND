@@ -176,6 +176,16 @@
     );
     color: white;
   }
+
+  .account-logo {
+    position: absolute;
+    top: 629px;
+    left: 85px;
+    width: 92px;
+    height: 32px;
+    background: transparent url('img/purepng.com-jcpenney-logologobrand-logoiconslogos-251519938706uu0ut.png') 0% 0% no-repeat padding-box;
+    opacity: 1;
+  }
 }
  
 @layer utilities {
