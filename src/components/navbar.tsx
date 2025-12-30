@@ -210,7 +210,7 @@ const Navbar = ({ role }: NavbarProps) => {
         )}
 
         {/* TP_Applications page when profile is selected */}
-        {selectedProfileId && (
+        {(
           <TP_Applications/>
         )}
       </div>
