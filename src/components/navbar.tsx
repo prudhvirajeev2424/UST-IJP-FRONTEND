@@ -257,7 +257,7 @@ const Navbar = ({ role }: NavbarProps) => {
           <ReportsPage />
         )}
 
-        {active === "EmpHome" && effectiveRole === "Employee" && <EmpHome />}
+        {active === "Home" && effectiveRole === "Employee" && <EmpHome />}
 
         {/* Employee-specific pages */}
         {active === "Opportunities" && effectiveRole === "Employee" && (

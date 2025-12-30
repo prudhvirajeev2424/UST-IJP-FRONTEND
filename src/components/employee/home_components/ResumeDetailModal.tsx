@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { X, Upload, Download } from 'lucide-react';
 // use default import (UpdateResumeDrawer exports default)
-import UpdateResumeDrawer from './UpdateResumeDrawer';
+import UpdateResumeDrawer from '../../../components/employee/UpdateResumeDrawer';
 
 interface ResumeDetailModalProps {
   isOpen: boolean;
