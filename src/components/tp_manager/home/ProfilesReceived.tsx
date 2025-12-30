@@ -33,7 +33,7 @@ const ProfilesReceived: React.FC = () => {
   // (mockOpportunities is imported above but not required for the TP Manager list view)
 
   return (
-    <div className="flex-1 rounded-lg bg-[#f9fafb86] p-6">
+  <div className="flex-1 rounded-lg bg-[#f9fafb86] px-6 py-6">
       {/* ---------- HEADER ---------- */}
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-900">Profiles Received</h2>
@@ -71,7 +71,7 @@ const ProfilesReceived: React.FC = () => {
 
       {/* ---------- CONTENT ---------- */}
       {viewMode === 'grid' ? (
-        <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-y-6 gap-x-2">
           {gridProfiles.map((profile) => (
             <ProfileCard key={profile.id} profile={profile} />
           ))}
