@@ -1,10 +1,10 @@
 import type { Opportunity } from "../types/opportunity";
 import type { Activity } from "../types/activity";
  
-export const getStatusColor = (opportunity: Opportunity): string => {
- if (!opportunity) return '';
+export const getStatusColor = (status: Opportunity['status']): string => {
+ if (!status) return '';
  
- switch (opportunity.status) {
+ switch (status) {
    case 'Shortlisted':
      return 'bg-success bg-opacity-10 text-success';
    case 'Actioned':
@@ -29,6 +29,10 @@ export const getStatusColorActivity = (activity: Activity): string => {
      return 'bg-gray-100 text-gray-700';
  }
 };
+
+ 
+
+ 
  
  
  
