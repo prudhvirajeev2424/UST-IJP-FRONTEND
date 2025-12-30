@@ -6,7 +6,7 @@ interface ProfileHomeListProps {
   profiles: any[];
 }
 
-const ProfileHomeList: React.FC<ProfileHomeListProps> = ({ profiles }) => {
+const ProfileHomeList: React.FC<ProfileHomeListProps> = ({ profiles }) => { 
   useEffect(() => {
     console.log('ProfileHomeList mounted with', profiles?.length ?? 0, 'profiles');
   }, [profiles]);
