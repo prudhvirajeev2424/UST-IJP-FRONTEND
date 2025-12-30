@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
-import xlIcon from "../assets/XlIcon.png";
+import xlIcon from "../assets/XlIcon.svg";
 import AssignTaskModal from "../components/tp_manager/Assigning_and_Tracking/AssignTaskModal";
 import SuccessBanner from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SuccessBanner";
 
