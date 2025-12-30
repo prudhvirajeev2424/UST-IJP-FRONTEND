@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Mail, Bell, X } from "lucide-react";
 import ProfilePic from "../assets/DP@2x.png";
@@ -32,7 +33,9 @@ const Navbar = ({ role }: NavbarProps) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showBulkPopup, setShowBulkPopup] = useState(false);
   const [appOpenedByCard, setAppOpenedByCard] = useState(false);
-  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);  // Track selected profile ID
+  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(
+    null
+  ); // Track selected profile ID
 
   /* ---------------- LANDING PAGE ---------------- */
   if (view === "landing") {
@@ -70,7 +73,7 @@ const Navbar = ({ role }: NavbarProps) => {
         setAppOpenedByCard(
           layout === "TP_Applications" || source === "card" || source === "list"
         );
-        if (profileId) setSelectedProfileId(profileId as string);  // Set profile ID on event
+        if (profileId) setSelectedProfileId(profileId as string); // Set profile ID on event
       }
     };
 
@@ -130,7 +133,7 @@ const Navbar = ({ role }: NavbarProps) => {
 
             {/* ---------- RIGHT ---------- */}
             <div className="relative flex items-center gap-4">
-              {role === "TP Manager" && (
+              {(effectiveRole === "TP Manager" || effectiveRole === "WFM") && (
                 <Mail
                   size={24}
                   className="cursor-pointer text-gray-700"
@@ -153,21 +156,83 @@ const Navbar = ({ role }: NavbarProps) => {
                 </span>
 
                 {showNotifications && (
-                  <div className="absolute right-0 mt-3 w-96 rounded-xl bg-teal-700 text-white shadow-xl">
-                    <div className="absolute -top-2 right-6 h-4 w-4 rotate-45 bg-teal-700" />
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-teal-600">
-                      <h3 className="text-sm font-semibold">
-                        Notifications (3)
-                      </h3>
+                  <div
+                    role="dialog"
+                    aria-label="Notifications"
+                    className="fixed shadow-2xl z-[10000]"
+                    style={{
+                      top: '79px',
+                      right: '24px',
+                      width: '438px',
+                      background: '#006E74',
+                      borderRadius: '20px',
+                      opacity: 1,
+                    }}
+                  >
+                    {/* Arrow pointer */}
+                    <div 
+                      className="absolute -top-2 right-6 h-4 w-4 rotate-45" 
+                      style={{ background: '#006E74' }}
+                    />
+                    
+                    {/* Header */}
+                    <div className="flex items-center justify-between px-5 py-4 border-b border-white border-opacity-20 relative z-10">
+                      <h3 className="text-base font-semibold text-white">Notifications (3)</h3>
                       <X
-                        size={18}
-                        className="cursor-pointer opacity-80 hover:opacity-100"
+                        size={20}
+                        className="cursor-pointer text-white opacity-90 hover:opacity-100"
                         onClick={() => setShowNotifications(false)}
                       />
                     </div>
 
-                    <div className="divide-y divide-teal-600">
-                      {/* Sample Notifications */}
+                    {/* Notification Items */}
+                    <div className="overflow-y-auto">
+                      {/* Notification 1 */}
+                      <div className="flex items-start gap-3 px-5 py-4 hover:bg-white hover:bg-opacity-10 border-b border-white border-opacity-10">
+                        <img
+                          src={ProfilePic}
+                          alt="Zamira Peterson"
+                          className="h-10 w-10 rounded-full object-cover flex-shrink-0"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm text-white leading-relaxed">
+                            <span className="font-semibold">Zamira Peterson</span> has applied for the{" "}
+                            <span className="font-semibold">SO 32443388</span>
+                          </p>
+                          <span className="text-xs text-white text-opacity-70 mt-1 inline-block">Now</span>
+                        </div>
+                      </div>
+
+                      {/* Notification 2 */}
+                      <div className="flex items-start gap-3 px-5 py-4 hover:bg-white hover:bg-opacity-10 border-b border-white border-opacity-10">
+                        <img
+                          src={ProfilePic}
+                          alt="Zamira Peterson"
+                          className="h-10 w-10 rounded-full object-cover flex-shrink-0"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm text-white leading-relaxed">
+                            <span className="font-semibold">Zamira Peterson</span> has uploaded the resume and manager's approval mail
+                          </p>
+                          <span className="text-xs text-white text-opacity-70 mt-1 inline-block">1m</span>
+                        </div>
+                      </div>
+
+                      {/* Notification 3 */}
+                      <div className="flex items-start gap-3 px-5 py-4 hover:bg-white hover:bg-opacity-10">
+                        <img
+                          src={ProfilePic}
+                          alt="Angie Johnson"
+                          className="h-10 w-10 rounded-full object-cover flex-shrink-0"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm text-white leading-relaxed">
+                            <span className="font-semibold">Angie Johnson</span> has been approved for the{" "}
+                            <span className="font-semibold">SO 3298721</span>
+                          </p>
+                          <span className="text-xs text-white text-opacity-70 mt-1 inline-block">2 days</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -217,7 +282,9 @@ const Navbar = ({ role }: NavbarProps) => {
         {active === "Assigning & Tracking" &&
           effectiveRole === "TP Manager" && <AssigningTracking />}
 
-        {active === "Reports" && effectiveRole === "TP Manager" && <ReportsPage />}
+        {active === "Reports" && effectiveRole === "TP Manager" && (
+          <ReportsPage />
+        )}
 
         {/* Employee-specific pages */}
         {active === "Opportunities" && effectiveRole === "Employee" && (
@@ -231,9 +298,9 @@ const Navbar = ({ role }: NavbarProps) => {
         )}
 
         {/* TP_Applications page when profile is selected */}
-        {(
-          <TP_Applications/>
-        )}
+        {/* {(
+          // <TP_Applications/>
+        )} */}
       </div>
     </>
   );

@@ -35,13 +35,13 @@ const UploadedDocuments = () => {
             <div key={doc.id} className="flex items-center gap-3">
               {doc.type === "pdf" ? (
                 <img 
-                  src="./src/assets/pdficon.png" 
+                  src="./src/assets/IconFilePdf.png" 
                   alt="PDF" 
                   className="w-5 h-5 flex-shrink-0 object-contain"
                 />
               ) : (
                 <img 
-                  src="./src/assets/mailicon.png" 
+                  src="./src/assets/email.svg" 
                   alt="Email" 
                   className="w-5 h-5 flex-shrink-0 object-contain"
                 />
