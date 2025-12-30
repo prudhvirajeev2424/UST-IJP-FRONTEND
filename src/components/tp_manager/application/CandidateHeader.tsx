@@ -6,6 +6,7 @@ import ShortlistModal from "./shortListModal/ShortlistModal";
 import { useShortlist } from "./context/ShortlistContext";
 
 import DP from "../../../assets/DP.png";
+import RejectModal from "./rejectModal/RejectModal";
 
 interface CandidateHeaderProps {
   candidate: Candidate;
@@ -18,6 +19,7 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setShortlisted, shortlisted } = useShortlist();
+  const [isRejectModalOpen, setIsRejectModalOpen] = React.useState(false);
 
   const handleShortlistClick = () => {
     if (shortlisted) return;
@@ -45,6 +47,16 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({
       // Dispatch app-level navigation to Home so Navbar (which listens for 'navigate') will switch views
       window.dispatchEvent(new CustomEvent("navigate", { detail: "Home" }));
     }
+  };
+
+  const handleRejectClick = () => {
+    setIsRejectModalOpen(true);
+  };
+
+  const handleConfirmReject = (reason: string) => {
+    console.log("Candidate Rejected for Reason:", reason);
+    setIsRejectModalOpen(false);
+    // additional reject logic (API etc) could go here
   };
 
   return (
@@ -93,7 +105,11 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({
         </div>
 
         <div className="flex space-x-3">
-          <Button variant="secondary" disabled={shortlisted}>
+          <Button
+            variant="secondary"
+            disabled={shortlisted}
+            onClick={handleRejectClick}
+          >
             Reject
           </Button>
           <button
@@ -113,6 +129,12 @@ const CandidateHeader: React.FC<CandidateHeaderProps> = ({
         isOpen={isModalOpen}
         onClose={handleModalClose}
         onConfirm={handleConfirmShortlist}
+      />
+      {/* Reject Modal */}
+      <RejectModal
+        isOpen={isRejectModalOpen}
+        onClose={() => setIsRejectModalOpen(false)}
+        onConfirm={handleConfirmReject}
       />
     </div>
   );

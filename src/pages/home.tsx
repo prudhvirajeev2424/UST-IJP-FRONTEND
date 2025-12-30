@@ -39,10 +39,9 @@ const TpManagerHome: React.FC = () => {
 
 const home: React.FC = () => {
   const { activeRole } = useActiveRole();
-
+  // default to TP Manager view
   if (activeRole === "Employee") return <EmpHome />;
   if (activeRole === "WFM") return <WfmHome />;
-  // default to TP Manager view
   return <TpManagerHome />;
 };
 

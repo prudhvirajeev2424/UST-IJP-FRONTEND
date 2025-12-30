@@ -1,10 +1,9 @@
-
 export interface Opportunity {
   id: string;
   role: string;
   band: string;
   location: string;
-  status: String;
+  status: string;
   skills: string[];
   description: string;
 }

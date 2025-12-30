@@ -19,22 +19,22 @@ const LoginPage: React.FC = () => {
     const t = setTimeout(() => setMounted(true), 60);
     return () => clearTimeout(t);
   }, []);
- 
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setErrorShake(false);
- 
+
     if (!email || !password) {
       setError("Please enter username and password.");
       setErrorShake(true);
       setTimeout(() => setErrorShake(false), 600);
       return;
     }
- 
+
     try {
       setIsLoading(true);
- 
+
       const ZOOM_MS = 1000;
       const FADE_MS = 300;
       setZoomOut(true);
@@ -51,8 +51,8 @@ const LoginPage: React.FC = () => {
       setIsLoading(false);
     }
   };
- 
-  // If user is logged in, show the active role
+
+  // If user is logged in, render the Navbar and a simple welcome area.
   if (activeRole) {
     return (
       <ActiveRoleContext.Provider value={{ activeRole, setActiveRole }}>
@@ -99,14 +99,14 @@ const LoginPage: React.FC = () => {
             </div>
           </div>
         )}
- 
+
         {/* Fade-to-white overlay */}
         <div
           className={`fixed inset-0 z-50 pointer-events-none bg-white transition-opacity duration-300 ${
             fadeWhite ? "opacity-100" : "opacity-0"
           }`}
         />
- 
+
         {/* Centered Login Card */}
         <div
           className={`login-card bg-white rounded-2xl shadow-2xl p-10 w-full max-w-md mx-4 ${
@@ -128,12 +128,12 @@ const LoginPage: React.FC = () => {
                 className="h-10"
               />
             </div>
- 
+
             {/* Title */}
             <h2 className="text-base font-semibold text-center text-gray-800 mb-8">
               Sign in with your corporate identity
             </h2>
- 
+
             {/* Error Message */}
             {error && (
               <div
@@ -144,7 +144,7 @@ const LoginPage: React.FC = () => {
                 {error}
               </div>
             )}
- 
+
             {/* Form */}
             <form onSubmit={handleLogin} className="space-y-5">
               <div>
@@ -159,7 +159,7 @@ const LoginPage: React.FC = () => {
                   required
                 />
               </div>
- 
+
               <div>
                 <input
                   type="password"
@@ -170,7 +170,7 @@ const LoginPage: React.FC = () => {
                   required
                 />
               </div>
- 
+
               <div>
                 <select
                   value={role}
@@ -182,7 +182,7 @@ const LoginPage: React.FC = () => {
                   <option>WFM</option>
                 </select>
               </div>
- 
+
               <button
                 type="submit"
                 disabled={isLoading}
@@ -215,14 +215,14 @@ const LoginPage: React.FC = () => {
                 </span>
               </button>
             </form>
- 
+
             {/* Help links */}
             <div className="text-center mt-4">
               <a href="#" className="text-sm text-[#008080] hover:underline">
                 Can't access your account?
               </a>
             </div>
- 
+
             <div className="mt-6 flex justify-center gap-6 text-sm text-gray-500">
               <a href="#" className="hover:underline">
                 Privacy
@@ -237,7 +237,5 @@ const LoginPage: React.FC = () => {
     </ActiveRoleContext.Provider>
   );
 };
- 
+
 export default LoginPage;
- 
- 

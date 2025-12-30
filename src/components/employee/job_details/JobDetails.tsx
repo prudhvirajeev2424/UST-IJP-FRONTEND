@@ -5,7 +5,7 @@ import ApplyModal from "./ApplyModal";
 import { JobSummaryCard } from "./JobSummaryCard";
 import { JobDetailsCard } from "./JobDetailsCard";
 import { MatchScoreCard } from "./MatchScoreCard";
-import { SimilarJobsPanel } from "./SimilarJobsPanel";
+import { SimilarJobs } from "./SimilarJobsPanel";
 import { getJobById, getSimilarJobs } from "../../../data/mockData";
 
 interface JobDetailsProps {
@@ -210,7 +210,7 @@ export default function JobDetails({ jobId, onBack }: JobDetailsProps) {
               </div>
 
               <div style={{ height: 470, boxSizing: "border-box", overflowY: "auto" }}>
-                <SimilarJobsPanel jobs={similarJobsData} />
+                <SimilarJobs jobs={similarJobsData} />
               </div>
             </div>
           </div>

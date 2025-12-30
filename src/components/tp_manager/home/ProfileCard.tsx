@@ -110,10 +110,15 @@ const ProfileCard = ({ profile }: { profile: Profile }) => {
           href="#"
           onClick={(e) => {
             e.preventDefault();
+            // When a card's "View in Detail" is clicked we want the app to
+            // navigate to the detailed TP Manager applications view. Use a
+            // distinct view string so the Navbar can distinguish a simple
+            // Applications nav click (which shows the ApplicationsPage) from a
+            // card-driven request to open the TP applications detail screen.
             window.dispatchEvent(
               new CustomEvent("navigate", {
                 detail: {
-                  view: "Applications",
+                  view: "ApplicationsDetail",
                   source: "card",
                   profileId: profile.id,
                 },

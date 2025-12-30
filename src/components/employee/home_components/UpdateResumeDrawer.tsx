@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, Upload } from 'lucide-react';
-import { Button } from '../../ui/Button';
+import { X } from 'lucide-react';
 import uploadSvg from '../../../assets/upload_svg.svg';
+import pdf from '../../../assets/Icon awesome-file-pdf.svg';
 
 interface UpdateResumeDrawerProps {
   isOpen: boolean;
@@ -92,7 +92,6 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
     }
   };
 
-  
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -118,20 +117,13 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
         onTouchMove={handleOverlayTouchMove}
       />
       
-      {/* Drawer aligned to ResumeDetailModal when open (solid white panel) */}
+      {/* Drawer aligned to ResumeDetailModal when open */}
       <div
-        className="fixed left-1/2 top-[480px] bottom-0 -translate-x-1/2 w-[1000px] bg-white shadow-xl z-50 flex flex-col"
+        className="fixed left-1/2 top-[480px] -translate-x-1/2 bg-white shadow-2xl rounded-t-xl flex flex-col overflow-hidden"
         style={{
-          // position: 'fixed',
-          // top: 280,
-          // left: 235,
           width: 1000,
           height: 680,
-          backgroundColor: '#FFFFFF',
-          borderRadius: '10px 10px 0 0',
-          boxSizing: 'border-box',
           zIndex: 70,
-          overflow: 'hidden',
         }}
       >
         <style>{`
@@ -141,95 +133,106 @@ export function UpdateResumeDrawer({ isOpen, onClose, onConfirm }: UpdateResumeD
           }
         `}</style>
         
-        {/* Header */}
-        <div className="flex items-center justify-between px-6 py-3 border-b border-border">
-          <h2 className="text-lg font-semibold text-foreground">Update resume?</h2>
-          <button 
-            onClick={onClose}
-            className="p-2 hover:bg-muted rounded-lg transition-colors"
-            aria-label="Close drawer"
-          >
-            <X className="w-5 h-5 text-muted-foreground" />
-          </button>
+        {/* Header with colored background */}
+        <div className="bg-[#F3FAF9]">
+          <div className="flex items-center justify-between px-8 py-5">
+            <h2 className="text-lg font-semibold text-gray-900">Update resume?</h2>
+            <button 
+              onClick={onClose}
+              className="hover:opacity-70 transition-opacity"
+              aria-label="Close drawer"
+            >
+              <X className="w-5 h-5 text-gray-600" />
+            </button>
+          </div>
         </div>
 
-        {/* Content - ensure left-aligned text */}
-        <div className="p-6 space-y-1 text-left">
-          <p className="text-sm text-muted-foreground">Upload your resume in a PDF format</p>
+        {/* Content */}
+        <div className="px-8 py-8">
+          <p className="text-base text-gray-700 mb-4">
+            Upload your resume in a PDF format
+          </p>
           
-          {/* Drop Zone */}
-          <div
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-            className={`rounded-lg p-6 transition-colors flex flex-col items-center justify-center text-center ${
-              isDragging ? 'border-primary' : ''
-            }`}
-            style={{
-              minHeight: 80,
-              border: '1px dashed var(---d7e0e3)',
-              background: '#F7F9FA',
-              borderRadius: '10px',
-              opacity: 1,
-            }}
-          >
-            {/* use imported uploadSvg */}
-            <img
-              src={uploadSvg}
-              alt="upload"
-              style={{ width: 40, height: 40 }}
-              className="mb-3 object-contain"
-            />
-            <p className="text-sm text-muted-foreground">
-              Drag and drop to upload or{' '}
-              <label className="text-primary cursor-pointer hover:underline">
-                Browse
-                <input
-                  type="file"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleFileSelect}
-                  className="hidden"
-                />
-              </label>
-            </p>
-          </div>
-
-          {/* Attached File */}
-          {attachedFile && (
-            <div className="flex items-center gap-1">
-              <div className="w-8 h-5 bg-red-100 rounded flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-red-600" fill="currentColor">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-                  <path d="M14 2v6h6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                </svg>
+          <div className="space-y-4">
+            {/* Drop Zone */}
+            <div
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              className={`
+                h-[140px]
+                border-2
+                border-dashed
+                rounded-lg
+                flex
+                flex-col
+                items-center
+                justify-center
+                gap-2
+                transition
+                ${
+                  isDragging
+                    ? "border-teal-600 bg-teal-50"
+                    : "border-gray-300 bg-gray-50"
+                }
+              `}
+            >
+              <img
+                src={uploadSvg}
+                alt="upload"
+                className="h-10 w-10 opacity-40"
+              />
+              <div className="text-center">
+                <p className="text-sm text-gray-500">Drag and drop to upload or</p>
+                <label
+                  htmlFor="file-input"
+                  className="text-teal-600 font-semibold cursor-pointer hover:text-teal-700 text-sm"
+                >
+                  Browse
+                </label>
               </div>
-              <span className="text-sm text-foreground flex-1">{attachedFile}</span>
-              <button 
-                onClick={handleRemoveFile}
-                className="p-1 hover:bg-muted rounded transition-colors"
-                aria-label="Remove file"
-              >
-                <X className="w-4 h-2 text-muted-foreground" />
-              </button>
+              <input
+                id="file-input"
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileSelect}
+                className="hidden"
+              />
             </div>
-          )}
+
+            {/* Attached File */}
+            {attachedFile && (
+              <div className="flex items-center gap-2">
+                <img src={pdf} className="h-5 w-5" alt="PDF" />
+                <span className="text-sm text-gray-700 truncate flex-1">
+                  {attachedFile}
+                </span>
+                <button 
+                  onClick={handleRemoveFile}
+                  className="text-gray-400 hover:text-gray-600 ml-1"
+                  aria-label="Remove file"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-center gap-3 px-6 py-4 border-t border-border">
-          <Button
-            variant="outline"
+        <div className="px-8 flex justify-center gap-3">
+          <button
             onClick={onClose}
-            className="px-6 py-5"
+            className="px-6 py-4 border border-black rounded text-black hover:bg-black hover:text-white disabled:opacity-50"
           >
             Cancel
-          </Button>
-          <Button
+          </button>
+          <button
             onClick={onConfirm}
-            className="px-6 bg-primary text-primary-foreground hover:bg-primary/90"
+            className="px-6 py-4 bg-[#006E74] border border-black rounded text-white hover:bg-black disabled:opacity-50"
           >
             Confirm
-          </Button>
+          </button>
         </div>
       </div>
     </div>

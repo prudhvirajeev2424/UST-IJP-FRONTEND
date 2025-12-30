@@ -390,6 +390,204 @@
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 }
+/* Reusable Table Styles */
+
+.table-container {
+
+  background-color: white;
+
+  border-radius: 0.5rem;
+
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  overflow: hidden;
+
+  width: 1000px;
+
+}
+ 
+.table-container table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+}
+ 
+/* Table Header Styles */
+
+.table-header-row {
+
+  background-color: rgba(215, 224, 227, 0.15);
+
+  height: 60px;
+
+}
+ 
+.table-header-cell {
+
+  text-align: left;
+
+  padding: 1rem 1.5rem;
+
+  font-family: 'Rubik', sans-serif;
+
+  font-weight: 400;
+
+  font-size: 14px;
+
+  line-height: 17px;
+
+  letter-spacing: 0px;
+
+  color: #7A7480;
+
+  text-transform: capitalize;
+
+}
+ 
+.table-header-cell.uppercase {
+
+  text-transform: uppercase;
+
+}
+ 
+/* Table Body Styles */
+
+.table-body-row {
+
+  background-color: #FFFFFF;
+
+  height: 65px;
+
+  border-bottom: 1px solid #D7E0E3;
+
+  transition: background-color 0.2s ease;
+
+}
+ 
+.table-body-row:last-child {
+
+  border-bottom: none;
+
+}
+ 
+.table-body-row:hover {
+
+  background-color: #F2F7F8;
+
+}
+ 
+.table-body-row.clickable {
+
+  cursor: pointer;
+
+}
+ 
+.table-body-cell {
+
+  padding: 1rem 1.5rem;
+
+  font-family: 'Rubik', sans-serif;
+
+}
+ 
+/* Cell Text Variants */
+
+.table-cell-text-sm {
+
+  font-size: 14px;
+
+  line-height: 17px;
+
+  letter-spacing: 0px;
+
+}
+ 
+.table-cell-text-md {
+
+  font-size: 16px;
+
+  line-height: 19px;
+
+  letter-spacing: 0px;
+
+}
+ 
+.table-cell-text-lg {
+
+  font-size: 18px;
+
+  line-height: 22px;
+
+  letter-spacing: 0px;
+
+}
+ 
+/* Color Variants */
+
+.table-cell-primary {
+
+  color: #006E74;
+
+}
+ 
+.table-cell-secondary {
+
+  color: #231F20;
+
+}
+ 
+.table-cell-muted {
+
+  color: #7A7480;
+
+}
+ 
+/* Responsive Table */
+
+@media (max-width: 1024px) {
+
+  .table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+  }
+
+}
+ 
+/* Optional: Add scrollbar styling for better UX */
+
+.table-container::-webkit-scrollbar {
+
+  height: 8px;
+
+}
+ 
+.table-container::-webkit-scrollbar-track {
+
+  background: #f1f1f1;
+
+  border-radius: 4px;
+
+}
+ 
+.table-container::-webkit-scrollbar-thumb {
+
+  background: #888;
+
+  border-radius: 4px;
+
+}
+ 
+.table-container::-webkit-scrollbar-thumb:hover {
+
+  background: #555;
+
+}
+ 
 
 /* Optional: show a faint thumb on hover for usability (uncomment if needed) */
 /*
