@@ -3,17 +3,17 @@ import { List } from "lucide-react";
 import type { Opportunity } from "../../../types/opportunity";
 import excelIcon from "../../../assets/ExcelIcon.svg";
 import { OpportunityCard } from "./OpportunityCard";
+<<<<<<< HEAD
 import EmpHomeList from "./EmpHomeList";
+=======
+import EmpHomeList from "../EmpHomeList";
+>>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
 
 interface OpportunityGridProps {
   opportunities: Opportunity[];
-  onViewDetails?: (jobId: string) => void;
 }
 
-export function EmpHomeGrid({
-  opportunities,
-  onViewDetails,
-}: OpportunityGridProps) {
+export function EmpHomeGrid({ opportunities }: OpportunityGridProps) {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [hideApplied, setHideApplied] = useState(false);
 
@@ -56,11 +56,7 @@ export function EmpHomeGrid({
 
             {/* Export Excel */}
             <button className="p-2 hover:bg-muted rounded transition-colors">
-              <img
-                src={excelIcon}
-                alt="Export to Excel"
-                className="w-[48px] h-[48px]"
-              />
+              <img src={excelIcon} alt="Export to Excel" className="w-[48px] h-[48px]" />
             </button>
 
             {/* View Mode Toggle */}
@@ -104,25 +100,34 @@ export function EmpHomeGrid({
             </div>
           </div>
         </div>
+<<<<<<< HEAD
+        {viewMode === 'grid' ?(
+        <div className="grid grid-cols-[repeat(3,1fr)]  gap-5">
+        {opportunities.slice(0,6).map((opportunity) => (
+          <OpportunityCard key={opportunity.id} opportunity={opportunity} />
+        ))}
+      </div>
+      ):
+      (
+        // render only the table component when list view is active
+        <div>
+          <EmpHomeList opportunities={opportunities} />
+        </div>
+      )}
+=======
         {viewMode === "grid" ? (
-          <div className="grid grid-cols-[repeat(3,1fr)] gap-5">
+          <div className="grid grid-cols-[repeat(3,1fr)]  gap-5">
             {opportunities.slice(0, 6).map((opportunity) => (
-              <OpportunityCard
-                key={opportunity.id}
-                opportunity={opportunity}
-                onViewDetails={onViewDetails}
-              />
+              <OpportunityCard key={opportunity.id} opportunity={opportunity} />
             ))}
           </div>
         ) : (
           // render only the table component when list view is active
           <div>
-            <EmpHomeList
-              opportunities={opportunities}
-              // onViewDetails={onViewDetails}
-            />
+            <EmpHomeList opportunities={opportunities} />
           </div>
         )}
+>>>>>>> c2352a1deff3b459eaa8ba9dd7efd41bd4bd492e
       </div>
     </div>
   );

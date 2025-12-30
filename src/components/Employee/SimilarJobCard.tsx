@@ -1,5 +1,5 @@
-import { Card, CardContent } from "../../ui";
-import { SkillBadge } from "../SkillBadge";
+import { Card, CardContent } from '../components/ui';
+import { SkillBadge } from './SkillBadge';
 
 interface SimilarJobCardProps {
   soNumber: string;
@@ -8,16 +8,11 @@ interface SimilarJobCardProps {
   matchScore: number;
 }
 
-export function SimilarJobCard({
-  soNumber,
-  title,
-  skills,
-  matchScore,
-}: SimilarJobCardProps) {
+export function SimilarJobCard({ soNumber, title, skills, matchScore }: SimilarJobCardProps) {
   const getScoreColor = (score: number) => {
-    if (score >= 80) return "bg-success text-success-foreground";
-    if (score >= 60) return "bg-warning text-warning-foreground";
-    return "bg-destructive text-destructive-foreground";
+    if (score >= 80) return 'bg-success text-success-foreground';
+    if (score >= 60) return 'bg-warning text-warning-foreground';
+    return 'bg-destructive text-destructive-foreground';
   };
 
   return (
@@ -40,11 +35,7 @@ export function SimilarJobCard({
               )}
             </div>
           </div>
-          <span
-            className={`shrink-0 px-2 py-1 rounded text-xs font-medium ${getScoreColor(
-              matchScore
-            )}`}
-          >
+          <span className={`shrink-0 px-2 py-1 rounded text-xs font-medium ${getScoreColor(matchScore)}`}>
             {matchScore}
           </span>
         </div>

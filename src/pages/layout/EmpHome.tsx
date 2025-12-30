@@ -1,21 +1,19 @@
 import { useState } from "react";
-import { UploadResumeModal } from "../../components/employee/home_components/UploadResumeModal";
-import { ResumeDetailModal } from "../../components/employee/home_components/ResumeDetailModal";
-import { UpdateResumeDrawer } from "../../components/employee/home_components/UpdateResumeDrawer";
-import { ResumeNotFoundCard } from "../../components/employee/home_components/ResumeNotFoundCard";
-import { EmpHomeRightSideBar } from "../../components/employee/home_components/EmpHomeRightSideBar";
-import { EmpHomeLeftSideBar } from "../../components/employee/home_components/EmpHomeLeftSideBar";
+import { UploadResumeModal } from "../../components/employee/UploadResumeModal";
+import { ResumeDetailModal } from "../../components/employee/ResumeDetailModal";
+import { UpdateResumeDrawer } from "../../components/employee/UpdateResumeDrawer";
+import { ResumeNotFoundCard } from "../../components/employee/ResumeNotFoundCard";
+import { EmpHomeRightSideBar } from "../../components/employee/EmpHomeRightSideBar";
+import { EmpHomeLeftSideBar } from "../../components/employee/EmpHomeLeftSideBar";
 import { stats, opportunities, recentActivities } from "../../data/mockData";
 import { profileData } from "../../data/profiles";
 import { EmpHomeGrid } from "../../components/employee/home_components/EmpHomeGrid";
-import JobDetails from "../../components/employee/job_details/JobDetails";
 
 export default function Home() {
   const [hasResume, setHasResume] = useState(false);
   const [uploadResumeModalOpen, setUploadResumeModalOpen] = useState(false);
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
   const [updateDrawerOpen, setUpdateDrawerOpen] = useState(false);
-  const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
 
   const handleResumeUpload = () => {
     setHasResume(true);
@@ -37,24 +35,11 @@ export default function Home() {
     setResumeModalOpen(false);
   };
 
-  const handleViewJobDetails = (jobId: string) => {
-    setSelectedJobId(jobId);
-  };
-
-  const handleBackToHome = () => {
-    setSelectedJobId(null);
-  };
-
   // Build a minimal ProfileSummary from the named profileData export for the left sidebar
   const profileSummary = {
     description: profileData?.description ?? "Profile summary",
     primarySkills: profileData?.primarySkills ?? [],
   };
-
-  // If a job is selected, show JobDetails fullscreen
-  if (selectedJobId) {
-    return <JobDetails jobId={selectedJobId} onBack={handleBackToHome} />;
-  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -64,6 +49,7 @@ export default function Home() {
         <div className="max-w-7xl ">
           <div className="w-full grid grid-cols-[repeat(3,1fr)] gap-6">
             {/* Left Column - Profile Summary */}
+
             <EmpHomeLeftSideBar
               profile={profileSummary}
               hasresume={hasResume}
@@ -71,17 +57,15 @@ export default function Home() {
             />
 
             {/* Center Column - Resume Upload or Uploaded State */}
+
             {!hasResume ? (
               // Resume not found state - Use the new component
               <ResumeNotFoundCard
                 onUploadClick={() => setUploadResumeModalOpen(true)}
               />
             ) : (
-              // Resume uploaded - show opportunities with job details handler
-              <EmpHomeGrid
-                opportunities={opportunities}
-                onViewDetails={handleViewJobDetails}
-              />
+              // Resume uploaded - show placeholder for opportunities
+              <EmpHomeGrid opportunities={opportunities} />
             )}
 
             {/* Right Column - Stats & Activities */}
