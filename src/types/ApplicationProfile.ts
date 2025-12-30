@@ -7,13 +7,16 @@ export interface Profile {
   id: string;
   name: string;
   position: string;
+  developer:string;
   uid: string;
   soId: string;
   status: string;
+  score:number;
   fitment: number;
   skills: string[];
   additionalSkills: number;
   description: string;
+  avatar: string;
   /** Optional URL to the profile image/avatar */
   imageUrl?: string;
 }
