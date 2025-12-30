@@ -4,7 +4,7 @@ import StatusTabs from "../../components/ui/StatusTabs";
 import { ApplicationsTable } from "../../components/ApplicationsTable";
 import ProfileCard from "../../components/Wfm/ProfileCard";
 import { wfmProfiles } from "../../data/wfmProfiles";
-import { mockApplications } from "../../data/profiles";
+import { mockApplications } from "../../data/ApplicationsMockdata";
 import { useActiveRole } from "../../context/ActiveRoleContext";
 
 const WfmApplications: React.FC = () => {

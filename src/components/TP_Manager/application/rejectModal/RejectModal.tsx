@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { X } from "lucide-react";
 import { showToast } from "../shortListModal/toastService";
+import ShortlistContext from "../context/ShortlistContext";
 
 interface RejectModalProps {
   isOpen?: boolean;
@@ -24,6 +25,9 @@ const RejectModal: React.FC<RejectModalProps> = ({
   const isOpen =
     controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
 
+  // read context safely at top-level so hooks rules are respected
+  const shortlistCtx = useContext(ShortlistContext as React.Context<any>);
+
   const handleClose = () => {
     setInternalIsOpen(false);
     onClose?.();
@@ -42,6 +46,16 @@ const RejectModal: React.FC<RejectModalProps> = ({
       type: "error",
       duration: 3000,
     });
+    // If ShortlistContext provider is present, update rejected state so other UI reflects the change
+    if (shortlistCtx && typeof shortlistCtx.setRejected === "function") {
+      try {
+        shortlistCtx.setRejected(true);
+      } catch (e) {
+        // ignore if setting fails
+        // eslint-disable-next-line no-console
+        console.warn("Failed to set rejected in context", e);
+      }
+    }
     setInternalIsOpen(false);
   };
 

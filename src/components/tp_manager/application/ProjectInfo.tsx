@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import type { Project } from "../../../types/project";
 import AdobeLogo from "../../../assets/Image46.png";
 import PdfIcon from "../../../assets/IconFilePdf.svg";
-import ShortlistImg from '../../../assets/Group 173611.svg';
-import { useShortlist } from './context/ShortlistContext';
+import ShortlistImg from "../../../assets/Group 173611.svg";
+import rejectImg from "../../../assets/Group 173612.svg";
+import { useShortlist } from "./context/ShortlistContext";
 import JobDetailsUI from "../../employee/home_components/JobDetailsUI";
 
 interface ProjectInfoProps {
@@ -12,33 +13,57 @@ interface ProjectInfoProps {
 
 const ProjectInfo: React.FC<ProjectInfoProps> = ({ project }) => {
   const [showModal, setShowModal] = useState(false);
-  const { shortlisted } = useShortlist();
+  const { shortlisted, rejected } = useShortlist();
 
   return (
     <>
-      {/* Inline shortlist banner for this page */}
-      {shortlisted && (
+      {/* Inline status banner for this page */}
+      {rejected ? (
         <div
           role="status"
           aria-live="polite"
-          className="flex items-center gap-2 rounded "
+          className="flex items-center gap-2 rounded"
           style={{
-            background: '#FFFFFF',
-            color: '#06B27C',
-            padding: '12px 16px',
-            marginBottom: '16px'
+            background: "#FFFFFF",
+            color: "#FC6A59",
+            padding: "12px 16px",
+            marginBottom: "16px",
           }}
         >
-          <img src={ShortlistImg} alt="shortlisted" className="w-12 h-12" />
+          <img src={rejectImg} alt="rejected" className="w-12 h-12" />
           <span
             className="text-sm font-medium"
             style={{
-              font: 'var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/19px var(--unnamed-font-family-rubik)'
+              font: "var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/19px var(--unnamed-font-family-rubik)",
             }}
           >
-            Candidate has been shortlisted for this opportunity
+            Candidate has been rejected from this opportunity
           </span>
         </div>
+      ) : (
+        shortlisted && (
+          <div
+            role="status"
+            aria-live="polite"
+            className="flex items-center gap-2 rounded "
+            style={{
+              background: "#FFFFFF",
+              color: "#06B27C",
+              padding: "12px 16px",
+              marginBottom: "16px",
+            }}
+          >
+            <img src={ShortlistImg} alt="shortlisted" className="w-12 h-12" />
+            <span
+              className="text-sm font-medium"
+              style={{
+                font: "var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/19px var(--unnamed-font-family-rubik)",
+              }}
+            >
+              Candidate has been shortlisted for this opportunity
+            </span>
+          </div>
+        )
       )}
       <div className="bg-white rounded-lg shadow-sm p-6 relative">
         {/* Adobe Logo fixed to top-right */}
