@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import CandidateHeader from "../../components/tp_manager/application/CandidateHeader";
+import CandidateHeader from "../../components/Wfm/Applications/WfmCandidateHeader";
 import Sidebar from "../../components/tp_manager/application/Sidebar";
 import Introduction from "../../components/tp_manager/application/Introduction";
 import ProfessionalExperience from "../../components/tp_manager/application/ProfessionalExperience";
@@ -97,14 +97,11 @@ const TP_Applications: React.FC<TPApplicationsProps> = ({ profileId }) => {
   };
 
   return (
-    <div 
-      className="h-full w-full overflow-hidden" 
-      style={{ backgroundColor: '#F2F7F8' }}
-    >
-      {/* CandidateHeader - directly below navbar */}
-      <CandidateHeader candidate={candidate ?? candidateData} />
+    <div className="min-h-screen" style={{ backgroundColor: '#F2F7F8' }}>
+  {/* CandidateHeader - directly below navbar */}
+  <CandidateHeader candidate={candidate ?? candidateData} />
 
-      <div className="flex px-8 py-6 space-x-6 h-[calc(100%-140px)]">
+      <div className="flex px-8 py-6 space-x-6">
         {/* Left Sidebar */}
         <Sidebar
           activeSection={activeSection}
@@ -114,7 +111,7 @@ const TP_Applications: React.FC<TPApplicationsProps> = ({ profileId }) => {
         {/* Main Content Panel */}
         <div
           ref={contentRef}
-          className="flex-1 bg-white rounded-lg shadow-sm p-8 overflow-y-auto scrollbar-hide scroll-smooth"
+          className="flex-1 bg-white rounded-lg shadow-sm p-8 overflow-y-auto max-h-[calc(100vh-240px)] scrollbar-hide scroll-smooth"
         >
           <section id="introduction" className="scroll-mt-20">
             <Introduction introduction={candidate?.introduction ?? candidateData.introduction} />
@@ -146,7 +143,7 @@ const TP_Applications: React.FC<TPApplicationsProps> = ({ profileId }) => {
         </div>
 
         {/* Right Sidebar - Project Info & Cover Letter */}
-        <div className="w-80 flex-shrink-0 space-y-6 overflow-y-auto scrollbar-hide max-h-full">
+        <div className="w-80 flex-shrink-0 space-y-6 sticky top-6 self-start">
           <ProjectInfo project={projectData} />
           <CoverLetter coverLetter={projectData.coverLetter} />
         </div>

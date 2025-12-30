@@ -81,7 +81,7 @@ const ProfilesReceived: React.FC = () => {
 
       {/* ---------- CONTENT ---------- */}
       {viewMode === 'grid' ? (
-        <div className="grid grid-cols-3 gap-y-2">
+        <div className="grid grid-cols-3 gap-y-4">
           {gridProfiles.map((profile) => (
             <ProfileCard key={profile.id} profile={profile} />
           ))}
