@@ -47,7 +47,7 @@ const AssigningTracking: React.FC = () => {
       bannerTimerRef.current = null;
     }, 4000);
 
-    bannerTimerRef.current = id; // store timer id for cleanup
+    bannerTimerRef.current = id; 
   }, []);
 
   // Cleanup on unmount: clear any pending banner timer
@@ -96,7 +96,6 @@ const AssigningTracking: React.FC = () => {
 
   return (
     <>
-      {/* Scroll wrapper: remaining viewport below the main Navbar */}
       <div className="h-[calc(100vh-64px)] overflow-auto scrollbar-thin-1 bg-[#F2F7F8]">
         <div className="max-w-[1920px] mx-auto px-6 py-6 relative">
           {/* ================= TOP BAR ================= */}

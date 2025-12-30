@@ -9,7 +9,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
  
   // Menu items with label and active state
   const menuItems = [
-    { label: "TP employee list", active: true }, // Active menu item
+    { label: "TP employee list", active: true }, 
     { label: "Certifications", active: false },
     { label: "Education", active: false },
   ]
@@ -89,7 +89,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
             role="button" // Mark the item as a button for accessibility
             tabIndex={0} // Enable keyboard navigation
             onKeyDown={(e) => {
-              // Handle keyboard events (Enter/Space) to trigger onClose
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault()
                 onClose?.()

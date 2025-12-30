@@ -14,7 +14,7 @@ const TableRow: React.FC<TableRowProps> = ({
     <tr
       className="bg-[#F2F7F8] hover:bg-[#e8f3e9] transition-colors duration-250 ease-out"
     >
-      {/* Employee UID - INCREASED PADDING FOR BETTER SPACING */}
+      {/* Employee UID */}
       <td className="px-4 py-5 border-b-[6px] border-white whitespace-nowrap">
         <span className="font-rubik font-normal text-[15px] leading-[1.4] text-[#231F20]">
           {employee.uid}
@@ -49,14 +49,14 @@ const TableRow: React.FC<TableRowProps> = ({
         </span>
       </td>
      
-      {/* Resume Update Date - Negative margin to pull closer */}
+      {/* Resume Update Date */}
       <td className="pl-3 pr-0 py-5 border-b-[6px] border-white whitespace-nowrap -mr-2">
         <span className="font-rubik font-normal text-[15px] leading-[1.4] text-[#231F20]">
           {employee.resumeUpdateDate}
         </span>
       </td>
      
-      {/* Actions - View matching jobs button - Negative margin for tighter spacing */}
+      {/* Actions*/}
       <td className="pl-0 pr-4 py-5 border-b-[6px] border-white text-right whitespace-nowrap -ml-2">
         <button
           onClick={() => onViewMatchingJobs(employee)}
