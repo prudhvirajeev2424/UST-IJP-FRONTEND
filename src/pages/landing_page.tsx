@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import { ActiveRoleContext } from "../context/ActiveRoleContext";
-import { ShortlistProvider } from "../components/TP_Manager/application/context/ShortlistContext";
+import { ShortlistProvider } from "../components/tp_manager/application/context/ShortlistContext";
  
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");

@@ -6,13 +6,15 @@ export const profiles: Profile[] = [
     name: "Zamira Peterson",
     developer: "Developer III - B3",
     uid: "UID - 123456",
-    soId: "SO#129856",
+    score: 90,
     status: "Allocated",
-    fitment: 85,
-    skills: ["JavaScript", "Python"],
-    additionalSkills: 2,
-    description: "Experienced developer skilled in JavaScript and Python.",
-    imageUrl: "https://i.pravatar.cc/150?img=32",
+    skills: ["Java Script", "Python", "+2"],
+    avatar: "ZP",
+    position: "",
+    soId: "",
+    fitment: 0,
+    additionalSkills: 0,
+    description: ""
   },
   {
     id: "SO#129856",
@@ -21,11 +23,13 @@ export const profiles: Profile[] = [
     uid: "UID - 123456",
     score: 65,
     status: "Allocated",
-    fitment: 65,
-    skills: ["JavaScript", "Python"],
-    additionalSkills: 2,
-    description: "Developer with strong background in JavaScript and Python.",
-    imageUrl: "https://i.pravatar.cc/150?img=12",
+    skills: ["Java Script", "Python", "+2"],
+    avatar: "AP",
+    position: "",
+    soId: "",
+    fitment: 0,
+    additionalSkills: 0,
+    description: ""
   },
   {
     id: "SO#129856",
@@ -36,6 +40,11 @@ export const profiles: Profile[] = [
     status: "Allocated",
     skills: ["Java Script", "Python", "+2"],
     avatar: "AP",
+    position: "",
+    soId: "",
+    fitment: 0,
+    additionalSkills: 0,
+    description: ""
   },
   {
     id: "SO#129856",
@@ -46,6 +55,11 @@ export const profiles: Profile[] = [
     status: "Allocated",
     skills: ["Java Script", "Python", "+2"],
     avatar: "AP",
+    position: "",
+    soId: "",
+    fitment: 0,
+    additionalSkills: 0,
+    description: ""
   },
   {
     id: "SO#129856",
@@ -56,6 +70,11 @@ export const profiles: Profile[] = [
     status: "Allocated",
     skills: ["Java Script", "Python", "+2"],
     avatar: "AP",
+    position: "",
+    soId: "",
+    fitment: 0,
+    additionalSkills: 0,
+    description: ""
   },
   {
     id: "SO#129856",
@@ -66,8 +85,22 @@ export const profiles: Profile[] = [
     status: "Allocated",
     skills: ["Java Script", "Python", "+2"],
     avatar: "AP",
+    position: "",
+    soId: "",
+    fitment: 0,
+    additionalSkills: 0,
+    description: ""
   },
 ];
+
+export const profileData = {
+  description: 'Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.',
+  primarySkills: ['Visual Basic', 'Java', '.NET'],
+  summary: 'Highly skilled Java Developer with expertise in designing, developing, and maintaining robust Java applications. Proficient in working with modern frameworks, APIs, and databases to deliver scalable software solutions.',
+};
+
+export default profiles;
+
 
 export const mockApplications: Application[] = [
   {

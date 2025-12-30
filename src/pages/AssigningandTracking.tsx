@@ -6,13 +6,13 @@ import React, {
   useCallback,
 } from "react";
 import xlIcon from "../assets/XlIcon.png";
-import AssignTaskModal from "../components/TP_Manager/Assigning_and_Tracking/AssignTaskModal";
+import AssignTaskModal from "../components/tp_manager/Assigning_and_Tracking/AssignTaskModal";
 import SuccessBanner from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SuccessBanner";
 
-import FilterPill from "../components/TP_Manager/Assigning_and_Tracking/dashboard/FilterPill";
+import FilterPill from "../components/tp_manager/Assigning_and_Tracking/dashboard/FilterPill";
 import SearchInput from "../components/ui/Shared/TP_Manager/Assigning_and_Tracking/SearchInput";
-import StatsSummary from "../components/TP_Manager/Assigning_and_Tracking/dashboard/StatsSummary";
-import TaskCard from "../components/TP_Manager/Assigning_and_Tracking/dashboard/TaskCard";
+import StatsSummary from "../components/tp_manager/Assigning_and_Tracking/dashboard/StatsSummary";
+import TaskCard from "../components/tp_manager/Assigning_and_Tracking/dashboard/TaskCard";
 import { mockTasks } from "../data/TPManagerAssigningandTrackingMockData";
 import { type FilterType } from "../types/AssigningandTrackingTypes";
 

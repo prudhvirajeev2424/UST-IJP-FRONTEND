@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../../ui";
-import  SkillsBadge from "../myapplications/SkillsBadge";
+import { SkillBadge } from "../home_components/SkillBadge";
 
 interface JobDetailsCardProps {
   title: string;
