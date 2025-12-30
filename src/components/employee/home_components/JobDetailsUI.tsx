@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { X, MapPin } from 'lucide-react';
 import emilyImage from '../../../assets/DP_emila_stephen.png';
+import accountLogo from '../../../assets/account_logo.png';
 
 interface JobDetailsUIProps {
   onClose: () => void;
@@ -78,7 +79,13 @@ const JobDetailsUI: React.FC<JobDetailsUIProps> = ({ onClose }) => {
                   {/* Account */}
                   <div className="mb-6">
                     <h3 className="text-xs font-medium text-gray-500 mb-2">Account</h3>
-                    <p className="text-base font-bold" style={{ color: '#E20074' }}>T Mobile</p>
+                    <div>
+                      <img
+                        src={accountLogo}
+                        alt="Account logo"
+                        style={{ width: 92, height: 32, objectFit: 'contain' }}
+                      />
+                    </div>
                   </div>
 
                   {/* Location */}
